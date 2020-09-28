@@ -70,6 +70,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-centos-7-安装宝塔-linux-面板（bt-cn）、flarum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" class="article-date">
+  <time datetime="2018-06-21T01:01:50.000Z" itemprop="datePublished">2018-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/">CentOS 7 安装宝塔 Linux 面板（bt.cn）、Flarum</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装宝塔-Linux-面板（bt-cn）"><a href="#安装宝塔-Linux-面板（bt-cn）" class="headerlink" title="安装宝塔 Linux 面板（bt.cn）"></a>安装宝塔 Linux 面板（bt.cn）</h2><p>yum install -y wget &amp;&amp; wget -O install.sh <a target="_blank" rel="noopener" href="http://download.bt.cn/install/install.sh">http://download.bt.cn/install/install.sh</a> &amp;&amp; sh install.sh</p>
+<p>添加站点，用于安装 Flarum <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png"></a></p>
+<h2 id="安装-Composer"><a href="#安装-Composer" class="headerlink" title="安装 Composer"></a>安装 Composer</h2><p>wget <a target="_blank" rel="noopener" href="https://getcomposer.org/composer.phar">https://getcomposer.org/composer.phar</a> -O /usr/local/bin/composer<br>chmod a+x /usr/local/bin/composer</p>
+<h1 id="添加-composer-bin-到-PATH"><a href="#添加-composer-bin-到-PATH" class="headerlink" title="添加 composer bin 到 PATH"></a>添加 composer bin 到 PATH</h1><p>export PATH=$PATH:/root/.config/composer/vendor/bin<br>source /etc/profile</p>
+<h1 id="composer-http-改成-https，连接速度会更佳"><a href="#composer-http-改成-https，连接速度会更佳" class="headerlink" title="composer http 改成 https，连接速度会更佳"></a>composer http 改成 https，连接速度会更佳</h1><p>composer config -g repo.packagist composer <a target="_blank" rel="noopener" href="https://packagist.phpcomposer.com/">https://packagist.phpcomposer.com</a></p>
+<h2 id="安装-Flarum"><a href="#安装-Flarum" class="headerlink" title="安装 Flarum"></a>安装 Flarum</h2><p># 安装 flarum<br>mkdir /tmp/flarum &amp;&amp; cd /tmp/flarum &amp;&amp; composer create-project flarum/flarum . –stability=beta</p>
+<h1 id="解决因PHP版本过高，安装依赖报错的问题"><a href="#解决因PHP版本过高，安装依赖报错的问题" class="headerlink" title="解决因PHP版本过高，安装依赖报错的问题"></a>解决因PHP版本过高，安装依赖报错的问题</h1><p>composer install –ignore-platform-reqs</p>
+<h1 id="拷贝-flarum-文件到-testweb-文件夹"><a href="#拷贝-flarum-文件到-testweb-文件夹" class="headerlink" title="拷贝 flarum 文件到 testweb 文件夹"></a>拷贝 flarum 文件到 testweb 文件夹</h1><p>rm -rf /www/wwwroot/testweb/* &amp;&amp; cp -R /tmp/flarum/* /www/wwwroot/testweb</p>
+<p>然后访问刚新建的站点，发现已经能访问 Flarum 了，只不过有几个问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png"></a></p>
+<h3 id="问题1：The-PHP-extension-‘fileinfo’-is-required"><a href="#问题1：The-PHP-extension-‘fileinfo’-is-required" class="headerlink" title="问题1：The PHP extension ‘fileinfo’ is required."></a>问题1：The PHP extension ‘fileinfo’ is required.</h3><p>解决方法：访问宝塔 Linux 面板，在 PHP 设置中安装 fileinfo 扩展，结果如下图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png"></a></p>
+<h3 id="问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable"><a href="#问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable" class="headerlink" title="问题2：The /www/wwwroot/testweb/assets directory is not writable."></a>问题2：The /www/wwwroot/testweb/assets directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
+<p>解决方法：</p>
+<p>chmod -R 0777 /www/wwwroot/testweb/assets</p>
+<h3 id="问题3：The-www-wwwroot-testweb-storage-directory-is-not-writable"><a href="#问题3：The-www-wwwroot-testweb-storage-directory-is-not-writable" class="headerlink" title="问题3：The /www/wwwroot/testweb/storage directory is not writable."></a>问题3：The /www/wwwroot/testweb/storage directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
+<p>解决方法：</p>
+<p>chmod -R 0777 /www/wwwroot/testweb/storage</p>
+<p>解决问题后，访问到正常安装页面，填写数据库等相关信息即可安装。</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png"></a>   提示：根据<a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">官方文档</a>想要访问正常，必需 URL Rewriting。</p>
+<h2 id="URL-Rewriting"><a href="#URL-Rewriting" class="headerlink" title="URL Rewriting"></a>URL Rewriting</h2><h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>Flarum includes a <code>.htaccess</code> file – make sure it’s been uploaded correctly. If you’re using shared hosting, confirm with your hosting provider that <code>mod_rewrite</code> is enabled. You may need to add the following to your Apache configuration:</p>
+<p>&lt;Directory “/path/to/your/forum”&gt;<br>    AllowOverride All<br></Directory></p>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>Add the following lines to your server’s configuration block:</p>
+<p>location / { try_files $uri $uri/ /index.php?$query_string; }<br>location /api { try_files $uri $uri/ /api.php?$query_string; }<br>location /admin { try_files $uri $uri/ /admin.php?$query_string; }</p>
+<p>location ~* ^/(composer\.(jsonlock)config\.phpflarumstoragevendor) {<br>    deny all;<br>    return 404;<br>}</p>
+<p>location ~* \.php$ {<br>    fastcgi_split_path_info ^(.+.php)(/.+)$;<br>    fastcgi_pass unix:/var/run/php5-fpm.sock;<br>    include fastcgi_params;<br>    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br>    fastcgi_param HTTP_PROXY “”; # Fix for <a target="_blank" rel="noopener" href="https://httpoxy.org/">https://httpoxy.org/</a> vulnerability<br>    fastcgi_index index.php;<br>}</p>
+<p>location ~* \.html$ {<br>    expires -1;<br>}</p>
+<p>location ~* \.(cssjsgifjpe?gpng)$ {<br>    expires 1M;<br>    add_header Pragma public;<br>    add_header Cache-Control “public, must-revalidate, proxy-revalidate”;<br>}</p>
+<p>gzip on;<br>gzip_http_version 1.1;<br>gzip_vary on;<br>gzip_comp_level 6;<br>gzip_proxied any;<br>gzip_types application/atom+xml<br>           application/javascript<br>           application/json<br>           application/vnd.ms-fontobject<br>           application/x-font-ttf<br>           application/x-web-app-manifest+json<br>           application/xhtml+xml<br>           application/xml<br>           font/opentype<br>           image/svg+xml<br>           image/x-icon<br>           text/css<br>           #text/html – text/html is gzipped by default by nginx<br>           text/plain<br>           text/xml;<br>gzip_buffers 16 8k;<br>gzip_disable “MSIE [1-6]\.(?!.*SV1)”;</p>
+<h3 id="Lighttpd"><a href="#Lighttpd" class="headerlink" title="Lighttpd"></a>Lighttpd</h3><p>Add the following lines to your server’s configuration block:</p>
+<p>url.rewrite-if-not-file = (<br>    “/admin.*“ =&gt; “/admin.php”,<br>    “/api.*“   =&gt; “/api.php”,<br>    “/.*“      =&gt; “/index.php”<br>)</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://www.bt.cn/bbs/thread-1186-1-1.html">https://www.bt.cn/bbs/thread-1186-1-1.html</a> <a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">https://flarum.org/docs/installation/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" data-id="ckfml9nz6000efber2bt2fprm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-一加-5-解锁-bootloader-和刷写第三方-recovery" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" class="article-date">
@@ -112,10 +184,336 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" data-id="ckfml8mph003bcyergkoh6fjy" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" data-id="ckfml9o2r004rfber3s3vdwru" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-sql-文件生成实体类、mybatis-mapper、mybatis-mapper-xml-文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2018-04-23T08:14:11.000Z" itemprop="datePublished">2018-04-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/">SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/com.godcheese.common">https://github.com/godcheese/com.godcheese.common</a></p>
+</blockquote>
+<ul>
+<li>项目目录 <code>D:\demo</code></li>
+<li><code>D:\demo\tables</code> 目录下的<code>api_table.sql</code>文件</li>
+<li>目前仅支持 MySQL数据库，Oracle 之后再适配</li>
+</ul>
+<h4 id="SQL-文件：api-table-sql"><a href="#SQL-文件：api-table-sql" class="headerlink" title="SQL 文件：api_table.sql"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/com.godcheese.common/blob/master/docs/DatabaseUtil.md#sql-%E6%96%87%E4%BB%B6api_tablesql"></a>SQL 文件：api_table.sql</h4><p>DROP TABLE<br>IF EXISTS `api`;</p>
+<p>CREATE TABLE `api` (<br>  `id`        BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT ‘id’,<br>  `name`      VARCHAR(255) NOT NULL COMMENT ‘api 名称’,<br>  `uri` TEXT COMMENT ‘请求地址’,<br>  `api_category_id` BIGINT(20) UNSIGNED NOT NULL COMMENT ‘api 目录 id’,<br>  `sort`      BIGINT(20) UNSIGNED DEFAULT 0 COMMENT ‘排序’,<br>  `remark`    VARCHAR(255) DEFAULT ‘’ COMMENT ‘备注’,<br>  `authority` VARCHAR(255) NOT NULL COMMENT ‘权限（API:UUID）’,<br>  `gmt_create` DATETIME DEFAULT NOW() COMMENT ‘创建时间’,<br>  `gmt_modified` DATETIME DEFAULT NOW() COMMENT ‘更新时间’,<br>  PRIMARY KEY `pk_id` (`id`),<br>  UNIQUE KEY `uk_authority` (`authority`)<br>)<br>  ENGINE = INNODB<br>  DEFAULT CHARACTER<br>  SET = utf8mb4<br>  COLLATE = utf8mb4_general_ci<br>  AUTO_INCREMENT = 1<br>  ROW_FORMAT = DYNAMIC<br>  COMMENT = ‘api 表’;</p>
+<h4 id="批量生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#批量生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><p>// 批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件<br>        SqlGenerateProperties properties = new SqlGenerateProperties();<br>        properties.setMyBatisMapperPackage(“com.gioov.demo.mapper”);<br>        properties.setEntityPackage(“com.gioov.demo.entity”);<br>        properties.setSqlDirectory(“D:\\tables”);<br>        properties.setEntityDirectory(“D:\\demo\\src\\main\\java\\com\\gioov\\demo\\entity”);<br>        properties.setMyBatisMapperDirectory(“D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper”);<br>        properties.setMyBatisMapperXmlDirectory(“D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper”);</p>
+<pre><code>    DatabaseUtil.generateEntity( properties);
+    DatabaseUtil.generateMyBatisMapperXml( properties);
+    DatabaseUtil.generateMyBatisMapper(properties);</code></pre>
+<h4 id="单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><p> // 指定单个 SQL 文件生成对应的实体类、MyBatis Mapper、MyBatis Mapper XML 文件<br>        SqlGenerateProperties properties = new SqlGenerateProperties();<br>        properties.setMyBatisMapperPackage(“com.gioov.demo.mapper”);<br>        properties.setEntityPackage(“com.gioov.demo.entity”);</p>
+<pre><code>    DatabaseUtil.generateEntity(&quot;D:\\\\demo\\\\tables\\\\api\_table.sql&quot;,&quot;D:\\\\demo\\\\src\\\\main\\\\java\\\\com\\\\gioov\\\\demo\\\\entity&quot;, properties);
+    DatabaseUtil.generateMyBatisMapper(&quot;D:\\\\demo\\\\tables\\\\api\_table.sql&quot;,&quot;D:\\\\demo\\\\src\\\\main\\\\java\\\\com\\\\gioov\\\\demo\\\\mapper&quot;, properties);
+    DatabaseUtil.generateMyBatisMapperXml(&quot;D:\\\\demo\\\\tables\\\\api\_table.sql&quot;,&quot;D:\\\\demo\\\\src\\\\main\\\\java\\\\com\\\\gioov\\\\demo\\\\mapper&quot;, properties);</code></pre>
+<h4 id="生成的实体类文件：ApiEntity-java"><a href="#生成的实体类文件：ApiEntity-java" class="headerlink" title="生成的实体类文件：ApiEntity.java"></a>生成的实体类文件：ApiEntity.java</h4><p>package com.gioov.demo.entity;</p>
+<p>import java.io.Serializable;<br>import java.lang.Long;<br>import java.lang.String;<br>import java.util.Date;</p>
+<p>/**<br> * @author godcheese [<a href="mailto:&#x67;&#111;&#100;&#99;&#x68;&#x65;&#101;&#115;&#x65;&#64;&#111;&#x75;&#116;&#x6c;&#111;&#111;&#x6b;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#111;&#100;&#99;&#x68;&#x65;&#101;&#115;&#x65;&#64;&#111;&#x75;&#116;&#x6c;&#111;&#111;&#x6b;&#x2e;&#x63;&#x6f;&#x6d;</a>]<br> * @date 2018/4/23 15:58<br> */<br>public class ApiEntity implements Serializable {</p>
+<pre><code>/\*\*
+ \* id
+ \*/
+private Long id;
+
+/\*\*
+ \* api 名称
+ \*/
+private String name;
+
+/\*\*
+ \* 请求地址
+ \*/
+private String uri;
+
+/\*\*
+ \* api 目录 id
+ \*/
+private Long apiCategoryId;
+
+/\*\*
+ \* 排序
+ \*/
+private Long sort;
+
+/\*\*
+ \* 备注
+ \*/
+private String remark;
+
+/\*\*
+ \* 权限（API:UUID）
+ \*/
+private String authority;
+
+/\*\*
+ \* 创建时间
+ \*/
+private Date gmtCreate;
+
+/\*\*
+ \* 更新时间
+ \*/
+private Date gmtModified;
+
+
+public Long getId() &#123;
+    return id;
+&#125;
+
+public void setId(Long id) &#123;
+    this.id = id;
+&#125;
+
+public String getName() &#123;
+    return name;
+&#125;
+
+public void setName(String name) &#123;
+    this.name = name;
+&#125;
+
+public String getUri() &#123;
+    return uri;
+&#125;
+
+public void setUri(String uri) &#123;
+    this.uri = uri;
+&#125;
+
+public Long getApiCategoryId() &#123;
+    return apiCategoryId;
+&#125;
+
+public void setApiCategoryId(Long apiCategoryId) &#123;
+    this.apiCategoryId = apiCategoryId;
+&#125;
+
+public Long getSort() &#123;
+    return sort;
+&#125;
+
+public void setSort(Long sort) &#123;
+    this.sort = sort;
+&#125;
+
+public String getRemark() &#123;
+    return remark;
+&#125;
+
+public void setRemark(String remark) &#123;
+    this.remark = remark;
+&#125;
+
+public String getAuthority() &#123;
+    return authority;
+&#125;
+
+public void setAuthority(String authority) &#123;
+    this.authority = authority;
+&#125;
+
+public Date getGmtCreate() &#123;
+    return gmtCreate;
+&#125;
+
+public void setGmtCreate(Date gmtCreate) &#123;
+    this.gmtCreate = gmtCreate;
+&#125;
+
+public Date getGmtModified() &#123;
+    return gmtModified;
+&#125;
+
+public void setGmtModified(Date gmtModified) &#123;
+    this.gmtModified = gmtModified;
+&#125;</code></pre>
+<p>}</p>
+<h4 id="生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml"><a href="#生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml" class="headerlink" title="生成的 MyBatis Mapper XML 文件：ApiMapper.xml"></a>生成的 MyBatis Mapper XML 文件：ApiMapper.xml</h4><?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gioov.demo.mapper.ApiMapper">
+    <resultMap id="BaseResultMap" type="com.gioov.demo.entity.ApiEntity">
+        <id column="id" property="id" jdbcType="BIGINT"/> <!-- id -->
+        <result column="name" property="name" jdbcType="VARCHAR"/> <!-- api 名称 -->
+        <result column="uri" property="uri" jdbcType="null"/> <!-- 请求地址 -->
+        <result column="api\_category\_id" property="apiCategoryId" jdbcType="BIGINT"/> <!-- api 目录 id -->
+        <result column="sort" property="sort" jdbcType="BIGINT"/> <!-- 排序 -->
+        <result column="remark" property="remark" jdbcType="VARCHAR"/> <!-- 备注 -->
+        <result column="authority" property="authority" jdbcType="VARCHAR"/> <!-- 权限（API:UUID） -->
+        <result column="gmt\_create" property="gmtCreate" jdbcType="DATE"/> <!-- 创建时间 -->
+        <result column="gmt\_modified" property="gmtModified" jdbcType="DATE"/> <!-- 更新时间 -->
+    </resultMap>
+
+<pre><code>&lt;sql id=&quot;TableName&quot;&gt;
+    \`api\`
+&lt;/sql&gt;
+
+&lt;sql id=&quot;BaseColumnList&quot;&gt;
+    \`id\`, \`name\`, \`uri\`, \`api\_category\_id\`, \`sort\`, \`remark\`, \`authority\`, \`gmt\_create\`, \`gmt\_modified\`
+&lt;/sql&gt;
+
+&lt;insert id=&quot;insertOne&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot; parameterType=&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;
+    INSERT INTO
+    &lt;include refid=&quot;TableName&quot;/&gt;
+    (\`id\`, \`name\`, \`uri\`, \`api\_category\_id\`, \`sort\`, \`remark\`, \`authority\`, \`gmt\_create\`, \`gmt\_modified\`)
+    VALUES (#&#123;id&#125;, #&#123;name&#125;, #&#123;uri&#125;, #&#123;apiCategoryId&#125;, #&#123;sort&#125;, #&#123;remark&#125;, #&#123;authority&#125;, #&#123;gmtCreate&#125;, #&#123;gmtModified&#125;)    &lt;/insert&gt;
+
+&lt;update id=&quot;updateOne&quot; keyProperty=&quot;id&quot; parameterType=&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;
+    UPDATE
+    &lt;include refid=&quot;TableName&quot;/&gt;
+    SET \`name\` = #&#123;name&#125;, \`uri\` = #&#123;uri&#125;, \`api\_category\_id\` = #&#123;apiCategoryId&#125;, \`sort\` = #&#123;sort&#125;, \`remark\` = #&#123;remark&#125;, \`authority\` = #&#123;authority&#125;, \`gmt\_create\` = #&#123;gmtCreate&#125;, \`gmt\_modified\` = #&#123;gmtModified&#125;
+    WHERE \`id\`= #&#123;id&#125;
+&lt;/update&gt;
+
+&lt;delete id=&quot;deleteOne&quot; parameterType=&quot;long&quot;&gt;
+    DELETE FROM
+    &lt;include refid=&quot;TableName&quot;/&gt;
+    WHERE id = #&#123;id&#125;
+&lt;/delete&gt;
+
+&lt;select id=&quot;getOne&quot; resultMap=&quot;BaseResultMap&quot;&gt;
+    SELECT
+    &lt;include refid=&quot;BaseColumnList&quot;/&gt;
+    FROM &lt;include refid=&quot;TableName&quot;/&gt; WHERE id = #&#123;id&#125;
+&lt;/select&gt;
+
+&lt;select id=&quot;listAll&quot; resultMap=&quot;BaseResultMap&quot;&gt;
+    SELECT
+    &lt;include refid=&quot;BaseColumnList&quot;/&gt;
+    FROM &lt;include refid=&quot;TableName&quot;/&gt;
+&lt;/select&gt;</code></pre>
+</mapper>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" data-id="ckfml9o15002nfber1sbt6o5t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-server-manager-基于-javafx-开发的-一款桌面服务器管理软件。" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/" class="article-date">
+  <time datetime="2018-04-20T05:00:09.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/">Server Manager 基于 JavaFX 开发的 一款桌面服务器管理软件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Server-Manager"><a href="#Server-Manager" class="headerlink" title="Server Manager"></a>Server Manager</h1><p>Server Manager 基于 JavaFX 开发的 一款桌面服务器管理软件。</p>
+<blockquote>
+<p>目前版本还不可靠，不适合在生产环境中部署使用，仅供参考学习。</p>
+</blockquote>
+<h3 id="目前实现功能"><a href="#目前实现功能" class="headerlink" title="目前实现功能"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager#%E7%9B%AE%E5%89%8D%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD"></a>目前实现功能</h3><ul>
+<li>备份项目应用数据、项目数据库数据，仅支持 MySQL 数据库</li>
+</ul>
+<h3 id="计划实现功能"><a href="#计划实现功能" class="headerlink" title="计划实现功能"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager#%E8%AE%A1%E5%88%92%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD"></a>计划实现功能</h3><ul>
+<li>更可靠的运行</li>
+<li>支持 Oracle 数据库</li>
+<li>定时备份项目数据</li>
+</ul>
+<h4 id="构建-jar"><a href="#构建-jar" class="headerlink" title="构建 jar"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager#%E6%9E%84%E5%BB%BA-jar"></a>构建 jar</h4><ol>
+<li><p><code>src/main/java/META-INF</code> 下创建 <code>MAINFEST.MF</code></p>
+<blockquote>
+<p>文件内容（最后一行为空行）：</p>
+</blockquote>
+<ul>
+<li>Manifest-Version: 1.0</li>
+<li>Main-Class: com.gioov.MainWindow</li>
+</ul>
+</li>
+<li><p><code>Build</code> -&gt; <code>Build Artifacts</code> -&gt; <code>Build Or Rebuild</code></p>
+</li>
+<li><p>cmd 运行 <code>java -jar servermanager.jar</code>，若报错，请将 <code>data</code> 文件夹及文件置于运行目录。</p>
+</li>
+</ol>
+<h4 id="构建-exe（不推荐，测试报错）"><a href="#构建-exe（不推荐，测试报错）" class="headerlink" title="构建 exe（不推荐，测试报错）"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager#%E6%9E%84%E5%BB%BA-exe%E4%B8%8D%E6%8E%A8%E8%8D%90%E6%B5%8B%E8%AF%95%E6%8A%A5%E9%94%99"></a>构建 exe（不推荐，测试报错）</h4><ol>
+<li><p><code>src/main/java/META-INF</code> 下创建 <code>MAINFEST.MF</code></p>
+<blockquote>
+<p>文件内容（最后一行为空行）：</p>
+</blockquote>
+<ul>
+<li>Manifest-Version: 1.0</li>
+<li>Main-Class: com.gioov.MainWindow</li>
+</ul>
+</li>
+<li><p><code>Build</code> -&gt; <code>Build Artifacts</code> -&gt; <code>Build Or Rebuild</code></p>
+</li>
+<li><p>运行 <code>scripts</code> 文件夹下的 <code>build_exe.cmd</code></p>
+</li>
+</ol>
+<h2 id="开发环境（jar-已测试正常，exe-测试报错）"><a href="#开发环境（jar-已测试正常，exe-测试报错）" class="headerlink" title="开发环境（jar 已测试正常，exe 测试报错）"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83jar-%E5%B7%B2%E6%B5%8B%E8%AF%95%E6%AD%A3%E5%B8%B8exe-%E6%B5%8B%E8%AF%95%E6%8A%A5%E9%94%99"></a>开发环境（jar 已测试正常，exe 测试报错）</h2><ul>
+<li>Windows 10 x64</li>
+<li>MySQL 5.7</li>
+<li>Java 8</li>
+<li>Maven 3.5</li>
+<li>SQLite 3</li>
+</ul>
+<h2 id="Snapshots"><a href="#Snapshots" class="headerlink" title="Snapshots"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager#snapshots"></a>Snapshots</h2><p><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager/blob/master/screenshots/servermanager_1.png"><img src="https://github.com/godcheese/servermanager/raw/master/screenshots/servermanager_1.png" alt="servermanager_1"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager/blob/master/screenshots/servermanager_2.png"><img src="https://github.com/godcheese/servermanager/raw/master/screenshots/servermanager_2.png" alt="servermanager_2"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager/blob/master/screenshots/servermanager_3.png"><img src="https://github.com/godcheese/servermanager/raw/master/screenshots/servermanager_3.png" alt="servermanager_3"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager/blob/master/screenshots/servermanager_4.png"><img src="https://github.com/godcheese/servermanager/raw/master/screenshots/servermanager_4.png" alt="servermanager_4"></a> <a target="_blank" rel="noopener" href="https://github.com/godcheese/servermanager/blob/master/screenshots/servermanager_5.png"><img src="https://github.com/godcheese/servermanager/raw/master/screenshots/servermanager_5.png" alt="servermanager_5"></a>  </p>
+<h3 id="开源地址：http-github-com-godcheese-servermanager"><a href="#开源地址：http-github-com-godcheese-servermanager" class="headerlink" title="开源地址：http://github.com/godcheese/servermanager"></a>开源地址：<a target="_blank" rel="noopener" href="http://github.com/godcheese/servermanager">http://github.com/godcheese/servermanager</a></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/" data-id="ckfml9o0v002afber6ltl67sa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaFX/" rel="tag">JavaFX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
 
     </footer>
   </div>
@@ -167,10 +565,189 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/11/%E4%B8%80%E5%8A%A0-5-%E6%89%8B%E6%9C%BA%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%AE%89%E8%A3%85-xposed-%E5%87%BA%E7%8E%B0-cp-write-error-no-space-left-no-device-error-1-occurred-%E8%A7%A3/" data-id="ckfml8mpf0037cyer5pxy2z5z" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/11/%E4%B8%80%E5%8A%A0-5-%E6%89%8B%E6%9C%BA%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%AE%89%E8%A3%85-xposed-%E5%87%BA%E7%8E%B0-cp-write-error-no-space-left-no-device-error-1-occurred-%E8%A7%A3/" data-id="ckfml9o2p004pfbera7j343hk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-boot-1-x-整合-spring-security-例子" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" class="article-date">
+  <time datetime="2018-04-09T02:13:32.000Z" itemprop="datePublished">2018-04-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/">Spring Boot 1.x 整合 Spring Security 实现角色/权限控制实例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><blockquote>
+<p>Spring Boot 1.x 整合 Spring Security 实现角色/权限控制实例</p>
+</blockquote>
+<p>官方实现：<a target="_blank" rel="noopener" href="http://spring.io/guides/gs/securing-web/">http://spring.io/guides/gs/securing-web/</a></p>
+<p>环境</p>
+<p>版本</p>
+<p>Java</p>
+<p>1.8</p>
+<p>MySQL</p>
+<p>5.7</p>
+<p>Maven</p>
+<p>3.5</p>
+<p>Tomcat</p>
+<p>8.5</p>
+<p>依赖</p>
+<p>版本</p>
+<p>Spring Boot</p>
+<p>1.5.11.RELEASE</p>
+<p>Spring Security</p>
+<p>4.2.5.RELEASE</p>
+<p>MyBatis</p>
+<p>3.4.6</p>
+<p>Thymeleaf</p>
+<p>2.1.6.RELEASE</p>
+<p>测试账号</p>
+<p>Username</p>
+<p>Password</p>
+<p>Role &amp; Authority</p>
+<p>system_admin</p>
+<p>123456</p>
+<p>ROLE_USER,ROLE_ADMIN,ROLE_SYSTEM_ADMIN</p>
+<p>admin</p>
+<p>123456</p>
+<p>ROLE_USER,ROLE_ADMIN,/user/delete/{id}</p>
+<p>user</p>
+<p>123456</p>
+<p>ROLE_USER</p>
+<p>表单登录、注销、后台管理、删除用户等。 主要配置文件：WebSecurityConfiguration.java</p>
+<p>package com.gioov.springboot1springsecurity.config;</p>
+<p>import org.springframework.beans.factory.annotation.Autowired;<br>import org.springframework.context.annotation.Bean;<br>import org.springframework.context.annotation.Configuration;<br>import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;<br>import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;<br>import org.springframework.security.config.annotation.web.builders.HttpSecurity;<br>import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;<br>import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;<br>import org.springframework.security.config.http.SessionCreationPolicy;<br>import org.springframework.security.core.session.SessionRegistry;<br>import org.springframework.security.core.session.SessionRegistryImpl;<br>import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</p>
+<p>/**<br> * @author godcheese [<a href="mailto:&#103;&#111;&#100;&#x63;&#x68;&#101;&#x65;&#115;&#101;&#64;&#x6f;&#117;&#116;&#x6c;&#x6f;&#x6f;&#107;&#46;&#99;&#111;&#x6d;">&#103;&#111;&#100;&#x63;&#x68;&#101;&#x65;&#115;&#101;&#64;&#x6f;&#117;&#116;&#x6c;&#x6f;&#x6f;&#107;&#46;&#99;&#111;&#x6d;</a>]<br> * @date 2018/4/7 19:00<br> */<br>@Configuration<br>@EnableWebSecurity<br>@EnableGlobalMethodSecurity(prePostEnabled = true)<br>public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {</p>
+<pre><code>@Autowired
+private SessionRegistry sessionRegistry;
+
+@Bean
+public SessionRegistry sessionRegistry()&#123;
+    return new SessionRegistryImpl();
+&#125;
+
+@Bean
+public SimpleUserDetailsService simpleUserDetailsService()&#123;
+    return new SimpleUserDetailsService();
+&#125;
+
+@Override
+protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;
+    auth.userDetailsService(simpleUserDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+&#125;
+
+@Override
+protected void configure(HttpSecurity http) throws Exception &#123;
+
+    http
+              // 禁用 csrf</code></pre>
+<p>//                .csrf().disable()</p>
+<pre><code>            .authorizeRequests()
+
+            // 匹配url，无需登录认证权限
+            .antMatchers(&quot;/css/\*\*&quot;,&quot;/js/\*\*&quot;,&quot;img/\*\*&quot;,&quot;/vendor/\*\*&quot;).permitAll()
+
+            .antMatchers(&quot;/&quot;,&quot;/index&quot;).permitAll()
+
+            // 其它请求均需要认证
+            .anyRequest().authenticated()</code></pre>
+<p>//                .antMatchers(“/**“).authenticated()</p>
+<pre><code>            .and()
+
+            // 开启表单登录，设置登录 url
+            .formLogin().loginPage(&quot;/login&quot;)
+
+            // 自定义登录表单提交 url
+            .loginProcessingUrl(&quot;/login/form&quot;)
+
+            // 设置登录成功跳转到的 url
+            .defaultSuccessUrl(&quot;/userCenter&quot;,true)
+
+            // 设置登录失败跳转到的 url
+            .failureUrl(&quot;/login?error&quot;).permitAll()
+
+            .and()
+
+            // 开启记住我功能， cookie 保存登录数据
+            .rememberMe().rememberMeParameter(&quot;rememberMe&quot;)
+
+            // 设置 cookie 有效期，7天内有效
+            .tokenValiditySeconds(60 \* 60 \* 60 \* 24 \* 7)
+
+            // 设置cookie的私钥
+            .key(&quot;user&quot;)
+
+            .and()
+
+            .logout()
+
+            // 设置注销 url
+            .logoutUrl(&quot;/logout&quot;)
+
+            //设置注销成功后跳转页面，默认是跳转到登录页面
+            .logoutSuccessUrl(&quot;/login?logout&quot;).permitAll()
+
+            .and()
+
+            .sessionManagement()
+
+            // 限制单个用户最大session，只允许一个用户登录
+            .maximumSessions(1)
+
+
+            // session 过期后跳转到登录 url
+            .expiredUrl(&quot;/login&quot;)
+
+            .sessionRegistry(sessionRegistry)
+
+            .and()
+
+            .sessionCreationPolicy(SessionCreationPolicy.IF\_REQUIRED)
+
+            .and()
+
+
+            // 无权限，访问指定 url
+            .exceptionHandling().accessDeniedPage(&quot;/403&quot;);
+&#125;</code></pre>
+<p>}</p>
+<p> </p>
+<h2 id="Screenshots"><a href="#Screenshots" class="headerlink" title="Screenshots"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity#screenshots"></a>Screenshots</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_1.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_3.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_4.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_4.png"></a></p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><a target="_blank" rel="noopener" href="https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity">https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfml9o0x002dfbereurl1ta2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li></ul>
 
     </footer>
   </div>
@@ -217,10 +794,156 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/01/24/java-apache-poi-%E8%AF%BB%E5%8F%96-excel-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E6%97%B6%E9%81%BF%E5%85%8D%E5%8F%91%E7%94%9F%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E9%97%AE%E9%A2%98%E7%9A%84/" data-id="ckfml8mnh000wcyer83i9ga0d" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/01/24/java-apache-poi-%E8%AF%BB%E5%8F%96-excel-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E6%97%B6%E9%81%BF%E5%85%8D%E5%8F%91%E7%94%9F%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E9%97%AE%E9%A2%98%E7%9A%84/" data-id="ckfml9nzu000zfberg3myc03n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-boot-自定义全局异常报错处理，返回-json-html" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/" class="article-date">
+  <time datetime="2018-01-23T04:30:31.000Z" itemprop="datePublished">2018-01-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/">Spring Boot 自定义全局异常报错处理，返回 JSON/HTML</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>新建一个叫 GlobalErrorController 然后继承 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/blob/4f7752d4672c3994a05dd3fb3d6e699040117ae0/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/AbstractErrorController.java">AbstractErrorController</a>，代码的写法可以参考  <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/blob/4f7752d4672c3994a05dd3fb3d6e699040117ae0/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/AbstractErrorController.java">BasicErrorController</a> 的代码。</p>
+<p>package com.gioov.multifunction.controller.system;</p>
+<p>import java.util.HashMap;<br>import java.util.Map;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;<br>import org.springframework.beans.factory.annotation.Value;<br>import org.springframework.boot.autoconfigure.web.AbstractErrorController;<br>import org.springframework.boot.autoconfigure.web.ErrorAttributes;<br>import org.springframework.http.HttpStatus;<br>import org.springframework.http.ResponseEntity;<br>import org.springframework.stereotype.Controller;<br>import org.springframework.web.bind.annotation.RequestMapping;<br>import org.springframework.web.bind.annotation.ResponseBody;<br>import org.springframework.web.servlet.ModelAndView;</p>
+<p>/**<br> * @author godcheese<br> *<br> */<br>@Controller<br>@RequestMapping(“${server.error.path:${error.path:/error}}”)<br>public class DefaultErrorController extends AbstractErrorController {</p>
+<pre><code>public DefaultErrorController(ErrorAttributes errorAttributes) &#123;
+    super(errorAttributes);
+&#125;
+
+@Value(&quot;$&#123;server.error.path:$&#123;error.path:/error&#125;&#125;&quot;)
+public static final String ERROR\_PATH = &quot;/error&quot;;
+
+@Override
+public String getErrorPath() &#123;
+    return ERROR\_PATH;
+&#125;
+
+@RequestMapping(produces = &quot;text/html&quot;)
+public ModelAndView errorHtml(HttpServletRequest request,
+                              HttpServletResponse response) &#123;
+
+    Integer statusCode = (Integer) request.getAttribute(&quot;javax.servlet.error.status\_code&quot;);
+    statusCode = statusCode == null ? HttpStatus.INTERNAL\_SERVER\_ERROR.value() : statusCode;
+    response.setStatus(getStatus(request).value());
+    Map&lt;String, Object&gt; model = new HashMap&lt;&gt;();
+    switch (statusCode)&#123;
+        case 404:
+            break;
+        case 500:
+            break;
+        default:
+            statusCode = 500;
+            break;
+    &#125;
+    return new ModelAndView(&quot;&quot;+statusCode, model);
+&#125;
+
+@RequestMapping
+@ResponseBody
+public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request,Exception exception) throws Exception &#123;
+
+    Integer statusCode = (Integer) request.getAttribute(&quot;javax.servlet.error.status\_code&quot;);
+    statusCode = statusCode == null ? HttpStatus.INTERNAL\_SERVER\_ERROR.value() : statusCode;
+    Map&lt;String, Object&gt; body = new HashMap&lt;&gt;();
+    HttpStatus status = getStatus(request);
+    body.put(&quot;code&quot;,statusCode);
+    body.put(&quot;message&quot;,HttpStatus.valueOf(statusCode));
+    body.put(&quot;data&quot;,null);
+    body.put(&quot;exception&quot;,exception.getMessage());
+    return new ResponseEntity&lt;&gt;(body, status);
+&#125;</code></pre>
+<p>}</p>
+<p>然后在 resources/templates 目录下新建 404.html、500.html、error.html 等几个文件，然后访问不存在的链接就可以访问到自定义的报错页面了，如果是json请求还可以返回自定义的json内容。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/01/springboot-error-20180123123609.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/01/springboot-error-20180123123609.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/" data-id="ckfml9o14002lfber1hjh696r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-x-y-z-软件版本发布命名规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/09/x-y-z-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" class="article-date">
+  <time datetime="2017-10-09T02:06:06.000Z" itemprop="datePublished">2017-10-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/09/x-y-z-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">x.y.z 软件版本发布命名规范 - 语义化版本 2.0.0</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="语义化版本-2-0-0"><a href="#语义化版本-2-0-0" class="headerlink" title="语义化版本 2.0.0"></a>语义化版本 2.0.0</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>版本格式：主版本号.次版本号.修订号，版本号递增规则如下： 主版本号：当你做了不兼容的 API 修改， 次版本号：当你做了向下兼容的功能性新增， 修订号：当你做了向下兼容的问题修正。 先行版本号及版本编译信息可以加到“主版本号.次版本号.修订号”的后面，作为延伸。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在软件管理的领域里存在着被称作“依赖地狱”的死亡之谷，系统规模越大，加入的套件越多，你就越有可能在未来的某一天发现自己已深陷绝望之中。 在依赖高的系统中发布新版本套件可能很快会成为恶梦。如果依赖关系过高，可能面临版本控制被锁死的风险（必须对每一个相依套件改版才能完成某次升级）。而如果依赖关系过于松散，又将无法避免版本的混乱（假设兼容于未来的多个版本已超出了合理数量）。当你专案的进展因为版本相依被锁死或版本混乱变得不够简便和可靠，就意味着你正处于依赖地狱之中。 作为这个问题的解决方案之一，我提议用一组简单的规则及条件来约束版本号的配置和增长。这些规则是根据（但不局限于）已经被各种封闭、开放源码软件所广泛使用的惯例所设计。为了让这套理论运作，你必须先有定义好的公共 API 。这可以透过文件定义或代码强制要求来实现。无论如何，这套 API 的清楚明了是十分重要的。一旦你定义了公共 API，你就可以透过修改相应的版本号来向大家说明你的修改。考虑使用这样的版本号格式：XYZ （主版本号.次版本号.修订号）修复问题但不影响API 时，递增修订号；API 保持向下兼容的新增及修改时，递增次版本号；进行不向下兼容的修改时，递增主版本号。 我称这套系统为“语义化的版本控制”，在这套约定下，版本号及其更新方式包含了相邻版本间的底层代码和修改内容的信息。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/10/semver.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/10/semver.png"></a></p>
+<h2 id="语义化版本控制规范（SemVer）"><a href="#语义化版本控制规范（SemVer）" class="headerlink" title="语义化版本控制规范（SemVer）"></a>语义化版本控制规范（SemVer）</h2><p>以下关键词 MUST、MUST NOT、REQUIRED、SHALL、SHALL NOT、SHOULD、SHOULD NOT、 RECOMMENDED、MAY、OPTIONAL 依照 RFC 2119 的叙述解读。（译注：为了保持语句顺畅， 以下文件遇到的关键词将依照整句语义进行翻译，在此先不进行个别翻译。） 使用语义化版本控制的软件“必须 MUST ”定义公共 API。该 API 可以在代码中被定义或出现于严谨的文件内。无论何种形式都应该力求精确且完整。 标准的版本号“必须 MUST ”采用 XYZ 的格式，其中 X、Y 和 Z 为非负的整数，且“禁止 MUST NOT”在数字前方补零。X 是主版本号、Y 是次版本号、而 Z 为修订号。每个元素“必须 MUST ”以数值来递增。例如：1.9.1 -&gt; 1.10.0 -&gt; 1.11.0。 标记版本号的软件发行后，“禁止 MUST NOT ”改变该版本软件的内容。任何修改都“必须 MUST ”以新版本发行。 主版本号为零（0.y.z）的软件处于开发初始阶段，一切都可能随时被改变。这样的公共 API 不应该被视为稳定版。 1.0.0 的版本号用于界定公共 API 的形成。这一版本之后所有的版本号更新都基于公共 API 及其修改内容。 修订号 Z（x.y.Z x &gt; 0）“必须 MUST ”在只做了向下兼容的修正时才递增。这里的修正指的是针对不正确结果而进行的内部修改。 次版本号 Y（x.Y.z x &gt; 0）“必须 MUST ”在有向下兼容的新功能出现时递增。在任何公共 API 的功能被标记为弃用时也“必须 MUST ”递增。也“可以 MAY ”在内部程序有大量新功能或改进被加入时递增，其中“可以 MAY ”包括修订级别的改变。每当次版本号递增时，修订号“必须 MUST ”归零。 主版本号 X（X.y.z X &gt; 0）“必须 MUST ”在有任何不兼容的修改被加入公共 API 时递增。其中“可以 MAY ”包括次版本号及修订级别的改变。每当主版本号递增时，次版本号和修订号“必须 MUST ”归零。 先行版本号“可以 MAY ”被标注在修订版之后，先加上一个连接号再加上一连串以句点分隔的标识符号来修饰。标识符号“必须 MUST ”由 ASCII 码的英数字和连接号 [0-9A-Za-z-] 组成，且“禁止 MUST NOT ”留白。数字型的标识符号“禁止 MUST NOT ”在前方补零。先行版的优先级低于相关联的标准版本。被标上先行版本号则表示这个版本并非稳定而且可能无法达到兼容的需求。范例：1.0.0-alpha、1.0.0-alpha.1、1.0.0-0.3.7、1.0.0-x.7.z.92。 版本编译信息“可以 MAY ”被标注在修订版或先行版本号之后，先加上一个加号再加上一连串以句点分隔的标识符号来修饰。标识符号“必须 MUST ”由 ASCII 的英数字和连接号 [0-9A-Za-z-] 组成，且“禁止 MUST NOT ”留白。当判断版本的优先层级时，版本编译信息“可 SHOULD ”被忽略。因此当两个版本只有在版本编译信息有差别时，属于相同的优先层级。范例：1.0.0-alpha+001、1.0.0+20130313144700、1.0.0-beta+exp.sha.5114f85。 版本的优先层级指的是不同版本在排序时如何比较。判断优先层级时，“必须 MUST ”把版本依序拆分为主版本号、次版本号、修订号及先行版本号后进行比较（版本编译信息不在这份比较的列表中）。由左到右依序比较每个标识符号，第一个差异值用来决定优先层级：主版本号、次版本号及修订号以数值比较，例如：1.0.0 &lt; 2.0.0 &lt; 2.1.0 &lt; 2.1.1。当主版本号、次版本号及修订号都相同时，改以优先层级比较低的先行版本号决定。例如：1.0.0-alpha &lt; 1.0.0。有相同主版本号、次版本号及修订号的两个先行版本号，其优先层级“必须 MUST ”透过由左到右的每个被句点分隔的标识符号来比较，直到找到一个差异值后决定：只有数字的标识符号以数值高低比较，有字母或连接号时则逐字以 ASCII 的排序来比较。数字的标识符号比非数字的标识符号优先层级低。若开头的标识符号都相同时，栏位比较多的先行版本号优先层级比较高。范例：1.0.0-alpha &lt; 1.0.0-alpha.1 &lt; 1.0.0-alpha.beta &lt; 1.0.0-beta &lt; 1.0.0-beta.2 &lt; 1.0.0-beta.11 &lt; 1.0.0- rc.1 &lt; 1.0.0。</p>
+<h2 id="为什么要使用语义化的版本控制？"><a href="#为什么要使用语义化的版本控制？" class="headerlink" title="为什么要使用语义化的版本控制？"></a>为什么要使用语义化的版本控制？</h2><p>这并不是一个新的或者革命性的想法。实际上，你可能已经在做一些近似的事情了。问题在于只是“近似”还不够。如果没有某个正式的规范可循，版本号对于依赖的管理并无实质意义。将上述的想法命名并给予清楚的定义，让你对软件使用者传达意向变得容易。一旦这些意向变得清楚，弹性（但又不会太弹性）的依赖规范就能达成。 举个简单的例子就可以展示语义化的版本控制如何让依赖地狱成为过去。假设有个名为“救火车”的函式库，它需要另一个名为“梯子”并已经有使用语义化版本控制的套件。当救火车创建时，梯子的版本号为 3.1.0。因为救火车使用了一些版本 3.1.0 所新增的功能， 你可以放心地指定相依于梯子的版本号大等于 3.1.0 但小于 4.0.0。这样，当梯子版本 3.1.1 和 3.2.0 发布时，你可以将直接它们纳入你的套件管理系统，因为它们能与原有相依的软件兼容。 作为一位负责任的开发者，你理当确保每次套件升级的运作与版本号的表述一致。现实世界是复杂的，我们除了提高警觉外能做的不多。你所能做的就是让语义化的版本控制为你提供一个健全的方式来发行以及升级套件，而无需推出新的相依套件，节省你的时间及烦恼。 如果你对此认同，希望立即开始使用语义化版本控制，你只需声明你的函式库正在使用它并遵循这些规则就可以了。请在你的 README 文件中保留此页连结，让别人也知道这些规则并从中受益。</p>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><p><strong>在 0.y.z 初始开发阶段，我该如何进行版本控制？</strong> 最简单的做法是以 0.1.0 作为你的初始化开发版本，并在后续的每次发行时递增次版本号。 <strong>如何判断发布 1.0.0 版本的时机？</strong> 当你的软件被用于正式环境，它应该已经达到了 1.0.0 版。如果你已经有个稳定的 API 被使用者依赖，也会是 1.0.0 版。如果你很担心向下兼容的问题，也应该算是 1.0.0 版了。 <strong>这不会阻碍快速开发和迭代吗？</strong> 主版本号为零的时候就是为了做快速开发。如果你每天都在改变 API，那么你应该仍在主版本号为零的阶段（0.y.z），或是正在下个主版本的独立开发分支中。 <strong>对于公共 API，若即使是最小但不向下兼容的改变都需要产生新的主版本号，岂不是很快就达到 42.0.0 版？</strong> 这是开发的责任感和前瞻性的问题。不兼容的改变不应该轻易被加入到有许多依赖代码的软件中。升级所付出的代价可能是巨大的。要递增主版本号来发行不兼容的改版，意味着你必须为这些改变所带来的影响深思熟虑，并且评估所涉及的成本及效益比。 <strong>为整个公共 API 写文件太费事了！</strong> 为供他人使用的软件编写适当的文件，是你作为一名专业开发者应尽的职责。保持专案高效一个非常重要的部份是掌控软件的复杂度，如果没有人知道如何使用你的软件或不知道哪些函数的调用是可靠的，要掌控复杂度会是困难的。长远来看，使用语义化版本控制以及对于公共 API 有良好规范的坚持，可以让每个人及每件事都运行顺畅。 <strong>万一不小心把一个不兼容的改版当成了次版本号发行了该怎么办？</strong> 一旦发现自己破坏了语义化版本控制的规范，就要修正这个问题，并发行一个新的次版本号来更正这个问题并且恢复向下兼容。即使是这种情况，也不能去修改已发行的版本。可以的话，将有问题的版本号记录到文件中，告诉使用者问题所在，让他们能够意识到这是有问题的版本。 <strong>如果我更新了自己的依赖但没有改变公共 API 该怎么办？</strong> 由于没有影响到公共 API，这可以被认定是兼容的。若某个软件和你的套件有共同依赖，则它会有自己的依赖规范，作者也会告知可能的冲突。要判断改版是属于修订等级或是次版等级，是依据你更新的依赖关系是为了修复问题或是加入新功能。对于后者，我经常会预期伴随着更多的代码，这显然会是一个次版本号级别的递增。 如果我变更了公共 API 但无意中未遵循版本号的改动怎么办呢？（意即在修订等级的发布中，误将重大且不兼容的改变加到代码之中） 自行做最佳的判断。如果你有庞大的使用者群在依照公共 API 的意图而变更行为后会大受影响，那么最好做一次主版本的发布，即使严格来说这个修复仅是修订等级的发布。记住， 语义化的版本控制就是透过版本号的改变来传达意义。若这些改变对你的使用者是重要的，那就透过版本号来向他们说明。 <strong>我该如何处理即将弃用的功能？</strong> 弃用现存的功能是软件开发中的家常便饭，也通常是向前发展所必须的。当你弃用部份公共 API 时，你应该做两件事：（1）更新你的文件让使用者知道这个改变，（2）在适当的时机将弃用的功能透过新的次版本号发布。在新的主版本完全移除弃用功能前，至少要有一个次版本包含这个弃用信息，这样使用者才能平顺地转移到新版 API。 <strong>语义化版本对于版本的字串长度是否有限制呢？</strong> 没有，请自行做适当的判断。举例来说，长到 255 个字元的版本已过度夸张。再者，特定的系统对于字串长度可能会有他们自己的限制。</p>
+<h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p>语义化版本控制的规范是由 Gravatars 创办者兼 GitHub 共同创办者 Tom Preston-Werner 所建立。 如果您有任何建议，请到 GitHub 上提出您的问题。</p>
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><p>创用 CC 姓名标示 3.0 Unported 授权条款 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by/3.0/">http://creativecommons.org/licenses/by/3.0/</a>  </p>
+<blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="http://semver.org/lang/zh-CN/spec/v2.0.0.html">http://semver.org/lang/zh-CN/spec/v2.0.0.html</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/10/09/x-y-z-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" data-id="ckfml9o1p003hfbere9t79j0y" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag">软件开发</a></li></ul>
 
     </footer>
   </div>
@@ -264,437 +987,10 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/09/26/oracle-%E5%B8%B8%E7%94%A8%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/" data-id="ckfml8moi0022cyer4ivdetr8" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/09/26/oracle-%E5%B8%B8%E7%94%A8%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/" data-id="ckfml9o0r0023fber8gyaa6m4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-easyui-combotree-textfield显示问题解决方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
-  <time datetime="2017-08-31T21:57:07.000Z" itemprop="datePublished">2017-09-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">EasyUI combotree textField显示问题解决方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"></a> 这是代码： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"></a> 这是显示结果： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"></a> 后来查看了下EasyUI的官方文档（<a target="_blank" rel="noopener" href="https://www.jeasyui.com/documentation/index.php">https://www.jeasyui.com/documentation/index.php</a>），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因为textField的作用是在选择某项后才显示的。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"></a> 那么肿么解决name的显示呢？ 我在文档中发现combotree依赖于combo和tree两个组件，那我就找找这两个组件下有什么解决思路，于是我发现tree下有个方法loadFilter，解决思路有了。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"></a> 代码如下：</p>
-<p>loadFilter: function (items) {<br>  if(items!==undefined){<br>    ret = [];<br>    console.log(items);<br>    $.each(items, function (i, e) {<br>      e.text=e.name;<br>      ret.push(e);<br>    });<br>  }<br>  return ret;<br>}</p>
-<p>最终解决了问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"></a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ckfml8mn6000pcyerfqjq21tj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mysql-数据库表创建及数据填充的cmd脚本（bat批处理）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/" class="article-date">
-  <time datetime="2017-08-19T03:09:53.000Z" itemprop="datePublished">2017-08-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/">MySQL 数据库表创建及数据填充的cmd脚本（bat批处理），提高数据库设计效率</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>大家在开发Web程序时肯定遇到过设计数据库表结构和数据填充的情况，有些是中小型企业级程序数据库结构设计更加复杂，当然我也遇到过此类烦恼，所以顺手写了几个脚本文件提高效率。 数据库表结构脚本（migrate.cmd）运行代码如下：</p>
-<p>chcp 65001</p>
-<p>@REM Author:<a href="mailto:&#x67;&#x6f;&#100;&#99;&#104;&#x65;&#x65;&#115;&#101;&#64;&#x6f;&#x75;&#x74;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#x6f;&#109;">&#x67;&#x6f;&#100;&#99;&#104;&#x65;&#x65;&#115;&#101;&#64;&#x6f;&#x75;&#x74;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#x6f;&#109;</a><br>@REM Description:MYSQL数据库迁移脚本<br>@REM Platform:Windows</p>
-<p>@echo off</p>
-<p>set “MYSQL_HOME=D:\dev\mysql\mysql5.7.14”<br>set “HOST=localhost”<br>set “PORT=3306”<br>set “USER=testuser”<br>set “PASSWORD=testpwd”<br>set “DATABASE=testdb”<br>set “TABLES=D:\dev\testdb\tables”<br>set “EXEC=%MYSQL_HOME%\bin\mysql.exe -h%HOST% -P%PORT% -u%USER% -p%PASSWORD% -D%DATABASE%&lt;%TABLES%”</p>
-<p>%EXEC%\deleteTables.sql<br>%EXEC%\1_ict_logs_table.sql<br>echo finished.</p>
-<p>复制以上代码到文件名为migrate.cmd的文件中，然后根据自己需求修改 MYSQL_HOME、HOST、PORT、USER、PASSWORD、TABLES等变量的值即可。 github gist:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/0b77450a167dbe5a354af93c048338c4">https://gist.github.com/godcheese/0b77450a167dbe5a354af93c048338c4</a>   数据库数据填充脚本（dbseed.cmd）运行代码如下：</p>
-<p>chcp 65001</p>
-<p>@REM Author:<a href="mailto:&#103;&#x6f;&#100;&#99;&#104;&#x65;&#x65;&#115;&#101;&#64;&#x6f;&#x75;&#x74;&#108;&#111;&#x6f;&#x6b;&#46;&#x63;&#x6f;&#x6d;">&#103;&#x6f;&#100;&#99;&#104;&#x65;&#x65;&#115;&#101;&#64;&#x6f;&#x75;&#x74;&#108;&#111;&#x6f;&#x6b;&#46;&#x63;&#x6f;&#x6d;</a><br>@REM Description:MYSQL数据库填充脚本<br>@REM Platform:Windows</p>
-<p>@echo off</p>
-<p>set “MYSQL_HOME=D:\dev\mysql\mysql5.7.14”<br>set “HOST=localhost”<br>set “PORT=3306”<br>set “USER=testuser”<br>set “PASSWORD=testpwd”<br>set “DATABASE=testdb”<br>set “DATA=D:\dev\testdb\data”<br>set “EXEC=%MYSQL_HOME%\bin\mysql.exe -h%HOST% -P%PORT% -u%USER% -p%PASSWORD% -D%DATABASE%&lt;%DATA%”</p>
-<p>%EXEC%\1_ict_logs_data.sql<br>%EXEC%\2_ict_areas_data.sql<br>echo finished.</p>
-<p>复制以上代码到文件名为dbseed.cmd的文件中，然后根据自己需求修改 MYSQL_HOME、HOST、PORT、USER、PASSWORD、DATA等变量的值即可。 github gist:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/2be10fd8ceecda2ea8d9f89e73d2e942">https://gist.github.com/godcheese/2be10fd8ceecda2ea8d9f89e73d2e942</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/" data-id="ckfml8mod001wcyer9jhf2a41" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java下载文件及解决java下载中文文件名文件时不正常问" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/" class="article-date">
-  <time datetime="2017-08-17T11:48:49.000Z" itemprop="datePublished">2017-08-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/">Java下载文件及解决Java下载中文文件名文件时不正常问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在开发一个管理系统，涉及到文件的上下载问题，但是我发现Java中文或者说对编码比较敏感（以前用PHP没感觉到），然后我在写一个上下载功能时就发现问题比较明显，下载英文然后无空格的文件下载完全正常，但是当下载含有中文文件名的文件时发现下载的文件名并为更名，一开始我以为是Header 中 Content-Disposition 未设置正确导致的，但是后来发现并不是，于是网上搜索了相关资料，的确存在对中文文件名支持不友好的情况，然后整理了相关资料，引用到了自己的代码里，请看下面这段代码，就是正确解决了这个问题，特别请看注释。</p>
-<p>   if(file.exists()){</p>
-<pre><code>                // 设置文件流
-                httpServletResponse.setContentType(&quot;application/octet-stream&quot;);
-
-                // 为防止中文文件名的乱码显示
-                //filename =new String(filename.getBytes(&quot;ISO8859-1&quot;),&quot;UTF-8&quot;);
-
-                // 编码文件名
-                filename = URLEncoder.encode(filename,&quot;UTF-8&quot;);
-
-                // 编码后文件名中的空格被替换为“+”号，所以此处将替换编码后文件名中“+”号为UTF-8中空格的“%20”编码
-                filename = filename.replaceAll(&quot;\\\\+&quot;,&quot;%20&quot;);
-
-                // 设置下载文件内容长度
-                httpServletResponse.setContentLengthLong(file.length());
-
-                // 设置文件名
-                httpServletResponse.setHeader(&quot;Content-Disposition&quot;,  String.format(&quot;attachment; filename=\\&quot;%s\\&quot;&quot;,filename));
-
-                System.out.println(httpServletResponse.getHeader(&quot;Content-Disposition&quot;));
-
-                byte\[\] bytes = new byte\[1024\];
-
-                FileInputStream fileInputStream =null;
-                BufferedInputStream bufferedInputStream = null;
-                OutputStream outputStream = null;
-
-                try &#123;
-                    fileInputStream = new FileInputStream(file);
-                    bufferedInputStream = new BufferedInputStream(fileInputStream);
-                    outputStream = httpServletResponse.getOutputStream();
-
-                    Integer len = 0;
-                    while((len=fileInputStream.read(bytes))&gt;0)&#123;
-                        outputStream.write(bytes,0,len);
-                    &#125;
-
-                    // 成功下载文件
-
-
-                &#125; catch (Exception e) &#123;
-                    e.printStackTrace();
-                &#125;finally &#123;
-
-                    if(fileInputStream!=null)&#123;
-                        try &#123;
-                            fileInputStream.close();
-                        &#125; catch (IOException e) &#123;
-                            e.printStackTrace();
-                        &#125;
-                    &#125;
-
-                    if(bufferedInputStream!=null)&#123;
-                        try &#123;
-                            bufferedInputStream.close();
-                        &#125; catch (IOException e) &#123;
-                            e.printStackTrace();
-                        &#125;
-                    &#125;
-
-                    if(outputStream!=null)&#123;
-                        try &#123;
-                            outputStream.close();
-                        &#125; catch (IOException e) &#123;
-                            e.printStackTrace();
-                        &#125;
-                    &#125;
-                &#125;
-            &#125;</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/" data-id="ckfml8mnz001jcyer23gn06al" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java2sql" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/16/java2sql/" class="article-date">
-  <time datetime="2017-07-16T06:07:12.000Z" itemprop="datePublished">2017-07-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/16/java2sql/">java2sql 让数据库构建更简单，java代码书写生成sql语句并迁移填充数据到数据库</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>java2sql 是一款基于java代码开发的数据库命令行构建工具。通过简单的命令生成和迁移填充数据库数据。 受 Laravel Artisan Migrate/Seeder 功能启发开发而成。 github开源地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/java2sql">https://github.com/godcheese/java2sql</a> 优点：</p>
-<ul>
-<li>利用 java 代码书写，java开发者的自然优越感</li>
-<li>用命令行操作，使用更加简单</li>
-<li>代码复用率更高</li>
-</ul>
-<p>基础组件有Migrate、Seeder等 安装： 使用</p>
-<p>java -jar java2sql migration:UsersMigration<br>java2sql migration:UsersMigration // 这句必需在系统设置环境变量后才能正常运行</p>
-<p>在 migrations 生成如下 *.java 文件，每个文件代表一个数据表迁移，每个文件都有一个public static void main(String[] args) 方法。 Template migration class java 代码实例：</p>
-<p>package com.gioov.java2sql;</p>
-<p>import com.gioov.java2sql.adapter.DatabaseAdapter;<br>import com.gioov.java2sql.adapter.FieldAdapter;<br>import com.gioov.java2sql.adapter.mysql.MySqlAdapter;<br>import com.gioov.java2sql.adapter.mysql.MysqlFieldAdapter;<br>import com.gioov.java2sql.adapter.mysql.MysqlTableAdapter;</p>
-<p>/**<br> * Created by godcheese on 2017/7/16.<br> */<br>public class TemplateMigration {</p>
-<pre><code>public static void main(String\[\] arg)&#123;
-
-    /\*\*
-     \*
-     \*  Init database adapter
-     \*  Init table adapter
-     \*  Init migration
-     \*
-      \*/
-
-    DatabaseAdapter database=new MySqlAdapter();
-    database.setName(&quot;test&quot;).setCharacterSet(&quot;utf8mb4&quot;).setCollate(&quot;utf8mb4&quot;);
-    MysqlTableAdapter table =new MysqlTableAdapter();
-    table.setName(&quot;NewTable&quot;);
-    Migration migration =new Migration(database,table);
-
-
-    /\*\*
-     \* Init field adapter and set properties
-     \* Field Name:id
-     \* Field Type:bigint
-     \* Field Length:20
-     \* Filed Primary Key:true
-     \* Filed Auto Increment:true
-     \* Field Null:false
-     \* Field Unsigned:false
-     \*
-     \*/
-    FieldAdapter idField=new MysqlFieldAdapter().setName(&quot;id&quot;).setType(&quot;bigint&quot;).setLength(20).setPrimaryKey(true).setAutoIncrement(true).setIsNull(false).setIsUnsigned(false);
-
-    /\*\*
-     \* Init field adapter and set properties
-     \* Field Name:name
-     \* Field Type:varchar
-     \* Field Length:50
-     \* Filed Null:false
-     \*
-     \*/
-
-    FieldAdapter nameField=new MysqlFieldAdapter().setName(&quot;name&quot;).setType(&quot;varchar&quot;).setLength(50).setIsNull(false);
-
-
-    // Add database table fields
-  String sql=  migration.addField(idField).addField(nameField).execute();
-
-  System.out.println(sql);
-
-    /\*\*
-     \*
-     \*
-     \* Result Sql: DROP TABLE IF EXISTS \`NewTable\`;
-     \* CREATE TABLE \`NewTable\` (  \`id\`  bigint(20) NOT NULL ,
-     \* \`name\`  varchar(50) CHARACTER SET utf8mb4  COLLATE utf8mb4  NOT NULL ,
-     \* PRIMARY KEY (\`id\`) )
-     \* ENGINE= InnoDB;
-     \*
-     \*/
-
-&#125;</code></pre>
-<p>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/07/16/java2sql/" data-id="ckfml8mnx001gcyer3d4x69mq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-【java学习笔记】windows-7-安装maven（新手可看，大佬绕行）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" class="article-date">
-  <time datetime="2017-07-07T13:26:46.000Z" itemprop="datePublished">2017-07-07</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Maven 是 Java Web 开发中必备的软件之一，其主要功能就是管理开发中依赖库，类似于node的Node Package Manager 和 PHP 的 composer。好了废话不多说，现在就来仔细操作一遍安装过程，不了解的新手可以看看，大佬可以绕行，因为挺简单的。 Maven 下载地址：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> 安装前请检查自己的电脑系统是否安装了JDK 1.7及以上（<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index.html">http://www.oracle.com/technetwork/java/index.html</a>） 第一步：先下载 Maven Binary zip archive <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"></a> 第二步：解压 zip 文件 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"></a> 第三步：设置环境 开始菜单=&gt;计算机=&gt;属性=&gt;高级系统设置=&gt;环境变量=&gt;系统变量=&gt;新建名为 M2_HOME 的变量值为之前 Maven 解压文件的地址，如我的为</p>
-<p>F:\dev\apache-maven-3.5.0</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"></a> 然后在 Path 变量中加入</p>
-<p>;%M2_HOME%\bin</p>
-<p>如下图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"></a> 然后保存即可。 最后才 cmd 中运行</p>
-<p>mvn -version</p>
-<p>可正常输出 Maven 信息则代表安装并运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"></a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" data-id="ckfml8mol0026cyerb74h4nlf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git-push-自动化-bash-脚本" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time datetime="2017-06-29T05:45:57.000Z" itemprop="datePublished">2017-06-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/">几句代码实现的 git push 代码提交到远程自动化 bash 脚本</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自己的很多项目都已经用上了git项目版本管理工具，但是每次更改代码或者某些重要更新时会频繁将本地项目代码push到远程服务器master主分支上，每次都需要打开命令行工具敲入 ：</p>
-<p>git add .</p>
-<p>git commit -m xxx</p>
-<p>git push origin master</p>
-<p>这样重复的动作，总合起来其实也浪费时间，而且效率低，于是自己写了个简单的提交脚本来完成。</p>
-<p>#!/usr/bin/env bash</p>
-<h1 id="Linux-platform-bash-file"><a href="#Linux-platform-bash-file" class="headerlink" title="Linux platform bash file"></a>Linux platform bash file</h1><p>echo “正在添加文件…”<br>git add .<br>echo -n “正在提交备注…，请填写备注（可空）:”<br>read remarks<br>if [ ! -n “$remarks” ];then<br>    remarks=”常规提交”<br>fi<br>git commit -m “$remarks”<br>echo “正在开始提交代码…”<br>git push origin master<br>echo “代码提交成功，正在关闭…”</p>
-<p>Gist（或需<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/657">科学上网</a>）:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/2c4ab58fc03674fd0ce523701cd88075">https://gist.github.com/godcheese/2c4ab58fc03674fd0ce523701cd88075</a> 将其拷贝并命名成 git-push.sh ，然后打开终端或命令行工具，输入</p>
-<p>bash git-push.sh</p>
-<p>写入一段脚本就可实现，它会提示你本次提交是否写入备注信息，不写则默认备注为“常规提交”。<a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/git-push-bash-auto.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/git-push-bash-auto.png"></a> 更多git相关知识：<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/379">https://www.godcheese.com/index.php/379</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/" data-id="ckfml8mn9000rcyergij20uu0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
 
     </footer>
   </div>
@@ -707,7 +1003,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">下一页 &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -728,7 +1024,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" rel="tag">办公软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag">安卓模拟器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" rel="tag">微信营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E8%AF%BE/" rel="tag">微课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" rel="tag">无线营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intellij-Idea/" rel="tag">Intellij Idea</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaFX/" rel="tag">JavaFX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PhpStorm/" rel="tag">PhpStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyCharm/" rel="tag">PyCharm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThinkPHP/" rel="tag">ThinkPHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Web服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-10/" rel="tag">Windows 10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-8-1/" rel="tag">Windows 8.1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-XP/" rel="tag">Windows XP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" rel="tag">办公软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" rel="tag">压缩解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag">安卓模拟器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" rel="tag">微信营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E8%AF%BE/" rel="tag">微课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" rel="tag">无线营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%AD%E4%BF%A1/" rel="tag">短信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag">软件开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" rel="tag">远程工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" rel="tag">阿里大鱼</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
     </div>
   </div>
 
@@ -738,7 +1034,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Adobe/" style="font-size: 15px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 12.5px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 12.5px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Maven/" style="font-size: 15px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 15px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 15px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 12.5px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 15px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Windows-7/" style="font-size: 12.5px;">Windows 7</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/jQuery/" style="font-size: 12.5px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 12.5px;">一加</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 12.5px;">办公软件</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 12.5px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 12.5px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 17.5px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 12.5px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 12.5px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 12.5px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 15px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 12.5px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Adobe/" style="font-size: 12.86px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 14.29px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 11.43px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 11.43px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaFX/" style="font-size: 10px;">JavaFX</a> <a href="/tags/JavaScript/" style="font-size: 11.43px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 11.43px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 12.86px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Maven/" style="font-size: 14.29px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 12.86px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 12.86px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 11.43px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PhpStorm/" style="font-size: 10px;">PhpStorm</a> <a href="/tags/PyCharm/" style="font-size: 10px;">PyCharm</a> <a href="/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 17.14px;">Spring Boot</a> <a href="/tags/Spring-Security/" style="font-size: 10px;">Spring Security</a> <a href="/tags/ThinkPHP/" style="font-size: 10px;">ThinkPHP</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 11.43px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">Web服务器</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a> <a href="/tags/Windows-7/" style="font-size: 14.29px;">Windows 7</a> <a href="/tags/Windows-8-1/" style="font-size: 10px;">Windows 8.1</a> <a href="/tags/Windows-XP/" style="font-size: 10px;">Windows XP</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 12.86px;">git</a> <a href="/tags/jQuery/" style="font-size: 11.43px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 11.43px;">一加</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 11.43px;">办公软件</a> <a href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" style="font-size: 10px;">压缩解压</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 11.43px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 11.43px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 11.43px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 14.29px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%9F%AD%E4%BF%A1/" style="font-size: 10px;">短信</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 11.43px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 11.43px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 11.43px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 11.43px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 12.86px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 11.43px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 11.43px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">软件开发</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">远程工具</a> <a href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" style="font-size: 10px;">阿里大鱼</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 11.43px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
     </div>
   </div>
 
@@ -747,7 +1043,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
     </div>
   </div>
 
