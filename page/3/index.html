@@ -70,10 +70,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-回到顶部最简单的jquery实现代码" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-【laravel学习笔记】laravel-数据迁移migrate的常见问题（操作）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/19/%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84jquery%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81/" class="article-date">
-  <time datetime="2016-06-19T14:12:26.000Z" itemprop="datePublished">2016-06-19</time>
+    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" class="article-date">
+  <time datetime="2017-06-27T12:20:42.000Z" itemprop="datePublished">2017-06-27</time>
 </a>
     
   <div class="article-category">
@@ -88,7 +88,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/19/%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84jquery%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81/">回到顶部最简单的jQuery实现代码</a>
+      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
     </h1>
   
 
@@ -96,20 +96,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="#" id="top">回到顶部</a></p>
-<p>CSS代码，使用了fixed让对象（回到顶部）固定于浏览器窗口内：</p>
-<p>#top{position:fixed;bottom:0;right:10px;}</p>
-<p>jQuery代码，注意正常使用的几个条件</p>
-<p>$(‘#top’).click(function(){$(‘html,body’).animate({scrollTop: ‘0px’}, 800);return false;});</p>
-<p>800 是调节移动速度的，可以自己调节！</p>
+        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br>`users` add constraint `users_role_id_foreign` foreign key (`role_id`) references `role<br>s` (`id`) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"></a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
+<p>composer dump-autoload</p>
+<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
+<p>// 外键约束<br>$table-&gt;foreign(‘role_id’)-&gt;references(‘id’)-&gt;on(‘roles’)-&gt;onUpdate(‘cascade’)-&gt;onDelete(‘cascade’);</p>
+<p>这句代码代码的欲添加外键约束的表是 users ，表字段是 role_id ；参考表是 roles ，参考字段是 roles 的 id 。</p>
+<h2 id="修改数据表默认存储引擎"><a href="#修改数据表默认存储引擎" class="headerlink" title="修改数据表默认存储引擎"></a>修改数据表默认存储引擎</h2><p>在 migration 文件内添加一句代码来指定数据库引擎（将存储引擎改成InnoDB，支持事务处理）：</p>
+<p>$table-&gt;engine=’InnoDB’;</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/06/19/%E5%9B%9E%E5%88%B0%E9%A1%B6%E9%83%A8%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84jquery%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81/" data-id="ckfml63a1001p9ger7kzlftvc" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfml8moq002dcyer0dhu6ixg" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
 
     </footer>
   </div>
@@ -118,53 +122,10 @@
 
 
   
-    <article id="post-高效程序员的7个习惯" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-【laravel学习笔记】安装并使用-laravel-passport-来请求授权令牌（oaut" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/06/15/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%847%E4%B8%AA%E4%B9%A0%E6%83%AF/" class="article-date">
-  <time datetime="2016-06-15T00:27:34.000Z" itemprop="datePublished">2016-06-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/15/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%847%E4%B8%AA%E4%B9%A0%E6%83%AF/">高效程序员的7个习惯</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/06/5b65768c1b48e733b2dbf43ca342a0a9.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/06/5b65768c1b48e733b2dbf43ca342a0a9.jpg" alt="5b65768c1b48e733b2dbf43ca342a0a9"></a> <strong>花的时间越多就能写出越可靠的代码吗?不一定。那如何才能写出优秀代码的呢?</strong> 提示:懒惰是一个良好的开始哦。 Perl 编程语言的原作者 Larry Wall 曾说过,伟大的程序员都有三个优点:<strong>懒惰、急躁和傲慢</strong>。 为什么这样说呢? <strong>懒惰</strong>会促使他们去写一些省事儿的程序来辅助他们或别人更好的工作,这样他们就无需再去回答一些不想回答的问题。 <strong>没耐**</strong>心<strong>会激励他们去写一些程序,不等你提出就主动满足你的需求。 **傲慢</strong>会促使他们写出可靠无误的代码,因为他们不想受到批评和指责。 但是,伟大的程序员也并不总是高效的,那些每天都能将自己的工作完成的很好的开发者,比那些偶尔编码到令人眩晕的高度的程序员要更高效。对大多数雇主来说,重要的是曲线下的面积,而不是最高点。 因此,为了最大限度得提高你的就业能力,你不需要成为一个伟大的开发者,而是一个高效的开发者。这里分享7个习惯,帮让你成为高效的开发者。 <strong>1、每天至少写4个小时代码</strong> 乍一看,这条建议很没有意义,因为大部分程序员在他们的电脑桌前要写至少8个小时的代码,很多甚至是10个小时。然而,Copyin 的 创始人兼CEO Peter Nixey 认为,他们实际上只有很少的时间花在了实际开发工作中。 “我曾经从事的项目中,开发者把他们的时间大部分都消磨在了会议、乒乓球、午餐等上面,”他说。“所以,纯粹写代码的时间是没有4个小时的,但令人惊讶的是,在办公环境中这点是很难实现的。” 为什么呢? Nixey 解释说,一个很重要的因素就是,要保证开发者在那4个小时内不能被打扰。因为一旦你全身心投入进去,你的大脑就处在高速运行中,一旦中间被打断了,可能会需要你花一个小时的时间才能找回原来的感觉和思路。 怪不得那么多程序员都不喜欢在编程中受到打扰呢。 <strong>2、配合开发团队</strong> 作为团队中的其中一员,学会和你的同事相处是成为一个高效开发者的重要组成部分。开发者网络 Scalable Path CEO Damien Filiatrault 认为,这要比你有经验丰富的编码技能更重要。 提出和一个自认为比别人聪明的家伙一起工作有多不开心。Filiatrault 说,无论他多么有才华,就问一个关键的问题,“和他们一起工作有趣吗?”如果答案是否定的,“那可能会影响整个团队的士气,”他补充到。 但这不仅仅是自大的家伙单方面造成的问题。如果开发人员太好或者因为某些原因不适应团队环境也可能会出现一些问题。例如,Filiatrault指出,“世界上任何一个角落的开发者都想尽可能的避免冲突,而他们可能又不愿承认自己无能为力,这也是一个问题。” <strong>3、利用业余时间编码</strong> 如果你写代码仅仅是为了钱,那么你很难在新的领域学到新技能以及经验。这也是为什么 Added Bytes 的创始人Dave Child会说,为了娱乐而去编码是很重要的。 他说:“我所知道的最好的开发者,他们业余都有自己研究的项目领域。” 那些开发者不会为他们的小项目使用他们在工作中需要的技能,Child补充道。相反,他们会利用一些业余项目来增加自己的技能,同时让自己跟上新技术发展的步伐,这才是真正让他们兴奋的。 <strong>4、学会写潦草的代码</strong> 很少有项目会需要开发者去天才般的创建华丽丽的代码作品:它们所需要的通常是一个可以在上面建立具体功能的通用平台。 Nixey说最好的方式就是快速写一些可运行的作品,然后从中受益。 “不管你的代码是邋遢也好,重复也好,命名很烂也好,”他说,“代码只是一种解决方案的表现形式,之后你可以去重构它,让它看起来很好。” <strong>5、不要在相同的工作上停留过长时间</strong> Child说,一个保证不失去自己编程优势的有效方式就是去重新找一个工作,然后让自己融入到开发团队中。因为一旦你掌握了工作所需的所有技能,你就进入了一个死胡同,你的技能很难再提升,你也很难成为一个更好的程序员。 “你需要不断挑战自己,”他说。“如果你在一个地方工作了好几年,那么你可能已经最大限度的学到了当时想学的东西,所以不要再待在那了——继续前行,去寻找新的挑战。” <strong>6、永远不要停止学习</strong> 软件技术更新的非常快,这意味着现在很多重要的编码技能可能很快就会过时。所以,如果你打算在软件开发领域有一个长期的发展,及时了解新的编程语言和技术趋势是非常重要的。 开发公司Progress Software的首席布道官Todd Anglin说,“事实很简单但也很残酷,你现有的知识是不足以你去消费一辈子的,你必须做好不断去重新学习的准备,因为你现在所拥有的知识未来是不能满足你的需求的。” 他还补充说,清楚并专注于你感兴趣的领域,而不是试图成为各行各业的高手是很重要的。“对你想深入学习的领域,要保持如饥似渴的态度和持续的激情。不要试图去啥都学,因为这是不可能的——要保持专注,不断学习。” Filiatrault也同意Todd的看法。“也许你每一份开发工作都会有一半之前没有做过的事情,所以你要有的重要的技能就是知道如何去学习,去寻找信息,”他说,“如果你有了这项技能,那么不管你需要什么你都可以通过自学拥有了。” <strong>7、因为热爱去编程</strong> Gregor Riegler是Be a Better Developer博客的一个作者,他说,选择自己热爱的领域是至关重要的,这样才能确保自己能够全身心投入项目中去。 “产生动力最重要的因素是你关心代码能够做什么,”他说,“也许它可以以某种方式让一个app运行,也许它会让一台机器以你希望的方式工作。” 无论如何,他补充说,“你要真正去享受自己正在做的事,并尝试获得最佳效果。如果你能从中找到快乐,那么恭喜你,你一定会写出伟大的代码。”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/06/15/%E9%AB%98%E6%95%88%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%847%E4%B8%AA%E4%B9%A0%E6%83%AF/" data-id="ckfml63b0002q9gercunsfa6q" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-版本控制-git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/08/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2016-06-08T10:04:19.000Z" itemprop="datePublished">2016-06-08</time>
+    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" class="article-date">
+  <time datetime="2017-06-27T06:33:47.000Z" itemprop="datePublished">2017-06-27</time>
 </a>
     
   <div class="article-category">
@@ -179,7 +140,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/08/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">项目版本控制——常用 Git 命令清单</a>
+      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
     </h1>
   
 
@@ -187,110 +148,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>先用一幅图，从总体上描述主要git命令的工作流程 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/06/1.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/06/1.png" alt="1"></a></p>
-<h2 id="二、命令笔记"><a href="#二、命令笔记" class="headerlink" title="二、命令笔记"></a>二、命令笔记</h2><p>新建代码库</p>
-<p># 在当前目录新建一个Git代码库<br>$ git init</p>
-<h1 id="新建一个目录，将其初始化为Git代码库"><a href="#新建一个目录，将其初始化为Git代码库" class="headerlink" title="新建一个目录，将其初始化为Git代码库"></a>新建一个目录，将其初始化为Git代码库</h1><p>$ git init [project-name]</p>
-<h1 id="下载一个项目和它的整个代码历史"><a href="#下载一个项目和它的整个代码历史" class="headerlink" title="下载一个项目和它的整个代码历史"></a>下载一个项目和它的整个代码历史</h1><p>$ git clone [url]</p>
-<p>配置</p>
-<p># Git的设置文件为.gitconfig，它可以在用户主目录下（全局配置），</p>
-<h1 id="也可以在项目目录下（项目配置）。"><a href="#也可以在项目目录下（项目配置）。" class="headerlink" title="也可以在项目目录下（项目配置）。"></a>也可以在项目目录下（项目配置）。</h1><p>#</p>
-<h1 id="显示当前的Git配置"><a href="#显示当前的Git配置" class="headerlink" title="显示当前的Git配置"></a>显示当前的Git配置</h1><p>$ git config –list</p>
-<h1 id="编辑Git配置文件"><a href="#编辑Git配置文件" class="headerlink" title="编辑Git配置文件"></a>编辑Git配置文件</h1><p>$ git config -e [–global]</p>
-<h1 id="设置提交代码时的用户信息"><a href="#设置提交代码时的用户信息" class="headerlink" title="设置提交代码时的用户信息"></a>设置提交代码时的用户信息</h1><p>$ git config [–global] user.name “[name]“<br>$ git config [–global] user.email “[email address]“</p>
-<p>增加/删除文件</p>
-<p># 添加指定文件到暂存区<br>$ git add [file1] [file2] …</p>
-<h1 id="添加指定目录到暂存区，包括子目录"><a href="#添加指定目录到暂存区，包括子目录" class="headerlink" title="添加指定目录到暂存区，包括子目录"></a>添加指定目录到暂存区，包括子目录</h1><p>$ git add [dir]</p>
-<h1 id="添加当前目录的所有文件到暂存区"><a href="#添加当前目录的所有文件到暂存区" class="headerlink" title="添加当前目录的所有文件到暂存区"></a>添加当前目录的所有文件到暂存区</h1><p>$ git add .</p>
-<h1 id="添加每个变化前，都会要求确认"><a href="#添加每个变化前，都会要求确认" class="headerlink" title="添加每个变化前，都会要求确认"></a>添加每个变化前，都会要求确认</h1><h1 id="对于同一个文件的多处变化，可以实现分次提交"><a href="#对于同一个文件的多处变化，可以实现分次提交" class="headerlink" title="对于同一个文件的多处变化，可以实现分次提交"></a>对于同一个文件的多处变化，可以实现分次提交</h1><p>$ git add -p</p>
-<h1 id="删除工作区文件，并且将这次删除放入暂存区"><a href="#删除工作区文件，并且将这次删除放入暂存区" class="headerlink" title="删除工作区文件，并且将这次删除放入暂存区"></a>删除工作区文件，并且将这次删除放入暂存区</h1><p>$ git rm [file1] [file2] …</p>
-<h1 id="停止追踪指定文件，但该文件会保留在工作区"><a href="#停止追踪指定文件，但该文件会保留在工作区" class="headerlink" title="停止追踪指定文件，但该文件会保留在工作区"></a>停止追踪指定文件，但该文件会保留在工作区</h1><p>$ git rm –cached [file]</p>
-<h1 id="改名文件，并且将这个改名放入暂存区"><a href="#改名文件，并且将这个改名放入暂存区" class="headerlink" title="改名文件，并且将这个改名放入暂存区"></a>改名文件，并且将这个改名放入暂存区</h1><p>$ git mv [file-original] [file-renamed]</p>
-<p>代码提交</p>
-<p># 提交暂存区到仓库区<br>$ git commit -m [message]</p>
-<h1 id="提交暂存区的指定文件到仓库区"><a href="#提交暂存区的指定文件到仓库区" class="headerlink" title="提交暂存区的指定文件到仓库区"></a>提交暂存区的指定文件到仓库区</h1><p>$ git commit [file1] [file2] … -m [message]</p>
-<h1 id="提交工作区自上次commit之后的变化，直接到仓库区"><a href="#提交工作区自上次commit之后的变化，直接到仓库区" class="headerlink" title="提交工作区自上次commit之后的变化，直接到仓库区"></a>提交工作区自上次commit之后的变化，直接到仓库区</h1><p>$ git commit -a</p>
-<h1 id="提交时显示所有diff信息"><a href="#提交时显示所有diff信息" class="headerlink" title="提交时显示所有diff信息"></a>提交时显示所有diff信息</h1><p>$ git commit -v</p>
-<h1 id="使用一次新的commit，替代上一次提交"><a href="#使用一次新的commit，替代上一次提交" class="headerlink" title="使用一次新的commit，替代上一次提交"></a>使用一次新的commit，替代上一次提交</h1><h1 id="如果代码没有任何新变化，则用来改写上一次commit的提交信息"><a href="#如果代码没有任何新变化，则用来改写上一次commit的提交信息" class="headerlink" title="如果代码没有任何新变化，则用来改写上一次commit的提交信息"></a>如果代码没有任何新变化，则用来改写上一次commit的提交信息</h1><p>$ git commit –amend -m [message]</p>
-<h1 id="重做上一次commit，并包括指定文件的新变化"><a href="#重做上一次commit，并包括指定文件的新变化" class="headerlink" title="重做上一次commit，并包括指定文件的新变化"></a>重做上一次commit，并包括指定文件的新变化</h1><p>$ git commit –amend [file1] [file2] …</p>
-<p>分支</p>
-<p># 列出所有本地分支<br>$ git branch</p>
-<h1 id="列出所有远程分支"><a href="#列出所有远程分支" class="headerlink" title="列出所有远程分支"></a>列出所有远程分支</h1><p>$ git branch -r</p>
-<h1 id="列出所有本地分支和远程分支"><a href="#列出所有本地分支和远程分支" class="headerlink" title="列出所有本地分支和远程分支"></a>列出所有本地分支和远程分支</h1><p>$ git branch -a</p>
-<h1 id="新建一个分支，但依然停留在当前分支"><a href="#新建一个分支，但依然停留在当前分支" class="headerlink" title="新建一个分支，但依然停留在当前分支"></a>新建一个分支，但依然停留在当前分支</h1><p>$ git branch [branch-name]</p>
-<h1 id="新建一个分支，并切换到该分支"><a href="#新建一个分支，并切换到该分支" class="headerlink" title="新建一个分支，并切换到该分支"></a>新建一个分支，并切换到该分支</h1><p>$ git checkout -b [branch]</p>
-<h1 id="新建一个分支，指向指定commit"><a href="#新建一个分支，指向指定commit" class="headerlink" title="新建一个分支，指向指定commit"></a>新建一个分支，指向指定commit</h1><p>$ git branch [branch] [commit]</p>
-<h1 id="新建一个分支，与指定的远程分支建立追踪关系"><a href="#新建一个分支，与指定的远程分支建立追踪关系" class="headerlink" title="新建一个分支，与指定的远程分支建立追踪关系"></a>新建一个分支，与指定的远程分支建立追踪关系</h1><p>$ git branch –track [branch] [remote-branch]</p>
-<h1 id="切换到指定分支，并更新工作区"><a href="#切换到指定分支，并更新工作区" class="headerlink" title="切换到指定分支，并更新工作区"></a>切换到指定分支，并更新工作区</h1><p>$ git checkout [branch-name]</p>
-<h1 id="切换到上一个分支"><a href="#切换到上一个分支" class="headerlink" title="切换到上一个分支"></a>切换到上一个分支</h1><p>$ git checkout -</p>
-<h1 id="建立追踪关系，在现有分支与指定的远程分支之间"><a href="#建立追踪关系，在现有分支与指定的远程分支之间" class="headerlink" title="建立追踪关系，在现有分支与指定的远程分支之间"></a>建立追踪关系，在现有分支与指定的远程分支之间</h1><p>$ git branch –set-upstream [branch] [remote-branch]</p>
-<h1 id="合并指定分支到当前分支"><a href="#合并指定分支到当前分支" class="headerlink" title="合并指定分支到当前分支"></a>合并指定分支到当前分支</h1><p>$ git merge [branch]</p>
-<h1 id="选择一个commit，合并进当前分支"><a href="#选择一个commit，合并进当前分支" class="headerlink" title="选择一个commit，合并进当前分支"></a>选择一个commit，合并进当前分支</h1><p>$ git cherry-pick [commit]</p>
-<h1 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h1><p>$ git branch -d [branch-name]</p>
-<h1 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h1><p>$ git push origin –delete [branch-name]<br>$ git branch -dr [remote/branch]</p>
-<p>标签</p>
-<p># 列出所有tag<br>$ git tag</p>
-<h1 id="新建一个tag在当前commit"><a href="#新建一个tag在当前commit" class="headerlink" title="新建一个tag在当前commit"></a>新建一个tag在当前commit</h1><p>$ git tag [tag]</p>
-<h1 id="新建一个tag在指定commit"><a href="#新建一个tag在指定commit" class="headerlink" title="新建一个tag在指定commit"></a>新建一个tag在指定commit</h1><p>$ git tag [tag] [commit]</p>
-<h1 id="删除本地tag"><a href="#删除本地tag" class="headerlink" title="删除本地tag"></a>删除本地tag</h1><p>$ git tag -d [tag]</p>
-<h1 id="删除远程tag"><a href="#删除远程tag" class="headerlink" title="删除远程tag"></a>删除远程tag</h1><p>$ git push origin :refs/tags/[tagName]</p>
-<h1 id="查看tag信息"><a href="#查看tag信息" class="headerlink" title="查看tag信息"></a>查看tag信息</h1><p>$ git show [tag]</p>
-<h1 id="提交指定tag"><a href="#提交指定tag" class="headerlink" title="提交指定tag"></a>提交指定tag</h1><p>$ git push [remote] [tag]</p>
-<h1 id="提交所有tag"><a href="#提交所有tag" class="headerlink" title="提交所有tag"></a>提交所有tag</h1><p>$ git push [remote] –tags</p>
-<h1 id="新建一个分支，指向某个tag"><a href="#新建一个分支，指向某个tag" class="headerlink" title="新建一个分支，指向某个tag"></a>新建一个分支，指向某个tag</h1><p>$ git checkout -b [branch] [tag]</p>
-<p>查看信息</p>
-<p># 显示有变更的文件<br>$ git status</p>
-<h1 id="显示当前分支的版本历史"><a href="#显示当前分支的版本历史" class="headerlink" title="显示当前分支的版本历史"></a>显示当前分支的版本历史</h1><p>$ git log</p>
-<h1 id="显示commit历史，以及每次commit发生变更的文件"><a href="#显示commit历史，以及每次commit发生变更的文件" class="headerlink" title="显示commit历史，以及每次commit发生变更的文件"></a>显示commit历史，以及每次commit发生变更的文件</h1><p>$ git log –stat</p>
-<h1 id="搜索提交历史，根据关键词"><a href="#搜索提交历史，根据关键词" class="headerlink" title="搜索提交历史，根据关键词"></a>搜索提交历史，根据关键词</h1><p>$ git log -S [keyword]</p>
-<h1 id="显示某个commit之后的所有变动，每个commit占据一行"><a href="#显示某个commit之后的所有变动，每个commit占据一行" class="headerlink" title="显示某个commit之后的所有变动，每个commit占据一行"></a>显示某个commit之后的所有变动，每个commit占据一行</h1><p>$ git log [tag] HEAD –pretty=format:%s</p>
-<h1 id="显示某个commit之后的所有变动，其”提交说明”必须符合搜索条件"><a href="#显示某个commit之后的所有变动，其”提交说明”必须符合搜索条件" class="headerlink" title="显示某个commit之后的所有变动，其”提交说明”必须符合搜索条件"></a>显示某个commit之后的所有变动，其”提交说明”必须符合搜索条件</h1><p>$ git log [tag] HEAD –grep feature</p>
-<h1 id="显示某个文件的版本历史，包括文件改名"><a href="#显示某个文件的版本历史，包括文件改名" class="headerlink" title="显示某个文件的版本历史，包括文件改名"></a>显示某个文件的版本历史，包括文件改名</h1><p>$ git log –follow [file]<br>$ git whatchanged [file]</p>
-<h1 id="显示指定文件相关的每一次diff"><a href="#显示指定文件相关的每一次diff" class="headerlink" title="显示指定文件相关的每一次diff"></a>显示指定文件相关的每一次diff</h1><p>$ git log -p [file]</p>
-<h1 id="显示过去5次提交"><a href="#显示过去5次提交" class="headerlink" title="显示过去5次提交"></a>显示过去5次提交</h1><p>$ git log -5 –pretty –oneline</p>
-<h1 id="显示所有提交过的用户，按提交次数排序"><a href="#显示所有提交过的用户，按提交次数排序" class="headerlink" title="显示所有提交过的用户，按提交次数排序"></a>显示所有提交过的用户，按提交次数排序</h1><p>$ git shortlog -sn</p>
-<h1 id="显示指定文件是什么人在什么时间修改过"><a href="#显示指定文件是什么人在什么时间修改过" class="headerlink" title="显示指定文件是什么人在什么时间修改过"></a>显示指定文件是什么人在什么时间修改过</h1><p>$ git blame [file]</p>
-<h1 id="显示暂存区和工作区的差异"><a href="#显示暂存区和工作区的差异" class="headerlink" title="显示暂存区和工作区的差异"></a>显示暂存区和工作区的差异</h1><p>$ git diff</p>
-<h1 id="显示暂存区和上一个commit的差异"><a href="#显示暂存区和上一个commit的差异" class="headerlink" title="显示暂存区和上一个commit的差异"></a>显示暂存区和上一个commit的差异</h1><p>$ git diff –cached [file]</p>
-<h1 id="显示工作区与当前分支最新commit之间的差异"><a href="#显示工作区与当前分支最新commit之间的差异" class="headerlink" title="显示工作区与当前分支最新commit之间的差异"></a>显示工作区与当前分支最新commit之间的差异</h1><p>$ git diff HEAD</p>
-<h1 id="显示两次提交之间的差异"><a href="#显示两次提交之间的差异" class="headerlink" title="显示两次提交之间的差异"></a>显示两次提交之间的差异</h1><p>$ git diff [first-branch]…[second-branch]</p>
-<h1 id="显示今天你写了多少行代码"><a href="#显示今天你写了多少行代码" class="headerlink" title="显示今天你写了多少行代码"></a>显示今天你写了多少行代码</h1><p>$ git diff –shortstat “@{0 day ago}”</p>
-<h1 id="显示某次提交的元数据和内容变化"><a href="#显示某次提交的元数据和内容变化" class="headerlink" title="显示某次提交的元数据和内容变化"></a>显示某次提交的元数据和内容变化</h1><p>$ git show [commit]</p>
-<h1 id="显示某次提交发生变化的文件"><a href="#显示某次提交发生变化的文件" class="headerlink" title="显示某次提交发生变化的文件"></a>显示某次提交发生变化的文件</h1><p>$ git show –name-only [commit]</p>
-<h1 id="显示某次提交时，某个文件的内容"><a href="#显示某次提交时，某个文件的内容" class="headerlink" title="显示某次提交时，某个文件的内容"></a>显示某次提交时，某个文件的内容</h1><p>$ git show [commit]:[filename]</p>
-<h1 id="显示当前分支的最近几次提交"><a href="#显示当前分支的最近几次提交" class="headerlink" title="显示当前分支的最近几次提交"></a>显示当前分支的最近几次提交</h1><p>$ git reflog</p>
-<p>远程同步</p>
-<p># 下载远程仓库的所有变动<br>$ git fetch [remote]</p>
-<h1 id="显示所有远程仓库"><a href="#显示所有远程仓库" class="headerlink" title="显示所有远程仓库"></a>显示所有远程仓库</h1><p>$ git remote -v</p>
-<h1 id="显示某个远程仓库的信息"><a href="#显示某个远程仓库的信息" class="headerlink" title="显示某个远程仓库的信息"></a>显示某个远程仓库的信息</h1><p>$ git remote show [remote]</p>
-<h1 id="增加一个新的远程仓库，并命名"><a href="#增加一个新的远程仓库，并命名" class="headerlink" title="增加一个新的远程仓库，并命名"></a>增加一个新的远程仓库，并命名</h1><p>$ git remote add [shortname] [url]</p>
-<h1 id="取回远程仓库的变化，并与本地分支合并"><a href="#取回远程仓库的变化，并与本地分支合并" class="headerlink" title="取回远程仓库的变化，并与本地分支合并"></a>取回远程仓库的变化，并与本地分支合并</h1><p>$ git pull [remote] [branch]</p>
-<h1 id="上传本地指定分支到远程仓库"><a href="#上传本地指定分支到远程仓库" class="headerlink" title="上传本地指定分支到远程仓库"></a>上传本地指定分支到远程仓库</h1><p>$ git push [remote] [branch]</p>
-<h1 id="强行推送当前分支到远程仓库，即使有冲突"><a href="#强行推送当前分支到远程仓库，即使有冲突" class="headerlink" title="强行推送当前分支到远程仓库，即使有冲突"></a>强行推送当前分支到远程仓库，即使有冲突</h1><p>$ git push [remote] –force</p>
-<h1 id="推送所有分支到远程仓库"><a href="#推送所有分支到远程仓库" class="headerlink" title="推送所有分支到远程仓库"></a>推送所有分支到远程仓库</h1><p>$ git push [remote] –all</p>
-<p>撤销</p>
-<p># 恢复暂存区的指定文件到工作区<br>$ git checkout [file]</p>
-<h1 id="恢复某个commit的指定文件到暂存区和工作区"><a href="#恢复某个commit的指定文件到暂存区和工作区" class="headerlink" title="恢复某个commit的指定文件到暂存区和工作区"></a>恢复某个commit的指定文件到暂存区和工作区</h1><p>$ git checkout [commit] [file]</p>
-<h1 id="恢复暂存区的所有文件到工作区"><a href="#恢复暂存区的所有文件到工作区" class="headerlink" title="恢复暂存区的所有文件到工作区"></a>恢复暂存区的所有文件到工作区</h1><p>$ git checkout .</p>
-<h1 id="重置暂存区的指定文件，与上一次commit保持一致，但工作区不变"><a href="#重置暂存区的指定文件，与上一次commit保持一致，但工作区不变" class="headerlink" title="重置暂存区的指定文件，与上一次commit保持一致，但工作区不变"></a>重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</h1><p>$ git reset [file]</p>
-<h1 id="重置暂存区与工作区，与上一次commit保持一致"><a href="#重置暂存区与工作区，与上一次commit保持一致" class="headerlink" title="重置暂存区与工作区，与上一次commit保持一致"></a>重置暂存区与工作区，与上一次commit保持一致</h1><p>$ git reset –hard</p>
-<h1 id="重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变"><a href="#重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变" class="headerlink" title="重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变"></a>重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</h1><p>$ git reset [commit]</p>
-<h1 id="重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致"><a href="#重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致" class="headerlink" title="重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致"></a>重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</h1><p>$ git reset –hard [commit]</p>
-<h1 id="重置当前HEAD为指定commit，但保持暂存区和工作区不变"><a href="#重置当前HEAD为指定commit，但保持暂存区和工作区不变" class="headerlink" title="重置当前HEAD为指定commit，但保持暂存区和工作区不变"></a>重置当前HEAD为指定commit，但保持暂存区和工作区不变</h1><p>$ git reset –keep [commit]</p>
-<h1 id="新建一个commit，用来撤销指定commit"><a href="#新建一个commit，用来撤销指定commit" class="headerlink" title="新建一个commit，用来撤销指定commit"></a>新建一个commit，用来撤销指定commit</h1><h1 id="后者的所有变化都将被前者抵消，并且应用到当前分支"><a href="#后者的所有变化都将被前者抵消，并且应用到当前分支" class="headerlink" title="后者的所有变化都将被前者抵消，并且应用到当前分支"></a>后者的所有变化都将被前者抵消，并且应用到当前分支</h1><p>$ git revert [commit]</p>
-<h1 id="暂时将未提交的变化移除，稍后再移入"><a href="#暂时将未提交的变化移除，稍后再移入" class="headerlink" title="暂时将未提交的变化移除，稍后再移入"></a>暂时将未提交的变化移除，稍后再移入</h1><p>$ git stash<br>$ git stash pop</p>
-<h2 id="如果想更深入地了解git用法，可参考"><a href="#如果想更深入地了解git用法，可参考" class="headerlink" title="如果想更深入地了解git用法，可参考"></a>如果想更深入地了解git用法，可参考</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://rogerdudler.github.io/git-guide/index.zh.html">Git简明指南(中文版)</a></li>
-<li><a target="_blank" rel="noopener" href="http://git-scm.com/docs">Git完整命令地址</a></li>
-</ul>
+        <h2 id="一、-安装-Passport"><a href="#一、-安装-Passport" class="headerlink" title="一、 安装 Passport"></a>一、 安装 Passport</h2><p>使用 Composer 依赖包管理器安装 Passport</p>
+<p>composer require laravel/passport</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"></a> 接下来将</p>
+<p>Laravel\Passport\PassportServiceProvider::class,</p>
+<p>这句代码添加到 config/app.php 的 providers 数组， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"></a> 然后运行</p>
+<p>php artisan migrate</p>
+<p>来运行 Passport 自带的数据库迁移文件（用于自动创建 Passport 必需的客户端数据表和令牌数据表）, <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"></a> 然后运行</p>
+<p>php artisan passport:install</p>
+<p>来创建生成安全访问令牌时用到的加密密钥及私人访问和密码访问客户端。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"></a> 接下来再将</p>
+<p>Laravel\Passport\HasApiTokens</p>
+<p>Trait 添加到 App\User 模型中，这个 Trait 会给这个模型提供一些辅助函数，用于检查已认证用户的令牌和使用作用于。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"></a> 然后在 AuthServiceProvider 的 boot 方法中添加</p>
+<p>Passport::roues();</p>
+<p>来注册 Passport 在访问令牌、客户端、私人访问令牌的发放和吊销过程中一些必要路由。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"></a> 最后修改下配置文件 config/auth.php 中的 api driver 改为 passport，此项操作会将 API 请求时使用 Passport 的  TokenGuard 来处理授权保护。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"></a> 全部配置好后，我们来请求令牌，但是发现我们并没有创建任何用户，于是我们需要用到seed来预设填充数据。 运行</p>
+<p>php artisan make:seeder UsersTableSeeder</p>
+<p>创建一个 Seeder 然后打开 database\seeds 文件夹里已经新建了一个叫 UserTableSeeder.php 的文件，打开它然后在 run 方法内输入以下代码：</p>
+<p>DB::table(‘users’)-&gt;insert([<br>‘name’=&gt;’admin’,<br>‘email’=&gt;‘godcheese@godcheese.com’,<br>‘password’=&gt;bcrypt(‘admin’)<br>]);</p>
+<p>如图所示， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"></a> 然后运行</p>
+<p>php artisan db:seed –class=UsersTableSeeder</p>
+<p>来往 user 表中填充刚刚添加好的 seed 数据。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"></a> 接下来我们来写前端 JavaScript 请求获取用户访问令牌的例子。</p>
+<h2 id="二、JavaScript-请求授权令牌"><a href="#二、JavaScript-请求授权令牌" class="headerlink" title="二、JavaScript 请求授权令牌"></a>二、JavaScript 请求授权令牌</h2><p>这是前端 UI， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"></a> 然后些下JavaScript请求代码如下（ 此处仅供演示，暂时忽略安全问题。实际生产环境中不建议在前端显示 client_id 和 client_secret）：</p>
+<p>$(‘#loginButton’).click(function(event){<br>event.preventDefault();<br>$.ajax({<br>type:’post’,<br>url:’<a target="_blank" rel="noopener" href="http://wodedaxue-backend/oauth/token&#39;">http://wodedaxue-backend/oauth/token&#39;</a>,<br>dataType:’json’,<br>data:{<br>‘grant_type’:’password’,<br>‘client_id’:’2’,<br>‘client_secret’:’o6N7JzK2y3pbJiQmDcHaDhrpvPHBktnAlmmfEnS7’,<br>‘username’:$(‘#username’).val(),<br>‘password’:$(‘#password’).val(),<br>‘scope’:’’<br>},<br>success:function(data){<br>console.log(data);<br>alert(JSON.stringify(data));<br>},<br>error:function(err){<br>console.log(err);<br>alert(‘statusCode:’+err.status+’\n’+’statusText:’+err.statusText+’\n’+’description:\n’+JSON.stringify(err.responseJSON));<br>}<br>});<br>});</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"></a> 接下来再将以下代码写入 User 模型：</p>
+<p>/**<br>* 自定义用Passport授权登录：用户名+密码<br>* @param $username<br>* @return mixed<br>*/<br>public function findForPassport($username)<br>{<br>return self::where(‘name’, $username)-&gt;first();<br>}</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"></a> 然后输入用户名 admin 和密码 admin ，点击登录按钮尝试登录：</p>
+<p>{<br>token_type:”Bearer”,<br>expires_in:31536000,<br>access_token:”eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNiOG…MFF7PYRIhXqCkZhZNfoLV1IYTzRmhO2oV41XR9wD7Zd3Oxl-g”,<br>refresh_token:”sabtS2jYhqAJtVxe868OpTTgBeYgpWgfttn5h97drUgBVLN7vL…ukx7yGfGhn5h+zCouLmuh0sdjYU+dgtRweXU3jiA0Fa6/c6k=”<br>}</p>
+<p>成功获取访问令牌（access_token）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"></a> 然后在每次访问其它 API 时候都带上此参数。 Laravel Passport 更多参考资料：<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/passport">https://laravel.com/docs/5.4/passport</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/06/08/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6-git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="ckfml63ai00249ger3un87vxs" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" data-id="ckfml8mos002gcyer4xs637xn" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
 
     </footer>
   </div>
@@ -299,110 +190,10 @@
 
 
   
-    <article id="post-使用zeronet搭建p2p全球网站" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-会声会影-最新版下载地址patch（仅供学习）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/30/%E4%BD%BF%E7%94%A8zeronet%E6%90%AD%E5%BB%BAp2p%E5%85%A8%E7%90%83%E7%BD%91%E7%AB%99/" class="article-date">
-  <time datetime="2016-05-30T05:39:15.000Z" itemprop="datePublished">2016-05-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/30/%E4%BD%BF%E7%94%A8zeronet%E6%90%AD%E5%BB%BAp2p%E5%85%A8%E7%90%83%E7%BD%91%E7%AB%99/">使用ZeroNet搭建P2P全球网站</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>ZeroNet是一个利用比特币加密和BT技术提供不受审查的网络与通信的BT平台，ZeroNet网络功能已经得到完整的种子的支持和加密连接，保证用户通信和文件共享的安全。使用ZeroNet，你可以匿名上网，你可以在自己电脑搭建网站，但即使你关机，你的网站依然在全球存在，别人无法关闭你的网站。 <strong>什么是ZeroNet</strong> ZeroNet是一个去中心化的类似于Internet的网络，由匈牙利的开发者使用Python制作，完全开源。网站由特殊的”ZeroNet URL”可以被使用一般的浏览器通过ZeroNet程序浏览，就像访问本地主机一样。ZeroNet默认并「不」匿名，但是用户可以通过内置的Tor功能进行匿名化。ZeroNet使用Bitcoin加密算法及BitTorrent网络。 <strong>防DMCA Take down</strong> 由于ZeroNet去中心化的原因，国外有人制作了一个ZeroNet版本的海盗湾——Play，这个网站可让版权所有者头疼啦…一般的网站服务器都有IP地址，不抗投诉的ISP收到了向IP WHOIS滥用信箱发送的DMCA投诉信的话，你就要和你的网站说再见了..(俗称 DMCA Take down)，可用了ZeroNet后，并没有一台服务器是真实的服务器，任何访客都有可能成为服务器，还有些访客使用了Tor，更找不到真正的。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/68747470733a2f2f692e696d6775722e636f6d2f4836304f4148592e706e67.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/68747470733a2f2f692e696d6775722e636f6d2f4836304f4148592e706e67.png" alt="68747470733a2f2f692e696d6775722e636f6d2f4836304f4148592e706e67"></a> 好了，说点有用的： 1.可以建自己的网站，你基本上不用做什么。 2.基于p2p原理，你只要建好并有人浏览过，即使你自己关机，你的网站依然在全球存在。别人想关你站，没门。 3.基于p2p原理，支持内网穿透，也就是说你在内网也没关系，手机也没问题。 4.基于比特币原理，账号很安全，谁也不知道你是谁，谁也盗不去。 5.不需要域名，任何人访问都使用<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/">http://127.0.0.1:43110/</a>字符串   来访问。 6.不用gg fb和tt你就能浏览全世界 <strong>项目地址：</strong><a target="_blank" rel="noopener" href="https://github.com/hellozeronet/zeronet">https://github.com/hellozeronet/zeronet</a> <strong>下载地址：</strong></p>
-<ul>
-<li>Download ZeroBundle package:<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/HelloZeroNet/ZeroBundle/raw/master/dist/ZeroBundle-win.zip">Microsoft Windows</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/HelloZeroNet/ZeroBundle/raw/master/dist/ZeroBundle-mac-osx.zip">Apple OS X</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/HelloZeroNet/ZeroBundle/raw/master/dist/ZeroBundle-linux64.tar.gz">Linux 64bit</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/HelloZeroNet/ZeroBundle/raw/master/dist/ZeroBundle-linux32.tar.gz">Linux 32bit</a></li>
-</ul>
-</li>
-<li>Unpack anywhere</li>
-<li>Run <code>ZeroNet.cmd</code> (win), <code>ZeroNet(.app)</code> (osx), <code>ZeroNet.sh</code> (linux)</li>
-</ul>
-<p>zendnet安装时需要vs2008运行环境，很多ghost精简系统没有。没有的话运行zeronet.cmd后一闪而过，闪退。 安装后你唯一要做的，是注册一个id。<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/zeroid.bit">http://127.0.0.1:43110/zeroid.bit  </a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/68747470733a2f2f7a65726f6e65742e72656164746865646f63732e6f72672f656e2f6c61746573742f696d672f7a65726f74616c6b2e706e67.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/68747470733a2f2f7a65726f6e65742e72656164746865646f63732e6f72672f656e2f6c61746573742f696d672f7a65726f74616c6b2e706e67.png" alt="68747470733a2f2f7a65726f6e65742e72656164746865646f63732e6f72672f656e2f6c61746573742f696d672f7a65726f74616c6b2e706e67"></a> <strong>福利资源：</strong> 海盗湾种子站：<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/1PLAYgDQboKojowD3kwdb3CtWmWaokXvfp/">http://127.0.0.1:43110/1PLAYgDQboKojowD3kwdb3CtWmWaokXvfp/</a> MSDN资源区：<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/1AJB5rtjfB9imjDGVk5vtRtZp3zgYizbpG/">http://127.0.0.1:43110/1AJB5rtjfB9imjDGVk5vtRtZp3zgYizbpG/</a> Kindle电子书：<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/1KHCBG6dmbKXTZNenfwhWZ5x3oDyYyHSD4">http://127.0.0.1:43110/1KHCBG6dmbKXTZNenfwhWZ5x3oDyYyHSD4</a> 中文导航：<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/1NzWeweqJ32aRVdM5UzFnYCszuvG5xV3vS">http://127.0.0.1:43110/1NzWeweqJ32aRVdM5UzFnYCszuvG5xV3vS</a> Zeronet搜索引擎：<a target="_blank" rel="noopener" href="http://zeroexpose.com/">http://zeroexpose.com/</a> 新手上路，怎样创建自己的论坛和博客：<a target="_blank" rel="noopener" href="http://127.0.0.1:43110/1Nse6WcodQ5Mj6ZwvZvuyCVvQESwuxbCUy/?Topic:1_13Z7XxTa7JuFat3KzzMWu3onwM6biLuurJ/+ZeroNet+4+11+Update+markdown+mac">http://127.0.0.1:43110/1Nse6WcodQ5Mj6ZwvZvuyCVvQESwuxbCUy/?Topic:1_13Z7XxTa7JuFat3KzzMWu3onwM6biLuurJ/+ZeroNet+4+11+Update+markdown+mac</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/05/30/%E4%BD%BF%E7%94%A8zeronet%E6%90%AD%E5%BB%BAp2p%E5%85%A8%E7%90%83%E7%BD%91%E7%AB%99/" data-id="ckfml639d000v9gerek1zdt2w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-黑客欲将盗取的4-27亿个myspace密码以2800美元卖出" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/28/%E9%BB%91%E5%AE%A2%E6%AC%B2%E5%B0%86%E7%9B%97%E5%8F%96%E7%9A%844-27%E4%BA%BF%E4%B8%AAmyspace%E5%AF%86%E7%A0%81%E4%BB%A52800%E7%BE%8E%E5%85%83%E5%8D%96%E5%87%BA/" class="article-date">
-  <time datetime="2016-05-28T03:29:40.000Z" itemprop="datePublished">2016-05-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/28/%E9%BB%91%E5%AE%A2%E6%AC%B2%E5%B0%86%E7%9B%97%E5%8F%96%E7%9A%844-27%E4%BA%BF%E4%B8%AAmyspace%E5%AF%86%E7%A0%81%E4%BB%A52800%E7%BE%8E%E5%85%83%E5%8D%96%E5%87%BA/">黑客欲将盗取的4.27亿个MySpace密码以2800美元卖出</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<h2 id="网络安全领域有一个被屡屡提及的格言：公司分两种，一种是已经被黑客攻击的，一种，是还不知道已被攻击的。"><a href="#网络安全领域有一个被屡屡提及的格言：公司分两种，一种是已经被黑客攻击的，一种，是还不知道已被攻击的。" class="headerlink" title="网络安全领域有一个被屡屡提及的格言：公司分两种，一种是已经被黑客攻击的，一种，是还不知道已被攻击的。"></a>网络安全领域有一个被屡屡提及的格言：公司分两种，一种是已经被黑客攻击的，一种，是还不知道已被攻击的。</h2></blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/134976220.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/134976220.jpg" alt="134976220"></a> 社交媒体巨头 MySpace，明显属于第二种。上周还在售卖超过1.64亿Linkedln用户数据的同一个黑客，本周继而宣称已拿到MySpace用户的3.6亿封邮件和密码，如果属实，这将是史上最大规模的密码泄露事件。而且，这份数据似乎已在其他黑客中流传开来。 该黑客名为 Peace, 从MySpace中盗走数据的时间不明，但黑客自己和一个 LeakedSource（被入侵数据的有偿搜索引擎）的操作员说法一致，且后者称有证据表明，数据泄露发生的原因是过去曾有一个未被报告的漏洞。 Peace 和 LeakedSource 都未提供被盗数据的样例。为验证这些泄露的数据是否正确， Motherboard网站将曾在MySpace注册过的三位员工以及两个公司员工的朋友的邮箱地址提交给LeakedSource ，结果 LeakedSource 正确地回复了对应邮箱的密码。 LeakedSource 于周五在一篇博文中宣布了泄露事件。该数据集有427,484,128 个密码，但只有360,213,024 亿封邮件，该文还称，数据集中的每项记录都包含“一个邮件地址，一个用户名，一个密码，某些情况下还包括一个备用密码”。 “数据一旦已被进行若干次交易，最终就会流传到某个不值得信任的人手里，然后就会疯狂地泛滥不止。” “在这3.6亿邮件中，有111,341,258个账户绑定了用户名，有68,493,651个账户有备用密码（其中有些没有设置第一密码）。”LeakedSource 写道。LeakedSource 的用户可每天支付2美元，也可每年支付265美元，就能登录其网站并浏览该公司声称的超过16亿被攻击或被泄露的数据记录。 文中表示，数据由某个化名为Tessa88的人提供，但在与 Motherboard的采访中。该网站的一个运营人员说他们不清楚泄露数据的真实来源，比如说谁是第一个盗取MySpace的人，也不知道谁在“这段时间”一直持有该数据，以及该公司被攻击的时间。但这些数据最后注定会被泄露，他们表示。 “这是信息的本质，‘三个人无法保住一个秘密，除非是其中两个人死了。’（出自本杰明·富兰克明）。”该运营人员在一次在线聊天中告诉我说：“数据一旦已被进行若干次交易，最终就会流传到某个不值得信任的人手里，然后就会疯狂地泛滥不止。” MySpace 收到多个询问请求，但都未表态。 LeakedSource 还写道，密码最初是由 SHA1算法进行散列化，该算法被认为性能较弱，易于攻破，雪上加霜的是，该公司在散列过程中没有对密码进行“salt”,即在为使密码难以攻破而进行散列之前，没有在密码末端添加一串随机字节。 因此LeakedSource 的运营人员才告诉我，他们希望在月底破解98%到99%的密码，尽管该人员拒绝透漏已经破解多少。 10年前的MySpace 曾是互联网上最大的网站之一，而如今这个社交媒体只是空有其名，有很严重的安全问题。该网址最近曾吹嘘注册用户已跨过10亿门槛，然而据去年的报告，每月只有5000万个独立访客。 如果全部数据正确，这将会是有史以来规模最大的一次数据失窃。而且，如果全部数据正确，这将会是有史以来规模最大的一次数据失窃。更重要的是，这表明某些时候MySpace已经被攻击过，而且，该公司从未发现过此事，也未曾公开或在内部披露过这些信息。如果所有数据真的都来自MySpace，这将是会曾出现过的最大规模的邮件和密码泄露事件，并会在数据泄露意识网站Have I Been Pwned上名列榜首。 因此对用户来说，即使弃用账户或让账户休眠也会存在风险，因为账户中仍有可能包含个人数据，并会在其他的网络攻击中加以利用。重要的是，如果你有MySpace账号，要进行密码修改。但最最重要的是，如果你在其他更加敏感的网络服务中也使用同样的密码，也要立即更改。而且可以考虑使用LastPass 或 1Password等密码管理器，让你可以在每个不同的网站使用专有且强大的密码。 东部时间下午5点1分更新：周五下午，自称为Peace的黑客在网上的黑市The Real Deal上欲出售从Myspace上盗取的密码以及账户等数据，出价6比特币（大约为2800美元）。 “在某个傻瓜散布这些信息之前，我要把它们卖出去。”Peace在一次网络聊天中告诉我。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/05/28/%E9%BB%91%E5%AE%A2%E6%AC%B2%E5%B0%86%E7%9B%97%E5%8F%96%E7%9A%844-27%E4%BA%BF%E4%B8%AAmyspace%E5%AF%86%E7%A0%81%E4%BB%A52800%E7%BE%8E%E5%85%83%E5%8D%96%E5%87%BA/" data-id="ckfml63b2002t9gerhs9kdas7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-【精品收藏】vmware-12注册破解安装教程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/22/%E3%80%90%E7%B2%BE%E5%93%81%E6%94%B6%E8%97%8F%E3%80%91vmware-12%E6%B3%A8%E5%86%8C%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="article-date">
-  <time datetime="2016-05-22T10:52:50.000Z" itemprop="datePublished">2016-05-22</time>
+    <a href="/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" class="article-date">
+  <time datetime="2017-05-16T08:02:36.000Z" itemprop="datePublished">2017-05-16</time>
 </a>
     
   <div class="article-category">
@@ -417,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/22/%E3%80%90%E7%B2%BE%E5%93%81%E6%94%B6%E8%97%8F%E3%80%91vmware-12%E6%B3%A8%E5%86%8C%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">【精品收藏】VMware 12 虚拟机软件+注册破解安装教程：一个软件让你一台电脑装上多个系统</a>
+      <a class="article-title" href="/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/">会声会影 X10/X9/X8/X7/5 下载地址+Patch（仅供学习）</a>
     </h1>
   
 
@@ -425,28 +216,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<h2 id="一个软件让你一台电脑装上多个系统-包括苹果系统"><a href="#一个软件让你一台电脑装上多个系统-包括苹果系统" class="headerlink" title="一个软件让你一台电脑装上多个系统~包括苹果系统"></a>一个软件让你一台电脑装上多个系统~包括苹果系统</h2></blockquote>
-<h2 id="Vmware-Workstation-主要功能："><a href="#Vmware-Workstation-主要功能：" class="headerlink" title="Vmware Workstation 主要功能："></a>Vmware Workstation 主要功能：</h2><p>VMware产品主要的功能有：</p>
-<p>⒈不需要分区或重开机就能在同一台PC上使用两种以上的<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/880.htm">操作系统</a>。</p>
-<p>⒉完全隔离并且保护不同OS的操作环境以及所有安装在OS上面的应用软件和资料。</p>
-<p>⒊不同的OS之间还能互动操作，包括网络、周边、文件分享以及复制粘贴功能。</p>
-<p>⒋有复原（Undo）功能。</p>
-<p>⒌能够设定并且随时修改<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/880.htm">操作系统</a>的操作环境，如：内存、磁碟空间、周边设备等等。</p>
-<p>⒍<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/4413972.htm">热迁移</a>，高可用性。</p>
-<h2 id="虚拟机安装，推荐电脑配置："><a href="#虚拟机安装，推荐电脑配置：" class="headerlink" title="虚拟机安装，推荐电脑配置："></a>虚拟机安装，推荐电脑配置：</h2><p>1、Inter I5及以上 (A卡请自行百度大神解决方案) 必须开启CPU虚拟化：开机进入 BIOS —&gt; Intel Virtualization Technology— &gt;修改为 Enabled 参考：联想笔记本电脑如何打开Intel 虚拟化技术 <a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/91f5db1b3002831c7f05e3b0.html">http://jingyan.baidu.com/article/91f5db1b3002831c7f05e3b0.html</a> 2、内存 4G以上 3、硬盘现在笔记本都能满足需求。40G及以上</p>
-<h2 id="Vmware-Workstation安装教程："><a href="#Vmware-Workstation安装教程：" class="headerlink" title="Vmware Workstation安装教程："></a>Vmware Workstation安装教程：</h2><p>1、双击程序自动解压，解压完成后进入安装向导。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/vE3IBni.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/vE3IBni.png" alt="vE3IBni"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/qAnuuui.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/qAnuuui.png" alt="qAnuuui"></a> 如果出现以上报错（一般Win7系统下不会报错），解决方案：右键–&gt;以管理员身份运行 解压完成后桌面右下角出现： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/N32IzeN.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/N32IzeN.png" alt="N32IzeN"></a> 2、安装向导，点击下一步 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/F3y6Zz.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/F3y6Zz.png" alt="F3y6Zz"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/ueuyYn.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/ueuyYn.png" alt="ueuyYn"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/zyMVZ3E.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/zyMVZ3E.png" alt="zyMVZ3E"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/vi6zmaj.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/vi6zmaj.png" alt="vi6zmaj"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/naeEBz6.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/naeEBz6.png" alt="naeEBz6"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/eMnIFjZ.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/eMnIFjZ.png" alt="eMnIFjZ"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/YBJRrmF.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/YBJRrmF.png" alt="YBJRrmF"></a> 点击安装，然后静静的等待…… <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/FzUFfqF.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/FzUFfqF.png" alt="FzUFfqF"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/eIfueeE.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/eIfueeE.png" alt="eIfueeE"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/UzEv223.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/UzEv223.png" alt="UzEv223"></a>   <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/MNvyQry.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/MNvyQry.png" alt="MNvyQry"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/2EnYFvq.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/2EnYFvq.png" alt="2EnYFvq"></a> 安装完成，输入产品Key VMware Workstation 12 Pro key/注册码 ：</p>
-<p>VY1DU-2VXDH-08DVQ-PXZQZ-P2KV8<br>VF58R-28D9P-0882Z-5GX7G-NPUTF<br>YG7XR-4GYEJ-4894Y-VFMNZ-YA296<br>5A02H-AU243-TZJ49-GTC7K-3C61N</p>
-<p>或者百度直接搜索：vmware workstation 12 密钥 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/YJjA3qU.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/YJjA3qU.png" alt="YJjA3qU"></a> 至此VMware Workstation 已经安装完成。 给大家看看我现在装在虚拟及内的在用的系统， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/20160522190036.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/20160522190036.png" alt="20160522190036"></a></p>
-<h2 id="Vmware-Workstation-12下载地址："><a href="#Vmware-Workstation-12下载地址：" class="headerlink" title="Vmware Workstation 12下载地址："></a>Vmware Workstation 12下载地址：</h2><p>官方下载：<a target="_blank" rel="noopener" href="https://www.vmware.com/go/downloadworkstation-cn/">https://www.vmware.com/go/downloadworkstation-cn/</a> 网盘下载+专业版永久许可证密钥：链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1pKUwGQZ">https://pan.baidu.com/s/1pKUwGQZ</a> 密码: gioo</p>
+        <p><strong>软件名称</strong>：会声会影 X10/X9/X8/X7/5 <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/">http://www.huishenghuiying.com.cn/</a> <strong>授权方式</strong>：试用（可破解） <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows 10/8/7 会声会影中文版是一款强大的视频剪辑、制作软件，完美支持 Intel第 7 代核心处理技术，新增的轨道透明度、360°视频支持功能，让用户完成的效果更加多元。重新映射时间则更快更方便的实现速度和方向的控制。功能合并，操作简化，使得无论老幼都可以轻松驾驭这款视频制作软件。</p>
+<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"></a></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>会声会影X9 64位：<a target="_blank" rel="noopener" href="http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe">http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe</a> 会声会影X8 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe">http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe</a> 会声会影X7 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe">http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe</a> 更多下载：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/xiazai.html">http://www.huishenghuiying.com.cn/xiazai.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/05/22/%E3%80%90%E7%B2%BE%E5%93%81%E6%94%B6%E8%97%8F%E3%80%91vmware-12%E6%B3%A8%E5%86%8C%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" data-id="ckfml6398000q9ger4tfyavpl" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" data-id="ckfml8mpj003ecyer3bhj2v70" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li></ul>
 
     </footer>
   </div>
@@ -455,14 +235,14 @@
 
 
   
-    <article id="post-程序员熬夜加班一月-肺部烂成马蜂窝" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-无封号风险破解百度网盘下载限速、大文件下载限" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/03/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%86%AC%E5%A4%9C%E5%8A%A0%E7%8F%AD%E4%B8%80%E6%9C%88-%E8%82%BA%E9%83%A8%E7%83%82%E6%88%90%E9%A9%AC%E8%9C%82%E7%AA%9D/" class="article-date">
-  <time datetime="2016-05-03T01:08:18.000Z" itemprop="datePublished">2016-05-03</time>
+    <a href="/2017/04/03/%E6%97%A0%E5%B0%81%E5%8F%B7%E9%A3%8E%E9%99%A9%E7%A0%B4%E8%A7%A3%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD%E9%99%90%E9%80%9F%E3%80%81%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90/" class="article-date">
+  <time datetime="2017-04-03T09:26:35.000Z" itemprop="datePublished">2017-04-03</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
   </div>
 
   </div>
@@ -473,7 +253,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/03/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%86%AC%E5%A4%9C%E5%8A%A0%E7%8F%AD%E4%B8%80%E6%9C%88-%E8%82%BA%E9%83%A8%E7%83%82%E6%88%90%E9%A9%AC%E8%9C%82%E7%AA%9D/">程序员熬夜加班一月 肺部烂成马蜂窝</a>
+      <a class="article-title" href="/2017/04/03/%E6%97%A0%E5%B0%81%E5%8F%B7%E9%A3%8E%E9%99%A9%E7%A0%B4%E8%A7%A3%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD%E9%99%90%E9%80%9F%E3%80%81%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90/">无封号风险破解百度网盘下载限速、大文件下载限制等问题（值得收藏）</a>
     </h1>
   
 
@@ -481,18 +261,88 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>做吊丝就是悲催唉。。</p>
+        <h3 id="前言：背景"><a href="#前言：背景" class="headerlink" title="前言：背景"></a>前言：背景</h3><p>前些日子有同学询问我关于百度网盘破解限速的问题，因为她的文件比较大，又挺多的。实话说就所处环境而言，下载这样的大文件实在吃力，而且百度网盘又搞个限速。我脑子在考虑是给她简单粗暴的官方软件修改得来的破解客户端还是给她推荐相对复杂但是相对可靠的方式呢。后来得出的结果是我给她推荐了相对可靠的破解方式。</p>
+<h3 id="第一步：安装-Google-Chrome"><a href="#第一步：安装-Google-Chrome" class="headerlink" title="第一步：安装 Google Chrome"></a>第一步：安装 Google Chrome</h3><p>安装 Google Chrome 前我们需要事先科学上网！ 安装科学上网（<a target="_blank" rel="noopener" href="https://www.godcheese.com/?s=%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91">https://www.godcheese.com/?s=%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91</a>）工具、Google Chrome（<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/868">https://www.godcheese.com/index.php/868</a>）</p>
+<h3 id="第二步：安装-Tampermonkey"><a href="#第二步：安装-Tampermonkey" class="headerlink" title="第二步：安装 Ｔampermonkey"></a>第二步：安装 Ｔampermonkey</h3><p><strong>Tampermonkey 介绍：</strong>Tampermonkey 是一款免费的浏览器扩展和最为流行的用户脚本管理器，它适用于 Chrome, Microsoft Edge, Safari, Opera Next, 和 Firefox。 虽然有些受支持的浏览器拥有原生的用户脚本支持，但 Tampermonkey 将在您的用户脚本管理方面提供更多的便利。 它提供了诸如便捷脚本安装、自动更新检查、标签中的脚本运行状况速览、内置的编辑器等众多功能， 同时Tampermonkey还有可能正常运行原本并不兼容的脚本。 Tampermonkey 可用于 Google Chrome, Microsoft Edge, Opera, Chromium,及其众多衍生产品如 CoolNovo 和 Rockmelt ,还有Firefox和一些安卓浏览器。 前往Google Chrome网上应用店安装 Tampermonkey（需要科学上网环境下安装）： <a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo">https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo</a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/04/20170403173646.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/04/20170403173646.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/04/20170403174208.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/04/20170403174208.png"></a></p>
+<h3 id="第三步：安装破解脚本"><a href="#第三步：安装破解脚本" class="headerlink" title="第三步：安装破解脚本"></a>第三步：安装破解脚本</h3><p>百度网盘直接下载助手：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/17800-%E8%A7%A3%E5%86%B3%E7%99%BE%E5%BA%A6%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90%E5%88%B6">https://greasyfork.org/zh-CN/scripts/17800-%E8%A7%A3%E5%86%B3%E7%99%BE%E5%BA%A6%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90%E5%88%B6</a> 解决百度云大文件下载限制：<a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/17800-%E8%A7%A3%E5%86%B3%E7%99%BE%E5%BA%A6%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90%E5%88%B6">https://greasyfork.org/zh-CN/scripts/17800-%E8%A7%A3%E5%86%B3%E7%99%BE%E5%BA%A6%E4%BA%91%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90%E5%88%B6</a> 安装好后登录百度网盘（<a target="_blank" rel="noopener" href="http://pan.baidu.com/">http://pan.baidu.com</a>），然后看操作： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/04/20170403180815.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/04/20170403180815.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/04/20170403181614.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/04/20170403181614.png"></a> （上图忘了打码了，大家自助打码）</p>
+<h3 id="后语：更多发现"><a href="#后语：更多发现" class="headerlink" title="后语：更多发现"></a>后语：更多发现</h3><p>Tampermonkey 还支持各大视频网站的VIP视频破解哦，麻麻再也不用担心我追剧了~更多还是让大家自己去发现吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/04/03/%E6%97%A0%E5%B0%81%E5%8F%B7%E9%A3%8E%E9%99%A9%E7%A0%B4%E8%A7%A3%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E4%B8%8B%E8%BD%BD%E9%99%90%E9%80%9F%E3%80%81%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E9%99%90/" data-id="ckfml8mqa004hcyer5fhcdbxd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-modern-browsers" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/30/modern-browsers/" class="article-date">
+  <time datetime="2017-03-30T03:55:53.000Z" itemprop="datePublished">2017-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a>►<a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/30/modern-browsers/">推荐的五款现代浏览器 - Google Chrome、Mozilla Firefox、Opera、Apple Safari、Microsoft Edge</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Google-Chrome（推荐）"><a href="#Google-Chrome（推荐）" class="headerlink" title="Google Chrome（推荐）"></a>Google Chrome（推荐）</h2><blockquote>
+<p><strong>软件名称</strong>：Google Chrome <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.google.cn/chrome/browser/">http://www.google.cn/chrome/browser/</a> <strong>授权方式</strong>：免费 <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows/macOS/Linux/Android</p>
 </blockquote>
-<p>为了“五一”陪家人旅游，汉口IT工程师郝鹏(化名)一个月熬夜加班，一次感冒竟使一部分肺烂成“马蜂窝”。 35岁的郝鹏家住青年路，经常加班编程序，计划“五一”带家人去外地旅游。他身体本来很好，两个月前不小心着凉，有些咳嗽，自己买了点感冒药吃。从上月底开始，他为了把手上的项目做完，每天晚上加班到凌晨两三点，有时忙得连晚饭都顾不上吃，中间有好几天干脆不回家。他的感冒一直没好彻底，最近几天还发起高烧来。他去诊所打针不见好转，还出现胸痛，呼吸困难，实在熬不下去才到市中心医院就诊。 拍片发现，他的胸腔内有两大片阴影，怀疑是肺部脓肿。做纤支镜时，医生又在他的气管上发现一个蚕豆大的破口，推断是肺部脓肿侵犯了支气管所致。“如果感染得不到控制，病变会进一步扩大，整个右肺可能会坏死‘报废’，引起大出血，呼吸衰竭，危及生命。”胸外科主任陈宝钧说。 前日上午，医生为他做了手术，开胸后看到，右肺中叶的大部分在脓液的浸泡下已经烂穿成了“马蜂窝”，1/6的右肺必须切除。目前，郝鹏仍在住院观察，必要时还要放入气管支架封堵破口。 陈宝钧介绍，郝鹏是因为咳嗽发热经久不愈，造成肺部重度感染，肺长期浸泡在脓液中，才形成了“马蜂窝肺”。同时，气管内的脓性分泌物通过破口流出，导致了危险的纵隔感染。如果不及时手术，生命危在旦夕。 他提醒，普通感冒一般一到两周会好，如果超过两周仍不见减轻和好转，应及时就医。感冒后需要充分休息，切忌熬夜。</p>
+<p>谷歌浏览器，是一个由Google（谷歌）公司开发的开放原始码网页浏览器。该浏览器是基于其他开放原始码软件所撰写，包括WebKit和Mozilla，目标是提升稳定性、速度和安全性，并创造出简单且有效率的使用者界面。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/google-chromepng.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/google-chromepng.png"></a></p>
+<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><p>官方下载地址：<a target="_blank" rel="noopener" href="http://www.google.cn/chrome/browser/">http://www.google.cn/chrome/browser/</a>（下载安装过程建议科学上网） 网盘下载：链接: <a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1i4CVVGL">http://pan.baidu.com/s/1i4CVVGL</a> 密码: gioo</p>
+<h3 id="安装说明"><a href="#安装说明" class="headerlink" title="安装说明"></a>安装说明</h3><p>网盘内文件说明： <em>ChromeStandaloneSetup64_57.0.2987.133</em> 为64位稳定版离线安装包，还没<a target="_blank" rel="noopener" href="https://www.godcheese.com/?s=%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91">科学上网</a>的电脑建议下载此安装包。 49.0.2623.112_chrome_installer.exe 为Windows XP 系统专用 Windows XP 系统建议下载：49.0.2623.112_chrome_installer.exe（ XP 系统专用） Windows XP SP3 系统以上版本建议下载：<em>ChromeStandaloneSetup64_57.0.2987.133</em></p>
+<h2 id="Mozilla-Firefox"><a href="#Mozilla-Firefox" class="headerlink" title="Mozilla Firefox"></a>Mozilla Firefox</h2><blockquote>
+<p><strong>软件名称</strong>：Mozilla Firefox <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.firefox.com.cn/">http://www.firefox.com.cn/</a> <strong>授权方式</strong>：免费 <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows/macOS/Linux/Android</p>
+</blockquote>
+<p>全球超过5亿用户使用的浏览器，汇聚各种全新特性，可定制性超强。</p>
+<h3 id="下载地址-1"><a href="#下载地址-1" class="headerlink" title="下载地址"></a>下载地址</h3><p>官方下载地址：<a target="_blank" rel="noopener" href="http://www.firefox.com.cn/download/#more">http://www.firefox.com.cn/download/#more</a></p>
+<h2 id="Opera"><a href="#Opera" class="headerlink" title="Opera"></a>Opera</h2><blockquote>
+<p><strong>软件名称</strong>：Opera <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.opera.com/zh-cn/">http://www.opera.com/zh-cn/</a> <strong>授权方式</strong>：免费 <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows/macOS/Linux/Android</p>
+</blockquote>
+<p>Opera浏览器是一款适用于各种平台、操作系统和嵌入式网络产品的高品质、多平台产品。采用Opera Turbo功能极大的改善受限连接上的浏览器速度，例如wifi，手机联网等；新引擎 Opera Presto在渲染内容复杂页面时速度更快，提速40%；全新的可视化标签，根据个人需求自定义自己的快速拨号。</p>
+<h3 id="下载地址-2"><a href="#下载地址-2" class="headerlink" title="下载地址"></a>下载地址</h3><p>官方下载地址：<a target="_blank" rel="noopener" href="http://www.opera.com/zh-cn/">http://www.opera.com/zh-cn/</a></p>
+<h2 id="Apple-Safari"><a href="#Apple-Safari" class="headerlink" title="Apple Safari"></a>Apple Safari</h2><blockquote>
+<p><strong>软件名称</strong>：Safari <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.apple.com.cn/safari/">http://www.apple.com.cn/safari/</a> <strong>授权方式</strong>：免费 <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows/macOS/iOS</p>
+</blockquote>
+<p>Safari使用全新的Nitro引擎展现极其快速的性能表现；提供开发人员工具，可以快速查看页面结构或测试编码的试验性片段等等；运用Top Sites功能通过单个页面中显示的 24 个缩略图；全新 Cover Flow 功能让你能够用图形化的方式查看网站。</p>
+<h3 id="下载地址-3"><a href="#下载地址-3" class="headerlink" title="下载地址"></a>下载地址</h3><p>macOS 下载更新：<a target="_blank" rel="noopener" href="https://support.apple.com/zh-cn/safari/">https://support.apple.com/zh-cn/safari/</a></p>
+<h3 id="安装说明-1"><a href="#安装说明-1" class="headerlink" title="安装说明"></a>安装说明</h3><p>该浏览器的 Windows 最新版本为2014年更新的，所以 Windows 系统用户不建议使用，仅建议 macOS/iOS 系统使用。</p>
+<h2 id="Microsoft-Edge"><a href="#Microsoft-Edge" class="headerlink" title="Microsoft Edge"></a>Microsoft Edge</h2><blockquote>
+<p><strong>软件名称</strong>：Microsoft Edge <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/windows/microsoft-edge/">https://www.microsoft.com/zh-cn/windows/microsoft-edge/</a> <strong>授权方式</strong>：免费 <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows</p>
+</blockquote>
+<h3 id="下载地址-4"><a href="#下载地址-4" class="headerlink" title="下载地址"></a>下载地址</h3><p>Windows 10 下载升级：<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/windows/microsoft-edge/">https://www.microsoft.com/zh-cn/windows/microsoft-edge/</a></p>
+<h3 id="安装说明-2"><a href="#安装说明-2" class="headerlink" title="安装说明"></a>安装说明</h3><p>该浏览器为 Microsoft Windows 10 系统专有，其他系统无法安装。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/05/03/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%86%AC%E5%A4%9C%E5%8A%A0%E7%8F%AD%E4%B8%80%E6%9C%88-%E8%82%BA%E9%83%A8%E7%83%82%E6%88%90%E9%A9%AC%E8%9C%82%E7%AA%9D/" data-id="ckfml63an002a9gerbdb3a70a" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/03/30/modern-browsers/" data-id="ckfml8moa001tcyeratwn47ac" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li></ul>
 
     </footer>
   </div>
@@ -501,14 +351,14 @@
 
 
   
-    <article id="post-11行代码引发的血案-node-js事件" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-分享一款自用的数据恢复硬盘分区工具-partitionguru-pro" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/07/11%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E8%A1%80%E6%A1%88-node-js%E4%BA%8B%E4%BB%B6/" class="article-date">
-  <time datetime="2016-04-07T07:01:58.000Z" itemprop="datePublished">2016-04-07</time>
+    <a href="/2017/03/24/%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%BE%E8%87%AA%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7-partitionguru-pro/" class="article-date">
+  <time datetime="2017-03-24T03:32:12.000Z" itemprop="datePublished">2017-03-24</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a>
+    <a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
   </div>
 
   </div>
@@ -519,7 +369,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/11%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E8%A1%80%E6%A1%88-node-js%E4%BA%8B%E4%BB%B6/">11行代码引发的血案——Node.js事件</a>
+      <a class="article-title" href="/2017/03/24/%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%BE%E8%87%AA%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7-partitionguru-pro/">分享一款自用的数据恢复/硬盘分区工具 - PartitionGuru Pro</a>
     </h1>
   
 
@@ -527,41 +377,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/04/c9fcc3cec3fdfc0336c1f719d33f8794a5c226d1.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/04/c9fcc3cec3fdfc0336c1f719d33f8794a5c226d1.png" alt="c9fcc3cec3fdfc0336c1f719d33f8794a5c226d1"></a></p>
-<p>在互联网世界里，程序员意味着什么？你可以把他们想象成神一样的人物，最顶尖的程序员可以一手遮天，甚至影响整个隐秘的互联网帝国。就在前不久，美国加州奥克兰一名程序员，只是删除了11行代码（如上图所示），但却破坏了全球的互联网，特别是JavaScript语言的世界。</p>
-<p><strong>来自社交巨头KIK的不速之客</strong></p>
-<p>根据海外新闻网站Quartz.com报道，这个程序员叫Azer Koçulu（我们叫他安东吧），是一名程序员，专门给NPM写程序，NPM是个什么东西？简单来说，就是提供用JavaScript写的开源软件的平台（如下图），你可以想象成一个巨大无比的公用图书馆，里面藏满了各种书籍而且允许你乱涂乱画，NPM每个月的调用量就超过10亿次。</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/04/c995d143ad4bd113b62ba3935dafa40f4afb05a8.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/04/c995d143ad4bd113b62ba3935dafa40f4afb05a8.jpg" alt="c995d143ad4bd113b62ba3935dafa40f4afb05a8"></a></p>
-<p>这个安东可以说是自学成才，他只是一个高中生，没念过大学，但靠着自学编程成为了一个高手，他的信仰就是分享和开源，并且对麻省理工学院（MIT)早期程序员的骇客之道深信不疑，那就是“程序员的友谊基础就是分享程序”。</p>
-<p>安东经常写的开源程序包叫<strong>KIK</strong>，用处是帮助程序员为他们开发的项目设置各种模板，故事到这里没有任何问题，但问题就在于KIK这个名字和那个<strong>全球知名的社交软件商KIK</strong>名字一样，这引发了为社交软件商KIK工作的专利和商标代理包卜.斯特拉顿（Bob Stratton）的注意。</p>
-<p>于是，斯特拉顿找到了安东并问他，你能不能重新命名你的那个程序包KIK，因为我们的KIK自己要推出程序包。</p>
-<p>安东拒绝了斯特拉顿，告诉他，抱歉，我开发的开源项目就叫KIK。（安东挺有脾气）</p>
-<p>斯特拉顿不高兴了，警告安东，如果执意这样做，那么会有人来找他麻烦，安东回复很简单，F*** You，不用再给我发邮件。</p>
-<p>斯特拉顿可能怂了，提出可以付钱给安东，安东说，好啊，3万美刀。</p>
-<p><strong>触及底线</strong></p>
-<p>Quartz.com报道称，斯特拉顿看无法攻破安东这一关，直接找到了NPM公司，不料这一招果然管用，NPM的首席执行官Isaac Schlueter同意将有争议名字归还给KIK。</p>
-<p>Schlueter的这一举动彻底惹怒了安东，特别是他一直维护的开源社区的价值观，安东告诉NPM必须撤下所有他写的程序包，否则他会自己动手。（碉堡的程序员啊，肃然起敬！）</p>
-<p><strong>破坏</strong></p>
-<p>事情到了这里，已经不可挽回了，一边是愤怒的程序员，一边是想息事宁人的NPM。</p>
-<p>3月22日，全世界的JavaScript程序员在试图运行代码时收到了一条奇怪的错误代码，其中一段是这样的：</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/04/21a4462309f790528dfd539f0bf3d7ca7acbd5b4.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/04/21a4462309f790528dfd539f0bf3d7ca7acbd5b4.jpg" alt="21a4462309f790528dfd539f0bf3d7ca7acbd5b4"></a></p>
-<p>这段代码的意思是，JavaScript程序员试图运行的代码<strong>缺少一个程序包，Left-Pad。</strong>但很多程序员都感到莫名其妙，Left-Pad是什么鬼？</p>
-<p>要理解为什么运行自己代码需要Left-Pad,就必须要理解这些程序的运行方式，根据Quartz.com的解释，几乎每一个程序都是建立于其他软件上的，你要运行自己的代码，没问题，但很可能必须要载入NPM某个特定的程序包，所以这也是为什么NPM那么风靡的原因。举个例子，你面前有一堵高墙，要翻过去必须叠罗汉，如果缺少一个罗汉，你都可能无法逾越。</p>
-<p>当天晚上，很多程序员聚集到了全球最大的开源代码平台GITHUB，在上面找到了遗失的Left-Pad以及11行代码（如下图），这11行代码非常简单，即便是大多数程序员都可以随手写出，但缺少了这11行代码，互联网世界就转不动了。</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/04/77094b36acaf2eddec015d488a1001e93801939a.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/04/77094b36acaf2eddec015d488a1001e93801939a.jpg" alt="77094b36acaf2eddec015d488a1001e93801939a"></a></p>
-<p>破坏已经造成，很多软件商都依赖于NPM,而NPM其中一个重要的程序包就包括Left-Pad，这种链条式的冲击影响了社交软件商业Kik,甚至影响了另一个至关重要的程序包React，React被广泛运用于多数主要网站，其中一个就包括Facebook。</p>
-<p>1个小时以后，安东在个人出版网站Medium上发文称，为了抗议NPM，他删除了在NPM上的273个程序包，其中一个就是令全球程序员抓狂的Left-Pad。</p>
-<p>2个小时后，NPM决定恢复这11行代码，终于结束了这场短暂的互联网危机。</p>
-<p>而急于复仇的程序员安东，在不经意之间，影响了全球的互联网。</p>
-<p>转自：<a target="_blank" rel="noopener" href="http://nextmind.baijia.baidu.com/article/391403">http://nextmind.baijia.baidu.com/article/391403</a></p>
+        <blockquote>
+<p><strong>软件名称</strong>：PartitionGuru Pro <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.eassos.com/">http://www.eassos.com/</a> <strong>授权方式</strong>：试用（可破解） <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows</p>
+</blockquote>
+<p>前天有同学打电话给我说参加考研复试，但是U盘里面拷贝了重要资料，U盘打开后发现资料都不见了，很着急，于是想我询问怎么解决。当然我的第一反应是询问是否做过备份，然后告知他U盘里丢失的资料可以用数据恢复工具找回，但是找回的数据完整性有待商榷。因为像这种U盘硬件没损坏但资料丢失，一大可能是中病毒或U盘读写存储程序出错，唯一的解决方法就是重新烧录U盘，不然之后存入的数据还是如此，不过幸运的是那同学说找到备份资料了。哈哈哈哈，所以Plan B还是需要的。然后自己推荐了这款软件给大家，因为是自己之前也用过，觉得还不错。此版本为单文件绿色破解版，只有一个.exe文件，无需更新。</p>
+<h2 id="软件介绍"><a href="#软件介绍" class="headerlink" title="软件介绍"></a>软件介绍</h2><p>PartitionGuru(DiskGenius的海外版)是一款方便好用的磁盘分区管理和数据恢复软件，它能对你的磁盘进行快速分区，支持GUID分区表，让你的工作变得更简单轻松。 PartitionGuru包含了基本的磁盘分区管理功能，例如：创建、删除、隐匿、格式化分区等，同时还能将误删除、误格式化、变成RAW格式分区的文件进行恢复。软件支持VMWare虚拟硬盘，支持 FAT12/FAT16/FAT32/NTFS/EXT3 文件系统。它能让你搜索已丢失分区，搜到分区金额立即看到文件。 PartitionGuru用户界面友好，操作简单方便容易上手，功能强大，支持硬盘系统众多，满足你的一切基本需求。可以是一款非常实用的工具软件，有兴趣的朋友不妨下载试试吧！</p>
+<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/20170324112557.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/20170324112557-595x356.png"></a></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>链接:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Cn2454C8AZuPcdtGUq_img">https://pan.baidu.com/s/1Cn2454C8AZuPcdtGUq_img</a> 密码:uovu</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/04/07/11%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E8%A1%80%E6%A1%88-node-js%E4%BA%8B%E4%BB%B6/" data-id="ckfml638000009ger94odavaw" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/03/24/%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%BE%E8%87%AA%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7-partitionguru-pro/" data-id="ckfml8mpx0040cyera6ieeau6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li></ul>
 
     </footer>
   </div>
@@ -570,10 +400,234 @@
 
 
   
-    <article id="post-网页前端设计必备小技巧分享" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-adobe-家族软件全系列破解补丁，赶紧收藏吧" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/03/19/%E7%BD%91%E9%A1%B5%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%88%86%E4%BA%AB/" class="article-date">
-  <time datetime="2016-03-19T12:56:40.000Z" itemprop="datePublished">2016-03-19</time>
+    <a href="/2017/03/21/adobe-%E5%AE%B6%E6%97%8F%E8%BD%AF%E4%BB%B6%E5%85%A8%E7%B3%BB%E5%88%97%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81%EF%BC%8C%E8%B5%B6%E7%B4%A7%E6%94%B6%E8%97%8F%E5%90%A7/" class="article-date">
+  <time datetime="2017-03-21T08:04:33.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/adobe-%E5%AE%B6%E6%97%8F%E8%BD%AF%E4%BB%B6%E5%85%A8%E7%B3%BB%E5%88%97%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81%EF%BC%8C%E8%B5%B6%E7%B4%A7%E6%94%B6%E8%97%8F%E5%90%A7/">Adobe 家族软件全系列破解补丁，赶紧收藏吧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>软件名称</strong>：amtemu.v0.9.2-painter <strong>软件官网</strong>：暂无 <strong>授权方式</strong>：免费 <strong>软件语言</strong>：英文 <strong>支持系统</strong>：Windows</p>
+</blockquote>
+<p>Adobe 家族软件全系列破解补丁，仅供学习测试，请购买正版软件！ <strong>可破解以下软件：</strong> Adobe Acrobat Adobe After Effects Adobe Animate Adobe  Audition Adobe Character Animator Adobe Dreamweaver Adobe Flash Adobe Illustrator Adobe InCopy Adobe InDesign Adobe Media Encoder Adobe Muse Adobe Photoshop Adobe Lightroom Adobe Prelude Adobe Premiere Pro 等…</p>
+<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/amtemu20170321160320.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/amtemu20170321160320.png"></a></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>链接:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1vQWB0MA_jJdN2AUS5FhkXw">https://pan.baidu.com/s/1vQWB0MA_jJdN2AUS5FhkXw</a> 密码:s6rl</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/03/21/adobe-%E5%AE%B6%E6%97%8F%E8%BD%AF%E4%BB%B6%E5%85%A8%E7%B3%BB%E5%88%97%E7%A0%B4%E8%A7%A3%E8%A1%A5%E4%B8%81%EF%BC%8C%E8%B5%B6%E7%B4%A7%E6%94%B6%E8%97%8F%E5%90%A7/" data-id="ckfml8mmi0005cyer2yt56xak" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-各大软件开源许可证介绍，选择一款适合自己的-license" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/%E5%90%84%E5%A4%A7%E8%BD%AF%E4%BB%B6%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84-license/" class="article-date">
+  <time datetime="2017-03-20T01:18:17.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/20/%E5%90%84%E5%A4%A7%E8%BD%AF%E4%BB%B6%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84-license/">各大软件开源许可证介绍，选择一款适合自己的 License</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Apache-v2-License"><a href="#Apache-v2-License" class="headerlink" title="Apache v2 License"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#apache-v2-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/Apache-2.0">Apache v2 License</a></h2><p>Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，同样鼓励代码共享和尊重原作者的著作权，同样允许代码修改，再发布（作为开源或商业软件）。需要满足的条件也和BSD类似：</p>
+<ol>
+<li>需要给代码的用户一份Apache Licence</li>
+<li>如果你修改了代码，需要再被修改的文件中说明。</li>
+<li>在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。</li>
+<li>如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</li>
+</ol>
+<p>Apache Licence也是对商业应用友好的许可。使用者也可以在需要的时候修改代码来满足需要并作为开源或商业产品发布/销售。</p>
+<h2 id="MIT-License"><a href="#MIT-License" class="headerlink" title="MIT License"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#mit-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/MIT">MIT License</a></h2><p>MIT许可证之名源自麻省理工学院（Massachusetts Institute of Technology, MIT），又称「X条款」（X License）或「X11条款」（X11 License） MIT内容与三条款BSD许可证（3-clause BSD license）内容颇为近似，但是赋予软体被授权人更大的权利与更少的限制。 被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软体及软体的副本。 被授权人可根据程式的需要修改授权条款为适当的内容。 在软件和软件的所有副本中都必须包含版权声明和许可声明。 此授权条款并非属copyleft的自由软体授权条款，允许在自由/开放源码软体或非自由软体（proprietary software）所使用。 此亦为MIT与BSD（The BSD license, 3-clause BSD license）本质上不同处。 MIT条款可与其他授权条款并存。另外，MIT条款也是自由软体基金会（FSF）所认可的自由软体授权条款，与GPL相容。</p>
+<h2 id="GPL-v2"><a href="#GPL-v2" class="headerlink" title="GPL v2"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#gpl-v2"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/GPL-2.0">GPL v2</a></h2><p>我们很熟悉的Linux就是采用了GPL。GPL协议和BSD, Apache Licence等鼓励代码重用的许可很不一样。GPL的出发点是代码的开源/免费使用和引用/修改/衍生代码的开源/免费使用，但不允许修改后和衍生的代码做为闭源的商业软件发布和销售。这也就是为什么我们能用免费的各种linux，包括商业公司的linux和linux上各种各样的由个人，组织，以及商业软件公司开发的免费软件了。 GPL协议的主要内容是只要在一个软件中使用(“使用”指类库引用，修改后的代码或者衍生代码)GPL 协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。这就是所谓的”传染性”。GPL协议的产品作为一个单独的产品使用没有任何问题，还可以享受免费的优势。 由于GPL严格要求使用了GPL类库的软件产品必须使用GPL协议，对于使用GPL协议的开源代码，商业软件或者对代码有保密要求的部门就不适合集成/采用作为类库和二次开发的基础。 其它细节如再发布的时候需要伴随GPL协议等和BSD/Apache等类似。</p>
+<h2 id="Artistic-License-2-0"><a href="#Artistic-License-2-0" class="headerlink" title="Artistic License 2.0"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#artistic-license-2-0"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/Artistic-2.0">Artistic License 2.0</a></h2><p>Artistic License，又称艺术许可协议（英语：Artistic License），通常指最初的艺术许可协议（1.0版），是一个自由软件授权条款，主要用在官方发布的Perl解释器和大部分CPAN模块的授权。原始的艺术许可协议是由Perl的创始人Larry Wall编写发布的。</p>
+<h2 id="BSD-2-Clause-license"><a href="#BSD-2-Clause-license" class="headerlink" title="BSD 2-Clause license"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#bsd-2-clause-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/BSD-2-Clause">BSD 2-Clause license</a></h2><p>BSD允许使用者修改和重新发布代码(以其他协议形式)，允许闭源商业发布和销售。 BSD鼓励代码共享的同时，要求尊重代码作者的著作权。 使用BSD协议，需要遵守以下规则：</p>
+<ol>
+<li>再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议；</li>
+<li>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档那个和版权声明中包含原来代码中的BSD协议。</li>
+</ol>
+<h2 id="Affero-GPL"><a href="#Affero-GPL" class="headerlink" title="Affero GPL"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#affero-gpl"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/AGPL-3.0">Affero GPL</a></h2><p>是一个广泛被使用的自由软件特许条款，最初由Affero, Inc撰写。此特许条款最新版本为“第3版”（v3），2007年11月发布。Affero 通用公众特许条款是改自GNU通用公众特许条款，并加入额外条款，其目的是为了Copyleft条款应用于在网络上运行的应用程式（如Web应用），从而避免有人以应用服务提供商方式逃避GNU通用公众特许条款。</p>
+<h2 id="LGPL-v2-1"><a href="#LGPL-v2-1" class="headerlink" title="LGPL v2.1"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#lgpl-v2-1"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/LGPL-2.1">LGPL v2.1</a></h2><p>LGPL是GPL的一个为主要为类库使用设计的开源协议。和GPL要求任何使用/修改/衍生之GPL类库的的软件必须采用GPL协议不同。LGPL允许商业软件通过类库引用(link)方式使用LGPL类库而不需要开源商业软件的代码。这使得采用LGPL协议的开源代码可以被商业软件作为类库引用并发布和销售。 但是如果修改LGPL协议的代码或者衍生，则所有修改的代码，涉及修改部分的额外代码和衍生的代码都必须采用LGPL协议。因此LGPL协议的开源代码很适合作为第三方类库被商业软件引用，但不适合希望以LGPL协议代码为基础，通过修改和衍生的方式做二次开发的商业软件采用。 GPL/LGPL都保障原作者的知识产权，避免有人利用开源代码复制并开发类似的产品</p>
+<h2 id="BSD-3-Clause-License"><a href="#BSD-3-Clause-License" class="headerlink" title="BSD (3-Clause) License"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#bsd-3-clause-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/BSD-3-Clause">BSD (3-Clause) License</a></h2><p>BSD允许使用者修改和重新发布代码(以其他协议形式)，允许闭源商业发布和销售。 BSD鼓励代码共享的同时，要求尊重代码作者的著作权。 使用BSD协议，需要遵守以下规则：</p>
+<ol>
+<li>再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议；</li>
+<li>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档那个和版权声明中包含原来代码中的BSD协议;</li>
+<li>不可以用开源代码的“作者/机构的名字”或“原来产品的名字”做市场推广。</li>
+</ol>
+<h2 id="Eclipse-Public-License-v1-0"><a href="#Eclipse-Public-License-v1-0" class="headerlink" title="Eclipse Public License v1.0"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#eclipse-public-license-v1-0"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/EPL-1.0">Eclipse Public License v1.0</a></h2><p>EPL允许使用者任意使用、复制、分发、传播、展示、修改以及改后闭源的二次商业发布。 使用EPL协议，需要遵守以下规则：</p>
+<ol>
+<li>当一个代码贡献者将源码的整体或部分再次开源发布的时候,必须继续遵循EPL开源协议来发布,而不能改用其他协议发布.除非你得到了原“源码”拥有者的授权；</li>
+<li>EPL协议下,你可以将源码不做任何修改来商业发布.但如果你要发布修改后的源码,或者当你再发布的是二进制文件的时候,你必须声明它的源代码是可以获取的,而且要告知获取方法；</li>
+<li>当你需要将EPL下的源码作为一部分跟其他私有的源码混和着成为一个Project发布的时候,你可以将整个Project/Product以私人的协议发布,但要声明哪一部分代码是EPL下的,而且声明那部分代码继续遵循EPL；</li>
+<li>独立的模块(Separate Module),不需要开源。</li>
+</ol>
+<h2 id="LGPL-v3"><a href="#LGPL-v3" class="headerlink" title="LGPL v3"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#lgpl-v3"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/LGPL-3.0">LGPL v3</a></h2><p>相对于LGPL v2，不仅要求用户公布修改的源代码，还要求公布相关硬件。</p>
+<h2 id="Mozilla-Public-License-Version-2-0"><a href="#Mozilla-Public-License-Version-2-0" class="headerlink" title="Mozilla Public License Version 2.0"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#mozilla-public-license-version-2-0"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/MPL-2.0">Mozilla Public License Version 2.0</a></h2><p>MPL是The Mozilla Public License的简写，是1998年初Netscape的 Mozilla小组为其开源软件项目设计的软件许可证。MPL许可证出现的最重要原因就是，Netscape公司认为GPL许可证没有很好地平衡开发者对 源代码的需求和他们利用源代码获得的利益。同著名的GPL许可证和BSD许可证相比，MPL在许多权利与义务的约定方面与它们相同（因为都是符合OSIA 认定的开源软件许可证）。但是，相比而言MPL还有以下几个显著的不同之处:</p>
+<ul>
+<li>MPL虽然要求对于经MPL许可证发布的源代码的修改也要以MPL许可证的方式再许可出来，以保证其他人可以在MPL的条款下共享源代码。但是，在MPL 许可证中对“发布”的定义是“以源代码方式发布的文件”，这就意味着MPL允许一个企业在自己已有的源代码库上加一个接口，除了接口程序的源代码以MPL 许可证的形式对外许可外，源代码库中的源代码就可以不用MPL许可证的方式强制对外许可。这些，就为借鉴别人的源代码用做自己商业软件开发的行为留了一个 豁口。</li>
+<li>MPL许可证第三条第7款中允许被许可人将经过MPL许可证获得的源代码同自己其他类型的代码混合得到自己的软件程序。</li>
+<li>对软件专利的态度，MPL许可证不像GPL许可证那样明确表示反对软件专利，但是却明确要求源代码的提供者不能提供已经受专利保护的源代码（除非他本人是 专利权人，并书面向公众免费许可这些源代码），也不能在将这些源代码以开放源代码许可证形式许可后再去申请与这些源代码有关的专利。</li>
+<li>对源代码的定义 而在MPL（1.1版本）许可证中，对源代码的定义是:“源代码指的是对作品进行修改最优先择 取的形式，它包括:所有模块的所有源程序，加上有关的接口的定义，加上控制可执行作品的安装和编译的‘原本’（原文为‘Script’），或者不是与初始 源代码显著不同的源代码就是被源代码贡献者选择的从公共领域可以得到的程序代码。”</li>
+<li>MPL许可证第3条有专门的一款是关于对源代码修改进行描述的规定，就是要求所有再发布者都得有一个专门的文件就对源代码程序修改的时间和修改的方式有描述。</li>
+</ul>
+<h2 id="GPL-v3"><a href="#GPL-v3" class="headerlink" title="GPL v3"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#gpl-v3"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/GPL-3.0">GPL v3</a></h2><p>GPL v3与GPL v2类似。区别在于，不仅要求用户公布修改的源代码，还要求公布相关硬件。 转自：<a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License">http://git.oschina.net/oschina/git-osc/wikis/License</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/03/20/%E5%90%84%E5%A4%A7%E8%BD%AF%E4%BB%B6%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84-license/" data-id="ckfml8mq30049cyer6wg4gfz4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-软件版本号命名规则（gun-风格、windows-风格、-net-framework-风格）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/" class="article-date">
+  <time datetime="2017-03-18T08:19:48.000Z" itemprop="datePublished">2017-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/">软件版本号命名规范（GUN 风格、Windows 风格、.Net Framework 风格等）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版本号用于区别软件不同的迭代版本，如何命名，应该说是每个公司都有自己的习惯。但是最好还是有一定的规律比较好，这样也能便于其他人了解你的软件更新历程，也不至于后期出现版本混乱、难以管理的尴尬。</p>
+<h2 id="列举一下比较普遍的命名方式"><a href="#列举一下比较普遍的命名方式" class="headerlink" title="列举一下比较普遍的命名方式"></a>列举一下比较普遍的命名方式</h2><p><strong>1、GUN风格：</strong> 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]] 示例：1.2.1 、 2.0 、 5.0.0 build-13124 <strong>2、Windows风格：</strong> 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]] 示例：1.2.1 、 2.0 <strong>3、.Net Framework风格：</strong> 主版本号.子版本号[.编译版本号[.修正版本号]] Major_Version_Number.Minor_Version_Number[.Build_Number[.Revision_Number]] 版本号由二到四部分组成：主版本号、次版本号、内部版本号、修订号。主版本号和次版本号是必选的，内部版本号和修订号是可选的。但是如果定义了修订号部分，则内部版本号就是必选的。所有定义的部分都必须是大于或者等于0的整数。 应根据约定使用下面这些部分： Major：具有相同名称但不同主版本号的程序集不可互换。它适用于对产品的大量重写，或战略性转变，且无法实现向后兼容性。 Minor：如果两个程序集的名称和主版本号相同，而次版本号不同，但照顾了向后兼容性。它适用于产品的修正版或完全向后兼容的新版本。 Build：内部版本号的不同，表示对相同源所做的重新编译。它适合于更改处理器、平台或编译器的情况。 Revision：名称、主版本号、次版本号都相同，但修订号不同的程序集应该是完全可以互换的。它适用于修复以前发布的程序集中的安全漏洞。 只有内部版本号或修订号不同的程序集后续版本，才可以被认为是先前版本的修补程序（Hotfix）更新。</p>
+<h2 id="版本号管理策略"><a href="#版本号管理策略" class="headerlink" title="版本号管理策略"></a>版本号管理策略</h2><p><strong>1、GUN风格：</strong> （1）产品初版时，版本号可以为0.1或0.1.0，也可以为1.0或1.0.0； （2）当产品进行了局部修改或bug修正时，主版本号和子版本号都不变，修正版本号+1； （3）当产品在原有的基础上增加了部分功能时，主版本号不变，子版本号+1，修正版本号复位为0； （4）当产品进行了重大修改或局部修正累计较多，而导致产品整体发生全局变化的，主版本号+1； （5）编译版本号，一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制； <strong>2、Windows风格：</strong> （1）产品初版时，版本号为1.0或1.0.0； （2）当产品进行了局部修改或bug修正时，主版本号和子版本号都不变，修正版本号+1； （3）当产品在原有的基础上增加了部分功能时，主版本号不变，子版本号+1，修正版本号复位为0； （4）当产品进行了重大修改或局部修正累计较多，而导致产品整体发生全局变化的，主版本号+1； （5）编译版本号，一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制； 一些付费软件在升级的时候也需要购买，那么这个所谓的升级，一般是指主版本号的变更。 另外，还可以在版本号后面加上Alpha、Beta、Gamma、Current、RC（Release Candidate）、Release、Stable等后缀，在这些后缀后面还可以加上1位数字的版本号。 <strong>3、Android版本风格：</strong> （1）主版本号变化 Android2.x：仅支持手机等小平移动设备； Android3.x：只支持平板和电视等大屏设备； Android4.x：合并了2.x和3.x，支持多种设备； （2）次版本号变化 功能增加； （3）维护版本号变化 修复漏洞、bug； （4）构建版本号变化 变化周期频繁且不固定，针对开发人员内部使用； 内部测试版本号使用建议： 主版本号.次（子）版本号.修正版本号.日期版本号_阶段版本号_（修改次数）_开发者缩写 例如：1.0.1.150325_beta_b3_ZainF</p>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><strong>α（alpha）内部测试版</strong> α版表示该产品只是一个初步完成的产品，通常只用于在开发者内部交流，也有很少一部分发布给专业的测试人员，一般情况下，该版本会存在较多bug，不适合普通用户使用。 <strong>β（Beta）外部测试版</strong> 该版本相对于α版已经有了很大改进，消除了严重的错误，但可能依然存在一些缺陷，需要经过大规模的发布测试进一步发现、消除错误。这一版本通常由软件公司免费发布，通过一些专业的爱好者测试，将结果反馈给开发人员，开发者们再进行有针对性的修改，该版本一般不适合普通用户大规模安装使用。 <strong>γ（Gamma）</strong> 表示该版本已经相当成熟，与即将发行的正式版相差无几。 <strong>trial（试用版）</strong> 改类产品通常都有时间限制，或者在功能上相对于正式版做了一些限制。在试用版中，用户可以通过注册或购买来获得正式的产品。 unregistered（未注册版） 与试用版类似，只是未注册版通常没有使用时间限制，但在功能上同样做了一定的限制。也可能无休止的弹出注册提示。 <strong>demo（演示版）</strong> 在非正式版本的产品中，此版本的知名度最大。demo版仅仅集成了正式版中的几个功能，也不能通过升级或注册成为正式版。 不同类型的正式版软件通常也有区别： <strong>release（最终释放版）</strong> 意味着在出了一系列测试版之后，终归会有一个正式版，该版本有时也会被称作：标准版。一般情况下，release不会以单词的形式出现在软件封面上，而是以符号（r）替代。例如：Windows NT（r）4.0、ms-dos（r）6.22等。 <strong>registered（注册版）</strong> 相对于unregistered（非注册版）。 <strong>standard（标准版）</strong> 无论什么产品，标准版一定存在，而且最常见。标准版中通常包含了该软件的基本组件以及一些常用功能，可以满足用户的一般需求，其价格相对高级版本也更加平易近人。 <strong>deluxe（豪华版）</strong> 通常相对于标准版而言，主要区别是多了几项功能，价格也相对较高。 <strong>reference</strong> 该版本型号常见于百科全书中，比较有名的是微软的Encarta系列。reference是最高级别，其中包含主题、图像、影片剪辑等。相对于standard和deluxe版均有大幅增加，容量由一张光盘猛增至三张光盘，并且加入了很强的交互功能。同时价格不菲，适合发烧友用户收藏。 <strong>professional（专业版）</strong> 专业版是针对某些特定的开发工具软件而言的。专业版中有许多内容是标准版所没有的，这些内容对于一个专业的软件开发人员来说是极为重要的。 <strong>enterprise（企业版）</strong> 企业版是开发类软件中的极品。可以通过它毫无障碍的开发任何级别的应用软件。而这一版本的价格也是一般普通用户所无法承受的。 除了以上这些，还有一些专有版本名称： <strong>update（升级版）</strong> 升级版的软件不能独立使用，该版本的软件会在安装过程中搜索原有的正式版，如果不存在，则会拒绝下一步。 <strong>oem</strong> oem版通常是捆绑在硬件中而不能单独销售的版本。将自己的产品交给别的公司卖，保留自己的著作权，双方互惠互利。 <strong>单机/网络版</strong> 网络版在结构、功能上远比单机版要复杂，且建个也要更加昂贵。 <strong>普及版</strong> 有时也成为共享版。价格便宜，甚至免费、功能单一、针对性强（可能用户占领市场或者打击盗版）。</p>
+<h2 id="更多版本名称"><a href="#更多版本名称" class="headerlink" title="更多版本名称"></a>更多版本名称</h2><p>英文名称</p>
+<p>中文释义</p>
+<p>Enhance</p>
+<p>增强版或者加强版，属于正式版</p>
+<p>Free</p>
+<p>自由</p>
+<p>Full version</p>
+<p>完全版，属于正式版</p>
+<p>Shareware</p>
+<p>共享版</p>
+<p>Release</p>
+<p>发行版，有时间限制</p>
+<p>Upgrade</p>
+<p>升级版</p>
+<p>Retail</p>
+<p>零售版</p>
+<p>Cardware</p>
+<p>属共享软件的一种，只要给作者回复一封电邮或明信片即可。（有的作者并由此提供注册码等），目前这种形式已不多见。</p>
+<p>Plus</p>
+<p>属增强版，不过这种大部分是在程序界面及多媒体功能上增强。</p>
+<p>Preview</p>
+<p>预览版</p>
+<p>Corporation &amp; Enterprise</p>
+<p>企业版</p>
+<p>Standard</p>
+<p>标准版</p>
+<p>Mini</p>
+<p>迷你版也叫精简版只有最基本的功能</p>
+<p>Premium</p>
+<p>贵价版</p>
+<p>Professional</p>
+<p>专业版</p>
+<p>Express</p>
+<p>特别版</p>
+<p>Deluxe</p>
+<p>豪华版</p>
+<p>Regged</p>
+<p>已注册版</p>
+<p>CN</p>
+<p>简体中文版</p>
+<p>CHT</p>
+<p>繁体中文版</p>
+<p>EN</p>
+<p>英文版</p>
+<p>Multilanguage</p>
+<p>多语言版</p>
+<p>整理转自：<a target="_blank" rel="noopener" href="http://www.newpm.net/pm/77">http://www.newpm.net/pm/77</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/" data-id="ckfml8mrb005icyer19343qsn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【laravel学习笔记】laravel-5-4vue-js-初体验：laravel下配置运行vue-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/" class="article-date">
+  <time datetime="2017-03-05T02:44:25.000Z" itemprop="datePublished">2017-03-05</time>
 </a>
     
   <div class="article-category">
@@ -588,7 +642,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/19/%E7%BD%91%E9%A1%B5%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%88%86%E4%BA%AB/">分享一段代码，却是网页前端设计必备小技巧</a>
+      <a class="article-title" href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/">【Laravel学习笔记】Laravel 5.4+Vue.js 初体验：Laravel下配置运行Vue.js</a>
     </h1>
   
 
@@ -596,184 +650,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这是我最近发现的一个致命问题，在apple设备下浏览我的网站，网页在两侧出现大片多余的空白区域，让我很苦恼，但是又无法再众多代码元素中锁定问题所在，之后我在搜索引擎中也没找到合适的解决方案，只能在群里求助大神们了（此处应该有表情），当然作为后端开发的我来说，这是一个绝顶好的小技巧，学了这么久的前端设计（皮毛而已），今天在向某大神请教问题的时候才发现的问题，好像发现了金库，我都无法形容当时的开心程度了，哈哈哈哈哈哈（此处应该有表情） 切入正题：</p>
-<p>/*<br> * @description 前端设计师必会的，这是一段简单又神奇的代码！！！！！！<br> */</p>
-<p>*{outline: 1px solid red;}</p>
-<p>这段代码的神奇之处，我就直接上对比图了。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/03/geilicssdaima_yuan.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/03/geilicssdaima_yuan.png" alt="geilicssdaima_yuan"></a><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/03/geilicssdaima.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/03/geilicssdaima.png" alt="geilicssdaima"></a> 懂网页制作的童鞋都应该知道，这其实是一段简单的CSS代码，它能够将outline用solid red 标注出来，为了方便设计师能够直观看到切图效果，还有一个好处，就是当我在开发自适应网站（就是页面可以自动适应各种主流设备）时候能够快速审查定位outside的元素，并在chrome debug界面代码！ 哈哈哈哈哈，这段代码真是太棒了，有时候它就像是一款可随时调用的小工具！</p>
+        <blockquote>
+<p><strong>生产材料</strong> PHP:PHP 5.6+ Laravel 5.4:<a target="_blank" rel="noopener" href="https://github.com/laravel/laravel/releases/">https://github.com/laravel/laravel/releases/</a> Composer:<a target="_blank" rel="noopener" href="http://getcomposer.org/">http://getcomposer.org/</a> Node.js:<a target="_blank" rel="noopener" href="http://nodejs.org/">http://nodejs.org/</a> Node Package Manager:<a target="_blank" rel="noopener" href="http://www.npmjs.com/">http://www.npmjs.com/</a> <strong>生产环境</strong> 系统环境：Windows 7 x64 Web服务器：WAMPServer 3 64bit:<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/wampserver/files/">https://sourceforge.net/projects/wampserver/files/</a> <strong>生产工具</strong> 开发工具：PhpStorm 2016:<a target="_blank" rel="noopener" href="http://www.jetbrains.com/phpstorm/">http://www.jetbrains.com/phpstorm/</a></p>
+</blockquote>
+<h2 id="一、检测环境是否正常"><a href="#一、检测环境是否正常" class="headerlink" title="一、检测环境是否正常"></a>一、检测环境是否正常</h2><p>打开Cmd，然后分别输入以下命令每个软件是否安装正确且版本是否符合要求。</p>
+<p>php –v</p>
+<p>composer -V</p>
+<p>node –v</p>
+<p>npm -v</p>
+<h2 id="二、创建Laravel项目"><a href="#二、创建Laravel项目" class="headerlink" title="二、创建Laravel项目"></a>二、创建Laravel项目</h2><p>首先打开PhpStorm ，然后新建一个空项目，然后打开Terminal，我们用Composer来安装一个Laravel，在Terminal内输入 <strong>composer create-project –prefer-dist laravel/laravel temp</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs1.png"></a> 然后等待安装完毕。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs2.png"></a> 安装完毕后会出现一个temp，然后我们将temp目录下所有文件剪切或拷贝到newproject根目录下，并删除temp即可（然后在Terminal输入一次 <strong>composer update</strong> 更新一下包防止出错）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs3.png"></a></p>
+<h2 id="三、初次运行Laravel项目"><a href="#三、初次运行Laravel项目" class="headerlink" title="三、初次运行Laravel项目"></a>三、初次运行Laravel项目</h2><p>安装好WAMPServer环境后运行 Laravel 项目。首先访问默认的地址localhost，然后点击 Add a Virtual Host，然后输入相应的参数， 如图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs4.png"></a> Virtual Host 的名字，其实就是我们浏览器访问时候要输入的域名，一般填写项目名，如newproject， VirtualHost IP 一般填写127.x.y.z IP段，如127.0.0.8 Complete absolute path 就是我们这个项目的绝对路径，但是在项目最后记得加上/public，这样我们直接访问 <a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 时可以直接访问到public目录下的index.php，而无需输入 <a target="_blank" rel="noopener" href="http://newproject/public/">http://newproject/public/</a> 去访问，Laravel 官方（<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/">https://laravel.com/docs/5.4/</a>）也是如此建议我们的，主要是为了考虑安全方面的问题。填好参数后然后点击Start the creation of the VirtualHost 创建VirtualHost，创建好后，你可以重开WAMPServer一次或Refresh。 然后在浏览器内输入<a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 访问当前项目，运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs5.png"></a></p>
+<h2 id="四、初次运行Vue组件"><a href="#四、初次运行Vue组件" class="headerlink" title="四、初次运行Vue组件"></a>四、初次运行Vue组件</h2><p>为了保证接下来的操作无其他影响，首先在Terminal输入 <strong>npm install</strong> ，来刷新项目内的nodejs module，这个过程会比较漫长。。。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs6.png"></a> 因为Laravel 用上了vue，而vue基于nodejs，需要用到构建工具gulp或webpack。而vue官方推荐用webpack来构建vue的代码，所以从5.4开始Laravel 抛弃gulp改用webpack来构建JavaScript代码，并用Laravel Mix 来编译SASS/Less成纯CSS代码。 这样我们就可以在Laravel项目根目录看到一下几个文件：webpack.mix.js（Mix编译SASS/Less 引用文件）、resources/assets/js/app.js（Vue组件的实例化文件或其他用途）、resources/assets/js/bootstrap.js（构建js代码的源构建引导js代码文件）、public/js/app.js（webpack 构建后的js代码文件）、public/js/app.js（Mix 编译后的css代码文件）。 接下来找到resources/views/welcome.blade.php ，删除部分无用内容，仅留html结构，然后引用 public/js/app.js，然后引用resources/assets/js/app.js 中被声明的vue component（<a target="_blank" rel="noopener" href="http://vuejs.org/v2/guide/%EF%BC%89%E3%80%82">http://vuejs.org/v2/guide/）。</a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs7.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs8.png"></a> 然后在Terminal 输入 <strong>npm run dev</strong>  编译，然后打开浏览器再次输入<a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 访问成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs9.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs9.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/03/19/%E7%BD%91%E9%A1%B5%E5%89%8D%E7%AB%AF%E8%AE%BE%E8%AE%A1%E5%BF%85%E5%A4%87%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%88%86%E4%BA%AB/" data-id="ckfml63as002h9gercseg6hna" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/" data-id="ckfml8moo002acyerakp7gzcu" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-通过curl来对接浙师大后勤学生信息！" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/19/%E9%80%9A%E8%BF%87curl%E6%9D%A5%E5%AF%B9%E6%8E%A5%E6%B5%99%E5%B8%88%E5%A4%A7%E5%90%8E%E5%8B%A4%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%EF%BC%81/" class="article-date">
-  <time datetime="2016-03-19T05:06:32.000Z" itemprop="datePublished">2016-03-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/19/%E9%80%9A%E8%BF%87curl%E6%9D%A5%E5%AF%B9%E6%8E%A5%E6%B5%99%E5%B8%88%E5%A4%A7%E5%90%8E%E5%8B%A4%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%EF%BC%81/">通过简单的PHP Curl来对接浙师大后勤学生简单信息！</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在开发学校一个校级比赛的官网，所以要涉及到学校学生信息资料的获取问题（学校肯定不开放给学生的），所以只能自己写一个能够简单获取学校学生信息的函数来帮助完善这个网站，通过php curl函数来简单的获取对接信息！ 对接到后勤网站的好处是可以外网访问。。哈哈哈哈 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/03/http___678890.zjnu_.edu_.cn_.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/03/http___678890.zjnu_.edu_.cn_.png" alt="http___678890.zjnu.edu.cn"></a> 这个函数能够获取学生基本信息，比如姓名、性别、学号、住址等等。。我只获取了前三种因为后面这些资料获取了也没用，还加重程序读取效率<del>还影响安全</del></p>
-<p>/**<br> * @note 获取curl后的contents<br> * @param $ch<br> * @return array array($cookie,$body)<br> */<br>function getChCookie($ch){</p>
-<pre><code>// 获取头部信息
-curl\_setopt($ch, CURLOPT\_HEADER, 1);
-
-// 返回原生的（Raw）输出
-curl\_setopt($ch, CURLOPT\_RETURNTRANSFER, true);
-
-// 执行并获取返回结果
-$content = curl\_exec($ch);
-
-// 解析HTTP数据流
-$body=&#39;&#39;;
-if($content!=&#39;&#39;)&#123;
-    list($header, $body) = explode(&quot;rnrn&quot;, $content);
-    // 解析COOKIE
-    preg\_match(&quot;/set-cookie:(\[^rn\]\*)/i&quot;, $header, $matches);</code></pre>
-<p>// 后面用CURL提交的时候可以直接使用<br>// curl_setopt($ch, CURLOPT_COOKIE, $cookie);</p>
-<pre><code>    if($matches!=null) &#123;
-        $cookie = $matches\[1\];
-    &#125;else&#123;
-        $cookie=&#39;&#39;;
-    &#125;
-
-
-&#125;else&#123;
-    $cookie=&#39;&#39;;
-&#125;
-return array($cookie,$body);</code></pre>
-<p>}</p>
-<p>/**<br> * @note 678890.zjnu.edu.cn 支持外网<br> * @param $account<br> * @param $password<br> * @return array array($tipid=0(登录失败，账号或密码错误)1(系统错误)2(登录成功))<br> */<br>function login2ZJUN678890($account,$password){</p>
-<pre><code>//初始化变量
-$tipid=&#39;2&#39;;//初始变量，登录成功！
-// $cookie\_file = ROOT\_PATH.&#39;\\cookie.txt&#39;;
-$cookie\_url = &#39;http://678890.zjnu.edu.cn&#39;;
-$referer=&#39;http://678890.zjnu.edu.cn/home/logintype&#39;;
-$login\_url = &#39;http://678890.zjnu.edu.cn/Module/login&#39;;
-$data\_url=&#39;http://678890.zjnu.edu.cn/Home/personalinfo&#39;;
-
-// for($i=0;$i&lt;$ii=2;$i++) &#123;
-$curl = curl\_init();
-$timeout = 10;
-curl\_setopt($curl, CURLOPT\_URL, $cookie\_url);
-curl\_setopt($curl, CURLOPT\_REFERER, $referer);
-curl\_setopt($curl, CURLOPT\_CONNECTTIMEOUT, $timeout);
-$cookie = getChCookie($curl)\[0\];
-curl\_close($curl);
-
-$post = &quot;uname=$account&amp;pwd=$password&quot;;//(unable to decode value)
-$curl = curl\_init();
-curl\_setopt($curl, CURLOPT\_URL, $login\_url);
-curl\_setopt($curl, CURLOPT\_REFERER, $referer);
-curl\_setopt($curl, CURLOPT\_HEADER, false);
-curl\_setopt($curl, CURLOPT\_RETURNTRANSFER, 1);
-curl\_setopt($curl, CURLOPT\_POST, 1);
-curl\_setopt($curl, CURLOPT\_POSTFIELDS, $post);
-curl\_setopt($curl, CURLOPT\_COOKIE, $cookie);
-$cookie = getChCookie($curl)\[0\];
-$contents = getChCookie($curl)\[1\];
-if($contents==&#39;no&#39;)&#123;
-    $tipid=&#39;0&#39;;//账号或密码错误
-&#125;
-
-$curl = curl\_init();
-curl\_setopt($curl, CURLOPT\_URL, $data\_url);
-curl\_setopt($curl, CURLOPT\_REFERER, $referer);
-curl\_setopt($curl, CURLOPT\_RETURNTRANSFER, 1);
-curl\_setopt($curl, CURLOPT\_CONNECTTIMEOUT, $timeout);
-curl\_setopt($curl, CURLOPT\_COOKIE, $cookie); //获取COOKIE并存储
-$contents = curl\_exec($curl);
-curl\_close($curl);
-
-if($tipid!=&#39;0&#39;) &#123;
-    if (strpos($contents, &#39;Object moved&#39;)) &#123;
-        $tipid = &#39;1&#39;;//系统错误，请稍后重试！
-    &#125;
-&#125;
-
-//需要时初始变量
-$id=&#39;&#39;;$name=&#39;&#39;;$sex=&#39;&#39;;
-
-$id\_left = &#39;&lt;td class=&quot;lable&quot;&gt;学(工)号：&lt;/td&gt;
-                        &lt;td class=&quot;field&quot;&gt;&#39;;
-$id\_right = &#39;&lt;/td&gt;
-                        &lt;td class=&quot;last&quot; rowspan=&quot;7&quot;&gt;&lt;div class=&quot;photo&quot;&gt;&lt;/div&gt;&lt;/td&gt;
-                    &lt;/tr&gt;
-                    &lt;tr&gt;
-                        &lt;td class=&quot;lable&quot;&gt;姓名：&lt;/td&gt;
-                        &lt;td class=&quot;field&quot;&gt;&#39;;
-
-$id\_left = strpos($contents, $id\_left) + strlen($id\_left);
-$id\_right = strpos($contents, $id\_right);
-if($id\_left!=false &amp;&amp; $id\_right!=false) &#123;
-    $id = substr($contents, $id\_left, $id\_right - $id\_left);
-&#125;
-
-$name\_left = &#39;&lt;td class=&quot;lable&quot;&gt;姓名：&lt;/td&gt;
-                        &lt;td class=&quot;field&quot;&gt;&#39;;
-$name\_right = &#39;&lt;/td&gt;
-                    &lt;/tr&gt;
-                    &lt;tr&gt;
-                        &lt;td class=&quot;lable&quot;&gt;性别：&lt;/td&gt;
-                        &lt;td class=&quot;field&quot;&gt;&#39;;
-$name\_left = strpos($contents, $name\_left) + strlen($name\_left);
-$name\_right = strpos($contents, $name\_right);
-if($name\_left!=false &amp;&amp; $name\_right!=false) &#123;
-    $name = substr($contents, $name\_left, $name\_right - $name\_left);
-&#125;
-
-$sex\_left = &#39;&lt;td class=&quot;lable&quot;&gt;性别：&lt;/td&gt;
-                        &lt;td class=&quot;field&quot;&gt;&#39;;
-$sex\_right = &#39;&lt;/td&gt;
-                    &lt;/tr&gt;
-                    &lt;tr&gt;
-                        &lt;td class=&quot;lable&quot;&gt;籍贯：&lt;/td&gt;
-                        &lt;td class=&quot;field&quot;&gt;&#39;;
-$sex\_left = strpos($contents, $sex\_left) + strlen($sex\_left);
-$sex\_right = strpos($contents, $sex\_right);
-if($sex\_left!=false &amp;&amp; $sex\_right!=false) &#123;
-    $sex = substr($contents, $sex\_left, $sex\_right - $sex\_left);
-&#125;
-
-return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;$name,&#39;sex&#39;=&gt;$sex);</code></pre>
-<p>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/03/19/%E9%80%9A%E8%BF%87curl%E6%9D%A5%E5%AF%B9%E6%8E%A5%E6%B5%99%E5%B8%88%E5%A4%A7%E5%90%8E%E5%8B%A4%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%EF%BC%81/" data-id="ckfml63ax002n9ger3ue13oxr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
 
     </footer>
   </div>
@@ -786,7 +681,7 @@ return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -797,7 +692,7 @@ return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%8B%E6%9C%BA%E6%95%B0%E7%A0%81/">手机数码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
     </div>
   </div>
 
@@ -807,7 +702,7 @@ return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" rel="tag">办公软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag">安卓模拟器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" rel="tag">微信营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E8%AF%BE/" rel="tag">微课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" rel="tag">无线营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
     </div>
   </div>
 
@@ -817,7 +712,7 @@ return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Adobe/" style="font-size: 10px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/GiWebFrame/" style="font-size: 10px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.33px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 13.33px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 16.67px;">Laravel</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows-7/" style="font-size: 13.33px;">Windows 7</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/jQuery/" style="font-size: 13.33px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 13.33px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 13.33px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 13.33px;">程序员</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 10px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 13.33px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 10px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 13.33px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Adobe/" style="font-size: 15px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 12.5px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 12.5px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Maven/" style="font-size: 15px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 15px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 15px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 12.5px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 15px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Windows-7/" style="font-size: 12.5px;">Windows 7</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/jQuery/" style="font-size: 12.5px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 12.5px;">一加</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 12.5px;">办公软件</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 12.5px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 12.5px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 17.5px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 12.5px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 12.5px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 12.5px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 15px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 12.5px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
     </div>
   </div>
 
@@ -826,7 +721,7 @@ return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -843,19 +738,19 @@ return array(&#39;tipid&#39;=&gt;$tipid,&#39;id&#39;=&gt;$id,&#39;name&#39;=&gt;
           </li>
         
           <li>
+            <a href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Java/MySQL/Maven/Tomcat 安装配置方式</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/">免费的 JetBrains 注册码获取方法及软件破解激活方式</a>
           </li>
         
           <li>
-            <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+            <a href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">注入 Filter 解决 Spring Boot 2.x 前后端分离开发 CORS 跨域问题</a>
           </li>
         
           <li>
-            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+            <a href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/">Java 实现无限层级树形结构遍历部门</a>
           </li>
         
       </ul>

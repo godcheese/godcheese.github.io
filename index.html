@@ -136,10 +136,165 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/" data-id="ckfml639v001h9gerbf4kf8i7" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/" data-id="ckfml8mq10046cyer0zoz5loc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-mysql-maven-tomcat-环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="article-date">
+  <time datetime="2020-03-14T05:21:35.000Z" itemprop="datePublished">2020-03-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Java/MySQL/Maven/Tomcat 安装配置方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java-安装"><a href="#Java-安装" class="headerlink" title="Java 安装"></a>Java 安装</h2><blockquote>
+<p>建议安装 Java 8</p>
+</blockquote>
+<ol>
+<li>下载。Windows/Linux/macOS 系统下载安装对应的安装包。<ul>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">点击下载</a></li>
+</ul>
+</li>
+<li>环境变量配置。<ul>
+<li>Windows 配置环境变量<ul>
+<li>计算机=&gt;属性=&gt;高级系统设置=&gt;高级=&gt;环境变量=&gt;系统变量=&gt;新建变量</li>
+<li>变量名：<code>JAVA_HOME</code>，变量值：JDK 路径（如：<code>C:\Program Files\Java\jdk1.8.0_181</code>）</li>
+<li>变量名：<code>CLASSPATH</code>，变量值：<code>.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar</code></li>
+<li>在已有 <code>Path</code> 变量的变量值最前增加：<code>%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</code></li>
+</ul>
+</li>
+<li>macOS 配置环境变量<ul>
+<li><code>cd ~ &amp;&amp; vim .bash_profile</code></li>
+<li>输入以下内容，再保存，然后输入 <code>source .bash_profile</code> 生效：</li>
+<li><code># JDK 路径</code></li>
+<li><code>JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home</code></li>
+<li><code>PATH=$JAVA_HOME/bin:$PATH:.</code></li>
+<li><code>CLASSPATH=$JAVA_HOME/lib/tools.jar:$JAVA_HOME/lib/dt.jar:.</code></li>
+<li><code>export JAVA_HOME</code></li>
+<li><code>export PATH</code></li>
+<li><code>export CLASSPATH</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>检验安装是否成功。 打开 cmd ，输入以下代码查询 java 版本：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="MySQL-安装"><a href="#MySQL-安装" class="headerlink" title="MySQL 安装"></a>MySQL 安装</h2><blockquote>
+<p>建议安装 MySQL 5.7 及以上版本</p>
+</blockquote>
+<ol>
+<li>下载。Windows/Linux/macOS 系统下载安装对应的安装包。<ul>
+<li><a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/5.7.html#downloads">点击下载</a></li>
+</ul>
+</li>
+<li>环境变量配置。<ul>
+<li>Windows 配置环境变量<ul>
+<li>计算机=&gt;属性=&gt;高级系统设置=&gt;高级=&gt;环境变量=&gt;系统变量=&gt;新建变量</li>
+<li>变量名：<code>MYSQL_HOME</code>，变量值：JDK 路径（如：<code>C:\Program Files\MySQL\mysql-5.7.29-winx64</code>）</li>
+<li>在已有 <code>Path</code> 变量的变量值最前增加：<code>%MYSQL_HOME%\bin;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>3.安装。 在 MySQL 安装目录下新建 my.ini 的文件，并在将以下内容复制到文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port&#x3D;3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir&#x3D;C:\Program Files\MySQL\mysql-5.7.29-winx64</span><br><span class="line"># 设置mysql数据库的数据的存放目录</span><br><span class="line">datadir&#x3D;C:\Program Files\MySQL\mysql-5.7.29-winx64\data</span><br></pre></td></tr></table></figure>
+
+<p>打开 cmd ，输入以下代码安装服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --install</span><br></pre></td></tr></table></figure>
+
+<p>初始化 MySQL，初始化时 root 密码自动设置为空，并会自动创建 data 目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize-insecure</span><br></pre></td></tr></table></figure>
+
+<p>启动 MySQL 服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql</span><br></pre></td></tr></table></figure>
+
+<p>设置 root 密码为 123456（因为初始化时 root 密码自动设置为空）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password 123456</span><br></pre></td></tr></table></figure>
+
+<p>登录数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p123456</span><br></pre></td></tr></table></figure>
+
+<p>列出所有数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>检验安装是否成功。 打开 cmd ，输入以下代码查询 java 版本：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="Maven-安装"><a href="#Maven-安装" class="headerlink" title="Maven 安装"></a>Maven 安装</h2><blockquote>
+<p>建议安装 Maven 3.6 及以上版本</p>
+</blockquote>
+<ol>
+<li>安装。Windows/Linux/macOS 系统下载安装对应的安装包。<ul>
+<li><a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">点击下载</a></li>
+</ul>
+</li>
+<li>环境变量配置。<ul>
+<li>Windows 配置环境变量<ul>
+<li>计算机=&gt;属性=&gt;高级系统设置=&gt;高级=&gt;环境变量=&gt;系统变量=&gt;新建变量</li>
+<li>变量名：<code>MAVEN</code>，变量值：Maven 路径（如：<code>C:\apache-maven-3.5.4 2</code>）</li>
+<li>在已有 <code>Path</code> 变量的变量值最前增加：<code>%MAVEN_HOME%\bin;</code></li>
+</ul>
+</li>
+<li>macOS 配置环境变量<ul>
+<li><code>cd ~ &amp;&amp; vim .bash_profile</code></li>
+<li>输入以下内容，再保存，然后输入 <code>source .bash_profile</code> 生效：</li>
+<li><code># Maven 路径</code></li>
+<li><code>export M2_HOME=/Volumes/office/dev/apache-maven-3.5.0</code></li>
+<li><code>export PATH=$PATH:$M2_HOME/bin</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Tomcat-安装"><a href="#Tomcat-安装" class="headerlink" title="Tomcat 安装"></a>Tomcat 安装</h2><blockquote>
+<p>建议安装 Tomcat 9 及以上版本</p>
+</blockquote>
+<ol>
+<li>安装。Windows/Linux/macOS 系统下载安装对应的安装包。<ul>
+<li><a target="_blank" rel="noopener" href="https://tomcat.apache.org/download-90.cgi">点击下载</a></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-id="ckfml8mnj000ycyerhp8z5myh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li></ul>
 
     </footer>
   </div>
@@ -195,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/" data-id="ckfml63cw006a9ger7jma2ucd" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/" data-id="ckfml8mty00cbcyer5vnve6vy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li></ul>
@@ -207,10 +362,79 @@
 
 
   
-    <article id="post-【java学习笔记】windows-7-安装maven（新手可看，大佬绕行）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-注入-filter-解决-spring-boot-2-x-前后端分离开发-cors-跨域问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" class="article-date">
-  <time datetime="2017-07-07T13:26:46.000Z" itemprop="datePublished">2017-07-07</time>
+    <a href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2019-05-12T09:51:14.000Z" itemprop="datePublished">2019-05-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">注入 Filter 解决 Spring Boot 2.x 前后端分离开发 CORS 跨域问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>package com.gioov.nimrodbackend.common;</p>
+<p>import org.springframework.boot.web.servlet.FilterRegistrationBean;<br>import org.springframework.context.annotation.Bean;<br>import org.springframework.context.annotation.Configuration;<br>import org.springframework.core.Ordered;<br>import org.springframework.web.cors.UrlBasedCorsConfigurationSource;<br>import org.springframework.web.filter.CorsFilter;</p>
+<p>/**<br> * @author godcheese [<a href="mailto:&#103;&#x6f;&#x64;&#99;&#104;&#101;&#x65;&#115;&#x65;&#64;&#111;&#x75;&#x74;&#x6c;&#111;&#x6f;&#107;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x6f;&#x64;&#99;&#104;&#101;&#x65;&#115;&#x65;&#64;&#111;&#x75;&#x74;&#x6c;&#111;&#x6f;&#107;&#x2e;&#x63;&#x6f;&#109;</a>]<br> * @date 2019-04-03<br> */<br>@Configuration<br>public class CorsConfiguration {</p>
+<pre><code>@Bean
+public FilterRegistrationBean&lt;CorsFilter&gt; corsConfig() &#123;
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    org.springframework.web.cors.CorsConfiguration corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
+    // 是否发送 Cookie
+    corsConfiguration.setAllowCredentials(true);
+    // 允许跨域访问的源
+    corsConfiguration.addAllowedOrigin(org.springframework.web.cors.CorsConfiguration.ALL);
+    // 允许头部设置
+    corsConfiguration.addAllowedHeader(org.springframework.web.cors.CorsConfiguration.ALL);
+    // 允许请求方法
+    corsConfiguration.addAllowedMethod(org.springframework.web.cors.CorsConfiguration.ALL);
+    // 预检间隔时间，单位：秒
+    corsConfiguration.setMaxAge(1800L);
+    // 允许跨域访问的路径
+    source.registerCorsConfiguration(&quot;/\*\*&quot;, corsConfiguration);
+    // 注入 Filter
+    FilterRegistrationBean&lt;CorsFilter&gt; bean = new FilterRegistrationBean&lt;&gt;();
+    bean.setFilter(new CorsFilter(source));
+    bean.setName(&quot;corsFilter&quot;);
+    bean.setOrder(Ordered.HIGHEST\_PRECEDENCE);
+    return bean;
+&#125;</code></pre>
+<p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" data-id="ckfml8mqn004vcyer7dgy2kl7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-实现无限层级树形结构遍历部门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/" class="article-date">
+  <time datetime="2019-05-03T11:03:27.000Z" itemprop="datePublished">2019-05-03</time>
 </a>
     
   <div class="article-category">
@@ -225,7 +449,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+      <a class="article-title" href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/">Java 实现无限层级树形结构遍历部门</a>
     </h1>
   
 
@@ -233,21 +457,198 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Maven 是 Java Web 开发中必备的软件之一，其主要功能就是管理开发中依赖库，类似于node的Node Package Manager 和 PHP 的 composer。好了废话不多说，现在就来仔细操作一遍安装过程，不了解的新手可以看看，大佬可以绕行，因为挺简单的。 Maven 下载地址：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> 安装前请检查自己的电脑系统是否安装了JDK 1.7及以上（<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index.html">http://www.oracle.com/technetwork/java/index.html</a>） 第一步：先下载 Maven Binary zip archive <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"></a> 第二步：解压 zip 文件 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"></a> 第三步：设置环境 开始菜单=&gt;计算机=&gt;属性=&gt;高级系统设置=&gt;环境变量=&gt;系统变量=&gt;新建名为 M2_HOME 的变量值为之前 Maven 解压文件的地址，如我的为</p>
-<p>F:\dev\apache-maven-3.5.0</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"></a> 然后在 Path 变量中加入</p>
-<p>;%M2_HOME%\bin</p>
-<p>如下图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"></a> 然后保存即可。 最后才 cmd 中运行</p>
-<p>mvn -version</p>
-<p>可正常输出 Maven 信息则代表安装并运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"></a></p>
+        <p>代码如下：</p>
+<p>   /**<br>     * 部门实体类<br>     */<br>    public class Department {</p>
+<pre><code>    public Department(Integer id, String name, Integer parentId) &#123;
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+    &#125;
+
+    private Integer id;
+    private String name;
+
+    /\*\*
+     \* 上级部门 id
+     \*/
+    private Integer parentId;
+
+    public Integer getId() &#123;
+        return id;
+    &#125;
+
+    public void setId(Integer id) &#123;
+        this.id = id;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public Integer getParentId() &#123;
+        return parentId;
+    &#125;
+
+    public void setParentId(Integer parentId) &#123;
+        this.parentId = parentId;
+    &#125;
+&#125;
+
+/\*\*
+ \* 树形节点实体类
+ \*/
+public class TreeNode &#123;
+
+    public TreeNode(Integer id, String name, Integer parentId, List&lt;TreeNode&gt; children) &#123;
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
+        this.children = children;
+    &#125;
+
+    private Integer id;
+    private String name;
+
+    /\*\*
+     \* 父级节点 id
+     \*/
+    private Integer parentId;
+
+    /\*\*
+     \* 子级节点
+     \*/
+    private List&lt;TreeNode&gt; children;
+
+    public Integer getId() &#123;
+        return id;
+    &#125;
+
+    public void setId(Integer id) &#123;
+        this.id = id;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public Integer getParentId() &#123;
+        return parentId;
+    &#125;
+
+    public void setParentId(Integer parentId) &#123;
+        this.parentId = parentId;
+    &#125;
+
+    public List&lt;TreeNode&gt; getChildren() &#123;
+        return children;
+    &#125;
+
+    public void setChildren(List&lt;TreeNode&gt; children) &#123;
+        this.children = children;
+    &#125;
+&#125;
+
+/\*\*
+ \* 循环遍历出子节点
+ \* @param parentId
+ \* @param treeNodeList
+ \* @return
+ \*/
+public List&lt;TreeNode&gt; forEachChildrenTreeNode(int parentId, List&lt;TreeNode&gt; treeNodeList) &#123;
+    List&lt;TreeNode&gt; children = new ArrayList&lt;&gt;(0);
+    for(TreeNode treeNode : treeNodeList) &#123;
+        if(treeNode.getParentId() != null &amp;&amp; treeNode.getParentId().equals(parentId)) &#123;
+            children.add(treeNode);
+        &#125;
+    &#125;
+
+    for(TreeNode child : children) &#123;
+        List&lt;TreeNode&gt; childChildren = forEachChildrenTreeNode(child.getId(), treeNodeList);
+        if(childChildren == null) &#123;
+            childChildren = new ArrayList&lt;&gt;(0);
+        &#125;
+        child.setChildren(childChildren);
+    &#125;
+
+    if(children.size() == 0) &#123;
+        return null;
+    &#125;
+    return children;
+&#125;
+
+/\*\*
+ \* 测试代码
+ \*/
+public void testApp() &#123;
+
+    List&lt;Department&gt; departmentList = new ArrayList&lt;&gt;(6);
+    departmentList.add(new Department(1,&quot;测试集团公司1&quot;, null));
+    departmentList.add(new Department(2,&quot;测试分公司1&quot;, 1));
+    departmentList.add(new Department(3,&quot;测试分公司2&quot;, 1));
+    departmentList.add(new Department(4,&quot;测试子部门1&quot;, 3));
+    departmentList.add(new Department(5,&quot;测试项目室1&quot;, 4));
+    departmentList.add(new Department(6,&quot;测试项目组1&quot;, 5));
+    departmentList.add(new Department(7,&quot;测试项目室2&quot;, 4));
+    departmentList.add(new Department(8,&quot;测试子部门2&quot;, 3));
+    departmentList.add(new Department(9,&quot;测试分公司3&quot;, 1));
+    departmentList.add(new Department(10,&quot;测试集团公司2&quot;, null));
+
+    /\*\*
+     \* 将部门数据转成树形节点
+     \*/
+    List&lt;TreeNode&gt; treeNodeList = new ArrayList&lt;&gt;(10);
+    for(Department department : departmentList) &#123;
+        treeNodeList.add(new TreeNode(department.getId(), department.getName(), department.getParentId(), new ArrayList&lt;&gt;()));
+    &#125;
+
+    /\*\*
+     \* 最终输出的树形结构类结果数据
+     \*/
+    List&lt;TreeNode&gt; treeNodeResultList = new ArrayList&lt;&gt;(0);
+
+    /\*\*
+     \* 将 parentId 为空的顶层节点首先写入结果数据
+     \*/
+    for(TreeNode treeNode : treeNodeList) &#123;
+        if(treeNode.getParentId() == null) &#123;
+            treeNodeResultList.add(treeNode);
+        &#125;
+    &#125;
+
+    /\*\*
+     \* 循环所有在结果数据中的顶层节点，并将子级节点装载进顶层节点的 children 属性
+     \*/
+    for(TreeNode treeNode : treeNodeResultList) &#123;
+        treeNode.setChildren(forEachChildrenTreeNode(treeNode.getId(), treeNodeList));
+    &#125;
+
+    /\*\*
+     \* 将结果数据以 JSON 格式输出
+     \*/
+    ObjectMapper objectMapper = new ObjectMapper();
+    try &#123;
+        System.out.println(objectMapper.writeValueAsString(treeNodeResultList));
+    &#125; catch (JsonProcessingException e) &#123;
+        e.printStackTrace();
+    &#125;
+&#125;</code></pre>
+<p>输出结果如下图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" data-id="ckfml638a00019gerhmwdb5rc" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/" data-id="ckfml8mnm0012cyer605tal50" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
 
     </footer>
   </div>
@@ -256,10 +657,10 @@
 
 
   
-    <article id="post-【laravel学习笔记】laravel-数据迁移migrate的常见问题（操作）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-数据字典设计之同步到内存（三）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" class="article-date">
-  <time datetime="2017-06-27T12:20:42.000Z" itemprop="datePublished">2017-06-27</time>
+    <a href="/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%90%8C%E6%AD%A5%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%B8%89%EF%BC%89/" class="article-date">
+  <time datetime="2018-09-04T00:23:54.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
   <div class="article-category">
@@ -274,7 +675,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
+      <a class="article-title" href="/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%90%8C%E6%AD%A5%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%B8%89%EF%BC%89/">Java 数据字典设计之同步到内存（三）</a>
     </h1>
   
 
@@ -282,25 +683,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br>`users` add constraint `users_role_id_foreign` foreign key (`role_id`) references `role<br>s` (`id`) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"></a></p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
-<p>composer dump-autoload</p>
-<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
-<p>// 外键约束<br>$table-&gt;foreign(‘role_id’)-&gt;references(‘id’)-&gt;on(‘roles’)-&gt;onUpdate(‘cascade’)-&gt;onDelete(‘cascade’);</p>
-<p>这句代码代码的欲添加外键约束的表是 users ，表字段是 role_id ；参考表是 roles ，参考字段是 roles 的 id 。</p>
-<h2 id="修改数据表默认存储引擎"><a href="#修改数据表默认存储引擎" class="headerlink" title="修改数据表默认存储引擎"></a>修改数据表默认存储引擎</h2><p>在 migration 文件内添加一句代码来指定数据库引擎（将存储引擎改成InnoDB，支持事务处理）：</p>
-<p>$table-&gt;engine=’InnoDB’;</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"></a></p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfml638j00059gereenvbhns" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%90%8C%E6%AD%A5%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%B8%89%EF%BC%89/" data-id="ckfml8mnr0018cyerdmx00rev" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
-
     </footer>
   </div>
   
@@ -308,10 +697,10 @@
 
 
   
-    <article id="post-【laravel学习笔记】安装并使用-laravel-passport-来请求授权令牌（oaut" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-数据字典设计之加载字典到内存（二）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" class="article-date">
-  <time datetime="2017-06-27T06:33:47.000Z" itemprop="datePublished">2017-06-27</time>
+    <a href="/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date">
+  <time datetime="2018-09-04T00:19:29.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
   <div class="article-category">
@@ -326,7 +715,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+      <a class="article-title" href="/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/">Java 数据字典设计之加载字典到内存（二）</a>
     </h1>
   
 
@@ -334,40 +723,72 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、-安装-Passport"><a href="#一、-安装-Passport" class="headerlink" title="一、 安装 Passport"></a>一、 安装 Passport</h2><p>使用 Composer 依赖包管理器安装 Passport</p>
-<p>composer require laravel/passport</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"></a> 接下来将</p>
-<p>Laravel\Passport\PassportServiceProvider::class,</p>
-<p>这句代码添加到 config/app.php 的 providers 数组， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"></a> 然后运行</p>
-<p>php artisan migrate</p>
-<p>来运行 Passport 自带的数据库迁移文件（用于自动创建 Passport 必需的客户端数据表和令牌数据表）, <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"></a> 然后运行</p>
-<p>php artisan passport:install</p>
-<p>来创建生成安全访问令牌时用到的加密密钥及私人访问和密码访问客户端。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"></a> 接下来再将</p>
-<p>Laravel\Passport\HasApiTokens</p>
-<p>Trait 添加到 App\User 模型中，这个 Trait 会给这个模型提供一些辅助函数，用于检查已认证用户的令牌和使用作用于。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"></a> 然后在 AuthServiceProvider 的 boot 方法中添加</p>
-<p>Passport::roues();</p>
-<p>来注册 Passport 在访问令牌、客户端、私人访问令牌的发放和吊销过程中一些必要路由。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"></a> 最后修改下配置文件 config/auth.php 中的 api driver 改为 passport，此项操作会将 API 请求时使用 Passport 的  TokenGuard 来处理授权保护。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"></a> 全部配置好后，我们来请求令牌，但是发现我们并没有创建任何用户，于是我们需要用到seed来预设填充数据。 运行</p>
-<p>php artisan make:seeder UsersTableSeeder</p>
-<p>创建一个 Seeder 然后打开 database\seeds 文件夹里已经新建了一个叫 UserTableSeeder.php 的文件，打开它然后在 run 方法内输入以下代码：</p>
-<p>DB::table(‘users’)-&gt;insert([<br>‘name’=&gt;’admin’,<br>‘email’=&gt;‘godcheese@godcheese.com’,<br>‘password’=&gt;bcrypt(‘admin’)<br>]);</p>
-<p>如图所示， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"></a> 然后运行</p>
-<p>php artisan db:seed –class=UsersTableSeeder</p>
-<p>来往 user 表中填充刚刚添加好的 seed 数据。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"></a> 接下来我们来写前端 JavaScript 请求获取用户访问令牌的例子。</p>
-<h2 id="二、JavaScript-请求授权令牌"><a href="#二、JavaScript-请求授权令牌" class="headerlink" title="二、JavaScript 请求授权令牌"></a>二、JavaScript 请求授权令牌</h2><p>这是前端 UI， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"></a> 然后些下JavaScript请求代码如下（ 此处仅供演示，暂时忽略安全问题。实际生产环境中不建议在前端显示 client_id 和 client_secret）：</p>
-<p>$(‘#loginButton’).click(function(event){<br>event.preventDefault();<br>$.ajax({<br>type:’post’,<br>url:’<a target="_blank" rel="noopener" href="http://wodedaxue-backend/oauth/token&#39;">http://wodedaxue-backend/oauth/token&#39;</a>,<br>dataType:’json’,<br>data:{<br>‘grant_type’:’password’,<br>‘client_id’:’2’,<br>‘client_secret’:’o6N7JzK2y3pbJiQmDcHaDhrpvPHBktnAlmmfEnS7’,<br>‘username’:$(‘#username’).val(),<br>‘password’:$(‘#password’).val(),<br>‘scope’:’’<br>},<br>success:function(data){<br>console.log(data);<br>alert(JSON.stringify(data));<br>},<br>error:function(err){<br>console.log(err);<br>alert(‘statusCode:’+err.status+’\n’+’statusText:’+err.statusText+’\n’+’description:\n’+JSON.stringify(err.responseJSON));<br>}<br>});<br>});</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"></a> 接下来再将以下代码写入 User 模型：</p>
-<p>/**<br>* 自定义用Passport授权登录：用户名+密码<br>* @param $username<br>* @return mixed<br>*/<br>public function findForPassport($username)<br>{<br>return self::where(‘name’, $username)-&gt;first();<br>}</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"></a> 然后输入用户名 admin 和密码 admin ，点击登录按钮尝试登录：</p>
-<p>{<br>token_type:”Bearer”,<br>expires_in:31536000,<br>access_token:”eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNiOG…MFF7PYRIhXqCkZhZNfoLV1IYTzRmhO2oV41XR9wD7Zd3Oxl-g”,<br>refresh_token:”sabtS2jYhqAJtVxe868OpTTgBeYgpWgfttn5h97drUgBVLN7vL…ukx7yGfGhn5h+zCouLmuh0sdjYU+dgtRweXU3jiA0Fa6/c6k=”<br>}</p>
-<p>成功获取访问令牌（access_token）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"></a> 然后在每次访问其它 API 时候都带上此参数。 Laravel Passport 更多参考资料：<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/passport">https://laravel.com/docs/5.4/passport</a></p>
+        <p>本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。</p>
+<p>/**<br> * @author godcheese<br> */<br>@Service<br>public class DictionaryServiceImpl implements DictionaryService {</p>
+<pre><code>@Autowired
+private DictionaryMapper dictionaryMapper;
+
+@Autowired
+private WebApplicationContext webApplicationContext;
+
+private static final Logger LOGGER = LoggerFactory.getLogger(DictionaryServiceImpl.class);
+
+@Override
+public void addDictionaryToServletContext() &#123;
+    ServletContext servletContext = webApplicationContext.getServletContext();
+    if (servletContext != null) &#123;
+
+        List&lt;DictionaryEntity&gt; dictionaryEntityList = dictionaryMapper.listAll();
+        for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;
+            servletContext.setAttribute(dictionaryEntity.getKey().toUpperCase() + &quot;.&quot; + dictionaryEntity.getValueSlug().toUpperCase(), dictionaryEntity.getValue());
+        &#125;
+
+        Map&lt;String, List&lt;DictionaryEntity&gt;&gt; dictionaryEntityMap = new HashMap&lt;&gt;(6);
+        for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;
+            String key = dictionaryEntity.getKey().toUpperCase();
+            if (dictionaryEntityMap.containsKey(key)) &#123;
+                List&lt;DictionaryEntity&gt; dictionaryEntityList1 = dictionaryEntityMap.get(key);
+                if (!dictionaryEntityList1.contains(dictionaryEntity)) &#123;
+                    dictionaryEntityList1.add(dictionaryEntity);
+                    dictionaryEntityMap.put(key, dictionaryEntityList1);
+                &#125;
+            &#125; else &#123;
+                List&lt;DictionaryEntity&gt; dictionaryEntityList2 = new ArrayList&lt;&gt;(1);
+                dictionaryEntityList2.add(dictionaryEntity);
+                dictionaryEntityMap.put(key, dictionaryEntityList2);
+            &#125;
+        &#125;
+
+        for (Map.Entry entry : dictionaryEntityMap.entrySet()) &#123;
+            servletContext.setAttribute((String) entry.getKey(), entry.getValue());
+        &#125;
+
+    &#125;
+&#125;</code></pre>
+<p>}</p>
+<p>新建 ApplicationStartupRunner.java，用于程序启动时进行的操作，此处调用 DictionaryService 的 addDictionaryToServletContext 方法，执行将字典加载到内存。</p>
+<p>/**<br> * @author godcheese<br> * @date 2018/2/22 16:19<br> */<br>@Component<br>@Order<br>public class ApplicationStartupRunner implements CommandLineRunner {</p>
+<pre><code>private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationStartupRunner.class);
+
+@Autowired
+private DictionaryService dictionaryService;
+
+@Override
+public void run(String... strings) throws Exception &#123;
+
+    // 首次启动加载数据字典到 ServletContext 内存
+    dictionaryService.addDictionaryToServletContext();
+
+&#125;</code></pre>
+<p>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" data-id="ckfml638l00069gerg5w07kb9" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckfml8mno0014cyergb0i4l3g" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li></ul>
 
     </footer>
   </div>
@@ -376,14 +797,14 @@
 
 
   
-    <article id="post-会声会影-最新版下载地址patch（仅供学习）" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-数据字典设计（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" class="article-date">
-  <time datetime="2017-05-16T08:02:36.000Z" itemprop="datePublished">2017-05-16</time>
+    <a href="/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+  <time datetime="2018-09-04T00:04:10.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a>►<a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
   </div>
 
   </div>
@@ -394,7 +815,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/">会声会影 X10/X9/X8/X7/5 下载地址+Patch（仅供学习）</a>
+      <a class="article-title" href="/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/">Java 数据字典设计之数据库设计（一）</a>
     </h1>
   
 
@@ -402,17 +823,279 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>软件名称</strong>：会声会影 X10/X9/X8/X7/5 <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/">http://www.huishenghuiying.com.cn/</a> <strong>授权方式</strong>：试用（可破解） <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows 10/8/7 会声会影中文版是一款强大的视频剪辑、制作软件，完美支持 Intel第 7 代核心处理技术，新增的轨道透明度、360°视频支持功能，让用户完成的效果更加多元。重新映射时间则更快更方便的实现速度和方向的控制。功能合并，操作简化，使得无论老幼都可以轻松驾驭这款视频制作软件。</p>
-<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"></a></p>
-<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>会声会影X9 64位：<a target="_blank" rel="noopener" href="http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe">http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe</a> 会声会影X8 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe">http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe</a> 会声会影X7 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe">http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe</a> 更多下载：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/xiazai.html">http://www.huishenghuiying.com.cn/xiazai.html</a></p>
+        <p>本文以 Spring Boot 应用、MySQL 数据库为例。</p>
+<p>数据字典表：</p>
+<p>-- 数据字典表<br>DROP TABLE<br>IF EXISTS `dictionary`;</p>
+<p>CREATE TABLE `dictionary` (<br>  `id` BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT ‘id’,<br>  `key` VARCHAR(255) NOT NULL COMMENT ‘字典键’,<br>  `key_name` VARCHAR(255) NOT NULL COMMENT ‘字典键名’,<br>  `value_name` VARCHAR(255) NOT NULL COMMENT ‘字典值名’,<br>  `value_slug` VARCHAR(255) NOT NULL COMMENT ‘字典值别名’,<br>  `value` TEXT COMMENT ‘字典值’,<br>  `editable` TINYINT(1) UNSIGNED DEFAULT NULL COMMENT ‘是否可编辑（0=不可编辑，1=可编辑，默认=1）’,<br>  `dictionary_category_id` BIGINT(20) UNSIGNED NOT NULL COMMENT ‘字典分类 id’,<br>  `sort` BIGINT(20) UNSIGNED DEFAULT 0 COMMENT ‘排序’,<br>  `remark` VARCHAR(255) DEFAULT ‘’ COMMENT ‘备注’,<br>  `gmt_modified` DATETIME DEFAULT NOW() COMMENT ‘更新时间’,<br>  `gmt_created` DATETIME DEFAULT NOW() COMMENT ‘创建时间’,<br>  PRIMARY KEY (`id`)<br>)<br>  ENGINE = INNODB<br>  DEFAULT CHARACTER<br>  SET = utf8mb4<br>  COLLATE = utf8mb4_general_ci<br>  AUTO_INCREMENT = 1<br>  ROW_FORMAT = DYNAMIC<br>  COMMENT = ‘数据字典表’;</p>
+<p>数据字典分类表：</p>
+<p>-- 数据字典分类表<br>DROP TABLE<br>IF EXISTS `dictionary_category`;</p>
+<p>CREATE TABLE `dictionary_category` (<br>  `id` BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT ‘id’,<br>  `name` VARCHAR(255) NOT NULL COMMENT ‘分类名称’,<br>  `parent_id` BIGINT(20) UNSIGNED DEFAULT NULL COMMENT ‘父级分类 id’,<br>  `sort` BIGINT(20) DEFAULT 0 COMMENT ‘排序’,<br>  `remark` VARCHAR(255) DEFAULT ‘’ COMMENT ‘备注’,<br>  `gmt_modified` DATETIME DEFAULT NOW() COMMENT ‘更新时间’,<br>  `gmt_created` DATETIME DEFAULT NOW() COMMENT ‘创建时间’,<br>  PRIMARY KEY (`id`)<br>)<br>  ENGINE = INNODB<br>  DEFAULT CHARACTER<br>  SET = utf8mb4<br>  COLLATE = utf8mb4_general_ci<br>  AUTO_INCREMENT = 1<br>  ROW_FORMAT = DYNAMIC<br>  COMMENT = ‘数据字典分类表’;</p>
+<p>数据字典表对应的实体类：</p>
+<p>package com.gioov.spiny.system.entity;</p>
+<p>import java.io.Serializable;<br>import java.util.Date;</p>
+<p>/**<br> * @author godcheese<br> * @date 2018/4/23 20:44<br> */<br>public class DictionaryEntity implements Serializable {</p>
+<pre><code>private static final long serialVersionUID = -4000696333938261490L;
+
+/\*\*
+ \* id
+ \*/
+private Long id;
+
+/\*\*
+ \* 字典键
+ \*/
+private String key;
+
+/\*\*
+ \* 字典键名
+ \*/
+private String keyName;
+
+/\*\*
+ \* 字典值名
+ \*/
+private String valueName;
+
+/\*\*
+ \* 字典值别名
+ \*/
+private String valueSlug;
+
+/\*\*
+ \* 字典值
+ \*/
+private String value;
+
+/\*\*
+ \* 是否可编辑
+ \*/
+private Integer editable;
+
+/\*\*
+ \* 字典分类 id
+ \*/
+private Long dictionaryCategoryId;
+
+/\*\*
+ \* 排序
+ \*/
+private Long sort;
+
+/\*\*
+ \* 备注
+ \*/
+private String remark;
+
+/\*\*
+ \* 更新时间
+ \*/
+private Date gmtModified;
+
+/\*\*
+ \* 创建时间
+ \*/
+private Date gmtCreated;
+
+
+public Long getId() &#123;
+    return id;
+&#125;
+
+public void setId(Long id) &#123;
+    this.id = id;
+&#125;
+
+public String getKey() &#123;
+    return key;
+&#125;
+
+public void setKey(String key) &#123;
+    this.key = key;
+&#125;
+
+public String getKeyName() &#123;
+    return keyName;
+&#125;
+
+public void setKeyName(String keyName) &#123;
+    this.keyName = keyName;
+&#125;
+
+public String getValueName() &#123;
+    return valueName;
+&#125;
+
+public void setValueName(String valueName) &#123;
+    this.valueName = valueName;
+&#125;
+
+public String getValueSlug() &#123;
+    return valueSlug;
+&#125;
+
+public void setValueSlug(String valueSlug) &#123;
+    this.valueSlug = valueSlug;
+&#125;
+
+public String getValue() &#123;
+    return value;
+&#125;
+
+public void setValue(String value) &#123;
+    this.value = value;
+&#125;
+
+public Integer getEditable() &#123;
+    return editable;
+&#125;
+
+public void setEditable(Integer editable) &#123;
+    this.editable = editable;
+&#125;
+
+public Long getDictionaryCategoryId() &#123;
+    return dictionaryCategoryId;
+&#125;
+
+public void setDictionaryCategoryId(Long dictionaryCategoryId) &#123;
+    this.dictionaryCategoryId = dictionaryCategoryId;
+&#125;
+
+public Long getSort() &#123;
+    return sort;
+&#125;
+
+public void setSort(Long sort) &#123;
+    this.sort = sort;
+&#125;
+
+public String getRemark() &#123;
+    return remark;
+&#125;
+
+public void setRemark(String remark) &#123;
+    this.remark = remark;
+&#125;
+
+public Date getGmtModified() &#123;
+    return gmtModified;
+&#125;
+
+public void setGmtModified(Date gmtModified) &#123;
+    this.gmtModified = gmtModified;
+&#125;
+
+public Date getGmtCreated() &#123;
+    return gmtCreated;
+&#125;
+
+public void setGmtCreated(Date gmtCreated) &#123;
+    this.gmtCreated = gmtCreated;
+&#125;</code></pre>
+<p>}</p>
+<p>数据字典分类表对应的实体类：</p>
+<p>package com.gioov.spiny.system.entity;</p>
+<p>import java.io.Serializable;<br>import java.util.Date;</p>
+<p>/**<br> * @author godcheese<br> * @date 2018/5/23<br> */<br>public class DictionaryCategoryEntity implements Serializable {</p>
+<pre><code>private static final long serialVersionUID = -5867777461580679038L;
+
+private Long id;
+
+/\*\*
+ \* 分类名称
+ \*/
+private String name;
+
+/\*\*
+ \* 父级分类 id
+ \*/
+private Long parentId;
+
+/\*\*
+ \* 排序
+ \*/
+private Long sort;
+
+/\*\*
+ \* 备注
+ \*/
+private String remark;
+
+/\*\*
+ \* 更新时间
+ \*/
+private Date gmtModified;
+
+/\*\*
+ \* 创建时间
+ \*/
+private Date gmtCreated;
+
+
+public Long getId() &#123;
+    return id;
+&#125;
+
+public void setId(Long id) &#123;
+    this.id = id;
+&#125;
+
+public String getName() &#123;
+    return name;
+&#125;
+
+public void setName(String name) &#123;
+    this.name = name;
+&#125;
+
+public Long getParentId() &#123;
+    return parentId;
+&#125;
+
+public void setParentId(Long parentId) &#123;
+    this.parentId = parentId;
+&#125;
+
+public Long getSort() &#123;
+    return sort;
+&#125;
+
+public void setSort(Long sort) &#123;
+    this.sort = sort;
+&#125;
+
+public String getRemark() &#123;
+    return remark;
+&#125;
+
+public void setRemark(String remark) &#123;
+    this.remark = remark;
+&#125;
+
+public Date getGmtModified() &#123;
+    return gmtModified;
+&#125;
+
+public void setGmtModified(Date gmtModified) &#123;
+    this.gmtModified = gmtModified;
+&#125;
+
+public Date getGmtCreated() &#123;
+    return gmtCreated;
+&#125;
+
+public void setGmtCreated(Date gmtCreated) &#123;
+    this.gmtCreated = gmtCreated;
+&#125;</code></pre>
+<p>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" data-id="ckfml639a000s9ger3vxh4bvr" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckfml8mnt001bcyer667g58ke" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li></ul>
 
     </footer>
   </div>
@@ -421,14 +1104,14 @@
 
 
   
-    <article id="post-分享一款自用的数据恢复硬盘分区工具-partitionguru-pro" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-centos-7-安装-oracle-11gr2-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/24/%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%BE%E8%87%AA%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7-partitionguru-pro/" class="article-date">
-  <time datetime="2017-03-24T03:32:12.000Z" itemprop="datePublished">2017-03-24</time>
+    <a href="/2018/06/30/centos-7-%E5%AE%89%E8%A3%85-oracle-11gr2-2/" class="article-date">
+  <time datetime="2018-06-29T23:08:10.000Z" itemprop="datePublished">2018-06-30</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
   </div>
 
   </div>
@@ -439,7 +1122,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/24/%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%BE%E8%87%AA%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7-partitionguru-pro/">分享一款自用的数据恢复/硬盘分区工具 - PartitionGuru Pro</a>
+      <a class="article-title" href="/2018/06/30/centos-7-%E5%AE%89%E8%A3%85-oracle-11gr2-2/">CentOS 7 安装 Oracle 11gR2 数据库</a>
     </h1>
   
 
@@ -448,20 +1131,91 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p><strong>软件名称</strong>：PartitionGuru Pro <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.eassos.com/">http://www.eassos.com/</a> <strong>授权方式</strong>：试用（可破解） <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows</p>
+<p>系统：CentOS 7 软件选择：最小安装</p>
 </blockquote>
-<p>前天有同学打电话给我说参加考研复试，但是U盘里面拷贝了重要资料，U盘打开后发现资料都不见了，很着急，于是想我询问怎么解决。当然我的第一反应是询问是否做过备份，然后告知他U盘里丢失的资料可以用数据恢复工具找回，但是找回的数据完整性有待商榷。因为像这种U盘硬件没损坏但资料丢失，一大可能是中病毒或U盘读写存储程序出错，唯一的解决方法就是重新烧录U盘，不然之后存入的数据还是如此，不过幸运的是那同学说找到备份资料了。哈哈哈哈，所以Plan B还是需要的。然后自己推荐了这款软件给大家，因为是自己之前也用过，觉得还不错。此版本为单文件绿色破解版，只有一个.exe文件，无需更新。</p>
-<h2 id="软件介绍"><a href="#软件介绍" class="headerlink" title="软件介绍"></a>软件介绍</h2><p>PartitionGuru(DiskGenius的海外版)是一款方便好用的磁盘分区管理和数据恢复软件，它能对你的磁盘进行快速分区，支持GUID分区表，让你的工作变得更简单轻松。 PartitionGuru包含了基本的磁盘分区管理功能，例如：创建、删除、隐匿、格式化分区等，同时还能将误删除、误格式化、变成RAW格式分区的文件进行恢复。软件支持VMWare虚拟硬盘，支持 FAT12/FAT16/FAT32/NTFS/EXT3 文件系统。它能让你搜索已丢失分区，搜到分区金额立即看到文件。 PartitionGuru用户界面友好，操作简单方便容易上手，功能强大，支持硬盘系统众多，满足你的一切基本需求。可以是一款非常实用的工具软件，有兴趣的朋友不妨下载试试吧！</p>
-<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/20170324112557.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/20170324112557-595x356.png"></a></p>
-<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>链接:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1Cn2454C8AZuPcdtGUq_img">https://pan.baidu.com/s/1Cn2454C8AZuPcdtGUq_img</a> 密码:uovu</p>
+<h2 id="配置系统环境"><a href="#配置系统环境" class="headerlink" title="配置系统环境"></a>配置系统环境</h2><p># 切换成 root 用户<br>su root</p>
+<p># 下载工具</p>
+<h1 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h1><h1 id="解压工具，用于解压Oracle安装文件"><a href="#解压工具，用于解压Oracle安装文件" class="headerlink" title="解压工具，用于解压Oracle安装文件"></a>解压工具，用于解压Oracle安装文件</h1><h1 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h1><h1 id="网络工具，用语查看本机网络情况，如：netstat"><a href="#网络工具，用语查看本机网络情况，如：netstat" class="headerlink" title="网络工具，用语查看本机网络情况，如：netstat"></a>网络工具，用语查看本机网络情况，如：netstat</h1><h1 id="net-tools"><a href="#net-tools" class="headerlink" title="net-tools"></a>net-tools</h1><p>yum install -y wget unzip net-tools</p>
+<p># 使用 Oracle 提供的环境配置工具，这个工具会调整内核参数，建立一些必要的Linux用户和组<br>wget <a target="_blank" rel="noopener" href="http://public-yum.oracle.com/public-yum-ol7.repo">http://public-yum.oracle.com/public-yum-ol7.repo</a> -O /etc/yum.repos.d/public-yum-ol7.repo<br>wget <a target="_blank" rel="noopener" href="http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7">http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7</a> -O /etc/pki/rpm-gpg/RPM-GPG-KEY-oracle</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_1.png"></a></p>
+<p>yum install -y oracle-rdbms-server-11gR2-preinstall</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_2.png"></a></p>
+<p># 以上工具安装完成后建议备份存放修改系统后日志和原本的内核配置备份这个目录<br>/var/log/oracle-rdbms-server-11gR2-preinstall</p>
+<p># 备份好后，执行以下命令加载内核参数（sysctl –p 等效）<br>sysctl –f</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_3.png"></a></p>
+<p># 创建一些目录，配置oracle系统配置文件和授权<br>cat &gt;&gt; /etc/oraInst.loc &lt;&lt;EOF<br>inventory_loc=/home/oracle/ora11g/oraInventory<br>inst_group=oinstall<br>EOF<br>chmod 664 /etc/oraInst.loc</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_4.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_4.png"></a></p>
+<p># 创建 oracle 安装目录和授权<br>mkdir -p /u01/app/<br>mkdir /u01/tmp<br>chown -R oracle:oinstall /u01/app/<br>chmod -R 775 /u01/app/<br>chmod a+wr /u01/tmp</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_5.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_5.png"></a></p>
+<p># 设置oracle用户密码（123456），oracle是安装工具自己创建的，参考我之前讲的<br>passwd oracle</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_6.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_6.png"></a></p>
+<h2 id="配置用户环境和上传-Oracle-压缩包"><a href="#配置用户环境和上传-Oracle-压缩包" class="headerlink" title="配置用户环境和上传 Oracle 压缩包"></a>配置用户环境和上传 Oracle 压缩包</h2><p># 切换成 oracle 用户<br>su oracle</p>
+<p># 为 oracle 用户添加一些必要的环境变量<br>cat &gt;&gt; /home/oracle/.bash_profile &lt;&lt;EOF<br>TMP=/u01/tmp<br>TMPDIR=/u01/tmp<br>export TMP TMPDIR</p>
+<p>ORACLE_BASE=/u01/app/oracle<br>ORACLE_HOME=/u01/app/oracle/product/11.2.0/dbhome_1<br>ORACLE_SID=orcl<br>PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin<br>export ORACLE_BASE ORACLE_SID ORACLE_HOME PATH<br>PATH=$PATH:$ORACLE_HOME/bin<br>export PATH<br>EOF</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_7.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_7.png"></a></p>
+<p># 生效用户环境变量<br>cd ~ &amp;&amp; source .bash_profile</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_8.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_8.png"></a> 使用 Xftp 的上传 linux.x64_11gR2_database_1of2.zip、linux.x64_11gR2_database_2of2.zip 2 个压缩包到 /home/oracle/ <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_9.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_9.png"></a></p>
+<p># 解压2个压缩包，解压后文件会在 /home/oracle/database/<br>unzip linux.x64_11gR2_database_1of2.zip<br>unzip linux.x64_11gR2_database_2of2.zip</p>
+<p>解压完成，如图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_10.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_10.png"></a></p>
+<h2 id="配置-Oracle-数据库安装响应文件（db-install-rsp）"><a href="#配置-Oracle-数据库安装响应文件（db-install-rsp）" class="headerlink" title="配置 Oracle 数据库安装响应文件（db_install.rsp）"></a>配置 Oracle 数据库安装响应文件（db_install.rsp）</h2><p># 切换成 oracle 用户<br>su oracle</p>
+<p>#备份 /home/oracle/database/response 下文件到 /home/oracle/rsp/<br>cp -r /home/oracle/database/response /home/oracle/rsp</p>
+<p>配置安装响应文件 /home/oracle/rsp/db_install.rsp文件，这里建议先用 Xftp 下载到本地配置参数，再上传，db_install.rsp文件配置示例如下：</p>
+<p>oracle.install.responseFileVersion=/oracle/install/rspfmt_dbinstall_response_schema_v11_2_0</p>
+<h1 id="INSTALL-DB-AND-CONFIG-安装并自动配置数据库实例和监听，建议首次安装用这个，不然配置另外两个文件，新建实例和监听"><a href="#INSTALL-DB-AND-CONFIG-安装并自动配置数据库实例和监听，建议首次安装用这个，不然配置另外两个文件，新建实例和监听" class="headerlink" title="INSTALL_DB_AND_CONFIG 安装并自动配置数据库实例和监听，建议首次安装用这个，不然配置另外两个文件，新建实例和监听"></a>INSTALL_DB_AND_CONFIG 安装并自动配置数据库实例和监听，建议首次安装用这个，不然配置另外两个文件，新建实例和监听</h1><p>oracle.install.option=INSTALL_DB_AND_CONFIG<br>ORACLE_HOSTNAME=localhost<br>UNIX_GROUP_NAME=oinstall<br>INVENTORY_LOCATION=/home/oracle/ora11g/oraInventory<br>SELECTED_LANGUAGES=zh_CN,en<br>ORACLE_HOME=/u01/app/oracle/product/11.2.0/dbhome_1<br>ORACLE_BASE=/u01/app/oracle<br>oracle.install.db.InstallEdition=EE<br>oracle.install.db.isCustomInstall=true<br>oracle.install.db.customComponents=oracle.server:11.2.0.1.0,oracle.sysman.ccr:10.2.7.0.0,oracle.xdk:11.2.0.1.0,oracle.rdbms.oci:11.2.0.1.0,oracle.network:11.2.0.1.0,oracle.network.listener:11.2.0.1.0,oracle.rdbms:11.2.0.1.0,oracle.options:11.2.0.1.0,oracle.rdbms.partitioning:11.2.0.1.0,oracle.oraolap:11.2.0.1.0,oracle.rdbms.dm:11.2.0.1.0,oracle.rdbms.dv:11.2.0.1.0,orcle.rdbms.lbac:11.2.0.1.0,oracle.rdbms.rat:11.2.0.1.0<br>oracle.install.db.DBA_GROUP=dba<br>oracle.install.db.OPER_GROUP=oinstall<br>oracle.install.db.config.starterdb.type=GENERAL_PURPOSE</p>
+<h1 id="这个是服务名"><a href="#这个是服务名" class="headerlink" title="这个是服务名"></a>这个是服务名</h1><p>oracle.install.db.config.starterdb.globalDBName=orcl.lan</p>
+<h1 id="实例-sid"><a href="#实例-sid" class="headerlink" title="实例 sid"></a>实例 sid</h1><p>oracle.install.db.config.starterdb.SID=orcl<br>oracle.install.db.config.starterdb.characterSet=AL32UTF8<br>oracle.install.db.config.starterdb.memoryOption=true</p>
+<h1 id="最小-256M-我是学习就选择最小了"><a href="#最小-256M-我是学习就选择最小了" class="headerlink" title="最小 256M 我是学习就选择最小了"></a>最小 256M 我是学习就选择最小了</h1><p>oracle.install.db.config.starterdb.memoryLimit=256</p>
+<h1 id="是否安装学习的scott和hr"><a href="#是否安装学习的scott和hr" class="headerlink" title="是否安装学习的scott和hr"></a>是否安装学习的scott和hr</h1><p>oracle.install.db.config.starterdb.installExampleSchemas=false<br>oracle.install.db.config.starterdb.enableSecuritySettings=true</p>
+<h1 id="全局密码设置成-123456-安装时会提示密码简单问题，可忽略"><a href="#全局密码设置成-123456-安装时会提示密码简单问题，可忽略" class="headerlink" title="全局密码设置成 123456 (安装时会提示密码简单问题，可忽略)"></a>全局密码设置成 123456 (安装时会提示密码简单问题，可忽略)</h1><p>oracle.install.db.config.starterdb.password.ALL=123456<br>oracle.install.db.config.starterdb.control=DB_CONTROL<br>oracle.install.db.config.starterdb.dbcontrol.enableEmailNotification=false<br>oracle.install.db.config.starterdb.automatedBackup.enable=false<br>oracle.install.db.config.starterdb.storageType=FILE_SYSTEM_STORAGE<br>oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=/u01/app/oracle/oradata<br>DECLINE_SECURITY_UPDATES=true</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_11.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_11.png"></a> 修改完成保存并上传到 /home/oracle /rsp ，覆盖 db_install.rsp。</p>
+<h2 id="静默安装-Oracle-数据库"><a href="#静默安装-Oracle-数据库" class="headerlink" title="静默安装 Oracle 数据库"></a>静默安装 Oracle 数据库</h2><p># 切换成 oracle 用户<br>su oracle</p>
+<p># 安装，会出现密码不规范的警告，可忽略<br>/home/oracle/database/runInstaller -silent -ignorePrereq -responseFile /home/oracle/rsp/db_install.rsp</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_14.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_14.png"></a></p>
+<p># 带有图形界面的系统可能会出现如下报错，无报错可忽略：<br> [oracle@localhost rsp]$ Exception in thread “main” java.lang.NoClassDefFoundError<br>at java.lang.Class.forName0(Native Method)<br>at java.lang.Class.forName(Class.java:164)<br>at java.awt.Toolkit$2.run(Toolkit.java:821)<br>at java.security.AccessController.doPrivileged(Native Method)<br>at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:804)<br>at javax.swing.UIManager.initialize(UIManager.java:1262)<br>at javax.swing.UIManager.maybeInitialize(UIManager.java:1245)<br>at javax.swing.UIManager.getUI(UIManager.java:851)<br>at javax.swing.JPanel.updateUI(JPanel.java:104)<br>at javax.swing.JPanel.<init>(JPanel.java:64)<br>at javax.swing.JPanel.<init>(JPanel.java:87)<br>at javax.swing.JPanel.<init>(JPanel.java:95)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMUI.<init>(OiifoOCMUI.java:125)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMInterfaceManager.<init>(OiifoOCMInterfaceManager.java:79)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMInterfaceManager.getInstance(OiifoOCMInterfaceManager.java:124)<br>at oracle.install.ivw.db.driver.DBInstaller.run(DBInstaller.java:123)<br>at oracle.install.commons.util.Application.startup(Application.java:869)<br>at oracle.install.commons.flow.FlowApplication.startup(FlowApplication.java:164)<br>at oracle.install.commons.flow.FlowApplication.startup(FlowApplication.java:181)<br>at oracle.install.commons.base.driver.common.Installer.startup(Installer.java:265)<br>at oracle.install.ivw.db.driver.DBInstaller.startup(DBInstaller.java:114)<br>at oracle.install.ivw.db.driver.DBInstaller.main(DBInstaller.java:132)</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_12.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_12.png"></a></p>
+<p># 出现如上报错是因为系统中设置了DISPLAY环境变量，执行以下命令即可：<br>unset DISPLAY</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_13.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_13.png"></a></p>
+<p># 再次执行 oracle 数据库安装命令<br>/home/oracle/database/runInstaller -silent -ignorePrereq -responseFile /home/oracle/rsp/db_install.rsp</p>
+<p># 查看安装过程建议另开一个shell 执行如下命令查看<br>tail -f /home/oracle/ora11g/oraInventory/logs/ installActions2018-06-29_09-57-41AM.log</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_15.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_15.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_16.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_16.png"></a> 安装完成。</p>
+<p># 切换成 root 用户<br>su root</p>
+<p># 执行以下脚本<br>/u01/app/oracle/product/11.2.0/dbhome_1/root.sh</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_17.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_17.png"></a></p>
+<p># 切换成 oracle 用户<br>su oracle</p>
+<p># sqlplus 登录<br>sqlplus / as sysdba</p>
+<h1 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h1><p>select status from v$instance;</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_18.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_18.png"></a></p>
+<h2 id="配置防火墙（可忽略）"><a href="#配置防火墙（可忽略）" class="headerlink" title="配置防火墙（可忽略）"></a>配置防火墙（可忽略）</h2><p># 切换成 root 用户<br>su root</p>
+<p># 查看 1521 数据库远程连接端口<br>netstat -angrep 1521</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_19.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_19.png"></a> 1521 端口监听中。</p>
+<p># 防火墙  添加 1521 端口永久开放公共连接规则<br>firewall-cmd –zone=public –add-port=1521/tcp –permanent</p>
+<h1 id="重新加载防火墙规则"><a href="#重新加载防火墙规则" class="headerlink" title="重新加载防火墙规则"></a>重新加载防火墙规则</h1><p>firewall-cmd –reload</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_20.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_20.png"></a></p>
+<h2 id="数据库-实例启动及关闭"><a href="#数据库-实例启动及关闭" class="headerlink" title="数据库/实例启动及关闭"></a>数据库/实例启动及关闭</h2><p># 切换成 root 用户<br>su root</p>
+<p>修改 oracle 服务启动配置，使启动数据库服务也会同时启动实例</p>
+<p>vi /etc/oratab</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_21.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_21.png"></a> 将</p>
+<p>Orcl:/u01/app/oracle/product/11.2.0/dbhome_1:N</p>
+<p>改成</p>
+<p>Orcl:/u01/app/oracle/product/11.2.0/dbhome_1:Y</p>
+<p>保存后，重启数据库使配置生效：</p>
+<p># 关闭数据库<br>dbshut $ORACLE_HOME</p>
+<h1 id="启动数据库"><a href="#启动数据库" class="headerlink" title="启动数据库"></a>启动数据库</h1><p>dbstart $ORACLE_HOME</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_22.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_22.png"></a></p>
+<h2 id="远程连接-oracle-数据库"><a href="#远程连接-oracle-数据库" class="headerlink" title="远程连接 oracle 数据库"></a>远程连接 oracle 数据库</h2><p>SID 连接：</p>
+<p>sqlplus sys/123456@ip:1521/orcl as sysdba</p>
+<h1 id="或"><a href="#或" class="headerlink" title="或"></a>或</h1><p>conn sys/123456@ip:1521/orcl as sysdba</p>
+<p>服务名连接：</p>
+<p>sqlplus sys/123456@ip:1521/orcl.lan as sysdba</p>
+<h1 id="或-1"><a href="#或-1" class="headerlink" title="或"></a>或</h1><p>conn sys/123456@ip:1521/orcl.lan as sysdba</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/03/24/%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%BE%E8%87%AA%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7-partitionguru-pro/" data-id="ckfml639q001a9ger8q8i18ga" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/06/30/centos-7-%E5%AE%89%E8%A3%85-oracle-11gr2-2/" data-id="ckfml8mmp000bcyer7pzc5ofm" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li></ul>
 
     </footer>
   </div>
@@ -470,186 +1224,10 @@
 
 
   
-    <article id="post-各大软件开源许可证介绍，选择一款适合自己的-license" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-centos-7-安装宝塔-linux-面板（bt-cn）、flarum" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/20/%E5%90%84%E5%A4%A7%E8%BD%AF%E4%BB%B6%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84-license/" class="article-date">
-  <time datetime="2017-03-20T01:18:17.000Z" itemprop="datePublished">2017-03-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/20/%E5%90%84%E5%A4%A7%E8%BD%AF%E4%BB%B6%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84-license/">各大软件开源许可证介绍，选择一款适合自己的 License</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Apache-v2-License"><a href="#Apache-v2-License" class="headerlink" title="Apache v2 License"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#apache-v2-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/Apache-2.0">Apache v2 License</a></h2><p>Apache Licence是著名的非盈利开源组织Apache采用的协议。该协议和BSD类似，同样鼓励代码共享和尊重原作者的著作权，同样允许代码修改，再发布（作为开源或商业软件）。需要满足的条件也和BSD类似：</p>
-<ol>
-<li>需要给代码的用户一份Apache Licence</li>
-<li>如果你修改了代码，需要再被修改的文件中说明。</li>
-<li>在延伸的代码中（修改和有源代码衍生的代码中）需要带有原来代码中的协议，商标，专利声明和其他原来作者规定需要包含的说明。</li>
-<li>如果再发布的产品中包含一个Notice文件，则在Notice文件中需要带有Apache Licence。你可以在Notice中增加自己的许可，但不可以表现为对Apache Licence构成更改。</li>
-</ol>
-<p>Apache Licence也是对商业应用友好的许可。使用者也可以在需要的时候修改代码来满足需要并作为开源或商业产品发布/销售。</p>
-<h2 id="MIT-License"><a href="#MIT-License" class="headerlink" title="MIT License"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#mit-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/MIT">MIT License</a></h2><p>MIT许可证之名源自麻省理工学院（Massachusetts Institute of Technology, MIT），又称「X条款」（X License）或「X11条款」（X11 License） MIT内容与三条款BSD许可证（3-clause BSD license）内容颇为近似，但是赋予软体被授权人更大的权利与更少的限制。 被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软体及软体的副本。 被授权人可根据程式的需要修改授权条款为适当的内容。 在软件和软件的所有副本中都必须包含版权声明和许可声明。 此授权条款并非属copyleft的自由软体授权条款，允许在自由/开放源码软体或非自由软体（proprietary software）所使用。 此亦为MIT与BSD（The BSD license, 3-clause BSD license）本质上不同处。 MIT条款可与其他授权条款并存。另外，MIT条款也是自由软体基金会（FSF）所认可的自由软体授权条款，与GPL相容。</p>
-<h2 id="GPL-v2"><a href="#GPL-v2" class="headerlink" title="GPL v2"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#gpl-v2"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/GPL-2.0">GPL v2</a></h2><p>我们很熟悉的Linux就是采用了GPL。GPL协议和BSD, Apache Licence等鼓励代码重用的许可很不一样。GPL的出发点是代码的开源/免费使用和引用/修改/衍生代码的开源/免费使用，但不允许修改后和衍生的代码做为闭源的商业软件发布和销售。这也就是为什么我们能用免费的各种linux，包括商业公司的linux和linux上各种各样的由个人，组织，以及商业软件公司开发的免费软件了。 GPL协议的主要内容是只要在一个软件中使用(“使用”指类库引用，修改后的代码或者衍生代码)GPL 协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。这就是所谓的”传染性”。GPL协议的产品作为一个单独的产品使用没有任何问题，还可以享受免费的优势。 由于GPL严格要求使用了GPL类库的软件产品必须使用GPL协议，对于使用GPL协议的开源代码，商业软件或者对代码有保密要求的部门就不适合集成/采用作为类库和二次开发的基础。 其它细节如再发布的时候需要伴随GPL协议等和BSD/Apache等类似。</p>
-<h2 id="Artistic-License-2-0"><a href="#Artistic-License-2-0" class="headerlink" title="Artistic License 2.0"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#artistic-license-2-0"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/Artistic-2.0">Artistic License 2.0</a></h2><p>Artistic License，又称艺术许可协议（英语：Artistic License），通常指最初的艺术许可协议（1.0版），是一个自由软件授权条款，主要用在官方发布的Perl解释器和大部分CPAN模块的授权。原始的艺术许可协议是由Perl的创始人Larry Wall编写发布的。</p>
-<h2 id="BSD-2-Clause-license"><a href="#BSD-2-Clause-license" class="headerlink" title="BSD 2-Clause license"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#bsd-2-clause-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/BSD-2-Clause">BSD 2-Clause license</a></h2><p>BSD允许使用者修改和重新发布代码(以其他协议形式)，允许闭源商业发布和销售。 BSD鼓励代码共享的同时，要求尊重代码作者的著作权。 使用BSD协议，需要遵守以下规则：</p>
-<ol>
-<li>再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议；</li>
-<li>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档那个和版权声明中包含原来代码中的BSD协议。</li>
-</ol>
-<h2 id="Affero-GPL"><a href="#Affero-GPL" class="headerlink" title="Affero GPL"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#affero-gpl"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/AGPL-3.0">Affero GPL</a></h2><p>是一个广泛被使用的自由软件特许条款，最初由Affero, Inc撰写。此特许条款最新版本为“第3版”（v3），2007年11月发布。Affero 通用公众特许条款是改自GNU通用公众特许条款，并加入额外条款，其目的是为了Copyleft条款应用于在网络上运行的应用程式（如Web应用），从而避免有人以应用服务提供商方式逃避GNU通用公众特许条款。</p>
-<h2 id="LGPL-v2-1"><a href="#LGPL-v2-1" class="headerlink" title="LGPL v2.1"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#lgpl-v2-1"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/LGPL-2.1">LGPL v2.1</a></h2><p>LGPL是GPL的一个为主要为类库使用设计的开源协议。和GPL要求任何使用/修改/衍生之GPL类库的的软件必须采用GPL协议不同。LGPL允许商业软件通过类库引用(link)方式使用LGPL类库而不需要开源商业软件的代码。这使得采用LGPL协议的开源代码可以被商业软件作为类库引用并发布和销售。 但是如果修改LGPL协议的代码或者衍生，则所有修改的代码，涉及修改部分的额外代码和衍生的代码都必须采用LGPL协议。因此LGPL协议的开源代码很适合作为第三方类库被商业软件引用，但不适合希望以LGPL协议代码为基础，通过修改和衍生的方式做二次开发的商业软件采用。 GPL/LGPL都保障原作者的知识产权，避免有人利用开源代码复制并开发类似的产品</p>
-<h2 id="BSD-3-Clause-License"><a href="#BSD-3-Clause-License" class="headerlink" title="BSD (3-Clause) License"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#bsd-3-clause-license"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/BSD-3-Clause">BSD (3-Clause) License</a></h2><p>BSD允许使用者修改和重新发布代码(以其他协议形式)，允许闭源商业发布和销售。 BSD鼓励代码共享的同时，要求尊重代码作者的著作权。 使用BSD协议，需要遵守以下规则：</p>
-<ol>
-<li>再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议；</li>
-<li>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档那个和版权声明中包含原来代码中的BSD协议;</li>
-<li>不可以用开源代码的“作者/机构的名字”或“原来产品的名字”做市场推广。</li>
-</ol>
-<h2 id="Eclipse-Public-License-v1-0"><a href="#Eclipse-Public-License-v1-0" class="headerlink" title="Eclipse Public License v1.0"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#eclipse-public-license-v1-0"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/EPL-1.0">Eclipse Public License v1.0</a></h2><p>EPL允许使用者任意使用、复制、分发、传播、展示、修改以及改后闭源的二次商业发布。 使用EPL协议，需要遵守以下规则：</p>
-<ol>
-<li>当一个代码贡献者将源码的整体或部分再次开源发布的时候,必须继续遵循EPL开源协议来发布,而不能改用其他协议发布.除非你得到了原“源码”拥有者的授权；</li>
-<li>EPL协议下,你可以将源码不做任何修改来商业发布.但如果你要发布修改后的源码,或者当你再发布的是二进制文件的时候,你必须声明它的源代码是可以获取的,而且要告知获取方法；</li>
-<li>当你需要将EPL下的源码作为一部分跟其他私有的源码混和着成为一个Project发布的时候,你可以将整个Project/Product以私人的协议发布,但要声明哪一部分代码是EPL下的,而且声明那部分代码继续遵循EPL；</li>
-<li>独立的模块(Separate Module),不需要开源。</li>
-</ol>
-<h2 id="LGPL-v3"><a href="#LGPL-v3" class="headerlink" title="LGPL v3"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#lgpl-v3"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/LGPL-3.0">LGPL v3</a></h2><p>相对于LGPL v2，不仅要求用户公布修改的源代码，还要求公布相关硬件。</p>
-<h2 id="Mozilla-Public-License-Version-2-0"><a href="#Mozilla-Public-License-Version-2-0" class="headerlink" title="Mozilla Public License Version 2.0"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#mozilla-public-license-version-2-0"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/MPL-2.0">Mozilla Public License Version 2.0</a></h2><p>MPL是The Mozilla Public License的简写，是1998年初Netscape的 Mozilla小组为其开源软件项目设计的软件许可证。MPL许可证出现的最重要原因就是，Netscape公司认为GPL许可证没有很好地平衡开发者对 源代码的需求和他们利用源代码获得的利益。同著名的GPL许可证和BSD许可证相比，MPL在许多权利与义务的约定方面与它们相同（因为都是符合OSIA 认定的开源软件许可证）。但是，相比而言MPL还有以下几个显著的不同之处:</p>
-<ul>
-<li>MPL虽然要求对于经MPL许可证发布的源代码的修改也要以MPL许可证的方式再许可出来，以保证其他人可以在MPL的条款下共享源代码。但是，在MPL 许可证中对“发布”的定义是“以源代码方式发布的文件”，这就意味着MPL允许一个企业在自己已有的源代码库上加一个接口，除了接口程序的源代码以MPL 许可证的形式对外许可外，源代码库中的源代码就可以不用MPL许可证的方式强制对外许可。这些，就为借鉴别人的源代码用做自己商业软件开发的行为留了一个 豁口。</li>
-<li>MPL许可证第三条第7款中允许被许可人将经过MPL许可证获得的源代码同自己其他类型的代码混合得到自己的软件程序。</li>
-<li>对软件专利的态度，MPL许可证不像GPL许可证那样明确表示反对软件专利，但是却明确要求源代码的提供者不能提供已经受专利保护的源代码（除非他本人是 专利权人，并书面向公众免费许可这些源代码），也不能在将这些源代码以开放源代码许可证形式许可后再去申请与这些源代码有关的专利。</li>
-<li>对源代码的定义 而在MPL（1.1版本）许可证中，对源代码的定义是:“源代码指的是对作品进行修改最优先择 取的形式，它包括:所有模块的所有源程序，加上有关的接口的定义，加上控制可执行作品的安装和编译的‘原本’（原文为‘Script’），或者不是与初始 源代码显著不同的源代码就是被源代码贡献者选择的从公共领域可以得到的程序代码。”</li>
-<li>MPL许可证第3条有专门的一款是关于对源代码修改进行描述的规定，就是要求所有再发布者都得有一个专门的文件就对源代码程序修改的时间和修改的方式有描述。</li>
-</ul>
-<h2 id="GPL-v3"><a href="#GPL-v3" class="headerlink" title="GPL v3"></a><a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License#gpl-v3"></a><a target="_blank" rel="noopener" href="http://opensource.org/licenses/GPL-3.0">GPL v3</a></h2><p>GPL v3与GPL v2类似。区别在于，不仅要求用户公布修改的源代码，还要求公布相关硬件。 转自：<a target="_blank" rel="noopener" href="http://git.oschina.net/oschina/git-osc/wikis/License">http://git.oschina.net/oschina/git-osc/wikis/License</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/03/20/%E5%90%84%E5%A4%A7%E8%BD%AF%E4%BB%B6%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E4%BB%8B%E7%BB%8D%EF%BC%8C%E9%80%89%E6%8B%A9%E4%B8%80%E6%AC%BE%E9%80%82%E5%90%88%E8%87%AA%E5%B7%B1%E7%9A%84-license/" data-id="ckfml639y001k9ger74eke9bw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-软件版本号命名规则（gun-风格、windows-风格、-net-framework-风格）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/" class="article-date">
-  <time datetime="2017-03-18T08:19:48.000Z" itemprop="datePublished">2017-03-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>►<a class="article-category-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/">软件版本号命名规范（GUN 风格、Windows 风格、.Net Framework 风格等）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>版本号用于区别软件不同的迭代版本，如何命名，应该说是每个公司都有自己的习惯。但是最好还是有一定的规律比较好，这样也能便于其他人了解你的软件更新历程，也不至于后期出现版本混乱、难以管理的尴尬。</p>
-<h2 id="列举一下比较普遍的命名方式"><a href="#列举一下比较普遍的命名方式" class="headerlink" title="列举一下比较普遍的命名方式"></a>列举一下比较普遍的命名方式</h2><p><strong>1、GUN风格：</strong> 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]] 示例：1.2.1 、 2.0 、 5.0.0 build-13124 <strong>2、Windows风格：</strong> 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]] 示例：1.2.1 、 2.0 <strong>3、.Net Framework风格：</strong> 主版本号.子版本号[.编译版本号[.修正版本号]] Major_Version_Number.Minor_Version_Number[.Build_Number[.Revision_Number]] 版本号由二到四部分组成：主版本号、次版本号、内部版本号、修订号。主版本号和次版本号是必选的，内部版本号和修订号是可选的。但是如果定义了修订号部分，则内部版本号就是必选的。所有定义的部分都必须是大于或者等于0的整数。 应根据约定使用下面这些部分： Major：具有相同名称但不同主版本号的程序集不可互换。它适用于对产品的大量重写，或战略性转变，且无法实现向后兼容性。 Minor：如果两个程序集的名称和主版本号相同，而次版本号不同，但照顾了向后兼容性。它适用于产品的修正版或完全向后兼容的新版本。 Build：内部版本号的不同，表示对相同源所做的重新编译。它适合于更改处理器、平台或编译器的情况。 Revision：名称、主版本号、次版本号都相同，但修订号不同的程序集应该是完全可以互换的。它适用于修复以前发布的程序集中的安全漏洞。 只有内部版本号或修订号不同的程序集后续版本，才可以被认为是先前版本的修补程序（Hotfix）更新。</p>
-<h2 id="版本号管理策略"><a href="#版本号管理策略" class="headerlink" title="版本号管理策略"></a>版本号管理策略</h2><p><strong>1、GUN风格：</strong> （1）产品初版时，版本号可以为0.1或0.1.0，也可以为1.0或1.0.0； （2）当产品进行了局部修改或bug修正时，主版本号和子版本号都不变，修正版本号+1； （3）当产品在原有的基础上增加了部分功能时，主版本号不变，子版本号+1，修正版本号复位为0； （4）当产品进行了重大修改或局部修正累计较多，而导致产品整体发生全局变化的，主版本号+1； （5）编译版本号，一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制； <strong>2、Windows风格：</strong> （1）产品初版时，版本号为1.0或1.0.0； （2）当产品进行了局部修改或bug修正时，主版本号和子版本号都不变，修正版本号+1； （3）当产品在原有的基础上增加了部分功能时，主版本号不变，子版本号+1，修正版本号复位为0； （4）当产品进行了重大修改或局部修正累计较多，而导致产品整体发生全局变化的，主版本号+1； （5）编译版本号，一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制； 一些付费软件在升级的时候也需要购买，那么这个所谓的升级，一般是指主版本号的变更。 另外，还可以在版本号后面加上Alpha、Beta、Gamma、Current、RC（Release Candidate）、Release、Stable等后缀，在这些后缀后面还可以加上1位数字的版本号。 <strong>3、Android版本风格：</strong> （1）主版本号变化 Android2.x：仅支持手机等小平移动设备； Android3.x：只支持平板和电视等大屏设备； Android4.x：合并了2.x和3.x，支持多种设备； （2）次版本号变化 功能增加； （3）维护版本号变化 修复漏洞、bug； （4）构建版本号变化 变化周期频繁且不固定，针对开发人员内部使用； 内部测试版本号使用建议： 主版本号.次（子）版本号.修正版本号.日期版本号_阶段版本号_（修改次数）_开发者缩写 例如：1.0.1.150325_beta_b3_ZainF</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><strong>α（alpha）内部测试版</strong> α版表示该产品只是一个初步完成的产品，通常只用于在开发者内部交流，也有很少一部分发布给专业的测试人员，一般情况下，该版本会存在较多bug，不适合普通用户使用。 <strong>β（Beta）外部测试版</strong> 该版本相对于α版已经有了很大改进，消除了严重的错误，但可能依然存在一些缺陷，需要经过大规模的发布测试进一步发现、消除错误。这一版本通常由软件公司免费发布，通过一些专业的爱好者测试，将结果反馈给开发人员，开发者们再进行有针对性的修改，该版本一般不适合普通用户大规模安装使用。 <strong>γ（Gamma）</strong> 表示该版本已经相当成熟，与即将发行的正式版相差无几。 <strong>trial（试用版）</strong> 改类产品通常都有时间限制，或者在功能上相对于正式版做了一些限制。在试用版中，用户可以通过注册或购买来获得正式的产品。 unregistered（未注册版） 与试用版类似，只是未注册版通常没有使用时间限制，但在功能上同样做了一定的限制。也可能无休止的弹出注册提示。 <strong>demo（演示版）</strong> 在非正式版本的产品中，此版本的知名度最大。demo版仅仅集成了正式版中的几个功能，也不能通过升级或注册成为正式版。 不同类型的正式版软件通常也有区别： <strong>release（最终释放版）</strong> 意味着在出了一系列测试版之后，终归会有一个正式版，该版本有时也会被称作：标准版。一般情况下，release不会以单词的形式出现在软件封面上，而是以符号（r）替代。例如：Windows NT（r）4.0、ms-dos（r）6.22等。 <strong>registered（注册版）</strong> 相对于unregistered（非注册版）。 <strong>standard（标准版）</strong> 无论什么产品，标准版一定存在，而且最常见。标准版中通常包含了该软件的基本组件以及一些常用功能，可以满足用户的一般需求，其价格相对高级版本也更加平易近人。 <strong>deluxe（豪华版）</strong> 通常相对于标准版而言，主要区别是多了几项功能，价格也相对较高。 <strong>reference</strong> 该版本型号常见于百科全书中，比较有名的是微软的Encarta系列。reference是最高级别，其中包含主题、图像、影片剪辑等。相对于standard和deluxe版均有大幅增加，容量由一张光盘猛增至三张光盘，并且加入了很强的交互功能。同时价格不菲，适合发烧友用户收藏。 <strong>professional（专业版）</strong> 专业版是针对某些特定的开发工具软件而言的。专业版中有许多内容是标准版所没有的，这些内容对于一个专业的软件开发人员来说是极为重要的。 <strong>enterprise（企业版）</strong> 企业版是开发类软件中的极品。可以通过它毫无障碍的开发任何级别的应用软件。而这一版本的价格也是一般普通用户所无法承受的。 除了以上这些，还有一些专有版本名称： <strong>update（升级版）</strong> 升级版的软件不能独立使用，该版本的软件会在安装过程中搜索原有的正式版，如果不存在，则会拒绝下一步。 <strong>oem</strong> oem版通常是捆绑在硬件中而不能单独销售的版本。将自己的产品交给别的公司卖，保留自己的著作权，双方互惠互利。 <strong>单机/网络版</strong> 网络版在结构、功能上远比单机版要复杂，且建个也要更加昂贵。 <strong>普及版</strong> 有时也成为共享版。价格便宜，甚至免费、功能单一、针对性强（可能用户占领市场或者打击盗版）。</p>
-<h2 id="更多版本名称"><a href="#更多版本名称" class="headerlink" title="更多版本名称"></a>更多版本名称</h2><p>英文名称</p>
-<p>中文释义</p>
-<p>Enhance</p>
-<p>增强版或者加强版，属于正式版</p>
-<p>Free</p>
-<p>自由</p>
-<p>Full version</p>
-<p>完全版，属于正式版</p>
-<p>Shareware</p>
-<p>共享版</p>
-<p>Release</p>
-<p>发行版，有时间限制</p>
-<p>Upgrade</p>
-<p>升级版</p>
-<p>Retail</p>
-<p>零售版</p>
-<p>Cardware</p>
-<p>属共享软件的一种，只要给作者回复一封电邮或明信片即可。（有的作者并由此提供注册码等），目前这种形式已不多见。</p>
-<p>Plus</p>
-<p>属增强版，不过这种大部分是在程序界面及多媒体功能上增强。</p>
-<p>Preview</p>
-<p>预览版</p>
-<p>Corporation &amp; Enterprise</p>
-<p>企业版</p>
-<p>Standard</p>
-<p>标准版</p>
-<p>Mini</p>
-<p>迷你版也叫精简版只有最基本的功能</p>
-<p>Premium</p>
-<p>贵价版</p>
-<p>Professional</p>
-<p>专业版</p>
-<p>Express</p>
-<p>特别版</p>
-<p>Deluxe</p>
-<p>豪华版</p>
-<p>Regged</p>
-<p>已注册版</p>
-<p>CN</p>
-<p>简体中文版</p>
-<p>CHT</p>
-<p>繁体中文版</p>
-<p>EN</p>
-<p>英文版</p>
-<p>Multilanguage</p>
-<p>多语言版</p>
-<p>整理转自：<a target="_blank" rel="noopener" href="http://www.newpm.net/pm/77">http://www.newpm.net/pm/77</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/" data-id="ckfml63av002k9gerfh8ebf7g" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-【laravel学习笔记】laravel-5-4vue-js-初体验：laravel下配置运行vue-js" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/" class="article-date">
-  <time datetime="2017-03-05T02:44:25.000Z" itemprop="datePublished">2017-03-05</time>
+    <a href="/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" class="article-date">
+  <time datetime="2018-06-21T01:01:50.000Z" itemprop="datePublished">2018-06-21</time>
 </a>
     
   <div class="article-category">
@@ -664,7 +1242,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/">【Laravel学习笔记】Laravel 5.4+Vue.js 初体验：Laravel下配置运行Vue.js</a>
+      <a class="article-title" href="/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/">CentOS 7 安装宝塔 Linux 面板（bt.cn）、Flarum</a>
     </h1>
   
 
@@ -672,25 +1250,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p><strong>生产材料</strong> PHP:PHP 5.6+ Laravel 5.4:<a target="_blank" rel="noopener" href="https://github.com/laravel/laravel/releases/">https://github.com/laravel/laravel/releases/</a> Composer:<a target="_blank" rel="noopener" href="http://getcomposer.org/">http://getcomposer.org/</a> Node.js:<a target="_blank" rel="noopener" href="http://nodejs.org/">http://nodejs.org/</a> Node Package Manager:<a target="_blank" rel="noopener" href="http://www.npmjs.com/">http://www.npmjs.com/</a> <strong>生产环境</strong> 系统环境：Windows 7 x64 Web服务器：WAMPServer 3 64bit:<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/wampserver/files/">https://sourceforge.net/projects/wampserver/files/</a> <strong>生产工具</strong> 开发工具：PhpStorm 2016:<a target="_blank" rel="noopener" href="http://www.jetbrains.com/phpstorm/">http://www.jetbrains.com/phpstorm/</a></p>
-</blockquote>
-<h2 id="一、检测环境是否正常"><a href="#一、检测环境是否正常" class="headerlink" title="一、检测环境是否正常"></a>一、检测环境是否正常</h2><p>打开Cmd，然后分别输入以下命令每个软件是否安装正确且版本是否符合要求。</p>
-<p>php –v</p>
-<p>composer -V</p>
-<p>node –v</p>
-<p>npm -v</p>
-<h2 id="二、创建Laravel项目"><a href="#二、创建Laravel项目" class="headerlink" title="二、创建Laravel项目"></a>二、创建Laravel项目</h2><p>首先打开PhpStorm ，然后新建一个空项目，然后打开Terminal，我们用Composer来安装一个Laravel，在Terminal内输入 <strong>composer create-project –prefer-dist laravel/laravel temp</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs1.png"></a> 然后等待安装完毕。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs2.png"></a> 安装完毕后会出现一个temp，然后我们将temp目录下所有文件剪切或拷贝到newproject根目录下，并删除temp即可（然后在Terminal输入一次 <strong>composer update</strong> 更新一下包防止出错）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs3.png"></a></p>
-<h2 id="三、初次运行Laravel项目"><a href="#三、初次运行Laravel项目" class="headerlink" title="三、初次运行Laravel项目"></a>三、初次运行Laravel项目</h2><p>安装好WAMPServer环境后运行 Laravel 项目。首先访问默认的地址localhost，然后点击 Add a Virtual Host，然后输入相应的参数， 如图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs4.png"></a> Virtual Host 的名字，其实就是我们浏览器访问时候要输入的域名，一般填写项目名，如newproject， VirtualHost IP 一般填写127.x.y.z IP段，如127.0.0.8 Complete absolute path 就是我们这个项目的绝对路径，但是在项目最后记得加上/public，这样我们直接访问 <a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 时可以直接访问到public目录下的index.php，而无需输入 <a target="_blank" rel="noopener" href="http://newproject/public/">http://newproject/public/</a> 去访问，Laravel 官方（<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/">https://laravel.com/docs/5.4/</a>）也是如此建议我们的，主要是为了考虑安全方面的问题。填好参数后然后点击Start the creation of the VirtualHost 创建VirtualHost，创建好后，你可以重开WAMPServer一次或Refresh。 然后在浏览器内输入<a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 访问当前项目，运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs5.png"></a></p>
-<h2 id="四、初次运行Vue组件"><a href="#四、初次运行Vue组件" class="headerlink" title="四、初次运行Vue组件"></a>四、初次运行Vue组件</h2><p>为了保证接下来的操作无其他影响，首先在Terminal输入 <strong>npm install</strong> ，来刷新项目内的nodejs module，这个过程会比较漫长。。。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs6.png"></a> 因为Laravel 用上了vue，而vue基于nodejs，需要用到构建工具gulp或webpack。而vue官方推荐用webpack来构建vue的代码，所以从5.4开始Laravel 抛弃gulp改用webpack来构建JavaScript代码，并用Laravel Mix 来编译SASS/Less成纯CSS代码。 这样我们就可以在Laravel项目根目录看到一下几个文件：webpack.mix.js（Mix编译SASS/Less 引用文件）、resources/assets/js/app.js（Vue组件的实例化文件或其他用途）、resources/assets/js/bootstrap.js（构建js代码的源构建引导js代码文件）、public/js/app.js（webpack 构建后的js代码文件）、public/js/app.js（Mix 编译后的css代码文件）。 接下来找到resources/views/welcome.blade.php ，删除部分无用内容，仅留html结构，然后引用 public/js/app.js，然后引用resources/assets/js/app.js 中被声明的vue component（<a target="_blank" rel="noopener" href="http://vuejs.org/v2/guide/%EF%BC%89%E3%80%82">http://vuejs.org/v2/guide/）。</a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs7.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs8.png"></a> 然后在Terminal 输入 <strong>npm run dev</strong>  编译，然后打开浏览器再次输入<a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 访问成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs9.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs9.png"></a></p>
+        <h2 id="安装宝塔-Linux-面板（bt-cn）"><a href="#安装宝塔-Linux-面板（bt-cn）" class="headerlink" title="安装宝塔 Linux 面板（bt.cn）"></a>安装宝塔 Linux 面板（bt.cn）</h2><p>yum install -y wget &amp;&amp; wget -O install.sh <a target="_blank" rel="noopener" href="http://download.bt.cn/install/install.sh">http://download.bt.cn/install/install.sh</a> &amp;&amp; sh install.sh</p>
+<p>添加站点，用于安装 Flarum <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png"></a></p>
+<h2 id="安装-Composer"><a href="#安装-Composer" class="headerlink" title="安装 Composer"></a>安装 Composer</h2><p>wget <a target="_blank" rel="noopener" href="https://getcomposer.org/composer.phar">https://getcomposer.org/composer.phar</a> -O /usr/local/bin/composer<br>chmod a+x /usr/local/bin/composer</p>
+<h1 id="添加-composer-bin-到-PATH"><a href="#添加-composer-bin-到-PATH" class="headerlink" title="添加 composer bin 到 PATH"></a>添加 composer bin 到 PATH</h1><p>export PATH=$PATH:/root/.config/composer/vendor/bin<br>source /etc/profile</p>
+<h1 id="composer-http-改成-https，连接速度会更佳"><a href="#composer-http-改成-https，连接速度会更佳" class="headerlink" title="composer http 改成 https，连接速度会更佳"></a>composer http 改成 https，连接速度会更佳</h1><p>composer config -g repo.packagist composer <a target="_blank" rel="noopener" href="https://packagist.phpcomposer.com/">https://packagist.phpcomposer.com</a></p>
+<h2 id="安装-Flarum"><a href="#安装-Flarum" class="headerlink" title="安装 Flarum"></a>安装 Flarum</h2><p># 安装 flarum<br>mkdir /tmp/flarum &amp;&amp; cd /tmp/flarum &amp;&amp; composer create-project flarum/flarum . –stability=beta</p>
+<h1 id="解决因PHP版本过高，安装依赖报错的问题"><a href="#解决因PHP版本过高，安装依赖报错的问题" class="headerlink" title="解决因PHP版本过高，安装依赖报错的问题"></a>解决因PHP版本过高，安装依赖报错的问题</h1><p>composer install –ignore-platform-reqs</p>
+<h1 id="拷贝-flarum-文件到-testweb-文件夹"><a href="#拷贝-flarum-文件到-testweb-文件夹" class="headerlink" title="拷贝 flarum 文件到 testweb 文件夹"></a>拷贝 flarum 文件到 testweb 文件夹</h1><p>rm -rf /www/wwwroot/testweb/* &amp;&amp; cp -R /tmp/flarum/* /www/wwwroot/testweb</p>
+<p>然后访问刚新建的站点，发现已经能访问 Flarum 了，只不过有几个问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png"></a></p>
+<h3 id="问题1：The-PHP-extension-‘fileinfo’-is-required"><a href="#问题1：The-PHP-extension-‘fileinfo’-is-required" class="headerlink" title="问题1：The PHP extension ‘fileinfo’ is required."></a>问题1：The PHP extension ‘fileinfo’ is required.</h3><p>解决方法：访问宝塔 Linux 面板，在 PHP 设置中安装 fileinfo 扩展，结果如下图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png"></a></p>
+<h3 id="问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable"><a href="#问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable" class="headerlink" title="问题2：The /www/wwwroot/testweb/assets directory is not writable."></a>问题2：The /www/wwwroot/testweb/assets directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
+<p>解决方法：</p>
+<p>chmod -R 0777 /www/wwwroot/testweb/assets</p>
+<h3 id="问题3：The-www-wwwroot-testweb-storage-directory-is-not-writable"><a href="#问题3：The-www-wwwroot-testweb-storage-directory-is-not-writable" class="headerlink" title="问题3：The /www/wwwroot/testweb/storage directory is not writable."></a>问题3：The /www/wwwroot/testweb/storage directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
+<p>解决方法：</p>
+<p>chmod -R 0777 /www/wwwroot/testweb/storage</p>
+<p>解决问题后，访问到正常安装页面，填写数据库等相关信息即可安装。</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png"></a>   提示：根据<a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">官方文档</a>想要访问正常，必需 URL Rewriting。</p>
+<h2 id="URL-Rewriting"><a href="#URL-Rewriting" class="headerlink" title="URL Rewriting"></a>URL Rewriting</h2><h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>Flarum includes a <code>.htaccess</code> file – make sure it’s been uploaded correctly. If you’re using shared hosting, confirm with your hosting provider that <code>mod_rewrite</code> is enabled. You may need to add the following to your Apache configuration:</p>
+<p>&lt;Directory “/path/to/your/forum”&gt;<br>    AllowOverride All<br></Directory></p>
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>Add the following lines to your server’s configuration block:</p>
+<p>location / { try_files $uri $uri/ /index.php?$query_string; }<br>location /api { try_files $uri $uri/ /api.php?$query_string; }<br>location /admin { try_files $uri $uri/ /admin.php?$query_string; }</p>
+<p>location ~* ^/(composer\.(jsonlock)config\.phpflarumstoragevendor) {<br>    deny all;<br>    return 404;<br>}</p>
+<p>location ~* \.php$ {<br>    fastcgi_split_path_info ^(.+.php)(/.+)$;<br>    fastcgi_pass unix:/var/run/php5-fpm.sock;<br>    include fastcgi_params;<br>    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br>    fastcgi_param HTTP_PROXY “”; # Fix for <a target="_blank" rel="noopener" href="https://httpoxy.org/">https://httpoxy.org/</a> vulnerability<br>    fastcgi_index index.php;<br>}</p>
+<p>location ~* \.html$ {<br>    expires -1;<br>}</p>
+<p>location ~* \.(cssjsgifjpe?gpng)$ {<br>    expires 1M;<br>    add_header Pragma public;<br>    add_header Cache-Control “public, must-revalidate, proxy-revalidate”;<br>}</p>
+<p>gzip on;<br>gzip_http_version 1.1;<br>gzip_vary on;<br>gzip_comp_level 6;<br>gzip_proxied any;<br>gzip_types application/atom+xml<br>           application/javascript<br>           application/json<br>           application/vnd.ms-fontobject<br>           application/x-font-ttf<br>           application/x-web-app-manifest+json<br>           application/xhtml+xml<br>           application/xml<br>           font/opentype<br>           image/svg+xml<br>           image/x-icon<br>           text/css<br>           #text/html – text/html is gzipped by default by nginx<br>           text/plain<br>           text/xml;<br>gzip_buffers 16 8k;<br>gzip_disable “MSIE [1-6]\.(?!.*SV1)”;</p>
+<h3 id="Lighttpd"><a href="#Lighttpd" class="headerlink" title="Lighttpd"></a>Lighttpd</h3><p>Add the following lines to your server’s configuration block:</p>
+<p>url.rewrite-if-not-file = (<br>    “/admin.*“ =&gt; “/admin.php”,<br>    “/api.*“   =&gt; “/api.php”,<br>    “/.*“      =&gt; “/index.php”<br>)</p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://www.bt.cn/bbs/thread-1186-1-1.html">https://www.bt.cn/bbs/thread-1186-1-1.html</a> <a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">https://flarum.org/docs/installation/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/" data-id="ckfml638g00039ger3ws1d2tw" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" data-id="ckfml8mmv000ecyer7a6c1g9d" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li></ul>
 
     </footer>
   </div>
@@ -703,7 +1300,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -714,7 +1311,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%8B%E6%9C%BA%E6%95%B0%E7%A0%81/">手机数码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
     </div>
   </div>
 
@@ -724,7 +1321,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" rel="tag">办公软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag">安卓模拟器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" rel="tag">微信营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E8%AF%BE/" rel="tag">微课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" rel="tag">无线营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
     </div>
   </div>
 
@@ -734,7 +1331,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Adobe/" style="font-size: 10px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/GiWebFrame/" style="font-size: 10px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.33px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 13.33px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 16.67px;">Laravel</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows-7/" style="font-size: 13.33px;">Windows 7</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/jQuery/" style="font-size: 13.33px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 13.33px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 13.33px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 13.33px;">程序员</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 10px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 13.33px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 10px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 13.33px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Adobe/" style="font-size: 15px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 17.5px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 12.5px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 12.5px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 12.5px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 12.5px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 15px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Maven/" style="font-size: 15px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 15px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 15px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 12.5px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 15px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/Windows-7/" style="font-size: 12.5px;">Windows 7</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/jQuery/" style="font-size: 12.5px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 12.5px;">一加</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 12.5px;">办公软件</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 12.5px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12.5px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 12.5px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 17.5px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 12.5px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 12.5px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 12.5px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 15px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 12.5px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 12.5px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
     </div>
   </div>
 
@@ -743,7 +1340,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -760,19 +1357,19 @@
           </li>
         
           <li>
+            <a href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Java/MySQL/Maven/Tomcat 安装配置方式</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/">免费的 JetBrains 注册码获取方法及软件破解激活方式</a>
           </li>
         
           <li>
-            <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+            <a href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">注入 Filter 解决 Spring Boot 2.x 前后端分离开发 CORS 跨域问题</a>
           </li>
         
           <li>
-            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
-          </li>
-        
-          <li>
-            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+            <a href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/">Java 实现无限层级树形结构遍历部门</a>
           </li>
         
       </ul>
