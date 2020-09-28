@@ -56,15 +56,15 @@
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
         
-          <a class="main-nav-link" href="/">home</a>
+          <a class="main-nav-link" href="/">首页</a>
         
-          <a class="main-nav-link" href="/archives">archives</a>
+          <a class="main-nav-link" href="/archives">归档</a>
         
-          <a class="main-nav-link" href="/link">link</a>
+          <a class="main-nav-link" href="/link">友链</a>
         
-          <a class="main-nav-link" href="/about">about</a>
+          <a class="main-nav-link" href="/about">关于</a>
         
-          <a class="main-nav-link" href="/message">message</a>
+          <a class="main-nav-link" href="/message">留言</a>
         
       </nav>
       <nav id="sub-nav">
@@ -146,7 +146,7 @@
 <p>表单登录、注销、后台管理、删除用户等。 主要配置文件：WebSecurityConfiguration.java</p>
 <p>package com.gioov.springboot1springsecurity.config;</p>
 <p>import org.springframework.beans.factory.annotation.Autowired;<br>import org.springframework.context.annotation.Bean;<br>import org.springframework.context.annotation.Configuration;<br>import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;<br>import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;<br>import org.springframework.security.config.annotation.web.builders.HttpSecurity;<br>import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;<br>import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;<br>import org.springframework.security.config.http.SessionCreationPolicy;<br>import org.springframework.security.core.session.SessionRegistry;<br>import org.springframework.security.core.session.SessionRegistryImpl;<br>import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</p>
-<p>/**<br> * @author godcheese [<a href="mailto:&#x67;&#x6f;&#100;&#x63;&#104;&#x65;&#x65;&#115;&#101;&#64;&#111;&#x75;&#x74;&#108;&#x6f;&#111;&#x6b;&#x2e;&#99;&#111;&#109;">&#x67;&#x6f;&#100;&#x63;&#104;&#x65;&#x65;&#115;&#101;&#64;&#111;&#x75;&#x74;&#108;&#x6f;&#111;&#x6b;&#x2e;&#99;&#111;&#109;</a>]<br> * @date 2018/4/7 19:00<br> */<br>@Configuration<br>@EnableWebSecurity<br>@EnableGlobalMethodSecurity(prePostEnabled = true)<br>public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {</p>
+<p>/**<br> * @author godcheese [<a href="mailto:&#103;&#x6f;&#x64;&#x63;&#104;&#x65;&#x65;&#x73;&#x65;&#x40;&#111;&#117;&#116;&#x6c;&#x6f;&#x6f;&#107;&#x2e;&#x63;&#111;&#109;">&#103;&#x6f;&#x64;&#x63;&#104;&#x65;&#x65;&#x73;&#x65;&#x40;&#111;&#117;&#116;&#x6c;&#x6f;&#x6f;&#107;&#x2e;&#x63;&#111;&#109;</a>]<br> * @date 2018/4/7 19:00<br> */<br>@Configuration<br>@EnableWebSecurity<br>@EnableGlobalMethodSecurity(prePostEnabled = true)<br>public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {</p>
 <pre><code>@Autowired
 private SessionRegistry sessionRegistry;
 
@@ -247,7 +247,7 @@ protected void configure(HttpSecurity http) throws Exception &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfmlfjoq0039nser195tfd37" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfmniqdc00363qer1c6va2xg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li></ul>
@@ -367,15 +367,15 @@ protected void configure(HttpSecurity http) throws Exception &#123;
     </div>
     <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">home</a>
+    <a href="/" class="mobile-nav-link">首页</a>
   
-    <a href="/archives" class="mobile-nav-link">archives</a>
+    <a href="/archives" class="mobile-nav-link">归档</a>
   
-    <a href="/link" class="mobile-nav-link">link</a>
+    <a href="/link" class="mobile-nav-link">友链</a>
   
-    <a href="/about" class="mobile-nav-link">about</a>
+    <a href="/about" class="mobile-nav-link">关于</a>
   
-    <a href="/message" class="mobile-nav-link">message</a>
+    <a href="/message" class="mobile-nav-link">留言</a>
   
 </nav>
     
