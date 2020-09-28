@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>天堂芝士的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="天堂芝士的个人博客">
+<meta property="og:url" content="http://godcheese.com/page/4/index.html">
+<meta property="og:site_name" content="天堂芝士的个人博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="godcheese">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">天堂芝士的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">home</a>
+        
+          <a class="main-nav-link" href="/archives">archives</a>
+        
+          <a class="main-nav-link" href="/link">link</a>
+        
+          <a class="main-nav-link" href="/about">about</a>
+        
+          <a class="main-nav-link" href="/message">message</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://godcheese.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-分享一个自己写的php网站开发简易mvc框架-giwebframe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/27/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84php%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91%E7%AE%80%E6%98%93mvc%E6%A1%86%E6%9E%B6-giwebframe/" class="article-date">
+  <time datetime="2016-01-27T12:52:16.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/27/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84php%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91%E7%AE%80%E6%98%93mvc%E6%A1%86%E6%9E%B6-giwebframe/">分享一个自己写的PHP网站开发简易MVC框架 ——GiWebFrame</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/02/GiWebFrame.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/02/GiWebFrame.png" alt="GiWebFrame"></a> 主要是接了学校的一个小小型网站开发，个人不太希望用现在主流的网络上的较为臃肿的框架来开发，所以寒假在家花费了2天左右时间写了一个网站开发轻量框架，取了一个简单的名字<code>GiWebFrame</code>。 现在开源共享给大家，供大家学习，这只是一个简易的MVC思路，供新手学习吧，大神就直接多提建议吧。框架挺小的，我还有安全方面没有考虑完全，大家可以自己写出安全类也挺方便的！ GiWebFrame最新版本：v1.1 alpha 最近更新时间：2016年1月28日 项目Github地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/GiWebFrame.git">https://github.com/godcheese/GiWebFrame.git</a> 大家也可以关注我的个人github主页：<a target="_blank" rel="noopener" href="http://github.com/godcheese">http://github.com/godcheese</a></p>
+<?php
+/\*\*
+ \* @project :   GiWebFrame
+ \* @version :   v1.1 alpha
+ \* @author  :   godcheese
+ \* @website :   https://www.godcheese.com
+ \* @github  :   https://github.com/godcheese
+ \* @link    :   https://github.com/godcheese/GiWebFrame.git
+ \* @copyright    :   godcheese copyright all reserved.
+ \* @date    :   2016.01
+ \*
+ \*/
+
+//\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*Main\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*//
+
+//定义根目录
+defined('ROOT\_PATH')?:define('ROOT\_PATH',dirname(\_\_FILE\_\_));
+
+//引用控制器控制类
+require\_once ROOT\_PATH.'/include/controller.class.php';
+
+//引用html视图代码输出类
+//require\_once ROOT\_PATH.'/include/view.class.php';
+
+//抽象控制器控制类
+$controller=new controller(false);
+
+//判断是否在首页
+if($controller->isHome()){
+    $resContent=$controller->callController('page','home'); //指定 首页home页面
+    echo $resContent;
+}else{
+    echo $controller->callController($controller->getController(),$controller->getMethod());
+}
+
+?>
+
+<p>思维导图： <a target="_blank" rel="noopener" href="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/routerController.class.php_.jpg"><img src="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/routerController.class.php_.jpg" alt="routerController.class.php"></a> <a target="_blank" rel="noopener" href="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/GiWebFrame-www.gioov_.com_.jpg"><img src="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/GiWebFrame-www.gioov_.com_.jpg" alt="GiWebFrame www.godcheese.com"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/01/27/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84php%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91%E7%AE%80%E6%98%93mvc%E6%A1%86%E6%9E%B6-giwebframe/" data-id="ckfml639m00159ger7dv2g7lm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-手机扫描二维码，别被小偷钻了空子！" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/17/%E6%89%8B%E6%9C%BA%E6%89%AB%E6%8F%8F%E4%BA%8C%E7%BB%B4%E7%A0%81%EF%BC%8C%E5%88%AB%E8%A2%AB%E5%B0%8F%E5%81%B7%E9%92%BB%E4%BA%86%E7%A9%BA%E5%AD%90%EF%BC%81/" class="article-date">
+  <time datetime="2016-01-17T13:11:44.000Z" itemprop="datePublished">2016-01-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/17/%E6%89%8B%E6%9C%BA%E6%89%AB%E6%8F%8F%E4%BA%8C%E7%BB%B4%E7%A0%81%EF%BC%8C%E5%88%AB%E8%A2%AB%E5%B0%8F%E5%81%B7%E9%92%BB%E4%BA%86%E7%A9%BA%E5%AD%90%EF%BC%81/">手机扫描二维码，别被小偷钻了空子！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“扫描二维码，领取购物红包。”对于智能手机用户来说，实在是太平常的事。但新闻报说江苏的小廖因扫了不明二维码导致手机中了木马，支付宝账户被转走4000元。以后扫描二维码一定一定要注意了 。知力君特担心，扫个二维码会那么容易被盗吗？如何做才能保证扫二维码支付的安全性？不少银子呢！今天知力君特别跟信息安全方面的专家请教了几招，留着备用！</p>
+<p>为啥一扫二维码，支付宝账户就被盗？</p>
+<p><strong>扫描二维码支付过程</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/01/jishudog_0.8.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/01/jishudog_0.8.jpg" alt="jishudog_0.8"></a></p>
+<p>二维码同一维条形码一样，也是一个信息承载的方式，就是在x轴和y轴都有存储信息的条形码。支付宝可以很便利地完成支付，比如我们到超市采用支付宝付款的时候直接提供一个二维码，店家用扫描枪扫一下顾客的二维码就可以完成支付行为。同样，我们在网上购物的时候也可以直接进行扫码支付，而不用二次验证。该过程的安全逻辑是操作支付宝账号的用户必须是合法账户，扫描二维码其实就是访问一个应用系统，扫一下二维码，就是访问一个链接，并且这个链接含有可以转帐的参数，当我们的支付宝账号和密码均泄露的话，基于支付宝自身的逻辑安全就失效了，这样帐户就被盗了。</p>
+<p><strong>满足条件才有被盗可能</strong></p>
+<p>当然一扫二维码，账号里金额就被盗，还需要前期再“泄露”些个人信息，比如身份证号，手机号码等等才能满足被盗的综合条件。在窃取余额的过程中，黑客需要重新绑定手机，用新的手机号做验证。满足被盗条件依托于个人的帐号、密码、手机号、身份证号、邮箱，甚至密码保护的问题和答案也有可能。</p>
+<p><strong>植入木马如何被盗</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/01/130482835.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/01/130482835.jpg" alt="130482835"></a></p>
+<p>正常的二维码不会有额外的信息，若是黑客利用二维码承载信息的功能，可以将木马或者病毒的链接放入二维码中，用户就可能在不知情的情况下被植入木马，窃取终端的内部信息，甚至篡改支付链接。用户被误导扫描带有木马的二维码登陆到钓鱼页面，输入信息的同时被黑客远程获取，接下来黑客就可以用获取的信息，随意地操控转帐行为。当然，这里只是给大家一个简易的说明流程，具体的细节还是需要烧脑的，不是所有的黑客都是高手，大家也不要因为这个太恐慌，因噎废食。 这些习惯你有吗？真是要不得！</p>
+<p><strong>见二维码就扫</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/01/130482847.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/01/130482847.jpg" alt="130482847"></a></p>
+<p>二维码具有信息存储功能，不能确定您扫描的二维码是否具有木马或者暗链接，若是扫描了具有木马的二维码和随意点击短信链接会产生一样的后果。见二维码就扫和见链接就点击是一样具有危害性的。 随意点击短信链接</p>
+<p>随意点击短信链接是强烈不推荐的行为，现在大家经常能收到各种伪造银行官方发送的短信，比如提示您账号即将冻结，可以申请换积分等等。若是用户点击此类短信中的链接，轻则会造成自己的信息泄露，重则就会将自己银行账户的资产轻易送给黑客，这个从专业的角度来讲叫钓鱼攻击。</p>
+<p><strong>随意回复短信</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/01/130482855.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/01/130482855.jpg" alt="130482855"></a> （来自公安部微博）</p>
+<p>紧急扩散！这是最新诈骗短信。图中短信的HK代表的是换卡、后面的数字代表的是新的sim卡卡号（临时号码）！新卡在骗子手里，用户的卡就不能用了，骗子可能就此转走你的银行卡，支付宝或者微信账户资金。后果不堪设想! （来自公安部微博）</p>
+<p>应用程序退出不彻底</p>
+<p>应用程序在不用的时候一定要及时关闭，比如大家经常看到的网络银行的key，在大家用完网银退出后，会有程序提示您要拔掉U盾，</p>
+<p>这也是避免被黑客利用的有效防范措施。若是大家手机正好丢了，丢的手机上支付软件没有完全退出，拿到手机的盗窃者完全可以以合法用户的方式将账户的钱转走！</p>
+<p>不加辨别蹭免费网络</p>
+<p>蹭网后，自己的网络数据流量都经过提供WiFi的路由器，而这个路由器若是黑客架设的话，您访问的网站，提供的用户名和密码有可能就会落入黑客的手中。</p>
+<p><strong>手机支付工具应该怎样安全地使用？</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/01/130482864.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2016/01/130482864.jpg" alt="130482864"></a></p>
+<p>1. 个人信息不要轻易泄露，比如身份证号，信用卡卡背面的三位数字，所有这些信息都可能会给黑客增加攻破支付系统的便利性。</p>
+<p>2. 在个人支付的时候，一定要确保你连接到的是合法的WiFi，不要贪图诱惑点击些来历不明的链接，或者扫一些来历不明的二维码。要能分清李逵和李鬼。</p>
+<p>3. 学习每种支付工具自身的流程，要确保自己能够用好支付软件提供的安全功能，确保账号的安全性。</p>
+<p>4. 一定要设置足够复杂的密码。很多人都习惯在所有的网站用同一个用户名，同一套密码，这样是极其不推荐的。一定不要将所有的账号都设置为同一个密码，否则只要泄露一个账号密码，其他的账号和密码都可以被轻而易举地获取到。</p>
+<p>5. 不要随便跟人说自己的个人信息。保管好自己的账号和密码资产，很多电信诈骗就是从受害者口中直接问出来账号和密码，然后进行转账窃取操作。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/01/17/%E6%89%8B%E6%9C%BA%E6%89%AB%E6%8F%8F%E4%BA%8C%E7%BB%B4%E7%A0%81%EF%BC%8C%E5%88%AB%E8%A2%AB%E5%B0%8F%E5%81%B7%E9%92%BB%E4%BA%86%E7%A9%BA%E5%AD%90%EF%BC%81/" data-id="ckfml63a9001w9ger83938pzh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-分享一个自己写的jquery来检测并用ajax方法提交数据的例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/06/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84jquery%E6%9D%A5%E6%A3%80%E6%B5%8B%E5%B9%B6%E7%94%A8ajax%E6%96%B9%E6%B3%95%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BE%8B/" class="article-date">
+  <time datetime="2016-01-06T12:57:44.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84jquery%E6%9D%A5%E6%A3%80%E6%B5%8B%E5%B9%B6%E7%94%A8ajax%E6%96%B9%E6%B3%95%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BE%8B/">分享一个自己写的jQuery来检测并用Ajax方法提交登录数据的例子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分享一个自己写的jQuery来检测并用Ajax方法提交登录数据的例子，项目已经放在了我的github上，供大家下载交流。</p>
+<p>在这里我给大家放上ajax部分代码解析：</p>
+<p>$.ajax({<br>type:”POST”,<br>url:”handleData.php”,//这里url写的是欲请求的地址<br>data:{<br>//这里的p_username、p_password、p_remember就是供POST提交的数据<br>p_username:username,<br>p_password:password,<br>p_rememberMe:rememberMe<br>},<br>dataType:”JSON”,//这里返回的数据类型是JSON<br>success:function(data){//{“success”:true,<br>“msg”:”返回的信息”} //这里返回的是success布尔值及msg的字符串类型</p>
+<p>if(data.success){<br>$(“#loginSuccessMsg”).html(data.msg);<br>}<br>},<br>error:function(jqXHR){<br>alert(jqXHR.error+’<br>‘+jqXHR.status);<br>}<br>})</p>
+<p>   </p>
+<p>实例的Github地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/CheckDataAndAjax.git">https://github.com/godcheese/CheckDataAndAjax.git</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/01/06/%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%AA%E8%87%AA%E5%B7%B1%E5%86%99%E7%9A%84jquery%E6%9D%A5%E6%A3%80%E6%B5%8B%E5%B9%B6%E7%94%A8ajax%E6%96%B9%E6%B3%95%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BE%8B/" data-id="ckfml639k00139gerawxhfoyn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-清除u盘内的病毒只需三招！" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/06/%E6%B8%85%E9%99%A4u%E7%9B%98%E5%86%85%E7%9A%84%E7%97%85%E6%AF%92%E5%8F%AA%E9%9C%80%E4%B8%89%E6%8B%9B%EF%BC%81/" class="article-date">
+  <time datetime="2016-01-06T02:17:59.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/06/%E6%B8%85%E9%99%A4u%E7%9B%98%E5%86%85%E7%9A%84%E7%97%85%E6%AF%92%E5%8F%AA%E9%9C%80%E4%B8%89%E6%8B%9B%EF%BC%81/">清除U盘内的病毒只需三招！</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们常常会在硬盘的各个分区根目录下面看到“Autorun.inf”这样的文件，并且用鼠标双击磁盘分区图标时，往往无法打开对应分区窗口;遭遇类似上述现象时，那几乎就能断定本地计算机系统已经感染了近来非常猖獗的闪盘病毒，这种病毒一般通过“Autorun.inf”文件进行传播。</p>
+<p>当我们遇到“Autorun.inf”文件，只要我们双击闪盘分区图标时，该病毒就会通过“Autorun.inf”文件中的设置来自动激活病毒，然后将“Autorun.inf”文件同时拷贝到其他分区，导致其他分区都无法用双击鼠标的方法打开。为了保护系统安全，本文下面就为各位献上这类病毒解除方法以及预防措施，希望下面内容能对大家有用!</p>
+<blockquote>
+<h3 id="赤手空拳，删除“Autorun-inf”文件"><a href="#赤手空拳，删除“Autorun-inf”文件" class="headerlink" title="赤手空拳，删除“Autorun.inf”文件"></a>赤手空拳，删除“Autorun.inf”文件</h3></blockquote>
+<p>当计算机系统不小心感染了“Autorun.inf”文件病毒时，该病毒就会自动在本地硬盘的所有分区根目录下面创建一个“Autorun.inf”文件，该文件在默认状态下具有隐藏属性，用普通方法是无法直接将它删除掉的。要想删除“Autorun.inf”病毒文件，我们可以按照如下方法来操作：</p>
+<p><a target="_blank" rel="noopener" href="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/640.webp_.jpg"><img src="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/640.webp_.jpg" alt="640.webp"></a></p>
+<p>下面为了防止病毒再次运行发作，我们还需要将遭受病毒破坏的磁盘关联修改过来。在修改磁盘关联时，必须先依次单击“开始”/“运行”命令，打开系统运行对话框，在其中执行注册表编辑命令“regedit”，打开本地系统的注册表编辑窗口;在该编辑窗口的左侧显示区域，先用鼠标展开“HKEY_CLASSES_ROOT”注册表分支，然后在该分支下面依次选择“Driveshell”项目，在对应“shell”项目的右侧列表区域(如图2所示)，用鼠标双击“默认”键值，在其后弹出的数值设置窗口中将“默认”键值数值修改为“none”;</p>
+<p>接下来再用鼠标展开“HKEY_CURRENT_USER”注册表分支，然后在该分支下面依次选择“SoftwareMicrosoftWindowsCurrentVersionExplorer”项目，在对应“Explorer”项目的右侧列表区域，检查一下是否存在一个名为“ountPoints2”键值，一旦发现该键值的话，我们必须及时将它删除掉，最后按一下键盘上的F5功能键，来刷新系统注册表的设置，这么一来闪盘病毒就被我们手工清除掉了，此时当我们再尝试用双击方法打开分区窗口时，就会看到对应分区窗口能被正常打开了。</p>
+<blockquote>
+<h3 id="借用外力，抑制闪盘病毒再生"><a href="#借用外力，抑制闪盘病毒再生" class="headerlink" title="借用外力，抑制闪盘病毒再生"></a>借用外力，抑制闪盘病毒再生</h3></blockquote>
+<p>倘若我们的计算机不小心中了闪盘病毒的黑手，尝试使用上面的方法无法删除“Autorun.inf”文件，而且重新安装了计算机系统后仍然无法使用双击鼠标方法打开分区窗口时，我们可以选用一款名为“费尔木马强力清除助手”的工具，来让本地系统摆脱闪盘病毒的“干扰”，并且有效抑制该类型病毒的继续发作。下面就是抑制闪盘病毒再生的具体操作步骤： 首先从网上将“费尔木马强力清除助手”工具下载到本地硬盘中，并对它进行正确安装;安装完毕后，直接运行“费尔木马强力清除助手”程序，在其后弹出的程序界面中选中“抑制文件再次生成”项目，同时在“文件名”文本框中输入“Autorun.inf”文件的具体路径信息，例如笔者在这里输入“C:Autorun.inf”，再单击“清除”按钮，这么一来C分区下面的“Autorun.inf”文件就被清除干净了;按照相同的操作方法，再将其他分区中的“Autorun.inf”文件删除干净。</p>
+<p>接着我们再按常规方法重新安装一下操作系统，或者直接通过Ghost程序来快速恢复一下系统，相信这么一来重装过后的系统就会摆脱闪盘病毒的“干扰”了。</p>
+<blockquote>
+<h3 id="小小巧招，预防闪盘病毒再次袭击"><a href="#小小巧招，预防闪盘病毒再次袭击" class="headerlink" title="小小巧招，预防闪盘病毒再次袭击"></a>小小巧招，预防闪盘病毒再次袭击</h3></blockquote>
+<p>当摆脱了闪盘病毒的“干扰”后，我们现在是不是就可以高枕无忧了呢?其实，闪盘病毒随时可能再次袭击我们，为此我们必须采取有效措施，让本地系统远离闪盘病毒。而要预防闪盘病毒再次袭击的方法非常简单，我们只需要在闪盘根目录下面自己手工创建一个“Autorun.inf”文件，这样一来闪盘病毒日后就无法往闪盘根目录下面自动生成“Autorun.inf”病毒文件了，毕竟相同的目录下面是不允许创建同名文件或同名文件夹的，那样的话闪盘病毒就无法通过闪盘进行非法传播了。同样地，这种预防闪盘病毒的方法也适用于移动硬盘！</p>
+<p><em>转自：中国黑客联盟</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/01/06/%E6%B8%85%E9%99%A4u%E7%9B%98%E5%86%85%E7%9A%84%E7%97%85%E6%AF%92%E5%8F%AA%E9%9C%80%E4%B8%89%E6%8B%9B%EF%BC%81/" data-id="ckfml63ab001z9ger0uqmakua" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-凤凰系统用安卓打造的个人电脑系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/04/%E5%87%A4%E5%87%B0%E7%B3%BB%E7%BB%9F%E7%94%A8%E5%AE%89%E5%8D%93%E6%89%93%E9%80%A0%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time datetime="2016-01-04T02:35:00.000Z" itemprop="datePublished">2016-01-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/04/%E5%87%A4%E5%87%B0%E7%B3%BB%E7%BB%9F%E7%94%A8%E5%AE%89%E5%8D%93%E6%89%93%E9%80%A0%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E7%B3%BB%E7%BB%9F/">凤凰系统——用安卓打造的个人电脑系统</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2016年新年伊始，北京超卓科技有限公司发布了面向平板、笔记本电脑、台式机的全新桌面操作系统——“凤凰操作系统”（PhoenixOS），该系统基于安卓平台深度研发，不仅延续了已成经典的个人电脑操作系统体验模式，同时也完全兼容安卓生态的软硬件产品，给不温不火的后PC时代的桌面端市场，注入了新年里的新气象。 <strong>安卓巨人肩上的新一代桌面平台</strong> 凤凰系统是基于安卓系统打造的个人电脑系统。相比传统操作系统，安卓系统具有后发优势，先天具备了现代操作系统的技术特点。如低功耗、沙箱运行、高DPI支持、开发者众多、各类应用丰富、兼容等。正是凭借着整个产业生态的完备性，安卓系统在Windows和Mac两大阵营强势夹击下突出重围，成功后来居上。现在，安卓的上述优势被凤凰系统完整的传承了下来，并且在安卓所能提供的生活娱乐服务基础上，针对学习和办公等场景进行了改进，相比在扩展性和交互性上保持手机形态的传统安卓平板，融合了个人电脑体验模式的凤凰系统，在应用和交互上，更接近于人们熟悉的Windows和Mac系统，实现了安卓系统向生产力工具的进化，有望在家庭、教育、办公等领域成为Windows和Mac系统的有力竞争者。   <a target="_blank" rel="noopener" href="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/1451889151427.png"><img src="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/1451889151427.png" alt="1451889151427.png"></a> **　移植PC使用体验熟悉界面轻松上手** 凤凰系统为保障用户能够轻松上手，特别移植了用户所熟悉的PC使用体验模式，体现了“基于用户”这一应用产品研发的“铁律”。开启系统，眼前经典的桌面布局，以“开始菜单”作为凤凰系统的综合入口，用户可以通过开始菜单启动所有应用、搜索应用和文件、调整系统设置。整个界面精心打造了触屏和笔记本电脑两种形态，可以通过设置，在全屏样式和菜单样式之间进行切换。 与此同时，凤凰系统全面支持触屏、键盘、鼠标交互操作，加入了多窗口快速切换功能，以释放安卓系统的多任务潜力。作为一款支持多窗口模式和任务栏的全新系统，凤凰系统多窗口、标题栏和自由拉伸窗口功能的加入，让应用的切换轻松、便捷，大幅提高了系统的效率，这些是传统移动端安卓系统难以企及的。   <a target="_blank" rel="noopener" href="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/1451889151525.png"><img src="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/1451889151525.png" alt="1451889151525.png"></a> **　和PC上一样强大的文管系统与浏览器** 除了更加PC化系统桌面，凤凰系统还设计了操作模式媲美Windows的强大文件管理器系统，提供跨窗口拖拽文件、全盘搜索文件、局域网访问、多用户映射、回收站、快捷收藏、鼠标拖拽、框选、右键菜单、文件预览、压缩解压缩、快捷键等PC用户熟悉的系统功能和操作模式。 凤凰系统内置了名为星尘的浏览器，其开发团队前身是孕育了世界之窗浏览器和360浏览器的业界顶级团队，作为平台与互联网交互的主要窗口，星尘采用了最新的Chromium开源代码，无论脚本性能还是HTML5兼容性，都处于行业领先水平，且支持经典的浏览器热键，使浏览体验更接近于传统PC。   <a target="_blank" rel="noopener" href="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/1451889151757.png"><img src="http://gioovcom-wordpress.stor.sinaapp.com/uploads/2016/01/1451889151757.png" alt="1451889151757.png"></a> **　强大的安全中心和通知中心** 传统安卓系统饱受诟病的内存管理和运行垃圾问题在凤凰系统也不复存在。源代码级的进程权限管理，改进了的通知中心、安全中心，实现了“防止应用自启、合理回收资源、多种风险扫描”三大核心功能，使系统更快、更安全、更省电。 此外，系统还预置了高效文本编辑器、邮箱、WPS等常用办公应用，帮助用户游刃有余的高效工作，符合凤凰系统“生产力工具”的市场定位。同时，背靠数以万计的安卓开发者们，凤凰与百万级的安卓平台应用实现了完美兼容，直接对接海量视频、游戏资源。 <strong>启航2016卓越平台驾驭美好未来</strong> 在移动互联网潮流的冲击下，桌面端市场进入后PC时代，但桌面PC作为学习和工作的工具，它的效率和扩展性依然是其它设备无法替代的。在老迈的Windows7乃至XP系统依旧牢牢占据市场半壁江山的现状下，未来PC操作系统升级空间将无限广大。 由谢震宇带领业界一流团队把握时势，博采安卓系统与传统PC系统众家之长，创新打造的凤凰操作系统（<a target="_blank" rel="noopener" href="http://phoenixos.com/">http://phoenixos.com</a>），作为家庭、办公、教育等应用领域的一个新选择，为开辟全新的互联网体验，奠定了无限可能。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/01/04/%E5%87%A4%E5%87%B0%E7%B3%BB%E7%BB%9F%E7%94%A8%E5%AE%89%E5%8D%93%E6%89%93%E9%80%A0%E7%9A%84%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91%E7%B3%BB%E7%BB%9F/" data-id="ckfml639g000y9ger1ccbfin0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-继续用win7有危险？微软被批故意散播恐慌" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/03/%E7%BB%A7%E7%BB%AD%E7%94%A8win7%E6%9C%89%E5%8D%B1%E9%99%A9%EF%BC%9F%E5%BE%AE%E8%BD%AF%E8%A2%AB%E6%89%B9%E6%95%85%E6%84%8F%E6%95%A3%E6%92%AD%E6%81%90%E6%85%8C/" class="article-date">
+  <time datetime="2016-01-03T03:21:34.000Z" itemprop="datePublished">2016-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/03/%E7%BB%A7%E7%BB%AD%E7%94%A8win7%E6%9C%89%E5%8D%B1%E9%99%A9%EF%BC%9F%E5%BE%AE%E8%BD%AF%E8%A2%AB%E6%89%B9%E6%95%85%E6%84%8F%E6%95%A3%E6%92%AD%E6%81%90%E6%85%8C/">继续用Win7有危险？微软被批故意散播恐慌</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1月3日消息，据国外媒体报道，Windows 7目前已运行在全球55%的计算机上。而根据微软高管本周的说法，这可能将带来巨大风险。</p>
+<p>在Windows Weekly播客节目中，微软营销负责人克里斯·卡波塞拉（Chris Capossela）表示，选择Windows 7的用户将面临风险。而对于Windows 7与未来软硬件的兼容性和安全性，微软也感到担忧。</p>
+<p>他表示：“我们很担心，如果用户使用已有10年历史的操作系统，那么他们购买的下一台打印机可能就无法很好地工作。他们购买的新游戏也无法运行在许多较老的机器上。此外，我们正在推动独立软件供应商（ISV）和硬件合作伙伴利用Windows 10的特性开发优秀的新产品，在这样的情况下，旧设备的问题将尤为明显。此外，病毒和安全性也是大问题。” 他同时强调，解决Windows的版本碎片化问题，将用户带到“更安全的地方”非常重要。</p>
+<p>不过业内人士认为，卡波塞拉的说法实际上并没有太大意义。Windows 7的安全性不及Windows 10，对软硬件的兼容性也更差。然而，Windows 7的市场份额表明，这一系统在开发者看来仍有较高的优先级，此外对较老的软件和外设也有更好的兼容性。如果PC无法运行新游戏，那么用户通常需要做的是升级硬件，而不是将操作系统升级至Windows 10。</p>
+<p>关于版本碎片化，唯一感到有问题的是微软。微软此前宣布了Windows 10近期的目标，即在2到3年内安装至10亿台设备。而这也是卡波塞拉发表这一观点的真正动机。</p>
+<p>他表示：“我们认为，对于每一台能够运行Windows 10的设备，我们应当尽一切可能使用户迁移至Windows 10。我们将尝试找到适当的平衡。毫无疑问，对于如此庞大的用户群体，很难在不激怒部分人的情况下向新模式迁移。我们不希望激怒任何人，但我们认为有责任将用户带到更好的地方。相对于Windows 7，Windows 10就是这种更好的地方。我们允许自由选择，但我们试图找到适当的威胁平衡。”</p>
+<p>“威胁平衡”一词表明，微软将会向Windows 7和Windows 8用户施压，敦促他们升级。但在实际操作中，微软可能更强调“威胁”，例如微软此前曾试图将用户的系统自动升级至Windows 10，而卡波塞拉此次也发表了一些并不准确的信息，通过引起用户的不安而促使他们升级。</p>
+<p>Windows 10确实是一款更强大的操作系统，但Windows 7和Windows 8用户继续使用此前系统的权利也应当得到尊重。微软或许在技术上给用户提供了多种选择，但通过不断的弹出提示，散播没有依据的恐慌情绪，微软实际上在强迫用户升级。</p>
+<p>[embed]<a target="_blank" rel="noopener" href="http://v.qq.com/page/n/v/p/n0168nur3vp.html/[/embed/]">http://v.qq.com/page/n/v/p/n0168nur3vp.html\[/embed\]</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/01/03/%E7%BB%A7%E7%BB%AD%E7%94%A8win7%E6%9C%89%E5%8D%B1%E9%99%A9%EF%BC%9F%E5%BE%AE%E8%BD%AF%E8%A2%AB%E6%89%B9%E6%95%85%E6%84%8F%E6%95%A3%E6%92%AD%E6%81%90%E6%85%8C/" data-id="ckfml63ap002d9gerbm95cgv0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Adobe/" style="font-size: 10px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/GiWebFrame/" style="font-size: 10px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 13.33px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 13.33px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 16.67px;">Laravel</a> <a href="/tags/Maven/" style="font-size: 13.33px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 10px;">Microsoft</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows-7/" style="font-size: 13.33px;">Windows 7</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/jQuery/" style="font-size: 13.33px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 13.33px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 13.33px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 13.33px;">程序员</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 10px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 10px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 13.33px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 13.33px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 10px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 13.33px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/">华为云和 Sonatype 联合发布中国官方 Maven 中央仓库镜像</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/">免费的 JetBrains 注册码获取方法及软件破解激活方式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 godcheese<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">home</a>
+  
+    <a href="/archives" class="mobile-nav-link">archives</a>
+  
+    <a href="/link" class="mobile-nav-link">link</a>
+  
+    <a href="/about" class="mobile-nav-link">about</a>
+  
+    <a href="/message" class="mobile-nav-link">message</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
