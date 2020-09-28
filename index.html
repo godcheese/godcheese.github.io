@@ -70,6 +70,228 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-【java学习笔记】windows-7-安装maven（新手可看，大佬绕行）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" class="article-date">
+  <time datetime="2017-07-07T13:26:46.000Z" itemprop="datePublished">2017-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Maven 是 Java Web 开发中必备的软件之一，其主要功能就是管理开发中依赖库，类似于node的Node Package Manager 和 PHP 的 composer。好了废话不多说，现在就来仔细操作一遍安装过程，不了解的新手可以看看，大佬可以绕行，因为挺简单的。 Maven 下载地址：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> 安装前请检查自己的电脑系统是否安装了JDK 1.7及以上（<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index.html">http://www.oracle.com/technetwork/java/index.html</a>） 第一步：先下载 Maven Binary zip archive <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"></a> 第二步：解压 zip 文件 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"></a> 第三步：设置环境 开始菜单=&gt;计算机=&gt;属性=&gt;高级系统设置=&gt;环境变量=&gt;系统变量=&gt;新建名为 M2_HOME 的变量值为之前 Maven 解压文件的地址，如我的为</p>
+<p>F:\dev\apache-maven-3.5.0</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"></a> 然后在 Path 变量中加入</p>
+<p>;%M2_HOME%\bin</p>
+<p>如下图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"></a> 然后保存即可。 最后才 cmd 中运行</p>
+<p>mvn -version</p>
+<p>可正常输出 Maven 信息则代表安装并运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" data-id="ckfmkzrcp000017er5q3pfgf1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【laravel学习笔记】laravel-数据迁移migrate的常见问题（操作）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" class="article-date">
+  <time datetime="2017-06-27T12:20:42.000Z" itemprop="datePublished">2017-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br>`users` add constraint `users_role_id_foreign` foreign key (`role_id`) references `role<br>s` (`id`) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"></a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
+<p>composer dump-autoload</p>
+<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
+<p>// 外键约束<br>$table-&gt;foreign(‘role_id’)-&gt;references(‘id’)-&gt;on(‘roles’)-&gt;onUpdate(‘cascade’)-&gt;onDelete(‘cascade’);</p>
+<p>这句代码代码的欲添加外键约束的表是 users ，表字段是 role_id ；参考表是 roles ，参考字段是 roles 的 id 。</p>
+<h2 id="修改数据表默认存储引擎"><a href="#修改数据表默认存储引擎" class="headerlink" title="修改数据表默认存储引擎"></a>修改数据表默认存储引擎</h2><p>在 migration 文件内添加一句代码来指定数据库引擎（将存储引擎改成InnoDB，支持事务处理）：</p>
+<p>$table-&gt;engine=’InnoDB’;</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfmkzrd5000317er0uvd3wv8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【laravel学习笔记】安装并使用-laravel-passport-来请求授权令牌（oaut" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" class="article-date">
+  <time datetime="2017-06-27T06:33:47.000Z" itemprop="datePublished">2017-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、-安装-Passport"><a href="#一、-安装-Passport" class="headerlink" title="一、 安装 Passport"></a>一、 安装 Passport</h2><p>使用 Composer 依赖包管理器安装 Passport</p>
+<p>composer require laravel/passport</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"></a> 接下来将</p>
+<p>Laravel\Passport\PassportServiceProvider::class,</p>
+<p>这句代码添加到 config/app.php 的 providers 数组， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"></a> 然后运行</p>
+<p>php artisan migrate</p>
+<p>来运行 Passport 自带的数据库迁移文件（用于自动创建 Passport 必需的客户端数据表和令牌数据表）, <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"></a> 然后运行</p>
+<p>php artisan passport:install</p>
+<p>来创建生成安全访问令牌时用到的加密密钥及私人访问和密码访问客户端。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"></a> 接下来再将</p>
+<p>Laravel\Passport\HasApiTokens</p>
+<p>Trait 添加到 App\User 模型中，这个 Trait 会给这个模型提供一些辅助函数，用于检查已认证用户的令牌和使用作用于。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"></a> 然后在 AuthServiceProvider 的 boot 方法中添加</p>
+<p>Passport::roues();</p>
+<p>来注册 Passport 在访问令牌、客户端、私人访问令牌的发放和吊销过程中一些必要路由。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"></a> 最后修改下配置文件 config/auth.php 中的 api driver 改为 passport，此项操作会将 API 请求时使用 Passport 的  TokenGuard 来处理授权保护。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"></a> 全部配置好后，我们来请求令牌，但是发现我们并没有创建任何用户，于是我们需要用到seed来预设填充数据。 运行</p>
+<p>php artisan make:seeder UsersTableSeeder</p>
+<p>创建一个 Seeder 然后打开 database\seeds 文件夹里已经新建了一个叫 UserTableSeeder.php 的文件，打开它然后在 run 方法内输入以下代码：</p>
+<p>DB::table(‘users’)-&gt;insert([<br>‘name’=&gt;’admin’,<br>‘email’=&gt;‘godcheese@godcheese.com’,<br>‘password’=&gt;bcrypt(‘admin’)<br>]);</p>
+<p>如图所示， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"></a> 然后运行</p>
+<p>php artisan db:seed –class=UsersTableSeeder</p>
+<p>来往 user 表中填充刚刚添加好的 seed 数据。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"></a> 接下来我们来写前端 JavaScript 请求获取用户访问令牌的例子。</p>
+<h2 id="二、JavaScript-请求授权令牌"><a href="#二、JavaScript-请求授权令牌" class="headerlink" title="二、JavaScript 请求授权令牌"></a>二、JavaScript 请求授权令牌</h2><p>这是前端 UI， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"></a> 然后些下JavaScript请求代码如下（ 此处仅供演示，暂时忽略安全问题。实际生产环境中不建议在前端显示 client_id 和 client_secret）：</p>
+<p>$(‘#loginButton’).click(function(event){<br>event.preventDefault();<br>$.ajax({<br>type:’post’,<br>url:’<a target="_blank" rel="noopener" href="http://wodedaxue-backend/oauth/token&#39;">http://wodedaxue-backend/oauth/token&#39;</a>,<br>dataType:’json’,<br>data:{<br>‘grant_type’:’password’,<br>‘client_id’:’2’,<br>‘client_secret’:’o6N7JzK2y3pbJiQmDcHaDhrpvPHBktnAlmmfEnS7’,<br>‘username’:$(‘#username’).val(),<br>‘password’:$(‘#password’).val(),<br>‘scope’:’’<br>},<br>success:function(data){<br>console.log(data);<br>alert(JSON.stringify(data));<br>},<br>error:function(err){<br>console.log(err);<br>alert(‘statusCode:’+err.status+’\n’+’statusText:’+err.statusText+’\n’+’description:\n’+JSON.stringify(err.responseJSON));<br>}<br>});<br>});</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"></a> 接下来再将以下代码写入 User 模型：</p>
+<p>/**<br>* 自定义用Passport授权登录：用户名+密码<br>* @param $username<br>* @return mixed<br>*/<br>public function findForPassport($username)<br>{<br>return self::where(‘name’, $username)-&gt;first();<br>}</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"></a> 然后输入用户名 admin 和密码 admin ，点击登录按钮尝试登录：</p>
+<p>{<br>token_type:”Bearer”,<br>expires_in:31536000,<br>access_token:”eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNiOG…MFF7PYRIhXqCkZhZNfoLV1IYTzRmhO2oV41XR9wD7Zd3Oxl-g”,<br>refresh_token:”sabtS2jYhqAJtVxe868OpTTgBeYgpWgfttn5h97drUgBVLN7vL…ukx7yGfGhn5h+zCouLmuh0sdjYU+dgtRweXU3jiA0Fa6/c6k=”<br>}</p>
+<p>成功获取访问令牌（access_token）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"></a> 然后在每次访问其它 API 时候都带上此参数。 Laravel Passport 更多参考资料：<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/passport">https://laravel.com/docs/5.4/passport</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" data-id="ckfmkzrd8000517erh0ra2dfj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【laravel学习笔记】laravel-5-4vue-js-初体验：laravel下配置运行vue-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/" class="article-date">
+  <time datetime="2017-03-05T02:44:25.000Z" itemprop="datePublished">2017-03-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/">【Laravel学习笔记】Laravel 5.4+Vue.js 初体验：Laravel下配置运行Vue.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>生产材料</strong> PHP:PHP 5.6+ Laravel 5.4:<a target="_blank" rel="noopener" href="https://github.com/laravel/laravel/releases/">https://github.com/laravel/laravel/releases/</a> Composer:<a target="_blank" rel="noopener" href="http://getcomposer.org/">http://getcomposer.org/</a> Node.js:<a target="_blank" rel="noopener" href="http://nodejs.org/">http://nodejs.org/</a> Node Package Manager:<a target="_blank" rel="noopener" href="http://www.npmjs.com/">http://www.npmjs.com/</a> <strong>生产环境</strong> 系统环境：Windows 7 x64 Web服务器：WAMPServer 3 64bit:<a target="_blank" rel="noopener" href="https://sourceforge.net/projects/wampserver/files/">https://sourceforge.net/projects/wampserver/files/</a> <strong>生产工具</strong> 开发工具：PhpStorm 2016:<a target="_blank" rel="noopener" href="http://www.jetbrains.com/phpstorm/">http://www.jetbrains.com/phpstorm/</a></p>
+</blockquote>
+<h2 id="一、检测环境是否正常"><a href="#一、检测环境是否正常" class="headerlink" title="一、检测环境是否正常"></a>一、检测环境是否正常</h2><p>打开Cmd，然后分别输入以下命令每个软件是否安装正确且版本是否符合要求。</p>
+<p>php –v</p>
+<p>composer -V</p>
+<p>node –v</p>
+<p>npm -v</p>
+<h2 id="二、创建Laravel项目"><a href="#二、创建Laravel项目" class="headerlink" title="二、创建Laravel项目"></a>二、创建Laravel项目</h2><p>首先打开PhpStorm ，然后新建一个空项目，然后打开Terminal，我们用Composer来安装一个Laravel，在Terminal内输入 <strong>composer create-project –prefer-dist laravel/laravel temp</strong> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs1.png"></a> 然后等待安装完毕。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs2.png"></a> 安装完毕后会出现一个temp，然后我们将temp目录下所有文件剪切或拷贝到newproject根目录下，并删除temp即可（然后在Terminal输入一次 <strong>composer update</strong> 更新一下包防止出错）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs3.png"></a></p>
+<h2 id="三、初次运行Laravel项目"><a href="#三、初次运行Laravel项目" class="headerlink" title="三、初次运行Laravel项目"></a>三、初次运行Laravel项目</h2><p>安装好WAMPServer环境后运行 Laravel 项目。首先访问默认的地址localhost，然后点击 Add a Virtual Host，然后输入相应的参数， 如图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs4.png"></a> Virtual Host 的名字，其实就是我们浏览器访问时候要输入的域名，一般填写项目名，如newproject， VirtualHost IP 一般填写127.x.y.z IP段，如127.0.0.8 Complete absolute path 就是我们这个项目的绝对路径，但是在项目最后记得加上/public，这样我们直接访问 <a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 时可以直接访问到public目录下的index.php，而无需输入 <a target="_blank" rel="noopener" href="http://newproject/public/">http://newproject/public/</a> 去访问，Laravel 官方（<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/">https://laravel.com/docs/5.4/</a>）也是如此建议我们的，主要是为了考虑安全方面的问题。填好参数后然后点击Start the creation of the VirtualHost 创建VirtualHost，创建好后，你可以重开WAMPServer一次或Refresh。 然后在浏览器内输入<a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 访问当前项目，运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs5.png"></a></p>
+<h2 id="四、初次运行Vue组件"><a href="#四、初次运行Vue组件" class="headerlink" title="四、初次运行Vue组件"></a>四、初次运行Vue组件</h2><p>为了保证接下来的操作无其他影响，首先在Terminal输入 <strong>npm install</strong> ，来刷新项目内的nodejs module，这个过程会比较漫长。。。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs6.png"></a> 因为Laravel 用上了vue，而vue基于nodejs，需要用到构建工具gulp或webpack。而vue官方推荐用webpack来构建vue的代码，所以从5.4开始Laravel 抛弃gulp改用webpack来构建JavaScript代码，并用Laravel Mix 来编译SASS/Less成纯CSS代码。 这样我们就可以在Laravel项目根目录看到一下几个文件：webpack.mix.js（Mix编译SASS/Less 引用文件）、resources/assets/js/app.js（Vue组件的实例化文件或其他用途）、resources/assets/js/bootstrap.js（构建js代码的源构建引导js代码文件）、public/js/app.js（webpack 构建后的js代码文件）、public/js/app.js（Mix 编译后的css代码文件）。 接下来找到resources/views/welcome.blade.php ，删除部分无用内容，仅留html结构，然后引用 public/js/app.js，然后引用resources/assets/js/app.js 中被声明的vue component（<a target="_blank" rel="noopener" href="http://vuejs.org/v2/guide/%EF%BC%89%E3%80%82">http://vuejs.org/v2/guide/）。</a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs7.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs8.png"></a> 然后在Terminal 输入 <strong>npm run dev</strong>  编译，然后打开浏览器再次输入<a target="_blank" rel="noopener" href="http://newproject/">http://newproject/</a> 访问成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs9.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/03/laravel-vuejs9.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/" data-id="ckfmkzrcy000117erc0pwcmxy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-【图片处理】adobe-photoshop-cc-2017（3264位）破解工具下载，带来优" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/26/%E3%80%90%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E3%80%91adobe-photoshop-cc-2017%EF%BC%883264%E4%BD%8D%EF%BC%89%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%EF%BC%8C%E5%B8%A6%E6%9D%A5%E4%BC%98/" class="article-date">
@@ -105,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/12/26/%E3%80%90%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E3%80%91adobe-photoshop-cc-2017%EF%BC%883264%E4%BD%8D%EF%BC%89%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%EF%BC%8C%E5%B8%A6%E6%9D%A5%E4%BC%98/" data-id="ckfmkyvmc0003znerdcifcf24" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2016/12/26/%E3%80%90%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E3%80%91adobe-photoshop-cc-2017%EF%BC%883264%E4%BD%8D%EF%BC%89%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%EF%BC%8C%E5%B8%A6%E6%9D%A5%E4%BC%98/" data-id="ckfmkzrdk000d17ergqgd6xya" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li></ul>
@@ -166,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/10/23/%E3%80%90%E5%9B%BD%E5%A4%96%E7%BD%91%E7%9B%98%E3%80%91mega-%E8%89%AF%E5%BF%83%E7%9A%84%E5%9B%BD%E5%A4%96%E4%BA%BA%E6%9D%83%E7%BD%91%E7%9B%98/" data-id="ckfmkyvm60001zner9rxp0qg0" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2016/10/23/%E3%80%90%E5%9B%BD%E5%A4%96%E7%BD%91%E7%9B%98%E3%80%91mega-%E8%89%AF%E5%BF%83%E7%9A%84%E5%9B%BD%E5%A4%96%E4%BA%BA%E6%9D%83%E7%BD%91%E7%9B%98/" data-id="ckfmkzrdg000a17er5hkr1lae" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li></ul>
@@ -230,10 +452,56 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/08/14/%E3%80%90%E5%BE%AE%E8%AF%BE%E5%88%B6%E4%BD%9C%E5%BF%85%E5%A4%87%E3%80%91%E5%87%A0%E6%AC%BE%E4%B8%93%E4%B8%9A%E7%9A%84%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB%E4%B8%8B/" data-id="ckfmkyvmf0005znerfeap97cu" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2016/08/14/%E3%80%90%E5%BE%AE%E8%AF%BE%E5%88%B6%E4%BD%9C%E5%BF%85%E5%A4%87%E3%80%91%E5%87%A0%E6%AC%BE%E4%B8%93%E4%B8%9A%E7%9A%84%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB%E4%B8%8B/" data-id="ckfmkzrdp000l17er27hlfe45" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【win7】分享精美主题premiere，自己动手美化电脑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/25/%E3%80%90win7%E3%80%91%E5%88%86%E4%BA%AB%E7%B2%BE%E7%BE%8E%E4%B8%BB%E9%A2%98premiere%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E7%BE%8E%E5%8C%96%E7%94%B5%E8%84%91/" class="article-date">
+  <time datetime="2016-07-25T13:00:33.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/25/%E3%80%90win7%E3%80%91%E5%88%86%E4%BA%AB%E7%B2%BE%E7%BE%8E%E4%B8%BB%E9%A2%98premiere%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E7%BE%8E%E5%8C%96%E7%94%B5%E8%84%91/">【Win7】分享精美主题Premiere，自己动手美化电脑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>分享一枚自己在用的精美暗灰Win7主题Premiere、Microsoft白色徽标、系统开机画面Cortana。</p>
+<h2 id="图片欣赏"><a href="#图片欣赏" class="headerlink" title="图片欣赏"></a>图片欣赏</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/07/img1.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/07/img1.png" alt="img1"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/07/img2.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/07/img2.png" alt="img2"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/07/img3.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/07/img3.png" alt="img3"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/07/img4.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/07/img4.png" alt="img4"></a></p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>Win7主题 Premier （包含 Windows 徽Logo）：链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1mh6jyaO">https://pan.baidu.com/s/1mh6jyaO</a> 密码: gioo 系统开机画面 Cortana：链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1kVQK0Sn">https://pan.baidu.com/s/1kVQK0Sn</a> 密码: gioo</p>
+<h2 id="美化教程"><a href="#美化教程" class="headerlink" title="美化教程"></a>美化教程</h2><p>使用软媒魔方更改系统主题：<a target="_blank" rel="noopener" href="http://www.orsoon.com/news/150712.html">http://www.orsoon.com/news/150712.html</a> 使用软媒魔方更改系统开始菜单按钮图标：<a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/6181c3e04f8a22152ff15376.html">http://jingyan.baidu.com/article/6181c3e04f8a22152ff15376.html</a> 使用软媒魔方更改系统开机画面：<a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/4f34706ecddb66e387b56deb.html">http://jingyan.baidu.com/article/4f34706ecddb66e387b56deb.html</a> 使用软媒魔方更改系统锁屏（登录）背景：<a target="_blank" rel="noopener" href="http://www.jb51.net/os/windows/222974.html">http://www.jb51.net/os/windows/222974.html</a> 如果还有不懂的地方，可以联系我：qq1176394803</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/07/25/%E3%80%90win7%E3%80%91%E5%88%86%E4%BA%AB%E7%B2%BE%E7%BE%8E%E4%B8%BB%E9%A2%98premiere%EF%BC%8C%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E7%BE%8E%E5%8C%96%E7%94%B5%E8%84%91/" data-id="ckfmkzrda000617er4y2u11p6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li></ul>
 
     </footer>
   </div>
@@ -274,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/07/08/%E3%80%90%E7%A6%8F%E5%88%A9%E3%80%91%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%99%A8-%E6%B5%B7%E9%87%8F%E6%96%87%E6%A1%A3%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD/" data-id="ckfmkyvmh0006znerewz11zrh" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2016/07/08/%E3%80%90%E7%A6%8F%E5%88%A9%E3%80%91%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%99%A8-%E6%B5%B7%E9%87%8F%E6%96%87%E6%A1%A3%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD/" data-id="ckfmkzrdm000g17ercr60c3qt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li></ul>
@@ -320,7 +588,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/07/08/%E3%80%90%E5%85%8D%E8%B4%B9%E7%A6%8F%E5%88%A9%E3%80%91%E7%9F%A5%E7%BD%91cnki%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%85%8D%E7%99%BB%E9%99%86%E5%85%8D%E7%A7%AF%E5%88%86/" data-id="ckfmkyvlw0000zner5bh7e57q" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2016/07/08/%E3%80%90%E5%85%8D%E8%B4%B9%E7%A6%8F%E5%88%A9%E3%80%91%E7%9F%A5%E7%BD%91cnki%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%85%8D%E7%99%BB%E9%99%86%E5%85%8D%E7%A7%AF%E5%88%86/" data-id="ckfmkzrde000917er5iry9c7c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
@@ -332,63 +600,12 @@
 
 
   
-    <article id="post-【精品收藏】vmware-12注册破解安装教程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/22/%E3%80%90%E7%B2%BE%E5%93%81%E6%94%B6%E8%97%8F%E3%80%91vmware-12%E6%B3%A8%E5%86%8C%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" class="article-date">
-  <time datetime="2016-05-22T10:52:50.000Z" itemprop="datePublished">2016-05-22</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a>►<a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/22/%E3%80%90%E7%B2%BE%E5%93%81%E6%94%B6%E8%97%8F%E3%80%91vmware-12%E6%B3%A8%E5%86%8C%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/">【精品收藏】VMware 12 虚拟机软件+注册破解安装教程：一个软件让你一台电脑装上多个系统</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<h2 id="一个软件让你一台电脑装上多个系统-包括苹果系统"><a href="#一个软件让你一台电脑装上多个系统-包括苹果系统" class="headerlink" title="一个软件让你一台电脑装上多个系统~包括苹果系统"></a>一个软件让你一台电脑装上多个系统~包括苹果系统</h2></blockquote>
-<h2 id="Vmware-Workstation-主要功能："><a href="#Vmware-Workstation-主要功能：" class="headerlink" title="Vmware Workstation 主要功能："></a>Vmware Workstation 主要功能：</h2><p>VMware产品主要的功能有：</p>
-<p>⒈不需要分区或重开机就能在同一台PC上使用两种以上的<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/880.htm">操作系统</a>。</p>
-<p>⒉完全隔离并且保护不同OS的操作环境以及所有安装在OS上面的应用软件和资料。</p>
-<p>⒊不同的OS之间还能互动操作，包括网络、周边、文件分享以及复制粘贴功能。</p>
-<p>⒋有复原（Undo）功能。</p>
-<p>⒌能够设定并且随时修改<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/880.htm">操作系统</a>的操作环境，如：内存、磁碟空间、周边设备等等。</p>
-<p>⒍<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/4413972.htm">热迁移</a>，高可用性。</p>
-<h2 id="虚拟机安装，推荐电脑配置："><a href="#虚拟机安装，推荐电脑配置：" class="headerlink" title="虚拟机安装，推荐电脑配置："></a>虚拟机安装，推荐电脑配置：</h2><p>1、Inter I5及以上 (A卡请自行百度大神解决方案) 必须开启CPU虚拟化：开机进入 BIOS —&gt; Intel Virtualization Technology— &gt;修改为 Enabled 参考：联想笔记本电脑如何打开Intel 虚拟化技术 <a target="_blank" rel="noopener" href="http://jingyan.baidu.com/article/91f5db1b3002831c7f05e3b0.html">http://jingyan.baidu.com/article/91f5db1b3002831c7f05e3b0.html</a> 2、内存 4G以上 3、硬盘现在笔记本都能满足需求。40G及以上</p>
-<h2 id="Vmware-Workstation安装教程："><a href="#Vmware-Workstation安装教程：" class="headerlink" title="Vmware Workstation安装教程："></a>Vmware Workstation安装教程：</h2><p>1、双击程序自动解压，解压完成后进入安装向导。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/vE3IBni.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/vE3IBni.png" alt="vE3IBni"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/qAnuuui.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/qAnuuui.png" alt="qAnuuui"></a> 如果出现以上报错（一般Win7系统下不会报错），解决方案：右键–&gt;以管理员身份运行 解压完成后桌面右下角出现： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/N32IzeN.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/N32IzeN.png" alt="N32IzeN"></a> 2、安装向导，点击下一步 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/F3y6Zz.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/F3y6Zz.png" alt="F3y6Zz"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/ueuyYn.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/ueuyYn.png" alt="ueuyYn"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/zyMVZ3E.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/zyMVZ3E.png" alt="zyMVZ3E"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/vi6zmaj.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/vi6zmaj.png" alt="vi6zmaj"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/naeEBz6.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/naeEBz6.png" alt="naeEBz6"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/eMnIFjZ.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/eMnIFjZ.png" alt="eMnIFjZ"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/YBJRrmF.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/YBJRrmF.png" alt="YBJRrmF"></a> 点击安装，然后静静的等待…… <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/FzUFfqF.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/FzUFfqF.png" alt="FzUFfqF"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/eIfueeE.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/eIfueeE.png" alt="eIfueeE"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/UzEv223.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/UzEv223.png" alt="UzEv223"></a>   <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/MNvyQry.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/MNvyQry.png" alt="MNvyQry"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/2EnYFvq.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/2EnYFvq.png" alt="2EnYFvq"></a> 安装完成，输入产品Key VMware Workstation 12 Pro key/注册码 ：</p>
-<p>VY1DU-2VXDH-08DVQ-PXZQZ-P2KV8<br>VF58R-28D9P-0882Z-5GX7G-NPUTF<br>YG7XR-4GYEJ-4894Y-VFMNZ-YA296<br>5A02H-AU243-TZJ49-GTC7K-3C61N</p>
-<p>或者百度直接搜索：vmware workstation 12 密钥 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/YJjA3qU.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/YJjA3qU.png" alt="YJjA3qU"></a> 至此VMware Workstation 已经安装完成。 给大家看看我现在装在虚拟及内的在用的系统， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/20160522190036.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/20160522190036.png" alt="20160522190036"></a></p>
-<h2 id="Vmware-Workstation-12下载地址："><a href="#Vmware-Workstation-12下载地址：" class="headerlink" title="Vmware Workstation 12下载地址："></a>Vmware Workstation 12下载地址：</h2><p>官方下载：<a target="_blank" rel="noopener" href="https://www.vmware.com/go/downloadworkstation-cn/">https://www.vmware.com/go/downloadworkstation-cn/</a> 网盘下载+专业版永久许可证密钥：链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1pKUwGQZ">https://pan.baidu.com/s/1pKUwGQZ</a> 密码: gioo</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/05/22/%E3%80%90%E7%B2%BE%E5%93%81%E6%94%B6%E8%97%8F%E3%80%91vmware-12%E6%B3%A8%E5%86%8C%E7%A0%B4%E8%A7%A3%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" data-id="ckfmkyvmk0009zner9ntibuwh" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -408,7 +625,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li></ul>
     </div>
   </div>
 
@@ -418,7 +635,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Adobe/" style="font-size: 10px;">Adobe</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 10px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 10px;">网盘</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 10px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a>
+      <a href="/tags/Adobe/" style="font-size: 10px;">Adobe</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Laravel/" style="font-size: 20px;">Laravel</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/Windows-7/" style="font-size: 10px;">Windows 7</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 10px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 10px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 10px;">网盘</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 10px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 10px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a>
     </div>
   </div>
 
@@ -427,7 +644,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
     </div>
   </div>
 
@@ -440,23 +657,23 @@
       <ul>
         
           <li>
+            <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/05/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-5-4vue-js-%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%9Alaravel%E4%B8%8B%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8Cvue-js/">【Laravel学习笔记】Laravel 5.4+Vue.js 初体验：Laravel下配置运行Vue.js</a>
+          </li>
+        
+          <li>
             <a href="/2016/12/26/%E3%80%90%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%E3%80%91adobe-photoshop-cc-2017%EF%BC%883264%E4%BD%8D%EF%BC%89%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%EF%BC%8C%E5%B8%A6%E6%9D%A5%E4%BC%98/">【图片处理】Adobe Photoshop CC 2017（32/64位）+破解工具下载，带来优雅体验</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/23/%E3%80%90%E5%9B%BD%E5%A4%96%E7%BD%91%E7%9B%98%E3%80%91mega-%E8%89%AF%E5%BF%83%E7%9A%84%E5%9B%BD%E5%A4%96%E4%BA%BA%E6%9D%83%E7%BD%91%E7%9B%98/">【推荐】MEGA一家拥护人权宣言的国外良心网盘</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/14/%E3%80%90%E5%BE%AE%E8%AF%BE%E5%88%B6%E4%BD%9C%E5%BF%85%E5%A4%87%E3%80%91%E5%87%A0%E6%AC%BE%E4%B8%93%E4%B8%9A%E7%9A%84%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6%E8%BD%AF%E4%BB%B6%E5%88%86%E4%BA%AB%E4%B8%8B/">【微课制作必备】几款专业的视频录制软件分享下载</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/08/%E3%80%90%E7%A6%8F%E5%88%A9%E3%80%91%E7%99%BE%E5%BA%A6%E6%96%87%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%99%A8-%E6%B5%B7%E9%87%8F%E6%96%87%E6%A1%A3%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD/">【福利】百度文库下载器——海量文档免费下载</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/08/%E3%80%90%E5%85%8D%E8%B4%B9%E7%A6%8F%E5%88%A9%E3%80%91%E7%9F%A5%E7%BD%91cnki%E6%96%87%E7%8C%AE%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7%EF%BC%8C%E5%85%8D%E7%99%BB%E9%99%86%E5%85%8D%E7%A7%AF%E5%88%86/">【福利】知网CNKI文献下载工具，免登陆免积分，海量论文免费下</a>
           </li>
         
       </ul>
