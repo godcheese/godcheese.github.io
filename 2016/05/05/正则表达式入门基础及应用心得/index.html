@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>【程序员必学】正则表达式入门基础及应用心得——天堂带你Hold住奇葩 | 天堂芝士的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天和大家分享一下正则表达式入门基础及应用心得~ 有助于各位新手学习，以下内容还有待指点改善，请各位大神级别的程序员多多建议，谢谢~——by 天堂芝士  好了，进入正题。说到正则表达式，其实应用范围极其宽泛，比如Windows的搜索、很多开发框架内、数据抓取软件等，都可能或多或少加上几句正则表达式以助软件能够更加高效和准确展示用户所需要的数据。接下来我将给大家展示我个人理解的正则表达式语法及应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【程序员必学】正则表达式入门基础及应用心得——天堂带你Hold住奇葩">
+<meta property="og:url" content="http://godcheese.com/2016/05/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%BA%94%E7%94%A8%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="天堂芝士的个人博客">
+<meta property="og:description" content="今天和大家分享一下正则表达式入门基础及应用心得~ 有助于各位新手学习，以下内容还有待指点改善，请各位大神级别的程序员多多建议，谢谢~——by 天堂芝士  好了，进入正题。说到正则表达式，其实应用范围极其宽泛，比如Windows的搜索、很多开发框架内、数据抓取软件等，都可能或多或少加上几句正则表达式以助软件能够更加高效和准确展示用户所需要的数据。接下来我将给大家展示我个人理解的正则表达式语法及应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png">
+<meta property="article:published_time" content="2016-05-05T06:03:10.000Z">
+<meta property="article:modified_time" content="2020-09-28T13:14:55.767Z">
+<meta property="article:author" content="godcheese">
+<meta property="article:tag" content="正则表达式">
+<meta property="article:tag" content="程序员必学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png">
+  
+    <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">天堂芝士的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">home</a>
+        
+          <a class="main-nav-link" href="/archives">archives</a>
+        
+          <a class="main-nav-link" href="/link">link</a>
+        
+          <a class="main-nav-link" href="/about">about</a>
+        
+          <a class="main-nav-link" href="/message">message</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://godcheese.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-正则表达式入门基础及应用心得" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%BA%94%E7%94%A8%E5%BF%83%E5%BE%97/" class="article-date">
+  <time datetime="2016-05-05T06:03:10.000Z" itemprop="datePublished">2016-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【程序员必学】正则表达式入门基础及应用心得——天堂带你Hold住奇葩
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>今天和大家分享一下正则表达式入门基础及应用心得~ 有助于各位新手学习，以下内容还有待指点改善，请各位大神级别的程序员多多建议，谢谢~——by 天堂芝士</p>
+</blockquote>
+<p>好了，进入正题。说到正则表达式，其实应用范围极其宽泛，比如Windows的搜索、很多开发框架内、数据抓取软件等，都可能或多或少加上几句正则表达式以助软件能够更加高效和准确展示用户所需要的数据。接下来我将给大家展示我个人理解的正则表达式语法及应用，尽可能用自己的看法和理解来描述，所以可能存在一些不足之处，当然我也接受大家的建议改正。由于我php/javascript 玩的比较溜，所以我就以php/js作为讲解代码了。 先给大家了解正则表达式一些需要应用的语法符号的介绍：正则表达式应用符号分为界定符、元字符（原子集合、量词），还有修正模式。</p>
+<p>@description:正则表达式 - 界定符：表达一个正则表达式的开始和结束。</p>
+<p>以下是三种表达方式：<br>@code:/[0-9]/<br>@description:两个 / 号即表示开始及结束符，推荐使用这个方法</p>
+<p>@code:#[0-9]#<br>@description:两个 # 号即表示开始及结束符</p>
+<p>@code:{[0-9]}<br>@description:{} 号即表示开始及结束符，因为{}号在正则内为区间括入符，所以不推荐使用此方法</p>
+<p>@description:正则表达式 - 边界控制符</p>
+<p>@code:^<br>@description:匹配字符串的开始位置</p>
+<p>@code:$<br>@description:匹配字符串结束的位置</p>
+<p>@code:()<br>@description:匹配括号内为一个原子整体</p>
+<p>PS:<br>@code:/^0/<br>@description:表示匹配以0开始的字符串</p>
+<p>@code:/^01$/<br>@description:表示匹配以0开始并以1结束的字符串</p>
+<p>@code:/^(34)/<br>@description:表示匹配以括号内34开始的字符串</p>
+<p>还有更多，等待大家挖掘~</p>
+<p>@description:正则表达式 - 元字符：什么是元字符？</p>
+<p>@code:<br>@description:匹配两个或者多个可选择内容，相当于编程语言的or</p>
+<p>@code:[]<br>@description:匹配方括号中任意一个原子</p>
+<p>@code:[^]<br>@description:匹配方括号中原子之外的任意字符</p>
+<p>·原子的集合：</p>
+<p>@code:.<br>@description:匹配换行符之外的任意字符</p>
+<p>@code:\d<br>@description:匹配任意一个十进制数字，与[0-9]等价</p>
+<p>@code:\D<br>@description:匹配任意一个非十进制数字，与[^0-9]等价</p>
+<p>@code:\s<br>@description:匹配一个不可见原子，与[\f\n\r\t\v]等价</p>
+<p>@code:\S<br>@description:匹配一个可见原子，与[^\f\n\r\t\v]等价</p>
+<p>@code:\w<br>@description:匹配任意一个数字、字母、或下划线，与[0-9a-zA-Z_]等价</p>
+<p>@code:\W<br>@description:匹配任意一个非数字、字幕、或下划线的字符，与[^0-9a-zA-Z_]等价</p>
+<p>·量词：指明原子欲匹配的数量</p>
+<p>@code:{n}<br>@description:表示其前面的原子恰好出现n次</p>
+<p>@code:{n,}<br>@description:表示其前面的原子至少出现n次到无穷次</p>
+<p>@code:{n,m}<br>@description:表示其前面的原子至出现n次，至多出现m次，及出现在此区间内次数</p>
+<p>以下为上方某些数量的简写表达式：</p>
+<p>@code:*<br>@description:表示其前面的原子至少出现0次或者更多次（无穷次），与{0,}等价</p>
+<p>@code:+<br>@description:表示其前面的原子至少出现1次或者更多次（无穷次），与{1,}等价</p>
+<p>@code:?<br>@description:表示其前面的原子至少出现0次或者至多出现1次，与{0,1}等价</p>
+<p>·PS:<br>不可见原子：\f、换行（\n）、（\r）、制表符（\t）  \v<br>可见原子：即可见的字符串内容</p>
+<p>以上都是常见的几种或者是本人所掌握的，更多请自行挖掘吧~</p>
+<p>@description:正则表达式 - 修正模式</p>
+<p>@code:U<br>@description:懒惰模式，匹配结果存在歧义时取其短</p>
+<p>@code:i<br>@description:忽略大小写匹配</p>
+<p>@code:m<br>@description:将字符串视作多行,不管是字符串哪行都能匹配</p>
+<p>@code:s<br>@description:将字符串视作单行，并将换行符视作普通字符匹配</p>
+<p>@code:e<br>@description:配合函数preg_replace()使用,可以把匹配来的字符串当作正则表达式执行</p>
+<p>以下是更多较专业网站提供的参考资料或工具： Regex Tester:<a target="_blank" rel="noopener" href="http://www.regexpal.com/">http://www.regexpal.com/</a>（英文工具站点） RegexPal:<a target="_blank" rel="noopener" href="http://regexpal.isbadguy.com/">http://regexpal.isbadguy.com/</a>（汉化版RegexPal，推荐） 在线正则表达式测试：<a target="_blank" rel="noopener" href="http://tool.oschina.net/regex/">http://tool.oschina.net/regex/</a>（开源中国） 正则表达式：<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-cn/library/d9eze55x(v=vs.80).aspx">https://msdn.microsoft.com/zh-cn/library/d9eze55x(v=vs.80).aspx</a>（微软MSDN） 正则表达式：<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/94238.htm">http://baike.baidu.com/view/94238.htm</a>（百度百科） 元字符：<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/1061241.htm">http://baike.baidu.com/view/1061241.htm</a>（百度百科）   最后共享一个自己写的php 正则应用工具类 RegexTool.php，已经在github上开放代码~ 里面有几个常用的正则表达式共享大家：</p>
+<pre><code>    &#39;require&#39;=&gt;&#39;/.+/&#39;,  //判断是否已输入
+    &#39;mobile&#39;=&gt;&#39;/^1(34578)\\d&#123;9&#125;$/&#39;, //手机号判断
+    &#39;url&#39;=&gt;&#39;/^(https?://)?(\\w+\\.)+\[a-zA-Z\]+$/&#39;, //url判断全部可能 加 http:// https://  或 未加http:// https://
+    &#39;url\_&#39;=&gt;&#39;/^(\\w+\\.)+\[a-zA-Z\]+$/&#39;,    //只判断未加 http:// https://
+    &#39;url\_http&#39;=&gt;&#39;/^(https?://)+(\\w+\\.)+\[a-zA-Z\]+$/&#39;,    //只判断加http:// https://
+    &#39;qq&#39;=&gt;&#39;/^\[1-9\]&#123;5,11&#125;$/&#39;,    //qq号码判断
+    &#39;email&#39;=&gt;&#39;/^\\w+(\\.\\w+)?@\\w+.+\[a-zA-Z\]$/&#39;,   //email判断
+    &#39;number&#39;=&gt;&#39;/^\\d+$/&#39;,    //是否为数字判断
+
+    // 语言判断
+    &#39;chinese&#39;=&gt;&#39;/^\[\\u2E80-\\u9FFF\]+$/&#39;,  //汉字判断，其中\\u2E80-\\u9FFF为汉字unicode内码编码区间
+    &#39;english&#39;=&gt;&#39;/^\[a-zA-Z\]$/&#39;,  //英文字母判断</code></pre>
+<p>地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/MyPHPCodeLibrary/blob/master/RegexTool.php">RegexTool.php</a>   <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png" alt="github_RegexTool"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2016/05/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%BA%94%E7%94%A8%E5%BF%83%E5%BE%97/" data-id="ckfmkftf1006p9ker9bjg4smy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/06/windows-1078-1-%E5%BE%AE%E8%BD%AF%E5%AE%98%E7%BD%91%E6%AD%A3%E7%89%88%E9%95%9C%E5%83%8F%E8%8B%B1%E4%B8%AD%E6%96%87%E7%89%88%E6%9C%AC%E7%B3%BB%E7%BB%9F%E4%B8%8B%E8%BD%BD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【精品收藏】Windows 10/7/8.1/XP 微软官网正版系统镜像英中文版本下载
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/03/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%86%AC%E5%A4%9C%E5%8A%A0%E7%8F%AD%E4%B8%80%E6%9C%88-%E8%82%BA%E9%83%A8%E7%83%82%E6%88%90%E9%A9%AC%E8%9C%82%E7%AA%9D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">程序员熬夜加班一月 肺部烂成马蜂窝</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%8B%E6%9C%BA%E6%95%B0%E7%A0%81/">手机数码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intellij-Idea/" rel="tag">Intellij Idea</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaFX/" rel="tag">JavaFX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PhpStorm/" rel="tag">PhpStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyCharm/" rel="tag">PyCharm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThinkPHP/" rel="tag">ThinkPHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Web服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-10/" rel="tag">Windows 10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-8-1/" rel="tag">Windows 8.1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-XP/" rel="tag">Windows XP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" rel="tag">办公软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" rel="tag">压缩解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag">安卓模拟器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%BD%E5%B8%A6/" rel="tag">宽带</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%BF%E7%94%B5%E6%80%BB%E5%B1%80/" rel="tag">广电总局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" rel="tag">微信营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E8%AF%BE/" rel="tag">微课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" rel="tag">无线营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag">游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%AD%E4%BF%A1/" rel="tag">短信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E4%BF%A1%E5%8A%9E/" rel="tag">网信办</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" rel="tag">网址导航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B9%E6%9E%9C/" rel="tag">苹果</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C/" rel="tag">谷歌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag">软件开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" rel="tag">远程工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" rel="tag">阿里大鱼</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Adobe/" style="font-size: 12.86px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 14.29px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 11.43px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 11.43px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaFX/" style="font-size: 10px;">JavaFX</a> <a href="/tags/JavaScript/" style="font-size: 11.43px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 11.43px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 12.86px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Maven/" style="font-size: 14.29px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 12.86px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 12.86px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 11.43px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PhpStorm/" style="font-size: 10px;">PhpStorm</a> <a href="/tags/PyCharm/" style="font-size: 10px;">PyCharm</a> <a href="/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 17.14px;">Spring Boot</a> <a href="/tags/Spring-Security/" style="font-size: 10px;">Spring Security</a> <a href="/tags/ThinkPHP/" style="font-size: 10px;">ThinkPHP</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 11.43px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">Web服务器</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a> <a href="/tags/Windows-7/" style="font-size: 14.29px;">Windows 7</a> <a href="/tags/Windows-8-1/" style="font-size: 10px;">Windows 8.1</a> <a href="/tags/Windows-XP/" style="font-size: 10px;">Windows XP</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 12.86px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/jQuery/" style="font-size: 11.43px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 11.43px;">一加</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 11.43px;">办公软件</a> <a href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" style="font-size: 10px;">压缩解压</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%AE%BD%E5%B8%A6/" style="font-size: 10px;">宽带</a> <a href="/tags/%E5%B9%BF%E7%94%B5%E6%80%BB%E5%B1%80/" style="font-size: 10px;">广电总局</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 11.43px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 11.43px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 11.43px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 14.29px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%9F%AD%E4%BF%A1/" style="font-size: 10px;">短信</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 11.43px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 11.43px;">系统美化</a> <a href="/tags/%E7%BD%91%E4%BF%A1%E5%8A%9E/" style="font-size: 10px;">网信办</a> <a href="/tags/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" style="font-size: 10px;">网址导航</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 11.43px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 11.43px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 12.86px;">网页设计</a> <a href="/tags/%E8%8B%B9%E6%9E%9C/" style="font-size: 10px;">苹果</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 11.43px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 11.43px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E8%B0%B7%E6%AD%8C/" style="font-size: 10px;">谷歌</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">软件开发</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">远程工具</a> <a href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" style="font-size: 10px;">阿里大鱼</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 11.43px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/">华为云和 Sonatype 联合发布中国官方 Maven 中央仓库镜像</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Java/MySQL/Maven/Tomcat 安装配置方式</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/">免费的 JetBrains 注册码获取方法及软件破解激活方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">注入 Filter 解决 Spring Boot 2.x 前后端分离开发 CORS 跨域问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/">Java 实现无限层级树形结构遍历部门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 godcheese<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">home</a>
+  
+    <a href="/archives" class="mobile-nav-link">archives</a>
+  
+    <a href="/link" class="mobile-nav-link">link</a>
+  
+    <a href="/about" class="mobile-nav-link">about</a>
+  
+    <a href="/message" class="mobile-nav-link">message</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
