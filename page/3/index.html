@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>天堂芝士的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="天堂芝士的个人博客">
+<meta property="og:url" content="http://godcheese.com/page/3/index.html">
+<meta property="og:site_name" content="天堂芝士的个人博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="godcheese">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">天堂芝士的个人博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/link">友链</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+          <a class="main-nav-link" href="/message">留言</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://godcheese.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-easyui-combotree-textfield显示问题解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2017-08-31T21:57:07.000Z" itemprop="datePublished">2017-09-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">EasyUI combotree textField显示问题解决方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"></a> 这是代码： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"></a> 这是显示结果： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"></a> 后来查看了下EasyUI的官方文档（<a target="_blank" rel="noopener" href="https://www.jeasyui.com/documentation/index.php">https://www.jeasyui.com/documentation/index.php</a>），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因为textField的作用是在选择某项后才显示的。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"></a> 那么肿么解决name的显示呢？ 我在文档中发现combotree依赖于combo和tree两个组件，那我就找找这两个组件下有什么解决思路，于是我发现tree下有个方法loadFilter，解决思路有了。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"></a> 代码如下：</p>
+<p>loadFilter: function (items) {<br>  if(items!==undefined){<br>    ret = [];<br>    console.log(items);<br>    $.each(items, function (i, e) {<br>      e.text=e.name;<br>      ret.push(e);<br>    });<br>  }<br>  return ret;<br>}</p>
+<p>最终解决了问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ckfnr7rsh001g8g2p3cbw2uxa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-数据库表创建及数据填充的cmd脚本（bat批处理）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/" class="article-date">
+  <time datetime="2017-08-19T03:09:53.000Z" itemprop="datePublished">2017-08-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/">MySQL 数据库表创建及数据填充的cmd脚本（bat批处理），提高数据库设计效率</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家在开发Web程序时肯定遇到过设计数据库表结构和数据填充的情况，有些是中小型企业级程序数据库结构设计更加复杂，当然我也遇到过此类烦恼，所以顺手写了几个脚本文件提高效率。 数据库表结构脚本（migrate.cmd）运行代码如下：</p>
+<p>chcp 65001</p>
+<p>@REM Author:<a href="mailto:&#103;&#x6f;&#100;&#x63;&#104;&#101;&#x65;&#115;&#101;&#x40;&#111;&#117;&#x74;&#108;&#x6f;&#111;&#x6b;&#x2e;&#99;&#111;&#109;">&#103;&#x6f;&#100;&#x63;&#104;&#101;&#x65;&#115;&#101;&#x40;&#111;&#117;&#x74;&#108;&#x6f;&#111;&#x6b;&#x2e;&#99;&#111;&#109;</a><br>@REM Description:MYSQL数据库迁移脚本<br>@REM Platform:Windows</p>
+<p>@echo off</p>
+<p>set “MYSQL_HOME=D:\dev\mysql\mysql5.7.14”<br>set “HOST=localhost”<br>set “PORT=3306”<br>set “USER=testuser”<br>set “PASSWORD=testpwd”<br>set “DATABASE=testdb”<br>set “TABLES=D:\dev\testdb\tables”<br>set “EXEC=%MYSQL_HOME%\bin\mysql.exe -h%HOST% -P%PORT% -u%USER% -p%PASSWORD% -D%DATABASE%&lt;%TABLES%”</p>
+<p>%EXEC%\deleteTables.sql<br>%EXEC%\1_ict_logs_table.sql<br>echo finished.</p>
+<p>复制以上代码到文件名为migrate.cmd的文件中，然后根据自己需求修改 MYSQL_HOME、HOST、PORT、USER、PASSWORD、TABLES等变量的值即可。 github gist:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/0b77450a167dbe5a354af93c048338c4">https://gist.github.com/godcheese/0b77450a167dbe5a354af93c048338c4</a>   数据库数据填充脚本（dbseed.cmd）运行代码如下：</p>
+<p>chcp 65001</p>
+<p>@REM Author:<a href="mailto:&#103;&#111;&#100;&#x63;&#104;&#x65;&#x65;&#x73;&#x65;&#64;&#111;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#x6f;&#109;">&#103;&#111;&#100;&#x63;&#104;&#x65;&#x65;&#x73;&#x65;&#64;&#111;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#x6f;&#109;</a><br>@REM Description:MYSQL数据库填充脚本<br>@REM Platform:Windows</p>
+<p>@echo off</p>
+<p>set “MYSQL_HOME=D:\dev\mysql\mysql5.7.14”<br>set “HOST=localhost”<br>set “PORT=3306”<br>set “USER=testuser”<br>set “PASSWORD=testpwd”<br>set “DATABASE=testdb”<br>set “DATA=D:\dev\testdb\data”<br>set “EXEC=%MYSQL_HOME%\bin\mysql.exe -h%HOST% -P%PORT% -u%USER% -p%PASSWORD% -D%DATABASE%&lt;%DATA%”</p>
+<p>%EXEC%\1_ict_logs_data.sql<br>%EXEC%\2_ict_areas_data.sql<br>echo finished.</p>
+<p>复制以上代码到文件名为dbseed.cmd的文件中，然后根据自己需求修改 MYSQL_HOME、HOST、PORT、USER、PASSWORD、DATA等变量的值即可。 github gist:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/2be10fd8ceecda2ea8d9f89e73d2e942">https://gist.github.com/godcheese/2be10fd8ceecda2ea8d9f89e73d2e942</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/" data-id="ckfnr7rtj002r8g2p4vfqh2fb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java下载文件及解决java下载中文文件名文件时不正常问" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/" class="article-date">
+  <time datetime="2017-08-17T11:48:49.000Z" itemprop="datePublished">2017-08-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/">Java下载文件及解决Java下载中文文件名文件时不正常问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在开发一个管理系统，涉及到文件的上下载问题，但是我发现Java中文或者说对编码比较敏感（以前用PHP没感觉到），然后我在写一个上下载功能时就发现问题比较明显，下载英文然后无空格的文件下载完全正常，但是当下载含有中文文件名的文件时发现下载的文件名并为更名，一开始我以为是Header 中 Content-Disposition 未设置正确导致的，但是后来发现并不是，于是网上搜索了相关资料，的确存在对中文文件名支持不友好的情况，然后整理了相关资料，引用到了自己的代码里，请看下面这段代码，就是正确解决了这个问题，特别请看注释。</p>
+<p>   if(file.exists()){</p>
+<pre><code>                // 设置文件流
+                httpServletResponse.setContentType(&quot;application/octet-stream&quot;);
+
+                // 为防止中文文件名的乱码显示
+                //filename =new String(filename.getBytes(&quot;ISO8859-1&quot;),&quot;UTF-8&quot;);
+
+                // 编码文件名
+                filename = URLEncoder.encode(filename,&quot;UTF-8&quot;);
+
+                // 编码后文件名中的空格被替换为“+”号，所以此处将替换编码后文件名中“+”号为UTF-8中空格的“%20”编码
+                filename = filename.replaceAll(&quot;\\\\+&quot;,&quot;%20&quot;);
+
+                // 设置下载文件内容长度
+                httpServletResponse.setContentLengthLong(file.length());
+
+                // 设置文件名
+                httpServletResponse.setHeader(&quot;Content-Disposition&quot;,  String.format(&quot;attachment; filename=\\&quot;%s\\&quot;&quot;,filename));
+
+                System.out.println(httpServletResponse.getHeader(&quot;Content-Disposition&quot;));
+
+                byte\[\] bytes = new byte\[1024\];
+
+                FileInputStream fileInputStream =null;
+                BufferedInputStream bufferedInputStream = null;
+                OutputStream outputStream = null;
+
+                try &#123;
+                    fileInputStream = new FileInputStream(file);
+                    bufferedInputStream = new BufferedInputStream(fileInputStream);
+                    outputStream = httpServletResponse.getOutputStream();
+
+                    Integer len = 0;
+                    while((len=fileInputStream.read(bytes))&gt;0)&#123;
+                        outputStream.write(bytes,0,len);
+                    &#125;
+
+                    // 成功下载文件
+
+
+                &#125; catch (Exception e) &#123;
+                    e.printStackTrace();
+                &#125;finally &#123;
+
+                    if(fileInputStream!=null)&#123;
+                        try &#123;
+                            fileInputStream.close();
+                        &#125; catch (IOException e) &#123;
+                            e.printStackTrace();
+                        &#125;
+                    &#125;
+
+                    if(bufferedInputStream!=null)&#123;
+                        try &#123;
+                            bufferedInputStream.close();
+                        &#125; catch (IOException e) &#123;
+                            e.printStackTrace();
+                        &#125;
+                    &#125;
+
+                    if(outputStream!=null)&#123;
+                        try &#123;
+                            outputStream.close();
+                        &#125; catch (IOException e) &#123;
+                            e.printStackTrace();
+                        &#125;
+                    &#125;
+                &#125;
+            &#125;</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/" data-id="ckfnr7rtd002e8g2pd5jx33sm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java2sql" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/16/java2sql/" class="article-date">
+  <time datetime="2017-07-16T06:07:12.000Z" itemprop="datePublished">2017-07-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/16/java2sql/">java2sql 让数据库构建更简单，java代码书写生成sql语句并迁移填充数据到数据库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java2sql 是一款基于java代码开发的数据库命令行构建工具。通过简单的命令生成和迁移填充数据库数据。 受 Laravel Artisan Migrate/Seeder 功能启发开发而成。 github开源地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/java2sql">https://github.com/godcheese/java2sql</a> 优点：</p>
+<ul>
+<li>利用 java 代码书写，java开发者的自然优越感</li>
+<li>用命令行操作，使用更加简单</li>
+<li>代码复用率更高</li>
+</ul>
+<p>基础组件有Migrate、Seeder等 安装： 使用</p>
+<p>java -jar java2sql migration:UsersMigration<br>java2sql migration:UsersMigration // 这句必需在系统设置环境变量后才能正常运行</p>
+<p>在 migrations 生成如下 *.java 文件，每个文件代表一个数据表迁移，每个文件都有一个public static void main(String[] args) 方法。 Template migration class java 代码实例：</p>
+<p>package com.gioov.java2sql;</p>
+<p>import com.gioov.java2sql.adapter.DatabaseAdapter;<br>import com.gioov.java2sql.adapter.FieldAdapter;<br>import com.gioov.java2sql.adapter.mysql.MySqlAdapter;<br>import com.gioov.java2sql.adapter.mysql.MysqlFieldAdapter;<br>import com.gioov.java2sql.adapter.mysql.MysqlTableAdapter;</p>
+<p>/**<br> * Created by godcheese on 2017/7/16.<br> */<br>public class TemplateMigration {</p>
+<pre><code>public static void main(String\[\] arg)&#123;
+
+    /\*\*
+     \*
+     \*  Init database adapter
+     \*  Init table adapter
+     \*  Init migration
+     \*
+      \*/
+
+    DatabaseAdapter database=new MySqlAdapter();
+    database.setName(&quot;test&quot;).setCharacterSet(&quot;utf8mb4&quot;).setCollate(&quot;utf8mb4&quot;);
+    MysqlTableAdapter table =new MysqlTableAdapter();
+    table.setName(&quot;NewTable&quot;);
+    Migration migration =new Migration(database,table);
+
+
+    /\*\*
+     \* Init field adapter and set properties
+     \* Field Name:id
+     \* Field Type:bigint
+     \* Field Length:20
+     \* Filed Primary Key:true
+     \* Filed Auto Increment:true
+     \* Field Null:false
+     \* Field Unsigned:false
+     \*
+     \*/
+    FieldAdapter idField=new MysqlFieldAdapter().setName(&quot;id&quot;).setType(&quot;bigint&quot;).setLength(20).setPrimaryKey(true).setAutoIncrement(true).setIsNull(false).setIsUnsigned(false);
+
+    /\*\*
+     \* Init field adapter and set properties
+     \* Field Name:name
+     \* Field Type:varchar
+     \* Field Length:50
+     \* Filed Null:false
+     \*
+     \*/
+
+    FieldAdapter nameField=new MysqlFieldAdapter().setName(&quot;name&quot;).setType(&quot;varchar&quot;).setLength(50).setIsNull(false);
+
+
+    // Add database table fields
+  String sql=  migration.addField(idField).addField(nameField).execute();
+
+  System.out.println(sql);
+
+    /\*\*
+     \*
+     \*
+     \* Result Sql: DROP TABLE IF EXISTS \`NewTable\`;
+     \* CREATE TABLE \`NewTable\` (  \`id\`  bigint(20) NOT NULL ,
+     \* \`name\`  varchar(50) CHARACTER SET utf8mb4  COLLATE utf8mb4  NOT NULL ,
+     \* PRIMARY KEY (\`id\`) )
+     \* ENGINE= InnoDB;
+     \*
+     \*/
+
+&#125;</code></pre>
+<p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/07/16/java2sql/" data-id="ckfnr7rta002b8g2p9v8if5av" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【java学习笔记】windows-7-安装maven（新手可看，大佬绕行）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" class="article-date">
+  <time datetime="2017-07-07T13:26:46.000Z" itemprop="datePublished">2017-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/">Windows 7 安装 Maven （新手可看，大佬绕行）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Maven 是 Java Web 开发中必备的软件之一，其主要功能就是管理开发中依赖库，类似于node的Node Package Manager 和 PHP 的 composer。好了废话不多说，现在就来仔细操作一遍安装过程，不了解的新手可以看看，大佬可以绕行，因为挺简单的。 Maven 下载地址：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> 安装前请检查自己的电脑系统是否安装了JDK 1.7及以上（<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index.html">http://www.oracle.com/technetwork/java/index.html</a>） 第一步：先下载 Maven Binary zip archive <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"></a> 第二步：解压 zip 文件 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"></a> 第三步：设置环境 开始菜单=&gt;计算机=&gt;属性=&gt;高级系统设置=&gt;环境变量=&gt;系统变量=&gt;新建名为 M2_HOME 的变量值为之前 Maven 解压文件的地址，如我的为</p>
+<p>F:\dev\apache-maven-3.5.0</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"></a> 然后在 Path 变量中加入</p>
+<p>;%M2_HOME%\bin</p>
+<p>如下图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"></a> 然后保存即可。 最后才 cmd 中运行</p>
+<p>mvn -version</p>
+<p>可正常输出 Maven 信息则代表安装并运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" data-id="ckfnr7ruw004s8g2p0f1lfkrw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git-push-自动化-bash-脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2017-06-29T05:45:57.000Z" itemprop="datePublished">2017-06-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/">几句代码实现的 git push 代码提交到远程自动化 bash 脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>自己的很多项目都已经用上了git项目版本管理工具，但是每次更改代码或者某些重要更新时会频繁将本地项目代码push到远程服务器master主分支上，每次都需要打开命令行工具敲入 ：</p>
+<p>git add .</p>
+<p>git commit -m xxx</p>
+<p>git push origin master</p>
+<p>这样重复的动作，总合起来其实也浪费时间，而且效率低，于是自己写了个简单的提交脚本来完成。</p>
+<p>#!/usr/bin/env bash</p>
+<h1 id="Linux-platform-bash-file"><a href="#Linux-platform-bash-file" class="headerlink" title="Linux platform bash file"></a>Linux platform bash file</h1><p>echo “正在添加文件…”<br>git add .<br>echo -n “正在提交备注…，请填写备注（可空）:”<br>read remarks<br>if [ ! -n “$remarks” ];then<br>    remarks=”常规提交”<br>fi<br>git commit -m “$remarks”<br>echo “正在开始提交代码…”<br>git push origin master<br>echo “代码提交成功，正在关闭…”</p>
+<p>Gist（或需<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/657">科学上网</a>）:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/2c4ab58fc03674fd0ce523701cd88075">https://gist.github.com/godcheese/2c4ab58fc03674fd0ce523701cd88075</a> 将其拷贝并命名成 git-push.sh ，然后打开终端或命令行工具，输入</p>
+<p>bash git-push.sh</p>
+<p>写入一段脚本就可实现，它会提示你本次提交是否写入备注信息，不写则默认备注为“常规提交”。<a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/git-push-bash-auto.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/git-push-bash-auto.png"></a> 更多git相关知识：<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/379">https://www.godcheese.com/index.php/379</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/" data-id="ckfnr7rsj001j8g2p6mbqh8wo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【laravel学习笔记】laravel-数据迁移migrate的常见问题（操作）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" class="article-date">
+  <time datetime="2017-06-27T12:20:42.000Z" itemprop="datePublished">2017-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/">Laravel 数据迁移 migrate 的常见问题（操作）总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br>`users` add constraint `users_role_id_foreign` foreign key (`role_id`) references `role<br>s` (`id`) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"></a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
+<p>composer dump-autoload</p>
+<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
+<p>// 外键约束<br>$table-&gt;foreign(‘role_id’)-&gt;references(‘id’)-&gt;on(‘roles’)-&gt;onUpdate(‘cascade’)-&gt;onDelete(‘cascade’);</p>
+<p>这句代码代码的欲添加外键约束的表是 users ，表字段是 role_id ；参考表是 roles ，参考字段是 roles 的 id 。</p>
+<h2 id="修改数据表默认存储引擎"><a href="#修改数据表默认存储引擎" class="headerlink" title="修改数据表默认存储引擎"></a>修改数据表默认存储引擎</h2><p>在 migration 文件内添加一句代码来指定数据库引擎（将存储引擎改成InnoDB，支持事务处理）：</p>
+<p>$table-&gt;engine=’InnoDB’;</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfnr7rv0004y8g2pd2448xl4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【laravel学习笔记】安装并使用-laravel-passport-来请求授权令牌（oaut" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" class="article-date">
+  <time datetime="2017-06-27T06:33:47.000Z" itemprop="datePublished">2017-06-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/">安装并使用 Laravel Passport 来请求授权令牌（OAuth2.0认证方式）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、-安装-Passport"><a href="#一、-安装-Passport" class="headerlink" title="一、 安装 Passport"></a>一、 安装 Passport</h2><p>使用 Composer 依赖包管理器安装 Passport</p>
+<p>composer require laravel/passport</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"></a> 接下来将</p>
+<p>Laravel\Passport\PassportServiceProvider::class,</p>
+<p>这句代码添加到 config/app.php 的 providers 数组， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"></a> 然后运行</p>
+<p>php artisan migrate</p>
+<p>来运行 Passport 自带的数据库迁移文件（用于自动创建 Passport 必需的客户端数据表和令牌数据表）, <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"></a> 然后运行</p>
+<p>php artisan passport:install</p>
+<p>来创建生成安全访问令牌时用到的加密密钥及私人访问和密码访问客户端。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"></a> 接下来再将</p>
+<p>Laravel\Passport\HasApiTokens</p>
+<p>Trait 添加到 App\User 模型中，这个 Trait 会给这个模型提供一些辅助函数，用于检查已认证用户的令牌和使用作用于。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"></a> 然后在 AuthServiceProvider 的 boot 方法中添加</p>
+<p>Passport::roues();</p>
+<p>来注册 Passport 在访问令牌、客户端、私人访问令牌的发放和吊销过程中一些必要路由。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"></a> 最后修改下配置文件 config/auth.php 中的 api driver 改为 passport，此项操作会将 API 请求时使用 Passport 的  TokenGuard 来处理授权保护。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"></a> 全部配置好后，我们来请求令牌，但是发现我们并没有创建任何用户，于是我们需要用到seed来预设填充数据。 运行</p>
+<p>php artisan make:seeder UsersTableSeeder</p>
+<p>创建一个 Seeder 然后打开 database\seeds 文件夹里已经新建了一个叫 UserTableSeeder.php 的文件，打开它然后在 run 方法内输入以下代码：</p>
+<p>DB::table(‘users’)-&gt;insert([<br>‘name’=&gt;’admin’,<br>‘email’=&gt;‘godcheese@godcheese.com’,<br>‘password’=&gt;bcrypt(‘admin’)<br>]);</p>
+<p>如图所示， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"></a> 然后运行</p>
+<p>php artisan db:seed –class=UsersTableSeeder</p>
+<p>来往 user 表中填充刚刚添加好的 seed 数据。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"></a> 接下来我们来写前端 JavaScript 请求获取用户访问令牌的例子。</p>
+<h2 id="二、JavaScript-请求授权令牌"><a href="#二、JavaScript-请求授权令牌" class="headerlink" title="二、JavaScript 请求授权令牌"></a>二、JavaScript 请求授权令牌</h2><p>这是前端 UI， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"></a> 然后些下JavaScript请求代码如下（ 此处仅供演示，暂时忽略安全问题。实际生产环境中不建议在前端显示 client_id 和 client_secret）：</p>
+<p>$(‘#loginButton’).click(function(event){<br>event.preventDefault();<br>$.ajax({<br>type:’post’,<br>url:’<a target="_blank" rel="noopener" href="http://wodedaxue-backend/oauth/token&#39;">http://wodedaxue-backend/oauth/token&#39;</a>,<br>dataType:’json’,<br>data:{<br>‘grant_type’:’password’,<br>‘client_id’:’2’,<br>‘client_secret’:’o6N7JzK2y3pbJiQmDcHaDhrpvPHBktnAlmmfEnS7’,<br>‘username’:$(‘#username’).val(),<br>‘password’:$(‘#password’).val(),<br>‘scope’:’’<br>},<br>success:function(data){<br>console.log(data);<br>alert(JSON.stringify(data));<br>},<br>error:function(err){<br>console.log(err);<br>alert(‘statusCode:’+err.status+’\n’+’statusText:’+err.statusText+’\n’+’description:\n’+JSON.stringify(err.responseJSON));<br>}<br>});<br>});</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"></a> 接下来再将以下代码写入 User 模型：</p>
+<p>/**<br>* 自定义用Passport授权登录：用户名+密码<br>* @param $username<br>* @return mixed<br>*/<br>public function findForPassport($username)<br>{<br>return self::where(‘name’, $username)-&gt;first();<br>}</p>
+<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"></a> 然后输入用户名 admin 和密码 admin ，点击登录按钮尝试登录：</p>
+<p>{<br>token_type:”Bearer”,<br>expires_in:31536000,<br>access_token:”eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNiOG…MFF7PYRIhXqCkZhZNfoLV1IYTzRmhO2oV41XR9wD7Zd3Oxl-g”,<br>refresh_token:”sabtS2jYhqAJtVxe868OpTTgBeYgpWgfttn5h97drUgBVLN7vL…ukx7yGfGhn5h+zCouLmuh0sdjYU+dgtRweXU3jiA0Fa6/c6k=”<br>}</p>
+<p>成功获取访问令牌（access_token）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"></a> 然后在每次访问其它 API 时候都带上此参数。 Laravel Passport 更多参考资料：<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/passport">https://laravel.com/docs/5.4/passport</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" data-id="ckfnr7rv200518g2p55lndmeq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-wampserver-运行库下载及安装说明" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/03/wampserver-%E8%BF%90%E8%A1%8C%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%8F%8A%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E/" class="article-date">
+  <time datetime="2017-06-03T08:51:34.000Z" itemprop="datePublished">2017-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a>►<a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/03/wampserver-%E8%BF%90%E8%A1%8C%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%8F%8A%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E/">WampServer 3.0 所需运行库下载及安装说明</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最新版本依赖编译于 VC9（Microsoft Visual C++ 2008）、VC10（Microsoft Visual C++ 2010），VC11（Microsoft Visual C++ 2012）以及 PHP7 依赖编译的 VC14（Microsoft Visual C++ 2015），所我们得确保所有 Microsoft Visual C++ 运行库都已安装至最新版。 <strong>请确认</strong> <strong>VC9**</strong>、**<strong>VC10**</strong>、**<strong>VC11**</strong>、**<strong>VC13**</strong>、**<strong>VC14</strong> <strong>发行版运行库都已更新至最新，即使你觉得已经是最新版了，也应该重新安装一次所有的运行库（以管理员身份运行），当出现信息“已安装”，修复等信息表明已经成功安装。</strong> <strong>VC9</strong> <strong>运行库</strong></p>
+<ul>
+<li>支持 Windows 2000 Service Pack 4/Windows Server 2003/ Windows Server 2008/ Windows Vista/Windows XP/Windows 7/Windows 8</li>
+<li>Microsoft Visual C++ 2008 SP1 Redistributable Package (x86)</li>
+<li>Microsoft Visual C++ 2008 SP1 Redistributable Package (x64)</li>
+</ul>
+<p><strong>VC10</strong> <strong>运行库</strong></p>
+<ul>
+<li>支持 Windows 7、Windows Server 2003、Windows Server 2008、Windows Server 2008 R2、Windows Vista、Windows XP</li>
+<li>Microsoft Visual C++ 2010 SP1 Redistributable Package (x86)</li>
+<li>Microsoft Visual C++ 2010 SP1 Redistributable Package (x64)</li>
+</ul>
+<p><strong>VC11 运行库</strong> 备注： VC11 不支持 Windows XP</p>
+<ul>
+<li>支持 Windows 7 Service Pack 1/Windows 8/Windows Server 2008 R2 SP1/Windows Server 2012/Windows Vista Service Pack 2</li>
+<li>Visual C++ Redistributable for Visual Studio 2012 Update 4 (x86)</li>
+<li>Visual C++ Redistributable for Visual Studio 2012 Update 4 (x64)</li>
+</ul>
+<p><strong>VC13 运行库</strong></p>
+<ul>
+<li>支持 Windows 7 Service Pack 1/Windows 8/Windows Server 2008 R2 SP1/Windows Server 2012/Windows Vista Service Pack 2</li>
+<li>Apache 2.4.17 和 PHP7 必装</li>
+<li>Visual C++ Redistributable for Visual Studio 2013 (x86)</li>
+<li>Visual C++ Redistributable for Visual Studio 2013 (x64)</li>
+</ul>
+<p><strong>VC14 运行库</strong></p>
+<ul>
+<li>支持 Windows 7 Service Pack 1/Windows 8/Windows Server 2008 R2 SP1/Windows Server 2012/Windows Vista Service Pack 2</li>
+<li>Apache 2.4.17 和 PHP7 必装</li>
+<li>Visual C++ Redistributable for Visual Studio 2015 Update 3 (x86)</li>
+<li>Visual C++ Redistributable for Visual Studio 2015 Update 3 (x64)</li>
+</ul>
+<p><strong>如果你是**</strong>64**<strong>位</strong> <strong>Windows</strong> <strong>系统，你必需安装所有**</strong>32**<strong>位和**</strong>64**<strong>位两个版本的运行库，即使你不用**</strong>64**<strong>位的</strong> <strong>Wampserver</strong> <strong>。</strong> <strong>请按照 VC9、VC10、VC11、VC13、VC14 排列顺序依次安装，务必在</strong> <strong>Wampserver</strong> <strong>之前安装这些运行库。</strong></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1WuZ0VdCGiM3odDJoZ1jxWg">https://pan.baidu.com/s/1WuZ0VdCGiM3odDJoZ1jxWg</a> 密码: 6qcf</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/06/03/wampserver-%E8%BF%90%E8%A1%8C%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%8F%8A%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E/" data-id="ckfnr7ruf00478g2pbahjev5n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Web服务器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-会声会影-最新版下载地址patch（仅供学习）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" class="article-date">
+  <time datetime="2017-05-16T08:02:36.000Z" itemprop="datePublished">2017-05-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a>►<a class="article-category-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/">会声会影 X10/X9/X8/X7/5 下载地址+Patch（仅供学习）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>软件名称</strong>：会声会影 X10/X9/X8/X7/5 <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/">http://www.huishenghuiying.com.cn/</a> <strong>授权方式</strong>：试用（可破解） <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows 10/8/7 会声会影中文版是一款强大的视频剪辑、制作软件，完美支持 Intel第 7 代核心处理技术，新增的轨道透明度、360°视频支持功能，让用户完成的效果更加多元。重新映射时间则更快更方便的实现速度和方向的控制。功能合并，操作简化，使得无论老幼都可以轻松驾驭这款视频制作软件。</p>
+<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"></a></p>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>会声会影X9 64位：<a target="_blank" rel="noopener" href="http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe">http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe</a> 会声会影X8 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe">http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe</a> 会声会影X7 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe">http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe</a> 更多下载：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/xiazai.html">http://www.huishenghuiying.com.cn/xiazai.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://godcheese.com/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" data-id="ckfnr7rvp00638g2p5mb855vu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">下一页 &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/">华为云和 Sonatype 联合发布中国官方 Maven 中央仓库镜像</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Java/MySQL/Maven/Tomcat 安装配置方式</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/">免费的 JetBrains 注册码获取方法及软件破解激活方式</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">注入 Filter 解决 Spring Boot 2.x 前后端分离开发 CORS 跨域问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/">Java 实现无限层级树形结构遍历部门</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%8B%E6%9C%BA%E6%95%B0%E7%A0%81/">手机数码</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/5G/" rel="tag">5G</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/" rel="tag">API</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP/" rel="tag">APP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Adobe/" rel="tag">Adobe</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/" rel="tag">Ajax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Alljoyn/" rel="tag">Alljoyn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/" rel="tag">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Arduino/" rel="tag">Arduino</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/" rel="tag">CSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CURL/" rel="tag">CURL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GiWebFrame/" rel="tag">GiWebFrame</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/" rel="tag">GitHub</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Chrome/" rel="tag">Google Chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IE/" rel="tag">IE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intellij-Idea/" rel="tag">Intellij Idea</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaFX/" rel="tag">JavaFX</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kindle/" rel="tag">Kindle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft/" rel="tag">Microsoft</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microsoft-Office/" rel="tag">Microsoft Office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mozilla-Firefox/" rel="tag">Mozilla Firefox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Opera/" rel="tag">Opera</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/P2P/" rel="tag">P2P</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PhpStorm/" rel="tag">PhpStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PyCharm/" rel="tag">PyCharm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Safari/" rel="tag">Safari</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ThinkPHP/" rel="tag">ThinkPHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/" rel="tag">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WIFI/" rel="tag">WIFI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebStorm/" rel="tag">WebStorm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Web服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-10/" rel="tag">Windows 10</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-7/" rel="tag">Windows 7</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-8-1/" rel="tag">Windows 8.1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows-XP/" rel="tag">Windows XP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jQuery/" rel="tag">jQuery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" rel="tag">个人电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E9%87%91%E8%9E%8D/" rel="tag">互联网金融</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BF%AE%E7%94%B5%E8%84%91/" rel="tag">修电脑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="tag">内网穿透</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" rel="tag">办公软件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" rel="tag">压缩解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" rel="tag">图片处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E6%A0%A1/" rel="tag">学校</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E7%94%9F/" rel="tag">学生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag">安卓模拟器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%BD%E5%B8%A6/" rel="tag">宽带</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%BF%E7%94%B5%E6%80%BB%E5%B1%80/" rel="tag">广电总局</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" rel="tag">微信营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BE%AE%E8%AF%BE/" rel="tag">微课</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%89%8B%E6%9C%BA/" rel="tag">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag">操作系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" rel="tag">数据恢复</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" rel="tag">无线营销</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" rel="tag">浙师大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag">游戏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="tag">版本控制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/" rel="tag">物联网</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%97%85%E6%AF%92/" rel="tag">病毒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6/" rel="tag">百度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%97%E5%8F%B7/" rel="tag">盗号</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E7%BD%91CNKI/" rel="tag">知网CNKI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%AD%E4%BF%A1/" rel="tag">短信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" rel="tag">移动设备安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="tag">程序员</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" rel="tag">系统美化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E4%BF%A1%E5%8A%9E/" rel="tag">网信办</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" rel="tag">网址导航</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%9B%98/" rel="tag">网盘</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" rel="tag">网站开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag">网站搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" rel="tag">网络安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" rel="tag">网页设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8B%B9%E6%9E%9C/" rel="tag">苹果</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A1%A8%E7%99%BD/" rel="tag">表白</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" rel="tag">视频编辑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BA%E6%96%87/" rel="tag">论文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" rel="tag">设计师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B0%B7%E6%AD%8C/" rel="tag">谷歌</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag">软件开发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" rel="tag">远程工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" rel="tag">阿里大鱼</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E6%95%88/" rel="tag">高效</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%BB%91%E5%AE%A2/" rel="tag">黑客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/5G/" style="font-size: 10px;">5G</a> <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/APP/" style="font-size: 10px;">APP</a> <a href="/tags/Adobe/" style="font-size: 12.86px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Alljoyn/" style="font-size: 10px;">Alljoyn</a> <a href="/tags/Android/" style="font-size: 17.14px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/Arduino/" style="font-size: 10px;">Arduino</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 11.43px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 11.43px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/IE/" style="font-size: 10px;">IE</a> <a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaFX/" style="font-size: 10px;">JavaFX</a> <a href="/tags/JavaScript/" style="font-size: 12.86px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 11.43px;">JetBrains</a> <a href="/tags/Kindle/" style="font-size: 10px;">Kindle</a> <a href="/tags/Laravel/" style="font-size: 12.86px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 11.43px;">Linux</a> <a href="/tags/Maven/" style="font-size: 14.29px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 14.29px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 12.86px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 11.43px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PhpStorm/" style="font-size: 10px;">PhpStorm</a> <a href="/tags/PyCharm/" style="font-size: 10px;">PyCharm</a> <a href="/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 17.14px;">Spring Boot</a> <a href="/tags/Spring-Security/" style="font-size: 10px;">Spring Security</a> <a href="/tags/ThinkPHP/" style="font-size: 10px;">ThinkPHP</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 11.43px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WIFI/" style="font-size: 10px;">WIFI</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">Web服务器</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a> <a href="/tags/Windows-10/" style="font-size: 11.43px;">Windows 10</a> <a href="/tags/Windows-7/" style="font-size: 14.29px;">Windows 7</a> <a href="/tags/Windows-8-1/" style="font-size: 10px;">Windows 8.1</a> <a href="/tags/Windows-XP/" style="font-size: 10px;">Windows XP</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 12.86px;">git</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/jQuery/" style="font-size: 11.43px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 11.43px;">一加</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E7%94%B5%E8%84%91/" style="font-size: 10px;">个人电脑</a> <a href="/tags/%E4%BA%92%E8%81%94%E7%BD%91%E9%87%91%E8%9E%8D/" style="font-size: 10px;">互联网金融</a> <a href="/tags/%E4%BF%AE%E7%94%B5%E8%84%91/" style="font-size: 10px;">修电脑</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 11.43px;">办公软件</a> <a href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" style="font-size: 10px;">压缩解压</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%AE%BD%E5%B8%A6/" style="font-size: 10px;">宽带</a> <a href="/tags/%E5%B9%BF%E7%94%B5%E6%80%BB%E5%B1%80/" style="font-size: 10px;">广电总局</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 11.43px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 11.43px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 11.43px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" style="font-size: 10px;">浏览器</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 11.43px;">版本控制</a> <a href="/tags/%E7%89%A9%E8%81%94%E7%BD%91/" style="font-size: 10px;">物联网</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 14.29px;">百度</a> <a href="/tags/%E7%9B%97%E5%8F%B7/" style="font-size: 10px;">盗号</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%9F%AD%E4%BF%A1/" style="font-size: 10px;">短信</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 14.29px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 11.43px;">系统美化</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a> <a href="/tags/%E7%BD%91%E4%BF%A1%E5%8A%9E/" style="font-size: 10px;">网信办</a> <a href="/tags/%E7%BD%91%E5%9D%80%E5%AF%BC%E8%88%AA/" style="font-size: 10px;">网址导航</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 11.43px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 15.71px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 12.86px;">网页设计</a> <a href="/tags/%E8%8B%B9%E6%9E%9C/" style="font-size: 10px;">苹果</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 11.43px;">虚拟机</a> <a href="/tags/%E8%A1%A8%E7%99%BD/" style="font-size: 10px;">表白</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 11.43px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E8%B0%B7%E6%AD%8C/" style="font-size: 10px;">谷歌</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">软件开发</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">远程工具</a> <a href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" style="font-size: 10px;">阿里大鱼</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 11.43px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a> <a href="/tags/%E9%BB%91%E5%AE%A2/" style="font-size: 10px;">黑客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 godcheese<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/link" class="mobile-nav-link">友链</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+    <a href="/message" class="mobile-nav-link">留言</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
