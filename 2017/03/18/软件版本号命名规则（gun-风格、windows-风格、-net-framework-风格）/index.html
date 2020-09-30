@@ -15,7 +15,7 @@
 <meta property="og:description" content="版本号用于区别软件不同的迭代版本，如何命名，应该说是每个公司都有自己的习惯。但是最好还是有一定的规律比较好，这样也能便于其他人了解你的软件更新历程，也不至于后期出现版本混乱、难以管理的尴尬。 列举一下比较普遍的命名方式1、GUN风格： 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Numb">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-03-18T08:19:48.000Z">
-<meta property="article:modified_time" content="2020-09-30T02:08:39.000Z">
+<meta property="article:modified_time" content="2020-09-30T03:55:59.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="项目管理">
 <meta name="twitter:card" content="summary">
@@ -103,58 +103,13 @@
 <h2 id="列举一下比较普遍的命名方式"><a href="#列举一下比较普遍的命名方式" class="headerlink" title="列举一下比较普遍的命名方式"></a>列举一下比较普遍的命名方式</h2><p><strong>1、GUN风格：</strong> 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]] 示例：1.2.1 、 2.0 、 5.0.0 build-13124 <strong>2、Windows风格：</strong> 主版本号.子版本号[.修正版本号[.编译版本号]] Major_Version_Number.Minor_Version_Number[.Revision_Number[.Build_Number]] 示例：1.2.1 、 2.0 <strong>3、.Net Framework风格：</strong> 主版本号.子版本号[.编译版本号[.修正版本号]] Major_Version_Number.Minor_Version_Number[.Build_Number[.Revision_Number]] 版本号由二到四部分组成：主版本号、次版本号、内部版本号、修订号。主版本号和次版本号是必选的，内部版本号和修订号是可选的。但是如果定义了修订号部分，则内部版本号就是必选的。所有定义的部分都必须是大于或者等于0的整数。 应根据约定使用下面这些部分： Major：具有相同名称但不同主版本号的程序集不可互换。它适用于对产品的大量重写，或战略性转变，且无法实现向后兼容性。 Minor：如果两个程序集的名称和主版本号相同，而次版本号不同，但照顾了向后兼容性。它适用于产品的修正版或完全向后兼容的新版本。 Build：内部版本号的不同，表示对相同源所做的重新编译。它适合于更改处理器、平台或编译器的情况。 Revision：名称、主版本号、次版本号都相同，但修订号不同的程序集应该是完全可以互换的。它适用于修复以前发布的程序集中的安全漏洞。 只有内部版本号或修订号不同的程序集后续版本，才可以被认为是先前版本的修补程序（Hotfix）更新。</p>
 <h2 id="版本号管理策略"><a href="#版本号管理策略" class="headerlink" title="版本号管理策略"></a>版本号管理策略</h2><p><strong>1、GUN风格：</strong> （1）产品初版时，版本号可以为0.1或0.1.0，也可以为1.0或1.0.0； （2）当产品进行了局部修改或bug修正时，主版本号和子版本号都不变，修正版本号+1； （3）当产品在原有的基础上增加了部分功能时，主版本号不变，子版本号+1，修正版本号复位为0； （4）当产品进行了重大修改或局部修正累计较多，而导致产品整体发生全局变化的，主版本号+1； （5）编译版本号，一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制； <strong>2、Windows风格：</strong> （1）产品初版时，版本号为1.0或1.0.0； （2）当产品进行了局部修改或bug修正时，主版本号和子版本号都不变，修正版本号+1； （3）当产品在原有的基础上增加了部分功能时，主版本号不变，子版本号+1，修正版本号复位为0； （4）当产品进行了重大修改或局部修正累计较多，而导致产品整体发生全局变化的，主版本号+1； （5）编译版本号，一般是编译器在编译过程中自动生成的，我们只定义其格式，并不进行人为控制； 一些付费软件在升级的时候也需要购买，那么这个所谓的升级，一般是指主版本号的变更。 另外，还可以在版本号后面加上Alpha、Beta、Gamma、Current、RC（Release Candidate）、Release、Stable等后缀，在这些后缀后面还可以加上1位数字的版本号。 <strong>3、Android版本风格：</strong> （1）主版本号变化 Android2.x：仅支持手机等小平移动设备； Android3.x：只支持平板和电视等大屏设备； Android4.x：合并了2.x和3.x，支持多种设备； （2）次版本号变化 功能增加； （3）维护版本号变化 修复漏洞、bug； （4）构建版本号变化 变化周期频繁且不固定，针对开发人员内部使用； 内部测试版本号使用建议： 主版本号.次（子）版本号.修正版本号.日期版本号_阶段版本号_（修改次数）_开发者缩写 例如：1.0.1.150325_beta_b3_ZainF</p>
 <h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p><strong>α（alpha）内部测试版</strong> α版表示该产品只是一个初步完成的产品，通常只用于在开发者内部交流，也有很少一部分发布给专业的测试人员，一般情况下，该版本会存在较多bug，不适合普通用户使用。 <strong>β（Beta）外部测试版</strong> 该版本相对于α版已经有了很大改进，消除了严重的错误，但可能依然存在一些缺陷，需要经过大规模的发布测试进一步发现、消除错误。这一版本通常由软件公司免费发布，通过一些专业的爱好者测试，将结果反馈给开发人员，开发者们再进行有针对性的修改，该版本一般不适合普通用户大规模安装使用。 <strong>γ（Gamma）</strong> 表示该版本已经相当成熟，与即将发行的正式版相差无几。 <strong>trial（试用版）</strong> 改类产品通常都有时间限制，或者在功能上相对于正式版做了一些限制。在试用版中，用户可以通过注册或购买来获得正式的产品。 unregistered（未注册版） 与试用版类似，只是未注册版通常没有使用时间限制，但在功能上同样做了一定的限制。也可能无休止的弹出注册提示。 <strong>demo（演示版）</strong> 在非正式版本的产品中，此版本的知名度最大。demo版仅仅集成了正式版中的几个功能，也不能通过升级或注册成为正式版。 不同类型的正式版软件通常也有区别： <strong>release（最终释放版）</strong> 意味着在出了一系列测试版之后，终归会有一个正式版，该版本有时也会被称作：标准版。一般情况下，release不会以单词的形式出现在软件封面上，而是以符号（r）替代。例如：Windows NT（r）4.0、ms-dos（r）6.22等。 <strong>registered（注册版）</strong> 相对于unregistered（非注册版）。 <strong>standard（标准版）</strong> 无论什么产品，标准版一定存在，而且最常见。标准版中通常包含了该软件的基本组件以及一些常用功能，可以满足用户的一般需求，其价格相对高级版本也更加平易近人。 <strong>deluxe（豪华版）</strong> 通常相对于标准版而言，主要区别是多了几项功能，价格也相对较高。 <strong>reference</strong> 该版本型号常见于百科全书中，比较有名的是微软的Encarta系列。reference是最高级别，其中包含主题、图像、影片剪辑等。相对于standard和deluxe版均有大幅增加，容量由一张光盘猛增至三张光盘，并且加入了很强的交互功能。同时价格不菲，适合发烧友用户收藏。 <strong>professional（专业版）</strong> 专业版是针对某些特定的开发工具软件而言的。专业版中有许多内容是标准版所没有的，这些内容对于一个专业的软件开发人员来说是极为重要的。 <strong>enterprise（企业版）</strong> 企业版是开发类软件中的极品。可以通过它毫无障碍的开发任何级别的应用软件。而这一版本的价格也是一般普通用户所无法承受的。 除了以上这些，还有一些专有版本名称： <strong>update（升级版）</strong> 升级版的软件不能独立使用，该版本的软件会在安装过程中搜索原有的正式版，如果不存在，则会拒绝下一步。 <strong>oem</strong> oem版通常是捆绑在硬件中而不能单独销售的版本。将自己的产品交给别的公司卖，保留自己的著作权，双方互惠互利。 <strong>单机/网络版</strong> 网络版在结构、功能上远比单机版要复杂，且建个也要更加昂贵。 <strong>普及版</strong> 有时也成为共享版。价格便宜，甚至免费、功能单一、针对性强（可能用户占领市场或者打击盗版）。</p>
-<h2 id="更多版本名称"><a href="#更多版本名称" class="headerlink" title="更多版本名称"></a>更多版本名称</h2><p>英文名称</p>
-<p>中文释义</p>
-<p>Enhance</p>
-<p>增强版或者加强版，属于正式版</p>
-<p>Free</p>
-<p>自由</p>
-<p>Full version</p>
-<p>完全版，属于正式版</p>
-<p>Shareware</p>
-<p>共享版</p>
-<p>Release</p>
-<p>发行版，有时间限制</p>
-<p>Upgrade</p>
-<p>升级版</p>
-<p>Retail</p>
-<p>零售版</p>
-<p>Cardware</p>
-<p>属共享软件的一种，只要给作者回复一封电邮或明信片即可。（有的作者并由此提供注册码等），目前这种形式已不多见。</p>
-<p>Plus</p>
-<p>属增强版，不过这种大部分是在程序界面及多媒体功能上增强。</p>
-<p>Preview</p>
-<p>预览版</p>
-<p>Corporation &amp; Enterprise</p>
-<p>企业版</p>
-<p>Standard</p>
-<p>标准版</p>
-<p>Mini</p>
-<p>迷你版也叫精简版只有最基本的功能</p>
-<p>Premium</p>
-<p>贵价版</p>
-<p>Professional</p>
-<p>专业版</p>
-<p>Express</p>
-<p>特别版</p>
-<p>Deluxe</p>
-<p>豪华版</p>
-<p>Regged</p>
-<p>已注册版</p>
-<p>CN</p>
-<p>简体中文版</p>
-<p>CHT</p>
-<p>繁体中文版</p>
-<p>EN</p>
-<p>英文版</p>
-<p>Multilanguage</p>
-<p>多语言版</p>
+<h2 id="更多版本名称"><a href="#更多版本名称" class="headerlink" title="更多版本名称"></a>更多版本名称</h2><p>| :– | :– |<br>| 英文名称 | 中文释义 |<br>| Enhance | 增强版或者加强版，属于正式版 |<br>| Free | 自由 |<br>| Full version | 完全版，属于正式版 |<br>| Shareware | 共享版 |<br>| Release | 发行版，有时间限制 |<br>| Upgrade | 升级版 |<br>| Retail | 零售版 |<br>| Cardware | 属共享软件的一种，只要给作者回复一封电邮或明信片即可。（有的作者并由此提供注册码等），目前这种形式已不多见。 |<br>| Plus | 属增强版，不过这种大部分是在程序界面及多媒体功能上增强。 |<br>| Preview | 预览版 |<br>| Corporation &amp; Enterprise | 企业版 |<br>| Standard | 标准版 |<br>| Mini | 迷你版也叫精简版只有最基本的功能 |<br>| Premium | 贵价版 |<br>| Professional | 专业版 |<br>| Express | 特别版 |<br>| Deluxe | 豪华版 |<br>| Regged | 已注册版 |<br>| CN | 简体中文版 |<br>| CHT | 繁体中文版 |<br>| EN | 英文版 |<br>| Multilanguage | 多语言版 |</p>
 <p>整理转自：<a target="_blank" rel="noopener" href="http://www.newpm.net/pm/77">http://www.newpm.net/pm/77</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/" data-id="ckfoun1n5007dkf2pabt41qn9" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/03/18/%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%B7%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88gun-%E9%A3%8E%E6%A0%BC%E3%80%81windows-%E9%A3%8E%E6%A0%BC%E3%80%81-net-framework-%E9%A3%8E%E6%A0%BC%EF%BC%89/" data-id="ckfouxwaa006o5v2p3sbcgnkm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" rel="tag">项目管理</a></li></ul>
