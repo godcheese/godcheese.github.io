@@ -14,20 +14,20 @@
 <meta property="og:site_name" content="天堂芝士的个人博客">
 <meta property="og:description" content="之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据：  这是代码：  这是显示结果：  后来查看了下EasyUI的官方文档（https:&#x2F;&#x2F;www.jeasyui.com&#x2F;documentation&#x2F;index.php），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-1.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-2.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-3.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-4.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-5.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-6.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-7.png">
+<meta property="og:image" content="http://godcheese.com/images/easyui-textField-8.png">
 <meta property="article:published_time" content="2017-08-31T21:57:07.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:39.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="EasyUI">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png">
+<meta name="twitter:image" content="http://godcheese.com/images/easyui-textField-1.png">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -108,14 +108,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"></a> 这是代码： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"></a> 这是显示结果： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"></a> 后来查看了下EasyUI的官方文档（<a target="_blank" rel="noopener" href="https://www.jeasyui.com/documentation/index.php">https://www.jeasyui.com/documentation/index.php</a>），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因为textField的作用是在选择某项后才显示的。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"></a> 那么肿么解决name的显示呢？ 我在文档中发现combotree依赖于combo和tree两个组件，那我就找找这两个组件下有什么解决思路，于是我发现tree下有个方法loadFilter，解决思路有了。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"></a> 代码如下：</p>
+        <p>之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据： <a href="/images/easyui-textField-1.png"><img src="/images/easyui-textField-1.png"></a> 这是代码： <a href="/images/easyui-textField-2.png"><img src="/images/easyui-textField-2.png"></a> 这是显示结果： <a href="/images/easyui-textField-3.png"><img src="/images/easyui-textField-3.png"></a> 后来查看了下EasyUI的官方文档（<a target="_blank" rel="noopener" href="https://www.jeasyui.com/documentation/index.php">https://www.jeasyui.com/documentation/index.php</a>），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因为textField的作用是在选择某项后才显示的。 <a href="/images/easyui-textField-4.png"><img src="/images/easyui-textField-4.png"></a> 那么肿么解决name的显示呢？ 我在文档中发现combotree依赖于combo和tree两个组件，那我就找找这两个组件下有什么解决思路，于是我发现tree下有个方法loadFilter，解决思路有了。 <a href="/images/easyui-textField-5.png"><img src="/images/easyui-textField-5.png"></a> <a href="/images/easyui-textField-6.png"><img src="/images/easyui-textField-6.png"></a> <a href="/images/easyui-textField-7.png"><img src="/images/easyui-textField-7.png"></a> 代码如下：</p>
 <p>loadFilter: function (items) {<br>  if(items!==undefined){<br>    ret = [];<br>    console.log(items);<br>    $.each(items, function (i, e) {<br>      e.text=e.name;<br>      ret.push(e);<br>    });<br>  }<br>  return ret;<br>}</p>
-<p>最终解决了问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"></a></p>
+<p>最终解决了问题： <a href="/images/easyui-textField-8.png"><img src="/images/easyui-textField-8.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ckfopr4s30017gu2p9gjebgsm" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ckfor4ksh001ctn2p185g4k8v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li></ul>

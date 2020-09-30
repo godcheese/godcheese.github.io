@@ -7,15 +7,15 @@
   
   <title>SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件 | 天堂芝士的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="开源地址：https:&#x2F;&#x2F;github.com&#x2F;godcheese&#x2F;com.godcheese.common   项目目录 D:\demo D:\demo\tables 目录下的api_table.sql文件 目前仅支持 MySQL数据库，Oracle 之后再适配  SQL 文件：api_table.sqlDROP TABLEIF EXISTS &#96;api&#96;; CREATE TABLE &#96;api&#96;">
+  <meta name="description" content="开源地址：https:&#x2F;&#x2F;github.com&#x2F;godcheese&#x2F;com.godcheese.common   项目目录D:\demo D:\demo\tables目录下的api_table.sql文件 目前仅支持 MySQL 数据库，Oracle 之后再适配  SQL 文件：api_table.sql1234567891011121314151617181920212223DROP TABL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件">
 <meta property="og:url" content="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="天堂芝士的个人博客">
-<meta property="og:description" content="开源地址：https:&#x2F;&#x2F;github.com&#x2F;godcheese&#x2F;com.godcheese.common   项目目录 D:\demo D:\demo\tables 目录下的api_table.sql文件 目前仅支持 MySQL数据库，Oracle 之后再适配  SQL 文件：api_table.sqlDROP TABLEIF EXISTS &#96;api&#96;; CREATE TABLE &#96;api&#96;">
+<meta property="og:description" content="开源地址：https:&#x2F;&#x2F;github.com&#x2F;godcheese&#x2F;com.godcheese.common   项目目录D:\demo D:\demo\tables目录下的api_table.sql文件 目前仅支持 MySQL 数据库，Oracle 之后再适配  SQL 文件：api_table.sql1234567891011121314151617181920212223DROP TABL">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-04-23T08:14:11.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:38.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="MySQL">
@@ -106,199 +106,19 @@
 <p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/com.godcheese.common">https://github.com/godcheese/com.godcheese.common</a></p>
 </blockquote>
 <ul>
-<li>项目目录 <code>D:\demo</code></li>
-<li><code>D:\demo\tables</code> 目录下的<code>api_table.sql</code>文件</li>
-<li>目前仅支持 MySQL数据库，Oracle 之后再适配</li>
+<li>项目目录<code>D:\demo</code></li>
+<li><code>D:\demo\tables</code>目录下的<code>api_table.sql</code>文件</li>
+<li>目前仅支持 MySQL 数据库，Oracle 之后再适配</li>
 </ul>
-<h4 id="SQL-文件：api-table-sql"><a href="#SQL-文件：api-table-sql" class="headerlink" title="SQL 文件：api_table.sql"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/com.godcheese.common/blob/master/docs/DatabaseUtil.md#sql-%E6%96%87%E4%BB%B6api_tablesql"></a>SQL 文件：api_table.sql</h4><p>DROP TABLE<br>IF EXISTS `api`;</p>
-<p>CREATE TABLE `api` (<br>  `id`        BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT ‘id’,<br>  `name`      VARCHAR(255) NOT NULL COMMENT ‘api 名称’,<br>  `uri` TEXT COMMENT ‘请求地址’,<br>  `api_category_id` BIGINT(20) UNSIGNED NOT NULL COMMENT ‘api 目录 id’,<br>  `sort`      BIGINT(20) UNSIGNED DEFAULT 0 COMMENT ‘排序’,<br>  `remark`    VARCHAR(255) DEFAULT ‘’ COMMENT ‘备注’,<br>  `authority` VARCHAR(255) NOT NULL COMMENT ‘权限（API:UUID）’,<br>  `gmt_create` DATETIME DEFAULT NOW() COMMENT ‘创建时间’,<br>  `gmt_modified` DATETIME DEFAULT NOW() COMMENT ‘更新时间’,<br>  PRIMARY KEY `pk_id` (`id`),<br>  UNIQUE KEY `uk_authority` (`authority`)<br>)<br>  ENGINE = INNODB<br>  DEFAULT CHARACTER<br>  SET = utf8mb4<br>  COLLATE = utf8mb4_general_ci<br>  AUTO_INCREMENT = 1<br>  ROW_FORMAT = DYNAMIC<br>  COMMENT = ‘api 表’;</p>
-<h4 id="批量生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#批量生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><p>// 批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件<br>        SqlGenerateProperties properties = new SqlGenerateProperties();<br>        properties.setMyBatisMapperPackage(“com.gioov.demo.mapper”);<br>        properties.setEntityPackage(“com.gioov.demo.entity”);<br>        properties.setSqlDirectory(“D:\\tables”);<br>        properties.setEntityDirectory(“D:\\demo\\src\\main\\java\\com\\gioov\\demo\\entity”);<br>        properties.setMyBatisMapperDirectory(“D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper”);<br>        properties.setMyBatisMapperXmlDirectory(“D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper”);</p>
-<pre><code>    DatabaseUtil.generateEntity( properties);
-    DatabaseUtil.generateMyBatisMapperXml( properties);
-    DatabaseUtil.generateMyBatisMapper(properties);</code></pre>
-<h4 id="单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><p> // 指定单个 SQL 文件生成对应的实体类、MyBatis Mapper、MyBatis Mapper XML 文件<br>        SqlGenerateProperties properties = new SqlGenerateProperties();<br>        properties.setMyBatisMapperPackage(“com.gioov.demo.mapper”);<br>        properties.setEntityPackage(“com.gioov.demo.entity”);</p>
-<pre><code>    DatabaseUtil.generateEntity(&quot;D:\\\\demo\\\\tables\\\\api\_table.sql&quot;,&quot;D:\\\\demo\\\\src\\\\main\\\\java\\\\com\\\\gioov\\\\demo\\\\entity&quot;, properties);
-    DatabaseUtil.generateMyBatisMapper(&quot;D:\\\\demo\\\\tables\\\\api\_table.sql&quot;,&quot;D:\\\\demo\\\\src\\\\main\\\\java\\\\com\\\\gioov\\\\demo\\\\mapper&quot;, properties);
-    DatabaseUtil.generateMyBatisMapperXml(&quot;D:\\\\demo\\\\tables\\\\api\_table.sql&quot;,&quot;D:\\\\demo\\\\src\\\\main\\\\java\\\\com\\\\gioov\\\\demo\\\\mapper&quot;, properties);</code></pre>
-<h4 id="生成的实体类文件：ApiEntity-java"><a href="#生成的实体类文件：ApiEntity-java" class="headerlink" title="生成的实体类文件：ApiEntity.java"></a>生成的实体类文件：ApiEntity.java</h4><p>package com.gioov.demo.entity;</p>
-<p>import java.io.Serializable;<br>import java.lang.Long;<br>import java.lang.String;<br>import java.util.Date;</p>
-<p>/**<br> * @author godcheese [<a href="mailto:&#103;&#x6f;&#x64;&#99;&#x68;&#x65;&#x65;&#115;&#101;&#64;&#111;&#117;&#116;&#x6c;&#x6f;&#111;&#x6b;&#x2e;&#x63;&#111;&#109;">&#103;&#x6f;&#x64;&#99;&#x68;&#x65;&#x65;&#115;&#101;&#64;&#111;&#117;&#116;&#x6c;&#x6f;&#111;&#x6b;&#x2e;&#x63;&#111;&#109;</a>]<br> * @date 2018/4/23 15:58<br> */<br>public class ApiEntity implements Serializable {</p>
-<pre><code>/\*\*
- \* id
- \*/
-private Long id;
-
-/\*\*
- \* api 名称
- \*/
-private String name;
-
-/\*\*
- \* 请求地址
- \*/
-private String uri;
-
-/\*\*
- \* api 目录 id
- \*/
-private Long apiCategoryId;
-
-/\*\*
- \* 排序
- \*/
-private Long sort;
-
-/\*\*
- \* 备注
- \*/
-private String remark;
-
-/\*\*
- \* 权限（API:UUID）
- \*/
-private String authority;
-
-/\*\*
- \* 创建时间
- \*/
-private Date gmtCreate;
-
-/\*\*
- \* 更新时间
- \*/
-private Date gmtModified;
-
-
-public Long getId() &#123;
-    return id;
-&#125;
-
-public void setId(Long id) &#123;
-    this.id = id;
-&#125;
-
-public String getName() &#123;
-    return name;
-&#125;
-
-public void setName(String name) &#123;
-    this.name = name;
-&#125;
-
-public String getUri() &#123;
-    return uri;
-&#125;
-
-public void setUri(String uri) &#123;
-    this.uri = uri;
-&#125;
-
-public Long getApiCategoryId() &#123;
-    return apiCategoryId;
-&#125;
-
-public void setApiCategoryId(Long apiCategoryId) &#123;
-    this.apiCategoryId = apiCategoryId;
-&#125;
-
-public Long getSort() &#123;
-    return sort;
-&#125;
-
-public void setSort(Long sort) &#123;
-    this.sort = sort;
-&#125;
-
-public String getRemark() &#123;
-    return remark;
-&#125;
-
-public void setRemark(String remark) &#123;
-    this.remark = remark;
-&#125;
-
-public String getAuthority() &#123;
-    return authority;
-&#125;
-
-public void setAuthority(String authority) &#123;
-    this.authority = authority;
-&#125;
-
-public Date getGmtCreate() &#123;
-    return gmtCreate;
-&#125;
-
-public void setGmtCreate(Date gmtCreate) &#123;
-    this.gmtCreate = gmtCreate;
-&#125;
-
-public Date getGmtModified() &#123;
-    return gmtModified;
-&#125;
-
-public void setGmtModified(Date gmtModified) &#123;
-    this.gmtModified = gmtModified;
-&#125;</code></pre>
-<p>}</p>
-<h4 id="生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml"><a href="#生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml" class="headerlink" title="生成的 MyBatis Mapper XML 文件：ApiMapper.xml"></a>生成的 MyBatis Mapper XML 文件：ApiMapper.xml</h4><?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gioov.demo.mapper.ApiMapper">
-    <resultMap id="BaseResultMap" type="com.gioov.demo.entity.ApiEntity">
-        <id column="id" property="id" jdbcType="BIGINT"/> <!-- id -->
-        <result column="name" property="name" jdbcType="VARCHAR"/> <!-- api 名称 -->
-        <result column="uri" property="uri" jdbcType="null"/> <!-- 请求地址 -->
-        <result column="api\_category\_id" property="apiCategoryId" jdbcType="BIGINT"/> <!-- api 目录 id -->
-        <result column="sort" property="sort" jdbcType="BIGINT"/> <!-- 排序 -->
-        <result column="remark" property="remark" jdbcType="VARCHAR"/> <!-- 备注 -->
-        <result column="authority" property="authority" jdbcType="VARCHAR"/> <!-- 权限（API:UUID） -->
-        <result column="gmt\_create" property="gmtCreate" jdbcType="DATE"/> <!-- 创建时间 -->
-        <result column="gmt\_modified" property="gmtModified" jdbcType="DATE"/> <!-- 更新时间 -->
-    </resultMap>
-
-<pre><code>&lt;sql id=&quot;TableName&quot;&gt;
-    \`api\`
-&lt;/sql&gt;
-
-&lt;sql id=&quot;BaseColumnList&quot;&gt;
-    \`id\`, \`name\`, \`uri\`, \`api\_category\_id\`, \`sort\`, \`remark\`, \`authority\`, \`gmt\_create\`, \`gmt\_modified\`
-&lt;/sql&gt;
-
-&lt;insert id=&quot;insertOne&quot; useGeneratedKeys=&quot;true&quot; keyProperty=&quot;id&quot; parameterType=&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;
-    INSERT INTO
-    &lt;include refid=&quot;TableName&quot;/&gt;
-    (\`id\`, \`name\`, \`uri\`, \`api\_category\_id\`, \`sort\`, \`remark\`, \`authority\`, \`gmt\_create\`, \`gmt\_modified\`)
-    VALUES (#&#123;id&#125;, #&#123;name&#125;, #&#123;uri&#125;, #&#123;apiCategoryId&#125;, #&#123;sort&#125;, #&#123;remark&#125;, #&#123;authority&#125;, #&#123;gmtCreate&#125;, #&#123;gmtModified&#125;)    &lt;/insert&gt;
-
-&lt;update id=&quot;updateOne&quot; keyProperty=&quot;id&quot; parameterType=&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;
-    UPDATE
-    &lt;include refid=&quot;TableName&quot;/&gt;
-    SET \`name\` = #&#123;name&#125;, \`uri\` = #&#123;uri&#125;, \`api\_category\_id\` = #&#123;apiCategoryId&#125;, \`sort\` = #&#123;sort&#125;, \`remark\` = #&#123;remark&#125;, \`authority\` = #&#123;authority&#125;, \`gmt\_create\` = #&#123;gmtCreate&#125;, \`gmt\_modified\` = #&#123;gmtModified&#125;
-    WHERE \`id\`= #&#123;id&#125;
-&lt;/update&gt;
-
-&lt;delete id=&quot;deleteOne&quot; parameterType=&quot;long&quot;&gt;
-    DELETE FROM
-    &lt;include refid=&quot;TableName&quot;/&gt;
-    WHERE id = #&#123;id&#125;
-&lt;/delete&gt;
-
-&lt;select id=&quot;getOne&quot; resultMap=&quot;BaseResultMap&quot;&gt;
-    SELECT
-    &lt;include refid=&quot;BaseColumnList&quot;/&gt;
-    FROM &lt;include refid=&quot;TableName&quot;/&gt; WHERE id = #&#123;id&#125;
-&lt;/select&gt;
-
-&lt;select id=&quot;listAll&quot; resultMap=&quot;BaseResultMap&quot;&gt;
-    SELECT
-    &lt;include refid=&quot;BaseColumnList&quot;/&gt;
-    FROM &lt;include refid=&quot;TableName&quot;/&gt;
-&lt;/select&gt;</code></pre>
-</mapper>
+<h4 id="SQL-文件：api-table-sql"><a href="#SQL-文件：api-table-sql" class="headerlink" title="SQL 文件：api_table.sql"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/com.godcheese.common/blob/master/docs/DatabaseUtil.md#sql-%E6%96%87%E4%BB%B6api_tablesql"></a>SQL 文件：api_table.sql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE</span><br><span class="line">IF EXISTS &#96;api&#96;;</span><br><span class="line"></span><br><span class="line">CREATE TABLE &#96;api&#96; (</span><br><span class="line">  &#96;id&#96;        BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT &#39;id&#39;,</span><br><span class="line">  &#96;name&#96;      VARCHAR(255) NOT NULL COMMENT &#39;api 名称&#39;,</span><br><span class="line">  &#96;uri&#96; TEXT COMMENT &#39;请求地址&#39;,</span><br><span class="line">  &#96;api_category_id&#96; BIGINT(20) UNSIGNED NOT NULL COMMENT &#39;api 目录 id&#39;,</span><br><span class="line">  &#96;sort&#96;      BIGINT(20) UNSIGNED DEFAULT 0 COMMENT &#39;排序&#39;,</span><br><span class="line">  &#96;remark&#96;    VARCHAR(255) DEFAULT &#39;&#39; COMMENT &#39;备注&#39;,</span><br><span class="line">  &#96;authority&#96; VARCHAR(255) NOT NULL COMMENT &#39;权限（API:UUID）&#39;,</span><br><span class="line">  &#96;gmt_create&#96; DATETIME DEFAULT NOW() COMMENT &#39;创建时间&#39;,</span><br><span class="line">  &#96;gmt_modified&#96; DATETIME DEFAULT NOW() COMMENT &#39;更新时间&#39;,</span><br><span class="line">  PRIMARY KEY &#96;pk_id&#96; (&#96;id&#96;),</span><br><span class="line">  UNIQUE KEY &#96;uk_authority&#96; (&#96;authority&#96;)</span><br><span class="line">)</span><br><span class="line">  ENGINE &#x3D; INNODB</span><br><span class="line">  DEFAULT CHARACTER</span><br><span class="line">  SET &#x3D; utf8mb4</span><br><span class="line">  COLLATE &#x3D; utf8mb4_general_ci</span><br><span class="line">  AUTO_INCREMENT &#x3D; 1</span><br><span class="line">  ROW_FORMAT &#x3D; DYNAMIC</span><br><span class="line">  COMMENT &#x3D; &#39;api 表&#39;;</span><br></pre></td></tr></table></figure>
+<h4 id="批量生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#批量生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</span><br><span class="line">        SqlGenerateProperties properties &#x3D; new SqlGenerateProperties();</span><br><span class="line">        properties.setMyBatisMapperPackage(&quot;com.gioov.demo.mapper&quot;);</span><br><span class="line">        properties.setEntityPackage(&quot;com.gioov.demo.entity&quot;);</span><br><span class="line">        properties.setSqlDirectory(&quot;D:\\tables&quot;);</span><br><span class="line">        properties.setEntityDirectory(&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\entity&quot;);</span><br><span class="line">        properties.setMyBatisMapperDirectory(&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper&quot;);</span><br><span class="line">        properties.setMyBatisMapperXmlDirectory(&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper&quot;);</span><br><span class="line"></span><br><span class="line">        DatabaseUtil.generateEntity( properties);</span><br><span class="line">        DatabaseUtil.generateMyBatisMapperXml( properties);</span><br><span class="line">        DatabaseUtil.generateMyBatisMapper(properties);</span><br></pre></td></tr></table></figure>
+<h4 id="单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 指定单个 SQL 文件生成对应的实体类、MyBatis Mapper、MyBatis Mapper XML 文件</span><br><span class="line">       SqlGenerateProperties properties &#x3D; new SqlGenerateProperties();</span><br><span class="line">       properties.setMyBatisMapperPackage(&quot;com.gioov.demo.mapper&quot;);</span><br><span class="line">       properties.setEntityPackage(&quot;com.gioov.demo.entity&quot;);</span><br><span class="line"></span><br><span class="line">       DatabaseUtil.generateEntity(&quot;D:\\demo\\tables\\api_table.sql&quot;,&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\entity&quot;, properties);</span><br><span class="line">       DatabaseUtil.generateMyBatisMapper(&quot;D:\\demo\\tables\\api_table.sql&quot;,&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper&quot;, properties);</span><br><span class="line">       DatabaseUtil.generateMyBatisMapperXml(&quot;D:\\demo\\tables\\api_table.sql&quot;,&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper&quot;, properties);</span><br></pre></td></tr></table></figure>
+<h4 id="生成的实体类文件：ApiEntity-java"><a href="#生成的实体类文件：ApiEntity-java" class="headerlink" title="生成的实体类文件：ApiEntity.java"></a>生成的实体类文件：ApiEntity.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.demo.entity;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line">import java.lang.Long;</span><br><span class="line">import java.lang.String;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese [godcheese@outlook.com]</span><br><span class="line"> * @date 2018&#x2F;4&#x2F;23 15:58</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class ApiEntity implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * api 名称</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 请求地址</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String uri;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * api 目录 id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long apiCategoryId;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 排序</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long sort;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 备注</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String remark;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 权限（API:UUID）</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String authority;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 创建时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtCreate;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 更新时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtModified;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getUri() &#123;</span><br><span class="line">        return uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUri(String uri) &#123;</span><br><span class="line">        this.uri &#x3D; uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getApiCategoryId() &#123;</span><br><span class="line">        return apiCategoryId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setApiCategoryId(Long apiCategoryId) &#123;</span><br><span class="line">        this.apiCategoryId &#x3D; apiCategoryId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getSort() &#123;</span><br><span class="line">        return sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSort(Long sort) &#123;</span><br><span class="line">        this.sort &#x3D; sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getRemark() &#123;</span><br><span class="line">        return remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRemark(String remark) &#123;</span><br><span class="line">        this.remark &#x3D; remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getAuthority() &#123;</span><br><span class="line">        return authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAuthority(String authority) &#123;</span><br><span class="line">        this.authority &#x3D; authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtCreate() &#123;</span><br><span class="line">        return gmtCreate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtCreate(Date gmtCreate) &#123;</span><br><span class="line">        this.gmtCreate &#x3D; gmtCreate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtModified() &#123;</span><br><span class="line">        return gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtModified(Date gmtModified) &#123;</span><br><span class="line">        this.gmtModified &#x3D; gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml"><a href="#生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml" class="headerlink" title="生成的 MyBatis Mapper XML 文件：ApiMapper.xml"></a>生成的 MyBatis Mapper XML 文件：ApiMapper.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace&#x3D;&quot;com.gioov.demo.mapper.ApiMapper&quot;&gt;</span><br><span class="line">    &lt;resultMap id&#x3D;&quot;BaseResultMap&quot; type&#x3D;&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;</span><br><span class="line">        &lt;id column&#x3D;&quot;id&quot; property&#x3D;&quot;id&quot; jdbcType&#x3D;&quot;BIGINT&quot;&#x2F;&gt; &lt;!-- id --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;name&quot; property&#x3D;&quot;name&quot; jdbcType&#x3D;&quot;VARCHAR&quot;&#x2F;&gt; &lt;!-- api 名称 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;uri&quot; property&#x3D;&quot;uri&quot; jdbcType&#x3D;&quot;null&quot;&#x2F;&gt; &lt;!-- 请求地址 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;api_category_id&quot; property&#x3D;&quot;apiCategoryId&quot; jdbcType&#x3D;&quot;BIGINT&quot;&#x2F;&gt; &lt;!-- api 目录 id --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;sort&quot; property&#x3D;&quot;sort&quot; jdbcType&#x3D;&quot;BIGINT&quot;&#x2F;&gt; &lt;!-- 排序 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;remark&quot; property&#x3D;&quot;remark&quot; jdbcType&#x3D;&quot;VARCHAR&quot;&#x2F;&gt; &lt;!-- 备注 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;authority&quot; property&#x3D;&quot;authority&quot; jdbcType&#x3D;&quot;VARCHAR&quot;&#x2F;&gt; &lt;!-- 权限（API:UUID） --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;gmt_create&quot; property&#x3D;&quot;gmtCreate&quot; jdbcType&#x3D;&quot;DATE&quot;&#x2F;&gt; &lt;!-- 创建时间 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;gmt_modified&quot; property&#x3D;&quot;gmtModified&quot; jdbcType&#x3D;&quot;DATE&quot;&#x2F;&gt; &lt;!-- 更新时间 --&gt;</span><br><span class="line">    &lt;&#x2F;resultMap&gt;</span><br><span class="line"></span><br><span class="line">    &lt;sql id&#x3D;&quot;TableName&quot;&gt;</span><br><span class="line">        &#96;api&#96;</span><br><span class="line">    &lt;&#x2F;sql&gt;</span><br><span class="line"></span><br><span class="line">    &lt;sql id&#x3D;&quot;BaseColumnList&quot;&gt;</span><br><span class="line">        &#96;id&#96;, &#96;name&#96;, &#96;uri&#96;, &#96;api_category_id&#96;, &#96;sort&#96;, &#96;remark&#96;, &#96;authority&#96;, &#96;gmt_create&#96;, &#96;gmt_modified&#96;</span><br><span class="line">    &lt;&#x2F;sql&gt;</span><br><span class="line"></span><br><span class="line">    &lt;insert id&#x3D;&quot;insertOne&quot; useGeneratedKeys&#x3D;&quot;true&quot; keyProperty&#x3D;&quot;id&quot; parameterType&#x3D;&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;</span><br><span class="line">        INSERT INTO</span><br><span class="line">        &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">        (&#96;id&#96;, &#96;name&#96;, &#96;uri&#96;, &#96;api_category_id&#96;, &#96;sort&#96;, &#96;remark&#96;, &#96;authority&#96;, &#96;gmt_create&#96;, &#96;gmt_modified&#96;)</span><br><span class="line">        VALUES (#&#123;id&#125;, #&#123;name&#125;, #&#123;uri&#125;, #&#123;apiCategoryId&#125;, #&#123;sort&#125;, #&#123;remark&#125;, #&#123;authority&#125;, #&#123;gmtCreate&#125;, #&#123;gmtModified&#125;)    &lt;&#x2F;insert&gt;</span><br><span class="line"></span><br><span class="line">    &lt;update id&#x3D;&quot;updateOne&quot; keyProperty&#x3D;&quot;id&quot; parameterType&#x3D;&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;</span><br><span class="line">        UPDATE</span><br><span class="line">        &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">        SET &#96;name&#96; &#x3D; #&#123;name&#125;, &#96;uri&#96; &#x3D; #&#123;uri&#125;, &#96;api_category_id&#96; &#x3D; #&#123;apiCategoryId&#125;, &#96;sort&#96; &#x3D; #&#123;sort&#125;, &#96;remark&#96; &#x3D; #&#123;remark&#125;, &#96;authority&#96; &#x3D; #&#123;authority&#125;, &#96;gmt_create&#96; &#x3D; #&#123;gmtCreate&#125;, &#96;gmt_modified&#96; &#x3D; #&#123;gmtModified&#125;</span><br><span class="line">        WHERE &#96;id&#96;&#x3D; #&#123;id&#125;</span><br><span class="line">    &lt;&#x2F;update&gt;</span><br><span class="line"></span><br><span class="line">    &lt;delete id&#x3D;&quot;deleteOne&quot; parameterType&#x3D;&quot;long&quot;&gt;</span><br><span class="line">        DELETE FROM</span><br><span class="line">        &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">        WHERE id &#x3D; #&#123;id&#125;</span><br><span class="line">    &lt;&#x2F;delete&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id&#x3D;&quot;getOne&quot; resultMap&#x3D;&quot;BaseResultMap&quot;&gt;</span><br><span class="line">        SELECT</span><br><span class="line">        &lt;include refid&#x3D;&quot;BaseColumnList&quot;&#x2F;&gt;</span><br><span class="line">        FROM &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt; WHERE id &#x3D; #&#123;id&#125;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id&#x3D;&quot;listAll&quot; resultMap&#x3D;&quot;BaseResultMap&quot;&gt;</span><br><span class="line">        SELECT</span><br><span class="line">        &lt;include refid&#x3D;&quot;BaseColumnList&quot;&#x2F;&gt;</span><br><span class="line">        FROM &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;mapper&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" data-id="ckfopr4tk003bgu2p9kgve7vj" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" data-id="ckfor4kty003atn2p9l9764m7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>

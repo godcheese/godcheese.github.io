@@ -7,25 +7,25 @@
   
   <title>Laravel 数据迁移 migrate 的常见问题（操作）总结 | 天堂芝士的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="外键约束添加错误[Illuminate\Database\QueryException]SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table&#96;users&#96; add constraint &#96;users_role_id_foreign&#96; foreign key (&#96;role_id">
+  <meta name="description" content="外键约束添加错误[Illuminate\Database\QueryException]SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter tableusers add constraint users_role_id_foreign foreign key (role_id) ref">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Laravel 数据迁移 migrate 的常见问题（操作）总结">
 <meta property="og:url" content="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/index.html">
 <meta property="og:site_name" content="天堂芝士的个人博客">
-<meta property="og:description" content="外键约束添加错误[Illuminate\Database\QueryException]SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table&#96;users&#96; add constraint &#96;users_role_id_foreign&#96; foreign key (&#96;role_id">
+<meta property="og:description" content="外键约束添加错误[Illuminate\Database\QueryException]SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter tableusers add constraint users_role_id_foreign foreign key (role_id) ref">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png">
+<meta property="og:image" content="http://godcheese.com/images/php-laravel-artisan-migrate-error1.png">
+<meta property="og:image" content="http://godcheese.com/images/php-laravel-artisan-migration-sort.png">
+<meta property="og:image" content="http://godcheese.com/images/php-laravel-artisan-migrate-error1-idea2.png">
+<meta property="og:image" content="http://godcheese.com/images/php-laravel-artisan-migrate-error1-idea1.png">
+<meta property="og:image" content="http://godcheese.com/images/php-artisan-migration-engine.png">
 <meta property="article:published_time" content="2017-06-27T12:20:42.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:38.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="Laravel">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png">
+<meta name="twitter:image" content="http://godcheese.com/images/php-laravel-artisan-migrate-error1.png">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -106,21 +106,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br>`users` add constraint `users_role_id_foreign` foreign key (`role_id`) references `role<br>s` (`id`) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"></a></p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
+        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br><code>users</code> add constraint <code>users_role_id_foreign</code> foreign key (<code>role_id</code>) references <code>role s</code> (<code>id</code>) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
+<p><a href="/images/php-laravel-artisan-migrate-error1.png"><img src="/images/php-laravel-artisan-migrate-error1.png"></a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a href="/images/php-laravel-artisan-migration-sort.png"><img src="/images/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
 <p>composer dump-autoload</p>
-<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
+<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a href="/images/php-laravel-artisan-migrate-error1-idea2.png"><img src="/images/php-laravel-artisan-migrate-error1-idea2.png"></a> <a href="/images/php-laravel-artisan-migrate-error1-idea1.png"><img src="/images/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
 <p>// 外键约束<br>$table-&gt;foreign(‘role_id’)-&gt;references(‘id’)-&gt;on(‘roles’)-&gt;onUpdate(‘cascade’)-&gt;onDelete(‘cascade’);</p>
 <p>这句代码代码的欲添加外键约束的表是 users ，表字段是 role_id ；参考表是 roles ，参考字段是 roles 的 id 。</p>
 <h2 id="修改数据表默认存储引擎"><a href="#修改数据表默认存储引擎" class="headerlink" title="修改数据表默认存储引擎"></a>修改数据表默认存储引擎</h2><p>在 migration 文件内添加一句代码来指定数据库引擎（将存储引擎改成InnoDB，支持事务处理）：</p>
 <p>$table-&gt;engine=’InnoDB’;</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"></a></p>
+<p><a href="/images/php-artisan-migration-engine.png"><img src="/images/php-artisan-migration-engine.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfopr4uc004jgu2p0c539btq" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfor4kuq004ftn2pa9pog7h3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>

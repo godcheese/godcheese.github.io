@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/" data-id="ckfopr4vk0068gu2p3dv1fdd6" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/" data-id="ckfor4kw40067tn2pe7ji2eyq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
@@ -291,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-id="ckfopr4sd001pgu2p7zazhoj7" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" data-id="ckfor4ksq001ptn2pc0u681db" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a></li></ul>
@@ -350,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/" data-id="ckfopr4z400fjgu2p28ddhitm" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/" data-id="ckfor4kzm00f9tn2p4x61b9yz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JetBrains/" rel="tag">JetBrains</a></li></ul>
@@ -388,38 +388,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>package com.gioov.nimrodbackend.common;</p>
-<p>import org.springframework.boot.web.servlet.FilterRegistrationBean;<br>import org.springframework.context.annotation.Bean;<br>import org.springframework.context.annotation.Configuration;<br>import org.springframework.core.Ordered;<br>import org.springframework.web.cors.UrlBasedCorsConfigurationSource;<br>import org.springframework.web.filter.CorsFilter;</p>
-<p>/**<br> * @author godcheese [<a href="mailto:&#103;&#x6f;&#100;&#99;&#x68;&#101;&#101;&#115;&#101;&#x40;&#111;&#117;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#x2e;&#99;&#111;&#109;">&#103;&#x6f;&#100;&#99;&#x68;&#101;&#101;&#115;&#101;&#x40;&#111;&#117;&#x74;&#108;&#x6f;&#x6f;&#x6b;&#x2e;&#99;&#111;&#109;</a>]<br> * @date 2019-04-03<br> */<br>@Configuration<br>public class CorsConfiguration {</p>
-<pre><code>@Bean
-public FilterRegistrationBean&lt;CorsFilter&gt; corsConfig() &#123;
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    org.springframework.web.cors.CorsConfiguration corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
-    // 是否发送 Cookie
-    corsConfiguration.setAllowCredentials(true);
-    // 允许跨域访问的源
-    corsConfiguration.addAllowedOrigin(org.springframework.web.cors.CorsConfiguration.ALL);
-    // 允许头部设置
-    corsConfiguration.addAllowedHeader(org.springframework.web.cors.CorsConfiguration.ALL);
-    // 允许请求方法
-    corsConfiguration.addAllowedMethod(org.springframework.web.cors.CorsConfiguration.ALL);
-    // 预检间隔时间，单位：秒
-    corsConfiguration.setMaxAge(1800L);
-    // 允许跨域访问的路径
-    source.registerCorsConfiguration(&quot;/\*\*&quot;, corsConfiguration);
-    // 注入 Filter
-    FilterRegistrationBean&lt;CorsFilter&gt; bean = new FilterRegistrationBean&lt;&gt;();
-    bean.setFilter(new CorsFilter(source));
-    bean.setName(&quot;corsFilter&quot;);
-    bean.setOrder(Ordered.HIGHEST\_PRECEDENCE);
-    return bean;
-&#125;</code></pre>
-<p>}</p>
-
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.nimrodbackend.common;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.web.servlet.FilterRegistrationBean;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.core.Ordered;</span><br><span class="line">import org.springframework.web.cors.UrlBasedCorsConfigurationSource;</span><br><span class="line">import org.springframework.web.filter.CorsFilter;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese [godcheese@outlook.com]</span><br><span class="line"> * @date 2019-04-03</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Configuration</span><br><span class="line">public class CorsConfiguration &#123;</span><br><span class="line">    </span><br><span class="line">    @Bean</span><br><span class="line">    public FilterRegistrationBean&lt;CorsFilter&gt; corsConfig() &#123;</span><br><span class="line">        UrlBasedCorsConfigurationSource source &#x3D; new UrlBasedCorsConfigurationSource();</span><br><span class="line">        org.springframework.web.cors.CorsConfiguration corsConfiguration &#x3D; new org.springframework.web.cors.CorsConfiguration();</span><br><span class="line">        &#x2F;&#x2F; 是否发送 Cookie</span><br><span class="line">        corsConfiguration.setAllowCredentials(true);</span><br><span class="line">        &#x2F;&#x2F; 允许跨域访问的源</span><br><span class="line">        corsConfiguration.addAllowedOrigin(org.springframework.web.cors.CorsConfiguration.ALL);</span><br><span class="line">        &#x2F;&#x2F; 允许头部设置</span><br><span class="line">        corsConfiguration.addAllowedHeader(org.springframework.web.cors.CorsConfiguration.ALL);</span><br><span class="line">        &#x2F;&#x2F; 允许请求方法</span><br><span class="line">        corsConfiguration.addAllowedMethod(org.springframework.web.cors.CorsConfiguration.ALL);</span><br><span class="line">        &#x2F;&#x2F; 预检间隔时间，单位：秒</span><br><span class="line">        corsConfiguration.setMaxAge(1800L);</span><br><span class="line">        &#x2F;&#x2F; 允许跨域访问的路径</span><br><span class="line">        source.registerCorsConfiguration(&quot;&#x2F;**&quot;, corsConfiguration);</span><br><span class="line">        &#x2F;&#x2F; 注入 Filter</span><br><span class="line">        FilterRegistrationBean&lt;CorsFilter&gt; bean &#x3D; new FilterRegistrationBean&lt;&gt;();</span><br><span class="line">        bean.setFilter(new CorsFilter(source));</span><br><span class="line">        bean.setName(&quot;corsFilter&quot;);</span><br><span class="line">        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);</span><br><span class="line">        return bean;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" data-id="ckfopr4vx006wgu2p6ilbb2r0" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" data-id="ckfor4kwi006vtn2p6e1ffx2q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li></ul>
@@ -458,194 +431,13 @@ public FilterRegistrationBean&lt;CorsFilter&gt; corsConfig() &#123;
     <div class="article-entry" itemprop="articleBody">
       
         <p>代码如下：</p>
-<p>   /**<br>     * 部门实体类<br>     */<br>    public class Department {</p>
-<pre><code>    public Department(Integer id, String name, Integer parentId) &#123;
-        this.id = id;
-        this.name = name;
-        this.parentId = parentId;
-    &#125;
-
-    private Integer id;
-    private String name;
-
-    /\*\*
-     \* 上级部门 id
-     \*/
-    private Integer parentId;
-
-    public Integer getId() &#123;
-        return id;
-    &#125;
-
-    public void setId(Integer id) &#123;
-        this.id = id;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public Integer getParentId() &#123;
-        return parentId;
-    &#125;
-
-    public void setParentId(Integer parentId) &#123;
-        this.parentId = parentId;
-    &#125;
-&#125;
-
-/\*\*
- \* 树形节点实体类
- \*/
-public class TreeNode &#123;
-
-    public TreeNode(Integer id, String name, Integer parentId, List&lt;TreeNode&gt; children) &#123;
-        this.id = id;
-        this.name = name;
-        this.parentId = parentId;
-        this.children = children;
-    &#125;
-
-    private Integer id;
-    private String name;
-
-    /\*\*
-     \* 父级节点 id
-     \*/
-    private Integer parentId;
-
-    /\*\*
-     \* 子级节点
-     \*/
-    private List&lt;TreeNode&gt; children;
-
-    public Integer getId() &#123;
-        return id;
-    &#125;
-
-    public void setId(Integer id) &#123;
-        this.id = id;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public Integer getParentId() &#123;
-        return parentId;
-    &#125;
-
-    public void setParentId(Integer parentId) &#123;
-        this.parentId = parentId;
-    &#125;
-
-    public List&lt;TreeNode&gt; getChildren() &#123;
-        return children;
-    &#125;
-
-    public void setChildren(List&lt;TreeNode&gt; children) &#123;
-        this.children = children;
-    &#125;
-&#125;
-
-/\*\*
- \* 循环遍历出子节点
- \* @param parentId
- \* @param treeNodeList
- \* @return
- \*/
-public List&lt;TreeNode&gt; forEachChildrenTreeNode(int parentId, List&lt;TreeNode&gt; treeNodeList) &#123;
-    List&lt;TreeNode&gt; children = new ArrayList&lt;&gt;(0);
-    for(TreeNode treeNode : treeNodeList) &#123;
-        if(treeNode.getParentId() != null &amp;&amp; treeNode.getParentId().equals(parentId)) &#123;
-            children.add(treeNode);
-        &#125;
-    &#125;
-
-    for(TreeNode child : children) &#123;
-        List&lt;TreeNode&gt; childChildren = forEachChildrenTreeNode(child.getId(), treeNodeList);
-        if(childChildren == null) &#123;
-            childChildren = new ArrayList&lt;&gt;(0);
-        &#125;
-        child.setChildren(childChildren);
-    &#125;
-
-    if(children.size() == 0) &#123;
-        return null;
-    &#125;
-    return children;
-&#125;
-
-/\*\*
- \* 测试代码
- \*/
-public void testApp() &#123;
-
-    List&lt;Department&gt; departmentList = new ArrayList&lt;&gt;(6);
-    departmentList.add(new Department(1,&quot;测试集团公司1&quot;, null));
-    departmentList.add(new Department(2,&quot;测试分公司1&quot;, 1));
-    departmentList.add(new Department(3,&quot;测试分公司2&quot;, 1));
-    departmentList.add(new Department(4,&quot;测试子部门1&quot;, 3));
-    departmentList.add(new Department(5,&quot;测试项目室1&quot;, 4));
-    departmentList.add(new Department(6,&quot;测试项目组1&quot;, 5));
-    departmentList.add(new Department(7,&quot;测试项目室2&quot;, 4));
-    departmentList.add(new Department(8,&quot;测试子部门2&quot;, 3));
-    departmentList.add(new Department(9,&quot;测试分公司3&quot;, 1));
-    departmentList.add(new Department(10,&quot;测试集团公司2&quot;, null));
-
-    /\*\*
-     \* 将部门数据转成树形节点
-     \*/
-    List&lt;TreeNode&gt; treeNodeList = new ArrayList&lt;&gt;(10);
-    for(Department department : departmentList) &#123;
-        treeNodeList.add(new TreeNode(department.getId(), department.getName(), department.getParentId(), new ArrayList&lt;&gt;()));
-    &#125;
-
-    /\*\*
-     \* 最终输出的树形结构类结果数据
-     \*/
-    List&lt;TreeNode&gt; treeNodeResultList = new ArrayList&lt;&gt;(0);
-
-    /\*\*
-     \* 将 parentId 为空的顶层节点首先写入结果数据
-     \*/
-    for(TreeNode treeNode : treeNodeList) &#123;
-        if(treeNode.getParentId() == null) &#123;
-            treeNodeResultList.add(treeNode);
-        &#125;
-    &#125;
-
-    /\*\*
-     \* 循环所有在结果数据中的顶层节点，并将子级节点装载进顶层节点的 children 属性
-     \*/
-    for(TreeNode treeNode : treeNodeResultList) &#123;
-        treeNode.setChildren(forEachChildrenTreeNode(treeNode.getId(), treeNodeList));
-    &#125;
-
-    /\*\*
-     \* 将结果数据以 JSON 格式输出
-     \*/
-    ObjectMapper objectMapper = new ObjectMapper();
-    try &#123;
-        System.out.println(objectMapper.writeValueAsString(treeNodeResultList));
-    &#125; catch (JsonProcessingException e) &#123;
-        e.printStackTrace();
-    &#125;
-&#125;</code></pre>
-<p>输出结果如下图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">  * 部门实体类</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public class Department &#123;</span><br><span class="line"></span><br><span class="line">     public Department(Integer id, String name, Integer parentId) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     private Integer id;</span><br><span class="line">     private String name;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 上级部门 id</span><br><span class="line">      *&#x2F;</span><br><span class="line">     private Integer parentId;</span><br><span class="line"></span><br><span class="line">     public Integer getId() &#123;</span><br><span class="line">         return id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setId(Integer id) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public String getName() &#123;</span><br><span class="line">         return name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setName(String name) &#123;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public Integer getParentId() &#123;</span><br><span class="line">         return parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setParentId(Integer parentId) &#123;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#x2F;**</span><br><span class="line">  * 树形节点实体类</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public class TreeNode &#123;</span><br><span class="line"></span><br><span class="line">     public TreeNode(Integer id, String name, Integer parentId, List&lt;TreeNode&gt; children) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">         this.children &#x3D; children;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     private Integer id;</span><br><span class="line">     private String name;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 父级节点 id</span><br><span class="line">      *&#x2F;</span><br><span class="line">     private Integer parentId;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 子级节点</span><br><span class="line">      *&#x2F;</span><br><span class="line">     private List&lt;TreeNode&gt; children;</span><br><span class="line"></span><br><span class="line">     public Integer getId() &#123;</span><br><span class="line">         return id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setId(Integer id) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public String getName() &#123;</span><br><span class="line">         return name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setName(String name) &#123;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public Integer getParentId() &#123;</span><br><span class="line">         return parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setParentId(Integer parentId) &#123;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public List&lt;TreeNode&gt; getChildren() &#123;</span><br><span class="line">         return children;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setChildren(List&lt;TreeNode&gt; children) &#123;</span><br><span class="line">         this.children &#x3D; children;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#x2F;**</span><br><span class="line">  * 循环遍历出子节点</span><br><span class="line">  * @param parentId</span><br><span class="line">  * @param treeNodeList</span><br><span class="line">  * @return</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public List&lt;TreeNode&gt; forEachChildrenTreeNode(int parentId, List&lt;TreeNode&gt; treeNodeList) &#123;</span><br><span class="line">     List&lt;TreeNode&gt; children &#x3D; new ArrayList&lt;&gt;(0);</span><br><span class="line">     for(TreeNode treeNode : treeNodeList) &#123;</span><br><span class="line">         if(treeNode.getParentId() !&#x3D; null &amp;&amp; treeNode.getParentId().equals(parentId)) &#123;</span><br><span class="line">             children.add(treeNode);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     for(TreeNode child : children) &#123;</span><br><span class="line">         List&lt;TreeNode&gt; childChildren &#x3D; forEachChildrenTreeNode(child.getId(), treeNodeList);</span><br><span class="line">         if(childChildren &#x3D;&#x3D; null) &#123;</span><br><span class="line">             childChildren &#x3D; new ArrayList&lt;&gt;(0);</span><br><span class="line">         &#125;</span><br><span class="line">         child.setChildren(childChildren);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     if(children.size() &#x3D;&#x3D; 0) &#123;</span><br><span class="line">         return null;</span><br><span class="line">     &#125;</span><br><span class="line">     return children;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#x2F;**</span><br><span class="line">  * 测试代码</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public void testApp() &#123;</span><br><span class="line"></span><br><span class="line">     List&lt;Department&gt; departmentList &#x3D; new ArrayList&lt;&gt;(6);</span><br><span class="line">     departmentList.add(new Department(1,&quot;测试集团公司1&quot;, null));</span><br><span class="line">     departmentList.add(new Department(2,&quot;测试分公司1&quot;, 1));</span><br><span class="line">     departmentList.add(new Department(3,&quot;测试分公司2&quot;, 1));</span><br><span class="line">     departmentList.add(new Department(4,&quot;测试子部门1&quot;, 3));</span><br><span class="line">     departmentList.add(new Department(5,&quot;测试项目室1&quot;, 4));</span><br><span class="line">     departmentList.add(new Department(6,&quot;测试项目组1&quot;, 5));</span><br><span class="line">     departmentList.add(new Department(7,&quot;测试项目室2&quot;, 4));</span><br><span class="line">     departmentList.add(new Department(8,&quot;测试子部门2&quot;, 3));</span><br><span class="line">     departmentList.add(new Department(9,&quot;测试分公司3&quot;, 1));</span><br><span class="line">     departmentList.add(new Department(10,&quot;测试集团公司2&quot;, null));</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 将部门数据转成树形节点</span><br><span class="line">      *&#x2F;</span><br><span class="line">     List&lt;TreeNode&gt; treeNodeList &#x3D; new ArrayList&lt;&gt;(10);</span><br><span class="line">     for(Department department : departmentList) &#123;</span><br><span class="line">         treeNodeList.add(new TreeNode(department.getId(), department.getName(), department.getParentId(), new ArrayList&lt;&gt;()));</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 最终输出的树形结构类结果数据</span><br><span class="line">      *&#x2F;</span><br><span class="line">     List&lt;TreeNode&gt; treeNodeResultList &#x3D; new ArrayList&lt;&gt;(0);</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 将 parentId 为空的顶层节点首先写入结果数据</span><br><span class="line">      *&#x2F;</span><br><span class="line">     for(TreeNode treeNode : treeNodeList) &#123;</span><br><span class="line">         if(treeNode.getParentId() &#x3D;&#x3D; null) &#123;</span><br><span class="line">             treeNodeResultList.add(treeNode);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 循环所有在结果数据中的顶层节点，并将子级节点装载进顶层节点的 children 属性</span><br><span class="line">      *&#x2F;</span><br><span class="line">     for(TreeNode treeNode : treeNodeResultList) &#123;</span><br><span class="line">         treeNode.setChildren(forEachChildrenTreeNode(treeNode.getId(), treeNodeList));</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 将结果数据以 JSON 格式输出</span><br><span class="line">      *&#x2F;</span><br><span class="line">     ObjectMapper objectMapper &#x3D; new ObjectMapper();</span><br><span class="line">     try &#123;</span><br><span class="line">         System.out.println(objectMapper.writeValueAsString(treeNodeResultList));</span><br><span class="line">     &#125; catch (JsonProcessingException e) &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下图： <a href="/images/java_foreach_department_1.jpg"><img src="/images/java_foreach_department_1.jpg"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/" data-id="ckfopr4sk001sgu2phtkz1muv" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/" data-id="ckfor4kss001ttn2pajwzf499" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
@@ -685,23 +477,23 @@ public void testApp() &#123;
       
         <h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><p>在 Maven pom.xml 文件 properties 中加入：</p>
 <p>&lt;resource.delimiter&gt;${}&lt;/resource.delimiter&gt;</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2019/01/springboot2x_properties_maven_1.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2019/01/springboot2x_properties_maven_1.jpg"></a> 然后在 Maven pom.xml 文件 build-resources 中加入：</p>
+<p><a href="/images/springboot2x_properties_maven_1.jpg"><img src="/images/springboot2x_properties_maven_1.jpg"></a> 然后在 Maven pom.xml 文件 build-resources 中加入：</p>
 <resource>
   <directory>${project.basedir}/src/main/resources</directory>
   <filtering>true</filtering>
   <includes>
-    <include>\*\*/\*.properties</include> <!-- 你要替换的 properties 文件，如 application.properties、application-dev.properties，我的是匹配所有 .properties 扩展结尾的文件 -->
+    <include>**/*.properties</include> <!-- 你要替换的 properties 文件，如 application.properties、application-dev.properties，我的是匹配所有 .properties 扩展结尾的文件 -->
   </includes>
 </resource>
 
-<p>项目 src/main/resources 下的 application.properties 文件属性配置中包含一项 Maven pom.xml 的属性值： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2019/01/springboot2x_properties_maven_3.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2019/01/springboot2x_properties_maven_3.jpg"></a> 最后打包看效果：</p>
+<p>项目 src/main/resources 下的 application.properties 文件属性配置中包含一项 Maven pom.xml 的属性值： <a href="/images/springboot2x_properties_maven_3.jpg"><img src="/images/springboot2x_properties_maven_3.jpg"></a> 最后打包看效果：</p>
 <p>maven clean package</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2019/01/springboot2x_properties_maven_4.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2019/01/springboot2x_properties_maven_4.jpg"></a> 值替换成功，问题解决。</p>
+<p><a href="/images/springboot2x_properties_maven_4.jpg"><img src="/images/springboot2x_properties_maven_4.jpg"></a> 值替换成功，问题解决。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2019/01/11/spring-boot-2-x-properties-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E5%BC%95%E7%94%A8-maven-pom-xml-%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%80%BC/" data-id="ckfopr4tg0034gu2pezweb7hd" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2019/01/11/spring-boot-2-x-properties-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E5%BC%95%E7%94%A8-maven-pom-xml-%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E5%80%BC/" data-id="ckfor4ktu0033tn2phj08eq4v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li></ul>
@@ -743,7 +535,7 @@ public void testApp() &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%90%8C%E6%AD%A5%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%B8%89%EF%BC%89/" data-id="ckfopr4so001zgu2p30ai0qf3" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%90%8C%E6%AD%A5%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%B8%89%EF%BC%89/" data-id="ckfor4ksy0023tn2phz5e8g1f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -780,68 +572,13 @@ public void testApp() &#123;
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。</p>
-<p>/**<br> * @author godcheese<br> */<br>@Service<br>public class DictionaryServiceImpl implements DictionaryService {</p>
-<pre><code>@Autowired
-private DictionaryMapper dictionaryMapper;
-
-@Autowired
-private WebApplicationContext webApplicationContext;
-
-private static final Logger LOGGER = LoggerFactory.getLogger(DictionaryServiceImpl.class);
-
-@Override
-public void addDictionaryToServletContext() &#123;
-    ServletContext servletContext = webApplicationContext.getServletContext();
-    if (servletContext != null) &#123;
-
-        List&lt;DictionaryEntity&gt; dictionaryEntityList = dictionaryMapper.listAll();
-        for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;
-            servletContext.setAttribute(dictionaryEntity.getKey().toUpperCase() + &quot;.&quot; + dictionaryEntity.getValueSlug().toUpperCase(), dictionaryEntity.getValue());
-        &#125;
-
-        Map&lt;String, List&lt;DictionaryEntity&gt;&gt; dictionaryEntityMap = new HashMap&lt;&gt;(6);
-        for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;
-            String key = dictionaryEntity.getKey().toUpperCase();
-            if (dictionaryEntityMap.containsKey(key)) &#123;
-                List&lt;DictionaryEntity&gt; dictionaryEntityList1 = dictionaryEntityMap.get(key);
-                if (!dictionaryEntityList1.contains(dictionaryEntity)) &#123;
-                    dictionaryEntityList1.add(dictionaryEntity);
-                    dictionaryEntityMap.put(key, dictionaryEntityList1);
-                &#125;
-            &#125; else &#123;
-                List&lt;DictionaryEntity&gt; dictionaryEntityList2 = new ArrayList&lt;&gt;(1);
-                dictionaryEntityList2.add(dictionaryEntity);
-                dictionaryEntityMap.put(key, dictionaryEntityList2);
-            &#125;
-        &#125;
-
-        for (Map.Entry entry : dictionaryEntityMap.entrySet()) &#123;
-            servletContext.setAttribute((String) entry.getKey(), entry.getValue());
-        &#125;
-
-    &#125;
-&#125;</code></pre>
-<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Service</span><br><span class="line">public class DictionaryServiceImpl implements DictionaryService &#123;</span><br><span class="line">   </span><br><span class="line">    @Autowired</span><br><span class="line">    private DictionaryMapper dictionaryMapper;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private WebApplicationContext webApplicationContext;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(DictionaryServiceImpl.class);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addDictionaryToServletContext() &#123;</span><br><span class="line">        ServletContext servletContext &#x3D; webApplicationContext.getServletContext();</span><br><span class="line">        if (servletContext !&#x3D; null) &#123;</span><br><span class="line"></span><br><span class="line">            List&lt;DictionaryEntity&gt; dictionaryEntityList &#x3D; dictionaryMapper.listAll();</span><br><span class="line">            for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;</span><br><span class="line">                servletContext.setAttribute(dictionaryEntity.getKey().toUpperCase() + &quot;.&quot; + dictionaryEntity.getValueSlug().toUpperCase(), dictionaryEntity.getValue());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Map&lt;String, List&lt;DictionaryEntity&gt;&gt; dictionaryEntityMap &#x3D; new HashMap&lt;&gt;(6);</span><br><span class="line">            for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;</span><br><span class="line">                String key &#x3D; dictionaryEntity.getKey().toUpperCase();</span><br><span class="line">                if (dictionaryEntityMap.containsKey(key)) &#123;</span><br><span class="line">                    List&lt;DictionaryEntity&gt; dictionaryEntityList1 &#x3D; dictionaryEntityMap.get(key);</span><br><span class="line">                    if (!dictionaryEntityList1.contains(dictionaryEntity)) &#123;</span><br><span class="line">                        dictionaryEntityList1.add(dictionaryEntity);</span><br><span class="line">                        dictionaryEntityMap.put(key, dictionaryEntityList1);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    List&lt;DictionaryEntity&gt; dictionaryEntityList2 &#x3D; new ArrayList&lt;&gt;(1);</span><br><span class="line">                    dictionaryEntityList2.add(dictionaryEntity);</span><br><span class="line">                    dictionaryEntityMap.put(key, dictionaryEntityList2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for (Map.Entry entry : dictionaryEntityMap.entrySet()) &#123;</span><br><span class="line">                servletContext.setAttribute((String) entry.getKey(), entry.getValue());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>新建 ApplicationStartupRunner.java，用于程序启动时进行的操作，此处调用 DictionaryService 的 addDictionaryToServletContext 方法，执行将字典加载到内存。</p>
-<p>/**<br> * @author godcheese<br> * @date 2018/2/22 16:19<br> */<br>@Component<br>@Order<br>public class ApplicationStartupRunner implements CommandLineRunner {</p>
-<pre><code>private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationStartupRunner.class);
-
-@Autowired
-private DictionaryService dictionaryService;
-
-@Override
-public void run(String... strings) throws Exception &#123;
-
-    // 首次启动加载数据字典到 ServletContext 内存
-    dictionaryService.addDictionaryToServletContext();
-
-&#125;</code></pre>
-<p>}</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> * @date 2018&#x2F;2&#x2F;22 16:19</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Component</span><br><span class="line">@Order</span><br><span class="line">public class ApplicationStartupRunner implements CommandLineRunner &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(ApplicationStartupRunner.class);</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private DictionaryService dictionaryService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(String... strings) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 首次启动加载数据字典到 ServletContext 内存</span><br><span class="line">        dictionaryService.addDictionaryToServletContext();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckfopr4sm001vgu2p7kfp989h" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckfor4ksu001wtn2p1wks2ja6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li></ul>
@@ -881,274 +618,15 @@ public void run(String... strings) throws Exception &#123;
       
         <p>本文以 Spring Boot 应用、MySQL 数据库为例。</p>
 <p>数据字典表：</p>
-<p>-- 数据字典表<br>DROP TABLE<br>IF EXISTS `dictionary`;</p>
-<p>CREATE TABLE `dictionary` (<br>  `id` BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT ‘id’,<br>  `key` VARCHAR(255) NOT NULL COMMENT ‘字典键’,<br>  `key_name` VARCHAR(255) NOT NULL COMMENT ‘字典键名’,<br>  `value_name` VARCHAR(255) NOT NULL COMMENT ‘字典值名’,<br>  `value_slug` VARCHAR(255) NOT NULL COMMENT ‘字典值别名’,<br>  `value` TEXT COMMENT ‘字典值’,<br>  `editable` TINYINT(1) UNSIGNED DEFAULT NULL COMMENT ‘是否可编辑（0=不可编辑，1=可编辑，默认=1）’,<br>  `dictionary_category_id` BIGINT(20) UNSIGNED NOT NULL COMMENT ‘字典分类 id’,<br>  `sort` BIGINT(20) UNSIGNED DEFAULT 0 COMMENT ‘排序’,<br>  `remark` VARCHAR(255) DEFAULT ‘’ COMMENT ‘备注’,<br>  `gmt_modified` DATETIME DEFAULT NOW() COMMENT ‘更新时间’,<br>  `gmt_created` DATETIME DEFAULT NOW() COMMENT ‘创建时间’,<br>  PRIMARY KEY (`id`)<br>)<br>  ENGINE = INNODB<br>  DEFAULT CHARACTER<br>  SET = utf8mb4<br>  COLLATE = utf8mb4_general_ci<br>  AUTO_INCREMENT = 1<br>  ROW_FORMAT = DYNAMIC<br>  COMMENT = ‘数据字典表’;</p>
-<p>数据字典分类表：</p>
-<p>-- 数据字典分类表<br>DROP TABLE<br>IF EXISTS `dictionary_category`;</p>
-<p>CREATE TABLE `dictionary_category` (<br>  `id` BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT ‘id’,<br>  `name` VARCHAR(255) NOT NULL COMMENT ‘分类名称’,<br>  `parent_id` BIGINT(20) UNSIGNED DEFAULT NULL COMMENT ‘父级分类 id’,<br>  `sort` BIGINT(20) DEFAULT 0 COMMENT ‘排序’,<br>  `remark` VARCHAR(255) DEFAULT ‘’ COMMENT ‘备注’,<br>  `gmt_modified` DATETIME DEFAULT NOW() COMMENT ‘更新时间’,<br>  `gmt_created` DATETIME DEFAULT NOW() COMMENT ‘创建时间’,<br>  PRIMARY KEY (`id`)<br>)<br>  ENGINE = INNODB<br>  DEFAULT CHARACTER<br>  SET = utf8mb4<br>  COLLATE = utf8mb4_general_ci<br>  AUTO_INCREMENT = 1<br>  ROW_FORMAT = DYNAMIC<br>  COMMENT = ‘数据字典分类表’;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">-- 数据字典表</span><br><span class="line">DROP TABLE</span><br><span class="line">IF EXISTS &#96;dictionary&#96;;</span><br><span class="line"></span><br><span class="line">CREATE TABLE &#96;dictionary&#96; (</span><br><span class="line">  &#96;id&#96; BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT &#39;id&#39;,</span><br><span class="line">  &#96;key&#96; VARCHAR(255) NOT NULL COMMENT &#39;字典键&#39;,</span><br><span class="line">  &#96;key_name&#96; VARCHAR(255) NOT NULL COMMENT &#39;字典键名&#39;,</span><br><span class="line">  &#96;value_name&#96; VARCHAR(255) NOT NULL COMMENT &#39;字典值名&#39;,</span><br><span class="line">  &#96;value_slug&#96; VARCHAR(255) NOT NULL COMMENT &#39;字典值别名&#39;,</span><br><span class="line">  &#96;value&#96; TEXT COMMENT &#39;字典值&#39;,</span><br><span class="line">  &#96;editable&#96; TINYINT(1) UNSIGNED DEFAULT NULL COMMENT &#39;是否可编辑（0&#x3D;不可编辑，1&#x3D;可编辑，默认&#x3D;1）&#39;,</span><br><span class="line">  &#96;dictionary_category_id&#96; BIGINT(20) UNSIGNED NOT NULL COMMENT &#39;字典分类 id&#39;,</span><br><span class="line">  &#96;sort&#96; BIGINT(20) UNSIGNED DEFAULT 0 COMMENT &#39;排序&#39;,</span><br><span class="line">  &#96;remark&#96; VARCHAR(255) DEFAULT &#39;&#39; COMMENT &#39;备注&#39;,</span><br><span class="line">  &#96;gmt_modified&#96; DATETIME DEFAULT NOW() COMMENT &#39;更新时间&#39;,</span><br><span class="line">  &#96;gmt_created&#96; DATETIME DEFAULT NOW() COMMENT &#39;创建时间&#39;,</span><br><span class="line">  PRIMARY KEY (&#96;id&#96;)</span><br><span class="line">)</span><br><span class="line">  ENGINE &#x3D; INNODB</span><br><span class="line">  DEFAULT CHARACTER</span><br><span class="line">  SET &#x3D; utf8mb4</span><br><span class="line">  COLLATE &#x3D; utf8mb4_general_ci</span><br><span class="line">  AUTO_INCREMENT &#x3D; 1</span><br><span class="line">  ROW_FORMAT &#x3D; DYNAMIC</span><br><span class="line">  COMMENT &#x3D; &#39;数据字典表&#39;;</span><br><span class="line"></span><br><span class="line">数据字典分类表：</span><br><span class="line"></span><br><span class="line">-- 数据字典分类表</span><br><span class="line">DROP TABLE</span><br><span class="line">IF EXISTS &#96;dictionary_category&#96;;</span><br><span class="line"></span><br><span class="line">CREATE TABLE &#96;dictionary_category&#96; (</span><br><span class="line">  &#96;id&#96; BIGINT(20) UNSIGNED AUTO_INCREMENT COMMENT &#39;id&#39;,</span><br><span class="line">  &#96;name&#96; VARCHAR(255) NOT NULL COMMENT &#39;分类名称&#39;,</span><br><span class="line">  &#96;parent_id&#96; BIGINT(20) UNSIGNED DEFAULT NULL COMMENT &#39;父级分类 id&#39;,</span><br><span class="line">  &#96;sort&#96; BIGINT(20) DEFAULT 0 COMMENT &#39;排序&#39;,</span><br><span class="line">  &#96;remark&#96; VARCHAR(255) DEFAULT &#39;&#39; COMMENT &#39;备注&#39;,</span><br><span class="line">  &#96;gmt_modified&#96; DATETIME DEFAULT NOW() COMMENT &#39;更新时间&#39;,</span><br><span class="line">  &#96;gmt_created&#96; DATETIME DEFAULT NOW() COMMENT &#39;创建时间&#39;,</span><br><span class="line">  PRIMARY KEY (&#96;id&#96;)</span><br><span class="line">)</span><br><span class="line">  ENGINE &#x3D; INNODB</span><br><span class="line">  DEFAULT CHARACTER</span><br><span class="line">  SET &#x3D; utf8mb4</span><br><span class="line">  COLLATE &#x3D; utf8mb4_general_ci</span><br><span class="line">  AUTO_INCREMENT &#x3D; 1</span><br><span class="line">  ROW_FORMAT &#x3D; DYNAMIC</span><br><span class="line">  COMMENT &#x3D; &#39;数据字典分类表&#39;;</span><br></pre></td></tr></table></figure>
 <p>数据字典表对应的实体类：</p>
-<p>package com.gioov.spiny.system.entity;</p>
-<p>import java.io.Serializable;<br>import java.util.Date;</p>
-<p>/**<br> * @author godcheese<br> * @date 2018/4/23 20:44<br> */<br>public class DictionaryEntity implements Serializable {</p>
-<pre><code>private static final long serialVersionUID = -4000696333938261490L;
-
-/\*\*
- \* id
- \*/
-private Long id;
-
-/\*\*
- \* 字典键
- \*/
-private String key;
-
-/\*\*
- \* 字典键名
- \*/
-private String keyName;
-
-/\*\*
- \* 字典值名
- \*/
-private String valueName;
-
-/\*\*
- \* 字典值别名
- \*/
-private String valueSlug;
-
-/\*\*
- \* 字典值
- \*/
-private String value;
-
-/\*\*
- \* 是否可编辑
- \*/
-private Integer editable;
-
-/\*\*
- \* 字典分类 id
- \*/
-private Long dictionaryCategoryId;
-
-/\*\*
- \* 排序
- \*/
-private Long sort;
-
-/\*\*
- \* 备注
- \*/
-private String remark;
-
-/\*\*
- \* 更新时间
- \*/
-private Date gmtModified;
-
-/\*\*
- \* 创建时间
- \*/
-private Date gmtCreated;
-
-
-public Long getId() &#123;
-    return id;
-&#125;
-
-public void setId(Long id) &#123;
-    this.id = id;
-&#125;
-
-public String getKey() &#123;
-    return key;
-&#125;
-
-public void setKey(String key) &#123;
-    this.key = key;
-&#125;
-
-public String getKeyName() &#123;
-    return keyName;
-&#125;
-
-public void setKeyName(String keyName) &#123;
-    this.keyName = keyName;
-&#125;
-
-public String getValueName() &#123;
-    return valueName;
-&#125;
-
-public void setValueName(String valueName) &#123;
-    this.valueName = valueName;
-&#125;
-
-public String getValueSlug() &#123;
-    return valueSlug;
-&#125;
-
-public void setValueSlug(String valueSlug) &#123;
-    this.valueSlug = valueSlug;
-&#125;
-
-public String getValue() &#123;
-    return value;
-&#125;
-
-public void setValue(String value) &#123;
-    this.value = value;
-&#125;
-
-public Integer getEditable() &#123;
-    return editable;
-&#125;
-
-public void setEditable(Integer editable) &#123;
-    this.editable = editable;
-&#125;
-
-public Long getDictionaryCategoryId() &#123;
-    return dictionaryCategoryId;
-&#125;
-
-public void setDictionaryCategoryId(Long dictionaryCategoryId) &#123;
-    this.dictionaryCategoryId = dictionaryCategoryId;
-&#125;
-
-public Long getSort() &#123;
-    return sort;
-&#125;
-
-public void setSort(Long sort) &#123;
-    this.sort = sort;
-&#125;
-
-public String getRemark() &#123;
-    return remark;
-&#125;
-
-public void setRemark(String remark) &#123;
-    this.remark = remark;
-&#125;
-
-public Date getGmtModified() &#123;
-    return gmtModified;
-&#125;
-
-public void setGmtModified(Date gmtModified) &#123;
-    this.gmtModified = gmtModified;
-&#125;
-
-public Date getGmtCreated() &#123;
-    return gmtCreated;
-&#125;
-
-public void setGmtCreated(Date gmtCreated) &#123;
-    this.gmtCreated = gmtCreated;
-&#125;</code></pre>
-<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.spiny.system.entity;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> * @date 2018&#x2F;4&#x2F;23 20:44</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class DictionaryEntity implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID &#x3D; -4000696333938261490L;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 字典键</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String key;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 字典键名</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String keyName;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 字典值名</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String valueName;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 字典值别名</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String valueSlug;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 字典值</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String value;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 是否可编辑</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Integer editable;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 字典分类 id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long dictionaryCategoryId;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 排序</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long sort;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 备注</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String remark;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 更新时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtModified;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 创建时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtCreated;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getKey() &#123;</span><br><span class="line">        return key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setKey(String key) &#123;</span><br><span class="line">        this.key &#x3D; key;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getKeyName() &#123;</span><br><span class="line">        return keyName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setKeyName(String keyName) &#123;</span><br><span class="line">        this.keyName &#x3D; keyName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getValueName() &#123;</span><br><span class="line">        return valueName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setValueName(String valueName) &#123;</span><br><span class="line">        this.valueName &#x3D; valueName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getValueSlug() &#123;</span><br><span class="line">        return valueSlug;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setValueSlug(String valueSlug) &#123;</span><br><span class="line">        this.valueSlug &#x3D; valueSlug;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getValue() &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setValue(String value) &#123;</span><br><span class="line">        this.value &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Integer getEditable() &#123;</span><br><span class="line">        return editable;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setEditable(Integer editable) &#123;</span><br><span class="line">        this.editable &#x3D; editable;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getDictionaryCategoryId() &#123;</span><br><span class="line">        return dictionaryCategoryId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDictionaryCategoryId(Long dictionaryCategoryId) &#123;</span><br><span class="line">        this.dictionaryCategoryId &#x3D; dictionaryCategoryId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getSort() &#123;</span><br><span class="line">        return sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSort(Long sort) &#123;</span><br><span class="line">        this.sort &#x3D; sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getRemark() &#123;</span><br><span class="line">        return remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRemark(String remark) &#123;</span><br><span class="line">        this.remark &#x3D; remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtModified() &#123;</span><br><span class="line">        return gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtModified(Date gmtModified) &#123;</span><br><span class="line">        this.gmtModified &#x3D; gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtCreated() &#123;</span><br><span class="line">        return gmtCreated;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtCreated(Date gmtCreated) &#123;</span><br><span class="line">        this.gmtCreated &#x3D; gmtCreated;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>数据字典分类表对应的实体类：</p>
-<p>package com.gioov.spiny.system.entity;</p>
-<p>import java.io.Serializable;<br>import java.util.Date;</p>
-<p>/**<br> * @author godcheese<br> * @date 2018/5/23<br> */<br>public class DictionaryCategoryEntity implements Serializable {</p>
-<pre><code>private static final long serialVersionUID = -5867777461580679038L;
-
-private Long id;
-
-/\*\*
- \* 分类名称
- \*/
-private String name;
-
-/\*\*
- \* 父级分类 id
- \*/
-private Long parentId;
-
-/\*\*
- \* 排序
- \*/
-private Long sort;
-
-/\*\*
- \* 备注
- \*/
-private String remark;
-
-/\*\*
- \* 更新时间
- \*/
-private Date gmtModified;
-
-/\*\*
- \* 创建时间
- \*/
-private Date gmtCreated;
-
-
-public Long getId() &#123;
-    return id;
-&#125;
-
-public void setId(Long id) &#123;
-    this.id = id;
-&#125;
-
-public String getName() &#123;
-    return name;
-&#125;
-
-public void setName(String name) &#123;
-    this.name = name;
-&#125;
-
-public Long getParentId() &#123;
-    return parentId;
-&#125;
-
-public void setParentId(Long parentId) &#123;
-    this.parentId = parentId;
-&#125;
-
-public Long getSort() &#123;
-    return sort;
-&#125;
-
-public void setSort(Long sort) &#123;
-    this.sort = sort;
-&#125;
-
-public String getRemark() &#123;
-    return remark;
-&#125;
-
-public void setRemark(String remark) &#123;
-    this.remark = remark;
-&#125;
-
-public Date getGmtModified() &#123;
-    return gmtModified;
-&#125;
-
-public void setGmtModified(Date gmtModified) &#123;
-    this.gmtModified = gmtModified;
-&#125;
-
-public Date getGmtCreated() &#123;
-    return gmtCreated;
-&#125;
-
-public void setGmtCreated(Date gmtCreated) &#123;
-    this.gmtCreated = gmtCreated;
-&#125;</code></pre>
-<p>}</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.spiny.system.entity;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> * @date 2018&#x2F;5&#x2F;23</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class DictionaryCategoryEntity implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    private static final long serialVersionUID &#x3D; -5867777461580679038L;</span><br><span class="line"></span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 分类名称</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 父级分类 id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long parentId;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 排序</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long sort;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 备注</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String remark;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 更新时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtModified;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 创建时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtCreated;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getParentId() &#123;</span><br><span class="line">        return parentId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setParentId(Long parentId) &#123;</span><br><span class="line">        this.parentId &#x3D; parentId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getSort() &#123;</span><br><span class="line">        return sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSort(Long sort) &#123;</span><br><span class="line">        this.sort &#x3D; sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getRemark() &#123;</span><br><span class="line">        return remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRemark(String remark) &#123;</span><br><span class="line">        this.remark &#x3D; remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtModified() &#123;</span><br><span class="line">        return gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtModified(Date gmtModified) &#123;</span><br><span class="line">        this.gmtModified &#x3D; gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtCreated() &#123;</span><br><span class="line">        return gmtCreated;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtCreated(Date gmtCreated) &#123;</span><br><span class="line">        this.gmtCreated &#x3D; gmtCreated;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckfopr4sq0022gu2pburug5gk" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckfor4ksw001ztn2p8l9f16cj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li></ul>
@@ -1189,31 +667,31 @@ public void setGmtCreated(Date gmtCreated) &#123;
         <blockquote>
 <p>系统：CentOS 7 软件选择：最小安装</p>
 </blockquote>
-<h2 id="配置系统环境"><a href="#配置系统环境" class="headerlink" title="配置系统环境"></a>配置系统环境</h2><p># 切换成 root 用户<br>su root</p>
-<p># 下载工具</p>
+<h2 id="配置系统环境"><a href="#配置系统环境" class="headerlink" title="配置系统环境"></a>配置系统环境</h2><p>切换成 root 用户<br>su root</p>
+<p>下载工具</p>
 <h1 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h1><h1 id="解压工具，用于解压Oracle安装文件"><a href="#解压工具，用于解压Oracle安装文件" class="headerlink" title="解压工具，用于解压Oracle安装文件"></a>解压工具，用于解压Oracle安装文件</h1><h1 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a>unzip</h1><h1 id="网络工具，用语查看本机网络情况，如：netstat"><a href="#网络工具，用语查看本机网络情况，如：netstat" class="headerlink" title="网络工具，用语查看本机网络情况，如：netstat"></a>网络工具，用语查看本机网络情况，如：netstat</h1><h1 id="net-tools"><a href="#net-tools" class="headerlink" title="net-tools"></a>net-tools</h1><p>yum install -y wget unzip net-tools</p>
-<p># 使用 Oracle 提供的环境配置工具，这个工具会调整内核参数，建立一些必要的Linux用户和组<br>wget <a target="_blank" rel="noopener" href="http://public-yum.oracle.com/public-yum-ol7.repo">http://public-yum.oracle.com/public-yum-ol7.repo</a> -O /etc/yum.repos.d/public-yum-ol7.repo<br>wget <a target="_blank" rel="noopener" href="http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7">http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7</a> -O /etc/pki/rpm-gpg/RPM-GPG-KEY-oracle</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_1.png"></a></p>
+<p>使用 Oracle 提供的环境配置工具，这个工具会调整内核参数，建立一些必要的Linux用户和组<br>wget <a target="_blank" rel="noopener" href="http://public-yum.oracle.com/public-yum-ol7.repo">http://public-yum.oracle.com/public-yum-ol7.repo</a> -O /etc/yum.repos.d/public-yum-ol7.repo<br>wget <a target="_blank" rel="noopener" href="http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7">http://public-yum.oracle.com/RPM-GPG-KEY-oracle-ol7</a> -O /etc/pki/rpm-gpg/RPM-GPG-KEY-oracle</p>
+<p><a href="/images/centos_install_oracle_11gr2_1.png"><img src="/images/centos_install_oracle_11gr2_1.png"></a></p>
 <p>yum install -y oracle-rdbms-server-11gR2-preinstall</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_2.png"></a></p>
-<p># 以上工具安装完成后建议备份存放修改系统后日志和原本的内核配置备份这个目录<br>/var/log/oracle-rdbms-server-11gR2-preinstall</p>
-<p># 备份好后，执行以下命令加载内核参数（sysctl –p 等效）<br>sysctl –f</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_3.png"></a></p>
-<p># 创建一些目录，配置oracle系统配置文件和授权<br>cat &gt;&gt; /etc/oraInst.loc &lt;&lt;EOF<br>inventory_loc=/home/oracle/ora11g/oraInventory<br>inst_group=oinstall<br>EOF<br>chmod 664 /etc/oraInst.loc</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_4.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_4.png"></a></p>
-<p># 创建 oracle 安装目录和授权<br>mkdir -p /u01/app/<br>mkdir /u01/tmp<br>chown -R oracle:oinstall /u01/app/<br>chmod -R 775 /u01/app/<br>chmod a+wr /u01/tmp</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_5.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_5.png"></a></p>
-<p># 设置oracle用户密码（123456），oracle是安装工具自己创建的，参考我之前讲的<br>passwd oracle</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_6.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_6.png"></a></p>
-<h2 id="配置用户环境和上传-Oracle-压缩包"><a href="#配置用户环境和上传-Oracle-压缩包" class="headerlink" title="配置用户环境和上传 Oracle 压缩包"></a>配置用户环境和上传 Oracle 压缩包</h2><p># 切换成 oracle 用户<br>su oracle</p>
-<p># 为 oracle 用户添加一些必要的环境变量<br>cat &gt;&gt; /home/oracle/.bash_profile &lt;&lt;EOF<br>TMP=/u01/tmp<br>TMPDIR=/u01/tmp<br>export TMP TMPDIR</p>
+<p><a href="/images/centos_install_oracle_11gr2_2.png"><img src="/images/centos_install_oracle_11gr2_2.png"></a></p>
+<p>以上工具安装完成后建议备份存放修改系统后日志和原本的内核配置备份这个目录<br>/var/log/oracle-rdbms-server-11gR2-preinstall</p>
+<p>备份好后，执行以下命令加载内核参数（sysctl –p 等效）<br>sysctl –f</p>
+<p><a href="/images/centos_install_oracle_11gr2_3.png"><img src="/images/centos_install_oracle_11gr2_3.png"></a></p>
+<p>创建一些目录，配置oracle系统配置文件和授权<br>cat &gt;&gt; /etc/oraInst.loc &lt;&lt;EOF<br>inventory_loc=/home/oracle/ora11g/oraInventory<br>inst_group=oinstall<br>EOF<br>chmod 664 /etc/oraInst.loc</p>
+<p><a href="/images/centos_install_oracle_11gr2_4.png"><img src="/images/centos_install_oracle_11gr2_4.png"></a></p>
+<p>创建 oracle 安装目录和授权<br>mkdir -p /u01/app/<br>mkdir /u01/tmp<br>chown -R oracle:oinstall /u01/app/<br>chmod -R 775 /u01/app/<br>chmod a+wr /u01/tmp</p>
+<p><a href="/images/centos_install_oracle_11gr2_5.png"><img src="/images/centos_install_oracle_11gr2_5.png"></a></p>
+<p>设置oracle用户密码（123456），oracle是安装工具自己创建的，参考我之前讲的<br>passwd oracle</p>
+<p><a href="/images/centos_install_oracle_11gr2_6.png"><img src="/images/centos_install_oracle_11gr2_6.png"></a></p>
+<h2 id="配置用户环境和上传-Oracle-压缩包"><a href="#配置用户环境和上传-Oracle-压缩包" class="headerlink" title="配置用户环境和上传 Oracle 压缩包"></a>配置用户环境和上传 Oracle 压缩包</h2><p>切换成 oracle 用户<br>su oracle</p>
+<p>为 oracle 用户添加一些必要的环境变量<br>cat &gt;&gt; /home/oracle/.bash_profile &lt;&lt;EOF<br>TMP=/u01/tmp<br>TMPDIR=/u01/tmp<br>export TMP TMPDIR</p>
 <p>ORACLE_BASE=/u01/app/oracle<br>ORACLE_HOME=/u01/app/oracle/product/11.2.0/dbhome_1<br>ORACLE_SID=orcl<br>PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:/root/bin<br>export ORACLE_BASE ORACLE_SID ORACLE_HOME PATH<br>PATH=$PATH:$ORACLE_HOME/bin<br>export PATH<br>EOF</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_7.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_7.png"></a></p>
-<p># 生效用户环境变量<br>cd ~ &amp;&amp; source .bash_profile</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_8.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_8.png"></a> 使用 Xftp 的上传 linux.x64_11gR2_database_1of2.zip、linux.x64_11gR2_database_2of2.zip 2 个压缩包到 /home/oracle/ <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_9.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_9.png"></a></p>
-<p># 解压2个压缩包，解压后文件会在 /home/oracle/database/<br>unzip linux.x64_11gR2_database_1of2.zip<br>unzip linux.x64_11gR2_database_2of2.zip</p>
-<p>解压完成，如图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_10.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_10.png"></a></p>
-<h2 id="配置-Oracle-数据库安装响应文件（db-install-rsp）"><a href="#配置-Oracle-数据库安装响应文件（db-install-rsp）" class="headerlink" title="配置 Oracle 数据库安装响应文件（db_install.rsp）"></a>配置 Oracle 数据库安装响应文件（db_install.rsp）</h2><p># 切换成 oracle 用户<br>su oracle</p>
+<p><a href="/images/centos_install_oracle_11gr2_7.png"><img src="/images/centos_install_oracle_11gr2_7.png"></a></p>
+<p>生效用户环境变量<br>cd ~ &amp;&amp; source .bash_profile</p>
+<p><a href="/images/centos_install_oracle_11gr2_8.png"><img src="/images/centos_install_oracle_11gr2_8.png"></a> 使用 Xftp 的上传 linux.x64_11gR2_database_1of2.zip、linux.x64_11gR2_database_2of2.zip 2 个压缩包到 /home/oracle/ <a href="/images/centos_install_oracle_11gr2_9.png"><img src="/images/centos_install_oracle_11gr2_9.png"></a></p>
+<p>解压2个压缩包，解压后文件会在 /home/oracle/database/<br>unzip linux.x64_11gR2_database_1of2.zip<br>unzip linux.x64_11gR2_database_2of2.zip</p>
+<p>解压完成，如图： <a href="/images/centos_install_oracle_11gr2_10.png"><img src="/images/centos_install_oracle_11gr2_10.png"></a></p>
+<h2 id="配置-Oracle-数据库安装响应文件（db-install-rsp）"><a href="#配置-Oracle-数据库安装响应文件（db-install-rsp）" class="headerlink" title="配置 Oracle 数据库安装响应文件（db_install.rsp）"></a>配置 Oracle 数据库安装响应文件（db_install.rsp）</h2><p>切换成 oracle 用户<br>su oracle</p>
 <p>#备份 /home/oracle/database/response 下文件到 /home/oracle/rsp/<br>cp -r /home/oracle/database/response /home/oracle/rsp</p>
 <p>配置安装响应文件 /home/oracle/rsp/db_install.rsp文件，这里建议先用 Xftp 下载到本地配置参数，再上传，db_install.rsp文件配置示例如下：</p>
 <p>oracle.install.responseFileVersion=/oracle/install/rspfmt_dbinstall_response_schema_v11_2_0</p>
@@ -1223,41 +701,41 @@ public void setGmtCreated(Date gmtCreated) &#123;
 <h1 id="最小-256M-我是学习就选择最小了"><a href="#最小-256M-我是学习就选择最小了" class="headerlink" title="最小 256M 我是学习就选择最小了"></a>最小 256M 我是学习就选择最小了</h1><p>oracle.install.db.config.starterdb.memoryLimit=256</p>
 <h1 id="是否安装学习的scott和hr"><a href="#是否安装学习的scott和hr" class="headerlink" title="是否安装学习的scott和hr"></a>是否安装学习的scott和hr</h1><p>oracle.install.db.config.starterdb.installExampleSchemas=false<br>oracle.install.db.config.starterdb.enableSecuritySettings=true</p>
 <h1 id="全局密码设置成-123456-安装时会提示密码简单问题，可忽略"><a href="#全局密码设置成-123456-安装时会提示密码简单问题，可忽略" class="headerlink" title="全局密码设置成 123456 (安装时会提示密码简单问题，可忽略)"></a>全局密码设置成 123456 (安装时会提示密码简单问题，可忽略)</h1><p>oracle.install.db.config.starterdb.password.ALL=123456<br>oracle.install.db.config.starterdb.control=DB_CONTROL<br>oracle.install.db.config.starterdb.dbcontrol.enableEmailNotification=false<br>oracle.install.db.config.starterdb.automatedBackup.enable=false<br>oracle.install.db.config.starterdb.storageType=FILE_SYSTEM_STORAGE<br>oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=/u01/app/oracle/oradata<br>DECLINE_SECURITY_UPDATES=true</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_11.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_11.png"></a> 修改完成保存并上传到 /home/oracle /rsp ，覆盖 db_install.rsp。</p>
-<h2 id="静默安装-Oracle-数据库"><a href="#静默安装-Oracle-数据库" class="headerlink" title="静默安装 Oracle 数据库"></a>静默安装 Oracle 数据库</h2><p># 切换成 oracle 用户<br>su oracle</p>
-<p># 安装，会出现密码不规范的警告，可忽略<br>/home/oracle/database/runInstaller -silent -ignorePrereq -responseFile /home/oracle/rsp/db_install.rsp</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_14.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_14.png"></a></p>
-<p># 带有图形界面的系统可能会出现如下报错，无报错可忽略：<br> [oracle@localhost rsp]$ Exception in thread “main” java.lang.NoClassDefFoundError<br>at java.lang.Class.forName0(Native Method)<br>at java.lang.Class.forName(Class.java:164)<br>at java.awt.Toolkit$2.run(Toolkit.java:821)<br>at java.security.AccessController.doPrivileged(Native Method)<br>at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:804)<br>at javax.swing.UIManager.initialize(UIManager.java:1262)<br>at javax.swing.UIManager.maybeInitialize(UIManager.java:1245)<br>at javax.swing.UIManager.getUI(UIManager.java:851)<br>at javax.swing.JPanel.updateUI(JPanel.java:104)<br>at javax.swing.JPanel.<init>(JPanel.java:64)<br>at javax.swing.JPanel.<init>(JPanel.java:87)<br>at javax.swing.JPanel.<init>(JPanel.java:95)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMUI.<init>(OiifoOCMUI.java:125)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMInterfaceManager.<init>(OiifoOCMInterfaceManager.java:79)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMInterfaceManager.getInstance(OiifoOCMInterfaceManager.java:124)<br>at oracle.install.ivw.db.driver.DBInstaller.run(DBInstaller.java:123)<br>at oracle.install.commons.util.Application.startup(Application.java:869)<br>at oracle.install.commons.flow.FlowApplication.startup(FlowApplication.java:164)<br>at oracle.install.commons.flow.FlowApplication.startup(FlowApplication.java:181)<br>at oracle.install.commons.base.driver.common.Installer.startup(Installer.java:265)<br>at oracle.install.ivw.db.driver.DBInstaller.startup(DBInstaller.java:114)<br>at oracle.install.ivw.db.driver.DBInstaller.main(DBInstaller.java:132)</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_12.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_12.png"></a></p>
-<p># 出现如上报错是因为系统中设置了DISPLAY环境变量，执行以下命令即可：<br>unset DISPLAY</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_13.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_13.png"></a></p>
-<p># 再次执行 oracle 数据库安装命令<br>/home/oracle/database/runInstaller -silent -ignorePrereq -responseFile /home/oracle/rsp/db_install.rsp</p>
-<p># 查看安装过程建议另开一个shell 执行如下命令查看<br>tail -f /home/oracle/ora11g/oraInventory/logs/ installActions2018-06-29_09-57-41AM.log</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_15.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_15.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_16.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_16.png"></a> 安装完成。</p>
-<p># 切换成 root 用户<br>su root</p>
-<p># 执行以下脚本<br>/u01/app/oracle/product/11.2.0/dbhome_1/root.sh</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_17.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_17.png"></a></p>
-<p># 切换成 oracle 用户<br>su oracle</p>
-<p># sqlplus 登录<br>sqlplus / as sysdba</p>
+<p><a href="/images/centos_install_oracle_11gr2_11.png"><img src="/images/centos_install_oracle_11gr2_11.png"></a> 修改完成保存并上传到 /home/oracle /rsp ，覆盖 db_install.rsp。</p>
+<h2 id="静默安装-Oracle-数据库"><a href="#静默安装-Oracle-数据库" class="headerlink" title="静默安装 Oracle 数据库"></a>静默安装 Oracle 数据库</h2><p>切换成 oracle 用户<br>su oracle</p>
+<p>安装，会出现密码不规范的警告，可忽略<br>/home/oracle/database/runInstaller -silent -ignorePrereq -responseFile /home/oracle/rsp/db_install.rsp</p>
+<p><a href="/images/centos_install_oracle_11gr2_14.png"><img src="/images/centos_install_oracle_11gr2_14.png"></a></p>
+<p>带有图形界面的系统可能会出现如下报错，无报错可忽略：<br> [oracle@localhost rsp]$ Exception in thread “main” java.lang.NoClassDefFoundError<br>at java.lang.Class.forName0(Native Method)<br>at java.lang.Class.forName(Class.java:164)<br>at java.awt.Toolkit$2.run(Toolkit.java:821)<br>at java.security.AccessController.doPrivileged(Native Method)<br>at java.awt.Toolkit.getDefaultToolkit(Toolkit.java:804)<br>at javax.swing.UIManager.initialize(UIManager.java:1262)<br>at javax.swing.UIManager.maybeInitialize(UIManager.java:1245)<br>at javax.swing.UIManager.getUI(UIManager.java:851)<br>at javax.swing.JPanel.updateUI(JPanel.java:104)<br>at javax.swing.JPanel.<init>(JPanel.java:64)<br>at javax.swing.JPanel.<init>(JPanel.java:87)<br>at javax.swing.JPanel.<init>(JPanel.java:95)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMUI.<init>(OiifoOCMUI.java:125)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMInterfaceManager.<init>(OiifoOCMInterfaceManager.java:79)<br>at oracle.sysman.oii.oiif.oiifo.OiifoOCMInterfaceManager.getInstance(OiifoOCMInterfaceManager.java:124)<br>at oracle.install.ivw.db.driver.DBInstaller.run(DBInstaller.java:123)<br>at oracle.install.commons.util.Application.startup(Application.java:869)<br>at oracle.install.commons.flow.FlowApplication.startup(FlowApplication.java:164)<br>at oracle.install.commons.flow.FlowApplication.startup(FlowApplication.java:181)<br>at oracle.install.commons.base.driver.common.Installer.startup(Installer.java:265)<br>at oracle.install.ivw.db.driver.DBInstaller.startup(DBInstaller.java:114)<br>at oracle.install.ivw.db.driver.DBInstaller.main(DBInstaller.java:132)</p>
+<p><a href="/images/centos_install_oracle_11gr2_12.png"><img src="/images/centos_install_oracle_11gr2_12.png"></a></p>
+<p>出现如上报错是因为系统中设置了DISPLAY环境变量，执行以下命令即可：<br>unset DISPLAY</p>
+<p><a href="/images/centos_install_oracle_11gr2_13.png"><img src="/images/centos_install_oracle_11gr2_13.png"></a></p>
+<p>再次执行 oracle 数据库安装命令<br>/home/oracle/database/runInstaller -silent -ignorePrereq -responseFile /home/oracle/rsp/db_install.rsp</p>
+<p>查看安装过程建议另开一个shell 执行如下命令查看<br>tail -f /home/oracle/ora11g/oraInventory/logs/ installActions2018-06-29_09-57-41AM.log</p>
+<p><a href="/images/centos_install_oracle_11gr2_15.png"><img src="/images/centos_install_oracle_11gr2_15.png"></a> <a href="/images/centos_install_oracle_11gr2_16.png"><img src="/images/centos_install_oracle_11gr2_16.png"></a> 安装完成。</p>
+<p>切换成 root 用户<br>su root</p>
+<p>执行以下脚本<br>/u01/app/oracle/product/11.2.0/dbhome_1/root.sh</p>
+<p><a href="/images/centos_install_oracle_11gr2_17.png"><img src="/images/centos_install_oracle_11gr2_17.png"></a></p>
+<p>切换成 oracle 用户<br>su oracle</p>
+<p>sqlplus 登录<br>sqlplus / as sysdba</p>
 <h1 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h1><p>select status from v$instance;</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_18.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_18.png"></a></p>
-<h2 id="配置防火墙（可忽略）"><a href="#配置防火墙（可忽略）" class="headerlink" title="配置防火墙（可忽略）"></a>配置防火墙（可忽略）</h2><p># 切换成 root 用户<br>su root</p>
-<p># 查看 1521 数据库远程连接端口<br>netstat -angrep 1521</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_19.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_19.png"></a> 1521 端口监听中。</p>
-<p># 防火墙  添加 1521 端口永久开放公共连接规则<br>firewall-cmd –zone=public –add-port=1521/tcp –permanent</p>
+<p><a href="/images/centos_install_oracle_11gr2_18.png"><img src="/images/centos_install_oracle_11gr2_18.png"></a></p>
+<h2 id="配置防火墙（可忽略）"><a href="#配置防火墙（可忽略）" class="headerlink" title="配置防火墙（可忽略）"></a>配置防火墙（可忽略）</h2><p>切换成 root 用户<br>su root</p>
+<p>查看 1521 数据库远程连接端口<br>netstat -angrep 1521</p>
+<p><a href="/images/centos_install_oracle_11gr2_19.png"><img src="/images/centos_install_oracle_11gr2_19.png"></a> 1521 端口监听中。</p>
+<p>防火墙  添加 1521 端口永久开放公共连接规则<br>firewall-cmd –zone=public –add-port=1521/tcp –permanent</p>
 <h1 id="重新加载防火墙规则"><a href="#重新加载防火墙规则" class="headerlink" title="重新加载防火墙规则"></a>重新加载防火墙规则</h1><p>firewall-cmd –reload</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_20.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_20.png"></a></p>
-<h2 id="数据库-实例启动及关闭"><a href="#数据库-实例启动及关闭" class="headerlink" title="数据库/实例启动及关闭"></a>数据库/实例启动及关闭</h2><p># 切换成 root 用户<br>su root</p>
+<p><a href="/images/centos_install_oracle_11gr2_20.png"><img src="/images/centos_install_oracle_11gr2_20.png"></a></p>
+<h2 id="数据库-实例启动及关闭"><a href="#数据库-实例启动及关闭" class="headerlink" title="数据库/实例启动及关闭"></a>数据库/实例启动及关闭</h2><p>切换成 root 用户<br>su root</p>
 <p>修改 oracle 服务启动配置，使启动数据库服务也会同时启动实例</p>
 <p>vi /etc/oratab</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_21.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_21.png"></a> 将</p>
+<p><a href="/images/centos_install_oracle_11gr2_21.png"><img src="/images/centos_install_oracle_11gr2_21.png"></a> 将</p>
 <p>Orcl:/u01/app/oracle/product/11.2.0/dbhome_1:N</p>
 <p>改成</p>
 <p>Orcl:/u01/app/oracle/product/11.2.0/dbhome_1:Y</p>
 <p>保存后，重启数据库使配置生效：</p>
-<p># 关闭数据库<br>dbshut $ORACLE_HOME</p>
+<p>关闭数据库<br>dbshut $ORACLE_HOME</p>
 <h1 id="启动数据库"><a href="#启动数据库" class="headerlink" title="启动数据库"></a>启动数据库</h1><p>dbstart $ORACLE_HOME</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_22.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/centos_install_oracle_11gr2_22.png"></a></p>
+<p><a href="/images/centos_install_oracle_11gr2_22.png"><img src="/images/centos_install_oracle_11gr2_22.png"></a></p>
 <h2 id="远程连接-oracle-数据库"><a href="#远程连接-oracle-数据库" class="headerlink" title="远程连接 oracle 数据库"></a>远程连接 oracle 数据库</h2><p>SID 连接：</p>
 <p>sqlplus sys/123456@ip:1521/orcl as sysdba</p>
 <h1 id="或"><a href="#或" class="headerlink" title="或"></a>或</h1><p>conn sys/123456@ip:1521/orcl as sysdba</p>
@@ -1268,7 +746,7 @@ public void setGmtCreated(Date gmtCreated) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/06/30/centos-7-%E5%AE%89%E8%A3%85-oracle-11gr2-2/" data-id="ckfopr4rv000ugu2pem6n9dve" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/06/30/centos-7-%E5%AE%89%E8%A3%85-oracle-11gr2-2/" data-id="ckfor4ks3000stn2p27v55204" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li></ul>

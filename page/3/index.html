@@ -96,14 +96,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-1.png"></a> 这是代码： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-2.png"></a> 这是显示结果： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-3.png"></a> 后来查看了下EasyUI的官方文档（<a target="_blank" rel="noopener" href="https://www.jeasyui.com/documentation/index.php">https://www.jeasyui.com/documentation/index.php</a>），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因为textField的作用是在选择某项后才显示的。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-4.png"></a> 那么肿么解决name的显示呢？ 我在文档中发现combotree依赖于combo和tree两个组件，那我就找找这两个组件下有什么解决思路，于是我发现tree下有个方法loadFilter，解决思路有了。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-5.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-6.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-7.png"></a> 代码如下：</p>
+        <p>之前在使用EasyUI combotree时候发现了一个很奇怪的问题，就是我设置了textField却显示undefined，如下图： 这是请求数据： <a href="/images/easyui-textField-1.png"><img src="/images/easyui-textField-1.png"></a> 这是代码： <a href="/images/easyui-textField-2.png"><img src="/images/easyui-textField-2.png"></a> 这是显示结果： <a href="/images/easyui-textField-3.png"><img src="/images/easyui-textField-3.png"></a> 后来查看了下EasyUI的官方文档（<a target="_blank" rel="noopener" href="https://www.jeasyui.com/documentation/index.php">https://www.jeasyui.com/documentation/index.php</a>），发现textField在1.5.2版本及之后才有的，但是我是最新版却还是不行，因为textField的作用是在选择某项后才显示的。 <a href="/images/easyui-textField-4.png"><img src="/images/easyui-textField-4.png"></a> 那么肿么解决name的显示呢？ 我在文档中发现combotree依赖于combo和tree两个组件，那我就找找这两个组件下有什么解决思路，于是我发现tree下有个方法loadFilter，解决思路有了。 <a href="/images/easyui-textField-5.png"><img src="/images/easyui-textField-5.png"></a> <a href="/images/easyui-textField-6.png"><img src="/images/easyui-textField-6.png"></a> <a href="/images/easyui-textField-7.png"><img src="/images/easyui-textField-7.png"></a> 代码如下：</p>
 <p>loadFilter: function (items) {<br>  if(items!==undefined){<br>    ret = [];<br>    console.log(items);<br>    $.each(items, function (i, e) {<br>      e.text=e.name;<br>      ret.push(e);<br>    });<br>  }<br>  return ret;<br>}</p>
-<p>最终解决了问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/09/easyui-textField-8.png"></a></p>
+<p>最终解决了问题： <a href="/images/easyui-textField-8.png"><img src="/images/easyui-textField-8.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ckfopr4s30017gu2p9gjebgsm" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/09/01/easyui-combotree-textfield%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" data-id="ckfor4ksh001ctn2p185g4k8v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EasyUI/" rel="tag">EasyUI</a></li></ul>
@@ -143,13 +143,13 @@
       
         <p>大家在开发Web程序时肯定遇到过设计数据库表结构和数据填充的情况，有些是中小型企业级程序数据库结构设计更加复杂，当然我也遇到过此类烦恼，所以顺手写了几个脚本文件提高效率。 数据库表结构脚本（migrate.cmd）运行代码如下：</p>
 <p>chcp 65001</p>
-<p>@REM Author:<a href="mailto:&#x67;&#x6f;&#x64;&#x63;&#104;&#x65;&#101;&#x73;&#x65;&#64;&#x6f;&#117;&#x74;&#108;&#111;&#x6f;&#x6b;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#x6f;&#x64;&#x63;&#104;&#x65;&#101;&#x73;&#x65;&#64;&#x6f;&#117;&#x74;&#108;&#111;&#x6f;&#x6b;&#x2e;&#x63;&#111;&#x6d;</a><br>@REM Description:MYSQL数据库迁移脚本<br>@REM Platform:Windows</p>
+<p>@REM Author:<a href="mailto:&#103;&#x6f;&#x64;&#x63;&#104;&#x65;&#x65;&#x73;&#101;&#x40;&#x6f;&#117;&#x74;&#108;&#111;&#111;&#107;&#46;&#x63;&#111;&#109;">&#103;&#x6f;&#x64;&#x63;&#104;&#x65;&#x65;&#x73;&#101;&#x40;&#x6f;&#117;&#x74;&#108;&#111;&#111;&#107;&#46;&#x63;&#111;&#109;</a><br>@REM Description:MYSQL数据库迁移脚本<br>@REM Platform:Windows</p>
 <p>@echo off</p>
 <p>set “MYSQL_HOME=D:\dev\mysql\mysql5.7.14”<br>set “HOST=localhost”<br>set “PORT=3306”<br>set “USER=testuser”<br>set “PASSWORD=testpwd”<br>set “DATABASE=testdb”<br>set “TABLES=D:\dev\testdb\tables”<br>set “EXEC=%MYSQL_HOME%\bin\mysql.exe -h%HOST% -P%PORT% -u%USER% -p%PASSWORD% -D%DATABASE%&lt;%TABLES%”</p>
 <p>%EXEC%\deleteTables.sql<br>%EXEC%\1_ict_logs_table.sql<br>echo finished.</p>
 <p>复制以上代码到文件名为migrate.cmd的文件中，然后根据自己需求修改 MYSQL_HOME、HOST、PORT、USER、PASSWORD、TABLES等变量的值即可。 github gist:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/0b77450a167dbe5a354af93c048338c4">https://gist.github.com/godcheese/0b77450a167dbe5a354af93c048338c4</a>   数据库数据填充脚本（dbseed.cmd）运行代码如下：</p>
 <p>chcp 65001</p>
-<p>@REM Author:<a href="mailto:&#x67;&#x6f;&#100;&#99;&#104;&#101;&#x65;&#115;&#x65;&#64;&#111;&#x75;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x6f;&#100;&#99;&#104;&#101;&#x65;&#115;&#x65;&#64;&#111;&#x75;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#x63;&#x6f;&#x6d;</a><br>@REM Description:MYSQL数据库填充脚本<br>@REM Platform:Windows</p>
+<p>@REM Author:<a href="mailto:&#x67;&#x6f;&#x64;&#x63;&#104;&#101;&#x65;&#x73;&#x65;&#64;&#x6f;&#x75;&#116;&#x6c;&#111;&#x6f;&#x6b;&#x2e;&#99;&#111;&#x6d;">&#x67;&#x6f;&#x64;&#x63;&#104;&#101;&#x65;&#x73;&#x65;&#64;&#x6f;&#x75;&#116;&#x6c;&#111;&#x6f;&#x6b;&#x2e;&#99;&#111;&#x6d;</a><br>@REM Description:MYSQL数据库填充脚本<br>@REM Platform:Windows</p>
 <p>@echo off</p>
 <p>set “MYSQL_HOME=D:\dev\mysql\mysql5.7.14”<br>set “HOST=localhost”<br>set “PORT=3306”<br>set “USER=testuser”<br>set “PASSWORD=testpwd”<br>set “DATABASE=testdb”<br>set “DATA=D:\dev\testdb\data”<br>set “EXEC=%MYSQL_HOME%\bin\mysql.exe -h%HOST% -P%PORT% -u%USER% -p%PASSWORD% -D%DATABASE%&lt;%DATA%”</p>
 <p>%EXEC%\1_ict_logs_data.sql<br>%EXEC%\2_ict_areas_data.sql<br>echo finished.</p>
@@ -158,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/" data-id="ckfopr4sy002ggu2pc25l1v2x" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/08/19/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%A1%AB%E5%85%85%E7%9A%84cmd%E8%84%9A%E6%9C%AC%EF%BC%88bat%E6%89%B9%E5%A4%84%E7%90%86%EF%BC%89/" data-id="ckfor4ktc002gtn2p5mevftlg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cmd/" rel="tag">cmd</a></li></ul>
@@ -208,17 +208,17 @@
                 filename = URLEncoder.encode(filename,&quot;UTF-8&quot;);
 
                 // 编码后文件名中的空格被替换为“+”号，所以此处将替换编码后文件名中“+”号为UTF-8中空格的“%20”编码
-                filename = filename.replaceAll(&quot;\\\\+&quot;,&quot;%20&quot;);
+                filename = filename.replaceAll(&quot;\+&quot;,&quot;%20&quot;);
 
                 // 设置下载文件内容长度
                 httpServletResponse.setContentLengthLong(file.length());
 
                 // 设置文件名
-                httpServletResponse.setHeader(&quot;Content-Disposition&quot;,  String.format(&quot;attachment; filename=\\&quot;%s\\&quot;&quot;,filename));
+                httpServletResponse.setHeader(&quot;Content-Disposition&quot;,  String.format(&quot;attachment; filename=\&quot;%s\&quot;&quot;,filename));
 
                 System.out.println(httpServletResponse.getHeader(&quot;Content-Disposition&quot;));
 
-                byte\[\] bytes = new byte\[1024\];
+                byte[] bytes = new byte[1024];
 
                 FileInputStream fileInputStream =null;
                 BufferedInputStream bufferedInputStream = null;
@@ -270,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/" data-id="ckfopr4sv002agu2peey635pa" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/08/17/java%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A7%A3%E5%86%B3java%E4%B8%8B%E8%BD%BD%E4%B8%AD%E6%96%87%E6%96%87%E4%BB%B6%E5%90%8D%E6%96%87%E4%BB%B6%E6%97%B6%E4%B8%8D%E6%AD%A3%E5%B8%B8%E9%97%AE/" data-id="ckfor4kt10028tn2pdsuphb5z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
@@ -315,76 +315,13 @@
 <li>代码复用率更高</li>
 </ul>
 <p>基础组件有Migrate、Seeder等 安装： 使用</p>
-<p>java -jar java2sql migration:UsersMigration<br>java2sql migration:UsersMigration // 这句必需在系统设置环境变量后才能正常运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -jar java2sql migration:UsersMigration</span><br><span class="line">java2sql migration:UsersMigration &#x2F;&#x2F; 这句必需在系统设置环境变量后才能正常运行</span><br></pre></td></tr></table></figure>
 <p>在 migrations 生成如下 *.java 文件，每个文件代表一个数据表迁移，每个文件都有一个public static void main(String[] args) 方法。 Template migration class java 代码实例：</p>
-<p>package com.gioov.java2sql;</p>
-<p>import com.gioov.java2sql.adapter.DatabaseAdapter;<br>import com.gioov.java2sql.adapter.FieldAdapter;<br>import com.gioov.java2sql.adapter.mysql.MySqlAdapter;<br>import com.gioov.java2sql.adapter.mysql.MysqlFieldAdapter;<br>import com.gioov.java2sql.adapter.mysql.MysqlTableAdapter;</p>
-<p>/**<br> * Created by godcheese on 2017/7/16.<br> */<br>public class TemplateMigration {</p>
-<pre><code>public static void main(String\[\] arg)&#123;
-
-    /\*\*
-     \*
-     \*  Init database adapter
-     \*  Init table adapter
-     \*  Init migration
-     \*
-      \*/
-
-    DatabaseAdapter database=new MySqlAdapter();
-    database.setName(&quot;test&quot;).setCharacterSet(&quot;utf8mb4&quot;).setCollate(&quot;utf8mb4&quot;);
-    MysqlTableAdapter table =new MysqlTableAdapter();
-    table.setName(&quot;NewTable&quot;);
-    Migration migration =new Migration(database,table);
-
-
-    /\*\*
-     \* Init field adapter and set properties
-     \* Field Name:id
-     \* Field Type:bigint
-     \* Field Length:20
-     \* Filed Primary Key:true
-     \* Filed Auto Increment:true
-     \* Field Null:false
-     \* Field Unsigned:false
-     \*
-     \*/
-    FieldAdapter idField=new MysqlFieldAdapter().setName(&quot;id&quot;).setType(&quot;bigint&quot;).setLength(20).setPrimaryKey(true).setAutoIncrement(true).setIsNull(false).setIsUnsigned(false);
-
-    /\*\*
-     \* Init field adapter and set properties
-     \* Field Name:name
-     \* Field Type:varchar
-     \* Field Length:50
-     \* Filed Null:false
-     \*
-     \*/
-
-    FieldAdapter nameField=new MysqlFieldAdapter().setName(&quot;name&quot;).setType(&quot;varchar&quot;).setLength(50).setIsNull(false);
-
-
-    // Add database table fields
-  String sql=  migration.addField(idField).addField(nameField).execute();
-
-  System.out.println(sql);
-
-    /\*\*
-     \*
-     \*
-     \* Result Sql: DROP TABLE IF EXISTS \`NewTable\`;
-     \* CREATE TABLE \`NewTable\` (  \`id\`  bigint(20) NOT NULL ,
-     \* \`name\`  varchar(50) CHARACTER SET utf8mb4  COLLATE utf8mb4  NOT NULL ,
-     \* PRIMARY KEY (\`id\`) )
-     \* ENGINE= InnoDB;
-     \*
-     \*/
-
-&#125;</code></pre>
-<p>}</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.java2sql;</span><br><span class="line"></span><br><span class="line">import com.gioov.java2sql.adapter.DatabaseAdapter;</span><br><span class="line">import com.gioov.java2sql.adapter.FieldAdapter;</span><br><span class="line">import com.gioov.java2sql.adapter.mysql.MySqlAdapter;</span><br><span class="line">import com.gioov.java2sql.adapter.mysql.MysqlFieldAdapter;</span><br><span class="line">import com.gioov.java2sql.adapter.mysql.MysqlTableAdapter;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Created by godcheese on 2017&#x2F;7&#x2F;16.</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class TemplateMigration &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] arg)&#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;**</span><br><span class="line">         *</span><br><span class="line">         *  Init database adapter</span><br><span class="line">         *  Init table adapter</span><br><span class="line">         *  Init migration</span><br><span class="line">         *</span><br><span class="line">          *&#x2F;</span><br><span class="line"></span><br><span class="line">        DatabaseAdapter database&#x3D;new MySqlAdapter();</span><br><span class="line">        database.setName(&quot;test&quot;).setCharacterSet(&quot;utf8mb4&quot;).setCollate(&quot;utf8mb4&quot;);</span><br><span class="line">        MysqlTableAdapter table &#x3D;new MysqlTableAdapter();</span><br><span class="line">        table.setName(&quot;NewTable&quot;);</span><br><span class="line">        Migration migration &#x3D;new Migration(database,table);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#x2F;**</span><br><span class="line">         * Init field adapter and set properties</span><br><span class="line">         * Field Name:id</span><br><span class="line">         * Field Type:bigint</span><br><span class="line">         * Field Length:20</span><br><span class="line">         * Filed Primary Key:true</span><br><span class="line">         * Filed Auto Increment:true</span><br><span class="line">         * Field Null:false</span><br><span class="line">         * Field Unsigned:false</span><br><span class="line">         *</span><br><span class="line">         *&#x2F;</span><br><span class="line">        FieldAdapter idField&#x3D;new MysqlFieldAdapter().setName(&quot;id&quot;).setType(&quot;bigint&quot;).setLength(20).setPrimaryKey(true).setAutoIncrement(true).setIsNull(false).setIsUnsigned(false);</span><br><span class="line"></span><br><span class="line">        &#x2F;**</span><br><span class="line">         * Init field adapter and set properties</span><br><span class="line">         * Field Name:name</span><br><span class="line">         * Field Type:varchar</span><br><span class="line">         * Field Length:50</span><br><span class="line">         * Filed Null:false</span><br><span class="line">         *</span><br><span class="line">         *&#x2F;</span><br><span class="line"></span><br><span class="line">        FieldAdapter nameField&#x3D;new MysqlFieldAdapter().setName(&quot;name&quot;).setType(&quot;varchar&quot;).setLength(50).setIsNull(false);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Add database table fields</span><br><span class="line">      String sql&#x3D;  migration.addField(idField).addField(nameField).execute();</span><br><span class="line"></span><br><span class="line">      System.out.println(sql);</span><br><span class="line"></span><br><span class="line">        &#x2F;**</span><br><span class="line">         *</span><br><span class="line">         *</span><br><span class="line">         * Result Sql: DROP TABLE IF EXISTS &#96;NewTable&#96;;</span><br><span class="line">         * CREATE TABLE &#96;NewTable&#96; (  &#96;id&#96;  bigint(20) NOT NULL ,</span><br><span class="line">         * &#96;name&#96;  varchar(50) CHARACTER SET utf8mb4  COLLATE utf8mb4  NOT NULL ,</span><br><span class="line">         * PRIMARY KEY (&#96;id&#96;) )</span><br><span class="line">         * ENGINE&#x3D; InnoDB;</span><br><span class="line">         *</span><br><span class="line">         *&#x2F;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/07/16/java2sql/" data-id="ckfopr4sr0025gu2p4rup69z7" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/07/16/java2sql/" data-id="ckfor4kt00025tn2pczng5h8b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
@@ -422,18 +359,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Maven 是 Java Web 开发中必备的软件之一，其主要功能就是管理开发中依赖库，类似于node的Node Package Manager 和 PHP 的 composer。好了废话不多说，现在就来仔细操作一遍安装过程，不了解的新手可以看看，大佬可以绕行，因为挺简单的。 Maven 下载地址：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> 安装前请检查自己的电脑系统是否安装了JDK 1.7及以上（<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index.html">http://www.oracle.com/technetwork/java/index.html</a>） 第一步：先下载 Maven Binary zip archive <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-install-for-windows.png"></a> 第二步：解压 zip 文件 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-unzip.png"></a> 第三步：设置环境 开始菜单=&gt;计算机=&gt;属性=&gt;高级系统设置=&gt;环境变量=&gt;系统变量=&gt;新建名为 M2_HOME 的变量值为之前 Maven 解压文件的地址，如我的为</p>
+        <p>Maven 是 Java Web 开发中必备的软件之一，其主要功能就是管理开发中依赖库，类似于node的Node Package Manager 和 PHP 的 composer。好了废话不多说，现在就来仔细操作一遍安装过程，不了解的新手可以看看，大佬可以绕行，因为挺简单的。 Maven 下载地址：<a target="_blank" rel="noopener" href="http://maven.apache.org/download.cgi">http://maven.apache.org/download.cgi</a> 安装前请检查自己的电脑系统是否安装了JDK 1.7及以上（<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/index.html">http://www.oracle.com/technetwork/java/index.html</a>） 第一步：先下载 Maven Binary zip archive <a href="/images/maven-install-for-windows.png"><img src="/images/maven-install-for-windows.png"></a> 第二步：解压 zip 文件 <a href="/images/maven-unzip.png"><img src="/images/maven-unzip.png"></a> 第三步：设置环境 开始菜单=&gt;计算机=&gt;属性=&gt;高级系统设置=&gt;环境变量=&gt;系统变量=&gt;新建名为 M2_HOME 的变量值为之前 Maven 解压文件的地址，如我的为</p>
 <p>F:\dev\apache-maven-3.5.0</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable.png"></a> 然后在 Path 变量中加入</p>
+<p><a href="/images/maven-set-system-variable.png"><img src="/images/maven-set-system-variable.png"></a> 然后在 Path 变量中加入</p>
 <p>;%M2_HOME%\bin</p>
-<p>如下图 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-set-system-variable-for-path.png"></a> 然后保存即可。 最后才 cmd 中运行</p>
+<p>如下图 <a href="/images/maven-set-system-variable-for-path.png"><img src="/images/maven-set-system-variable-for-path.png"></a> 然后保存即可。 最后才 cmd 中运行</p>
 <p>mvn -version</p>
-<p>可正常输出 Maven 信息则代表安装并运行成功。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/07/maven-version-for-windows.png"></a></p>
+<p>可正常输出 Maven 信息则代表安装并运行成功。 <a href="/images/maven-version-for-windows.png"><img src="/images/maven-version-for-windows.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" data-id="ckfopr4u60049gu2pcjrqamol" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/07/07/%E3%80%90java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91windows-7-%E5%AE%89%E8%A3%85maven%EF%BC%88%E6%96%B0%E6%89%8B%E5%8F%AF%E7%9C%8B%EF%BC%8C%E5%A4%A7%E4%BD%AC%E7%BB%95%E8%A1%8C%EF%BC%89/" data-id="ckfor4kuo004ctn2p0b7q1qb8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/" rel="tag">Maven</a></li></ul>
@@ -480,12 +417,12 @@
 <h1 id="Linux-platform-bash-file"><a href="#Linux-platform-bash-file" class="headerlink" title="Linux platform bash file"></a>Linux platform bash file</h1><p>echo “正在添加文件…”<br>git add .<br>echo -n “正在提交备注…，请填写备注（可空）:”<br>read remarks<br>if [ ! -n “$remarks” ];then<br>    remarks=”常规提交”<br>fi<br>git commit -m “$remarks”<br>echo “正在开始提交代码…”<br>git push origin master<br>echo “代码提交成功，正在关闭…”</p>
 <p>Gist（或需<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/657">科学上网</a>）:<a target="_blank" rel="noopener" href="https://gist.github.com/godcheese/2c4ab58fc03674fd0ce523701cd88075">https://gist.github.com/godcheese/2c4ab58fc03674fd0ce523701cd88075</a> 将其拷贝并命名成 git-push.sh ，然后打开终端或命令行工具，输入</p>
 <p>bash git-push.sh</p>
-<p>写入一段脚本就可实现，它会提示你本次提交是否写入备注信息，不写则默认备注为“常规提交”。<a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/git-push-bash-auto.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/git-push-bash-auto.png"></a> 更多git相关知识：<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/379">https://www.godcheese.com/index.php/379</a></p>
+<p>写入一段脚本就可实现，它会提示你本次提交是否写入备注信息，不写则默认备注为“常规提交”。<a href="/images/git-push-bash-auto.png"><img src="/images/git-push-bash-auto.png"></a> 更多git相关知识：<a target="_blank" rel="noopener" href="https://www.godcheese.com/index.php/379">https://www.godcheese.com/index.php/379</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/" data-id="ckfopr4s7001fgu2p4v255765" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/29/git-push-%E8%87%AA%E5%8A%A8%E5%8C%96-bash-%E8%84%9A%E6%9C%AC/" data-id="ckfor4ksj001gtn2pf3go8yij" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
@@ -523,21 +460,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br>`users` add constraint `users_role_id_foreign` foreign key (`role_id`) references `role<br>s` (`id`) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1.png"></a></p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
+        <h2 id="外键约束添加错误"><a href="#外键约束添加错误" class="headerlink" title="外键约束添加错误"></a>外键约束添加错误</h2><p>[Illuminate\Database\QueryException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint (SQL: alter table<br><code>users</code> add constraint <code>users_role_id_foreign</code> foreign key (<code>role_id</code>) references <code>role s</code> (<code>id</code>) on delete cascade on update cascade)<br>[PDOException]<br>SQLSTATE[HY000]: General error: 1215 Cannot add foreign key constraint</p>
+<p><a href="/images/php-laravel-artisan-migrate-error1.png"><img src="/images/php-laravel-artisan-migrate-error1.png"></a></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>1． 将欲添加外键约束的数据表 migration 文件放在参考表 migration 之后（通过文件重命名方式），如下， <a href="/images/php-laravel-artisan-migration-sort.png"><img src="/images/php-laravel-artisan-migration-sort.png"></a> 并在命令行运行（此项操作很重要）</p>
 <p>composer dump-autoload</p>
-<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
+<p>刷新 autoload-classmap 2． 需确认添加外键约束的字段与参考字段其字段属性必须相同，如下： <a href="/images/php-laravel-artisan-migrate-error1-idea2.png"><img src="/images/php-laravel-artisan-migrate-error1-idea2.png"></a> <a href="/images/php-laravel-artisan-migrate-error1-idea1.png"><img src="/images/php-laravel-artisan-migrate-error1-idea1.png"></a></p>
 <p>// 外键约束<br>$table-&gt;foreign(‘role_id’)-&gt;references(‘id’)-&gt;on(‘roles’)-&gt;onUpdate(‘cascade’)-&gt;onDelete(‘cascade’);</p>
 <p>这句代码代码的欲添加外键约束的表是 users ，表字段是 role_id ；参考表是 roles ，参考字段是 roles 的 id 。</p>
 <h2 id="修改数据表默认存储引擎"><a href="#修改数据表默认存储引擎" class="headerlink" title="修改数据表默认存储引擎"></a>修改数据表默认存储引擎</h2><p>在 migration 文件内添加一句代码来指定数据库引擎（将存储引擎改成InnoDB，支持事务处理）：</p>
 <p>$table-&gt;engine=’InnoDB’;</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-artisan-migration-engine.png"></a></p>
+<p><a href="/images/php-artisan-migration-engine.png"><img src="/images/php-artisan-migration-engine.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfopr4uc004jgu2p0c539btq" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91laravel-%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BBmigrate%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%88%E6%93%8D%E4%BD%9C%EF%BC%89/" data-id="ckfor4kuq004ftn2pa9pog7h3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
@@ -577,35 +514,41 @@
       
         <h2 id="一、-安装-Passport"><a href="#一、-安装-Passport" class="headerlink" title="一、 安装 Passport"></a>一、 安装 Passport</h2><p>使用 Composer 依赖包管理器安装 Passport</p>
 <p>composer require laravel/passport</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-composer-require-laravel-passport.png"></a> 接下来将</p>
+<p><a href="/images/php-laravel-passport-composer-require-laravel-passport.png"><img src="/images/php-laravel-passport-composer-require-laravel-passport.png"></a> 接下来将</p>
 <p>Laravel\Passport\PassportServiceProvider::class,</p>
-<p>这句代码添加到 config/app.php 的 providers 数组， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-provider.png"></a> 然后运行</p>
+<p>这句代码添加到 config/app.php 的 providers 数组， <a href="/images/php-laravel-passport-provider.png"><img src="/images/php-laravel-passport-provider.png"></a> 然后运行</p>
 <p>php artisan migrate</p>
-<p>来运行 Passport 自带的数据库迁移文件（用于自动创建 Passport 必需的客户端数据表和令牌数据表）, <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-migrate.png"></a> 然后运行</p>
+<p>来运行 Passport 自带的数据库迁移文件（用于自动创建 Passport 必需的客户端数据表和令牌数据表）, <a href="/images/php-laravel-passport-artisan-migrate.png"><img src="/images/php-laravel-passport-artisan-migrate.png"></a> 然后运行</p>
 <p>php artisan passport:install</p>
-<p>来创建生成安全访问令牌时用到的加密密钥及私人访问和密码访问客户端。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-artisan-passport-install.png"></a> 接下来再将</p>
+<p>来创建生成安全访问令牌时用到的加密密钥及私人访问和密码访问客户端。 <a href="/images/php-laravel-passport-artisan-passport-install.png"><img src="/images/php-laravel-passport-artisan-passport-install.png"></a> 接下来再将</p>
 <p>Laravel\Passport\HasApiTokens</p>
-<p>Trait 添加到 App\User 模型中，这个 Trait 会给这个模型提供一些辅助函数，用于检查已认证用户的令牌和使用作用于。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-has-api-tokens.png"></a> 然后在 AuthServiceProvider 的 boot 方法中添加</p>
+<p>Trait 添加到 App\User 模型中，这个 Trait 会给这个模型提供一些辅助函数，用于检查已认证用户的令牌和使用作用于。 <a href="/images/php-laravel-passport-has-api-tokens.png"><img src="/images/php-laravel-passport-has-api-tokens.png"></a> 然后在 AuthServiceProvider 的 boot 方法中添加</p>
 <p>Passport::roues();</p>
-<p>来注册 Passport 在访问令牌、客户端、私人访问令牌的发放和吊销过程中一些必要路由。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-routes.png"></a> 最后修改下配置文件 config/auth.php 中的 api driver 改为 passport，此项操作会将 API 请求时使用 Passport 的  TokenGuard 来处理授权保护。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-auth-api-driver.png"></a> 全部配置好后，我们来请求令牌，但是发现我们并没有创建任何用户，于是我们需要用到seed来预设填充数据。 运行</p>
+<p>来注册 Passport 在访问令牌、客户端、私人访问令牌的发放和吊销过程中一些必要路由。 <a href="/images/php-laravel-passport-routes.png"><img src="/images/php-laravel-passport-routes.png"></a> 最后修改下配置文件 config/auth.php 中的 api driver 改为 passport，此项操作会将 API 请求时使用 Passport 的  TokenGuard 来处理授权保护。 <a href="/images/php-laravel-passport-auth-api-driver.png"><img src="/images/php-laravel-passport-auth-api-driver.png"></a> 全部配置好后，我们来请求令牌，但是发现我们并没有创建任何用户，于是我们需要用到seed来预设填充数据。 运行</p>
 <p>php artisan make:seeder UsersTableSeeder</p>
 <p>创建一个 Seeder 然后打开 database\seeds 文件夹里已经新建了一个叫 UserTableSeeder.php 的文件，打开它然后在 run 方法内输入以下代码：</p>
 <p>DB::table(‘users’)-&gt;insert([<br>‘name’=&gt;’admin’,<br>‘email’=&gt;‘godcheese@godcheese.com’,<br>‘password’=&gt;bcrypt(‘admin’)<br>]);</p>
-<p>如图所示， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-seed-users.png"></a> 然后运行</p>
+<p>如图所示， <a href="/images/php-laravel-passport-seed-users.png"><img src="/images/php-laravel-passport-seed-users.png"></a> 然后运行</p>
 <p>php artisan db:seed –class=UsersTableSeeder</p>
-<p>来往 user 表中填充刚刚添加好的 seed 数据。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"></a> 接下来我们来写前端 JavaScript 请求获取用户访问令牌的例子。</p>
-<h2 id="二、JavaScript-请求授权令牌"><a href="#二、JavaScript-请求授权令牌" class="headerlink" title="二、JavaScript 请求授权令牌"></a>二、JavaScript 请求授权令牌</h2><p>这是前端 UI， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token.png"></a> 然后些下JavaScript请求代码如下（ 此处仅供演示，暂时忽略安全问题。实际生产环境中不建议在前端显示 client_id 和 client_secret）：</p>
+<p>来往 user 表中填充刚刚添加好的 seed 数据。 <a href="/images/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"><img src="/images/php-laravel-passport-passport-php-artisan-db-seed-class-users-table-seeder.png"></a> 接下来我们来写前端 JavaScript 请求获取用户访问令牌的例子。</p>
+<h2 id="二、JavaScript-请求授权令牌"><a href="#二、JavaScript-请求授权令牌" class="headerlink" title="二、JavaScript 请求授权令牌"></a>二、JavaScript 请求授权令牌</h2><p>这是前端 UI， <a href="/images/php-laravel-passport-ajax-oauth-token.png"><img src="/images/php-laravel-passport-ajax-oauth-token.png"></a> 然后些下JavaScript请求代码如下（ 此处仅供演示，暂时忽略安全问题。实际生产环境中不建议在前端显示 client_id 和 client_secret）：</p>
 <p>$(‘#loginButton’).click(function(event){<br>event.preventDefault();<br>$.ajax({<br>type:’post’,<br>url:’<a target="_blank" rel="noopener" href="http://wodedaxue-backend/oauth/token&#39;">http://wodedaxue-backend/oauth/token&#39;</a>,<br>dataType:’json’,<br>data:{<br>‘grant_type’:’password’,<br>‘client_id’:’2’,<br>‘client_secret’:’o6N7JzK2y3pbJiQmDcHaDhrpvPHBktnAlmmfEnS7’,<br>‘username’:$(‘#username’).val(),<br>‘password’:$(‘#password’).val(),<br>‘scope’:’’<br>},<br>success:function(data){<br>console.log(data);<br>alert(JSON.stringify(data));<br>},<br>error:function(err){<br>console.log(err);<br>alert(‘statusCode:’+err.status+’\n’+’statusText:’+err.statusText+’\n’+’description:\n’+JSON.stringify(err.responseJSON));<br>}<br>});<br>});</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-post.png"></a> 接下来再将以下代码写入 User 模型：</p>
-<p>/**<br>* 自定义用Passport授权登录：用户名+密码<br>* @param $username<br>* @return mixed<br>*/<br>public function findForPassport($username)<br>{<br>return self::where(‘name’, $username)-&gt;first();<br>}</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-find-for-passport.png"></a> 然后输入用户名 admin 和密码 admin ，点击登录按钮尝试登录：</p>
+<p><a href="/images/php-laravel-passport-ajax-post.png"><img src="/images/php-laravel-passport-ajax-post.png"></a> 接下来再将以下代码写入 User 模型：</p>
+<p>/**</p>
+<ul>
+<li>自定义用Passport授权登录：用户名+密码</li>
+<li>@param $username</li>
+<li>@return mixed</li>
+<li>/<br>public function findForPassport($username)<br>{<br>return self::where(‘name’, $username)-&gt;first();<br>}</li>
+</ul>
+<p><a href="/images/php-laravel-passport-find-for-passport.png"><img src="/images/php-laravel-passport-find-for-passport.png"></a> 然后输入用户名 admin 和密码 admin ，点击登录按钮尝试登录：</p>
 <p>{<br>token_type:”Bearer”,<br>expires_in:31536000,<br>access_token:”eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImNiOG…MFF7PYRIhXqCkZhZNfoLV1IYTzRmhO2oV41XR9wD7Zd3Oxl-g”,<br>refresh_token:”sabtS2jYhqAJtVxe868OpTTgBeYgpWgfttn5h97drUgBVLN7vL…ukx7yGfGhn5h+zCouLmuh0sdjYU+dgtRweXU3jiA0Fa6/c6k=”<br>}</p>
-<p>成功获取访问令牌（access_token）。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"><img src="https://www.godcheese.com/wp-content/uploads/2017/06/php-laravel-passport-ajax-oauth-token-200.png"></a> 然后在每次访问其它 API 时候都带上此参数。 Laravel Passport 更多参考资料：<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/passport">https://laravel.com/docs/5.4/passport</a></p>
+<p>成功获取访问令牌（access_token）。 <a href="/images/php-laravel-passport-ajax-oauth-token-200.png"><img src="/images/php-laravel-passport-ajax-oauth-token-200.png"></a> 然后在每次访问其它 API 时候都带上此参数。 Laravel Passport 更多参考资料：<a target="_blank" rel="noopener" href="https://laravel.com/docs/5.4/passport">https://laravel.com/docs/5.4/passport</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" data-id="ckfopr4uf004ngu2pgpiyef41" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/27/%E3%80%90laravel%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BD%BF%E7%94%A8-laravel-passport-%E6%9D%A5%E8%AF%B7%E6%B1%82%E6%8E%88%E6%9D%83%E4%BB%A4%E7%89%8C%EF%BC%88oaut/" data-id="ckfor4kuz004ptn2pd2iseafs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Laravel/" rel="tag">Laravel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li></ul>
@@ -681,7 +624,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/06/03/wampserver-%E8%BF%90%E8%A1%8C%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%8F%8A%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E/" data-id="ckfopr4tx003wgu2p1yziemgi" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/06/03/wampserver-%E8%BF%90%E8%A1%8C%E5%BA%93%E4%B8%8B%E8%BD%BD%E5%8F%8A%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E/" data-id="ckfor4kuc003utn2p1checzcp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Web服务器</a></li></ul>
@@ -720,13 +663,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><strong>软件名称</strong>：会声会影 X10/X9/X8/X7/5 <strong>软件官网</strong>：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/">http://www.huishenghuiying.com.cn/</a> <strong>授权方式</strong>：试用（可破解） <strong>软件语言</strong>：简体中文 <strong>支持系统</strong>：Windows 10/8/7 会声会影中文版是一款强大的视频剪辑、制作软件，完美支持 Intel第 7 代核心处理技术，新增的轨道透明度、360°视频支持功能，让用户完成的效果更加多元。重新映射时间则更快更方便的实现速度和方向的控制。功能合并，操作简化，使得无论老幼都可以轻松驾驭这款视频制作软件。</p>
-<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2017/05/huishenghuiyin.jpg"></a></p>
+<h2 id="软件截图"><a href="#软件截图" class="headerlink" title="软件截图"></a>软件截图</h2><p><a href="/images/huishenghuiyin.jpg"><img src="/images/huishenghuiyin.jpg"></a></p>
 <h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><p>会声会影X9 64位：<a target="_blank" rel="noopener" href="http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe">http://xiazai.huishenghuiying.com.cn/trails/VideoStudioX9-64bit_YY.exe</a> 会声会影X8 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe">http://dlsw.baidu.com/sw-search-sp/soft/8a/39391/hshyx864w18.0.1.32.1434621315.exe</a> 会声会影X7 64位：<a target="_blank" rel="noopener" href="http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe">http://dlsw.baidu.com/sw-search-sp/soft/c3/26848/VSX7_Pro_x64_Setup.1420534845.exe</a> 更多下载：<a target="_blank" rel="noopener" href="http://www.huishenghuiying.com.cn/xiazai.html">http://www.huishenghuiying.com.cn/xiazai.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" data-id="ckfopr4v7005lgu2paj0e7h9n" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/05/16/%E4%BC%9A%E5%A3%B0%E4%BC%9A%E5%BD%B1-%E6%9C%80%E6%96%B0%E7%89%88%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80patch%EF%BC%88%E4%BB%85%E4%BE%9B%E5%AD%A6%E4%B9%A0%EF%BC%89/" data-id="ckfor4kvo005itn2p3jtsa9y5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/x-force/" rel="tag">x-force</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" rel="tag">视频剪辑</a></li></ul>

@@ -7,21 +7,21 @@
   
   <title>Spring Boot 自定义全局异常报错处理，返回 JSON/HTML | 天堂芝士的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="新建一个叫 GlobalErrorController 然后继承 AbstractErrorController，代码的写法可以参考  BasicErrorController 的代码。 package com.gioov.multifunction.controller.system; import java.util.HashMap;import java.util.Map;import ja">
+  <meta name="description" content="新建一个叫 GlobalErrorController 然后继承 AbstractErrorController，代码的写法可以参考  BasicErrorController 的代码。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring Boot 自定义全局异常报错处理，返回 JSON&#x2F;HTML">
 <meta property="og:url" content="http://godcheese.com/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/index.html">
 <meta property="og:site_name" content="天堂芝士的个人博客">
-<meta property="og:description" content="新建一个叫 GlobalErrorController 然后继承 AbstractErrorController，代码的写法可以参考  BasicErrorController 的代码。 package com.gioov.multifunction.controller.system; import java.util.HashMap;import java.util.Map;import ja">
+<meta property="og:description" content="新建一个叫 GlobalErrorController 然后继承 AbstractErrorController，代码的写法可以参考  BasicErrorController 的代码。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/01/springboot-error-20180123123609.png">
+<meta property="og:image" content="http://godcheese.com/images/springboot-error-20180123123609.png">
 <meta property="article:published_time" content="2018-01-23T04:30:31.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:38.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring Boot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2018/01/springboot-error-20180123123609.png">
+<meta name="twitter:image" content="http://godcheese.com/images/springboot-error-20180123123609.png">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -103,62 +103,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>新建一个叫 GlobalErrorController 然后继承 <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/blob/4f7752d4672c3994a05dd3fb3d6e699040117ae0/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/AbstractErrorController.java">AbstractErrorController</a>，代码的写法可以参考  <a target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/blob/4f7752d4672c3994a05dd3fb3d6e699040117ae0/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/AbstractErrorController.java">BasicErrorController</a> 的代码。</p>
-<p>package com.gioov.multifunction.controller.system;</p>
-<p>import java.util.HashMap;<br>import java.util.Map;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;<br>import org.springframework.beans.factory.annotation.Value;<br>import org.springframework.boot.autoconfigure.web.AbstractErrorController;<br>import org.springframework.boot.autoconfigure.web.ErrorAttributes;<br>import org.springframework.http.HttpStatus;<br>import org.springframework.http.ResponseEntity;<br>import org.springframework.stereotype.Controller;<br>import org.springframework.web.bind.annotation.RequestMapping;<br>import org.springframework.web.bind.annotation.ResponseBody;<br>import org.springframework.web.servlet.ModelAndView;</p>
-<p>/**<br> * @author godcheese<br> *<br> */<br>@Controller<br>@RequestMapping(“${server.error.path:${error.path:/error}}”)<br>public class DefaultErrorController extends AbstractErrorController {</p>
-<pre><code>public DefaultErrorController(ErrorAttributes errorAttributes) &#123;
-    super(errorAttributes);
-&#125;
-
-@Value(&quot;$&#123;server.error.path:$&#123;error.path:/error&#125;&#125;&quot;)
-public static final String ERROR\_PATH = &quot;/error&quot;;
-
-@Override
-public String getErrorPath() &#123;
-    return ERROR\_PATH;
-&#125;
-
-@RequestMapping(produces = &quot;text/html&quot;)
-public ModelAndView errorHtml(HttpServletRequest request,
-                              HttpServletResponse response) &#123;
-
-    Integer statusCode = (Integer) request.getAttribute(&quot;javax.servlet.error.status\_code&quot;);
-    statusCode = statusCode == null ? HttpStatus.INTERNAL\_SERVER\_ERROR.value() : statusCode;
-    response.setStatus(getStatus(request).value());
-    Map&lt;String, Object&gt; model = new HashMap&lt;&gt;();
-    switch (statusCode)&#123;
-        case 404:
-            break;
-        case 500:
-            break;
-        default:
-            statusCode = 500;
-            break;
-    &#125;
-    return new ModelAndView(&quot;&quot;+statusCode, model);
-&#125;
-
-@RequestMapping
-@ResponseBody
-public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request,Exception exception) throws Exception &#123;
-
-    Integer statusCode = (Integer) request.getAttribute(&quot;javax.servlet.error.status\_code&quot;);
-    statusCode = statusCode == null ? HttpStatus.INTERNAL\_SERVER\_ERROR.value() : statusCode;
-    Map&lt;String, Object&gt; body = new HashMap&lt;&gt;();
-    HttpStatus status = getStatus(request);
-    body.put(&quot;code&quot;,statusCode);
-    body.put(&quot;message&quot;,HttpStatus.valueOf(statusCode));
-    body.put(&quot;data&quot;,null);
-    body.put(&quot;exception&quot;,exception.getMessage());
-    return new ResponseEntity&lt;&gt;(body, status);
-&#125;</code></pre>
-<p>}</p>
-<p>然后在 resources/templates 目录下新建 404.html、500.html、error.html 等几个文件，然后访问不存在的链接就可以访问到自定义的报错页面了，如果是json请求还可以返回自定义的json内容。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/01/springboot-error-20180123123609.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/01/springboot-error-20180123123609.png"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.multifunction.controller.system;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import org.springframework.beans.factory.annotation.Value;</span><br><span class="line">import org.springframework.boot.autoconfigure.web.AbstractErrorController;</span><br><span class="line">import org.springframework.boot.autoconfigure.web.ErrorAttributes;</span><br><span class="line">import org.springframework.http.HttpStatus;</span><br><span class="line">import org.springframework.http.ResponseEntity;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line">import org.springframework.web.servlet.ModelAndView;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Controller</span><br><span class="line">@RequestMapping(&quot;$&#123;server.error.path:$&#123;error.path:&#x2F;error&#125;&#125;&quot;)</span><br><span class="line">public class DefaultErrorController extends AbstractErrorController &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public DefaultErrorController(ErrorAttributes errorAttributes) &#123;</span><br><span class="line">        super(errorAttributes);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;server.error.path:$&#123;error.path:&#x2F;error&#125;&#125;&quot;)</span><br><span class="line">    public static final String ERROR_PATH &#x3D; &quot;&#x2F;error&quot;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getErrorPath() &#123;</span><br><span class="line">        return ERROR_PATH;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping(produces &#x3D; &quot;text&#x2F;html&quot;)</span><br><span class="line">    public ModelAndView errorHtml(HttpServletRequest request,</span><br><span class="line">                                  HttpServletResponse response) &#123;</span><br><span class="line"></span><br><span class="line">        Integer statusCode &#x3D; (Integer) request.getAttribute(&quot;javax.servlet.error.status_code&quot;);</span><br><span class="line">        statusCode &#x3D; statusCode &#x3D;&#x3D; null ? HttpStatus.INTERNAL_SERVER_ERROR.value() : statusCode;</span><br><span class="line">        response.setStatus(getStatus(request).value());</span><br><span class="line">        Map&lt;String, Object&gt; model &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">        switch (statusCode)&#123;</span><br><span class="line">            case 404:</span><br><span class="line">                break;</span><br><span class="line">            case 500:</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                statusCode &#x3D; 500;</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        return new ModelAndView(&quot;&quot;+statusCode, model);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @RequestMapping</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; error(HttpServletRequest request,Exception exception) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        Integer statusCode &#x3D; (Integer) request.getAttribute(&quot;javax.servlet.error.status_code&quot;);</span><br><span class="line">        statusCode &#x3D; statusCode &#x3D;&#x3D; null ? HttpStatus.INTERNAL_SERVER_ERROR.value() : statusCode;</span><br><span class="line">        Map&lt;String, Object&gt; body &#x3D; new HashMap&lt;&gt;();</span><br><span class="line">        HttpStatus status &#x3D; getStatus(request);</span><br><span class="line">        body.put(&quot;code&quot;,statusCode);</span><br><span class="line">        body.put(&quot;message&quot;,HttpStatus.valueOf(statusCode));</span><br><span class="line">        body.put(&quot;data&quot;,null);</span><br><span class="line">        body.put(&quot;exception&quot;,exception.getMessage());</span><br><span class="line">        return new ResponseEntity&lt;&gt;(body, status);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 resources/templates 目录下新建 404.html、500.html、error.html 等几个文件，然后访问不存在的链接就可以访问到自定义的报错页面了，如果是json请求还可以返回自定义的json内容。 <a href="/images/springboot-error-20180123123609.png"><img src="/images/springboot-error-20180123123609.png"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/" data-id="ckfopr4ti0037gu2pasv0bznk" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/" data-id="ckfor4ktw0036tn2pcjbj048e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li></ul>

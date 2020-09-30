@@ -7,20 +7,20 @@
   
   <title>Java 实现无限层级树形结构遍历部门 | 天堂芝士的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码如下：    &#x2F;**     * 部门实体类     *&#x2F;    public class Department {     public Department(Integer id, String name, Integer parentId) &amp;#123;         this.id &#x3D; id;         this.name &#x3D; name;         this.parent">
+  <meta name="description" content="代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 实现无限层级树形结构遍历部门">
 <meta property="og:url" content="http://godcheese.com/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/index.html">
 <meta property="og:site_name" content="天堂芝士的个人博客">
-<meta property="og:description" content="代码如下：    &#x2F;**     * 部门实体类     *&#x2F;    public class Department {     public Department(Integer id, String name, Integer parentId) &amp;#123;         this.id &#x3D; id;         this.name &#x3D; name;         this.parent">
+<meta property="og:description" content="代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg">
+<meta property="og:image" content="http://godcheese.com/images/java_foreach_department_1.jpg">
 <meta property="article:published_time" content="2019-05-03T11:03:27.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:00:25.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg">
+<meta name="twitter:image" content="http://godcheese.com/images/java_foreach_department_1.jpg">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -102,194 +102,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>代码如下：</p>
-<p>   /**<br>     * 部门实体类<br>     */<br>    public class Department {</p>
-<pre><code>    public Department(Integer id, String name, Integer parentId) &#123;
-        this.id = id;
-        this.name = name;
-        this.parentId = parentId;
-    &#125;
-
-    private Integer id;
-    private String name;
-
-    /\*\*
-     \* 上级部门 id
-     \*/
-    private Integer parentId;
-
-    public Integer getId() &#123;
-        return id;
-    &#125;
-
-    public void setId(Integer id) &#123;
-        this.id = id;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public Integer getParentId() &#123;
-        return parentId;
-    &#125;
-
-    public void setParentId(Integer parentId) &#123;
-        this.parentId = parentId;
-    &#125;
-&#125;
-
-/\*\*
- \* 树形节点实体类
- \*/
-public class TreeNode &#123;
-
-    public TreeNode(Integer id, String name, Integer parentId, List&lt;TreeNode&gt; children) &#123;
-        this.id = id;
-        this.name = name;
-        this.parentId = parentId;
-        this.children = children;
-    &#125;
-
-    private Integer id;
-    private String name;
-
-    /\*\*
-     \* 父级节点 id
-     \*/
-    private Integer parentId;
-
-    /\*\*
-     \* 子级节点
-     \*/
-    private List&lt;TreeNode&gt; children;
-
-    public Integer getId() &#123;
-        return id;
-    &#125;
-
-    public void setId(Integer id) &#123;
-        this.id = id;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public Integer getParentId() &#123;
-        return parentId;
-    &#125;
-
-    public void setParentId(Integer parentId) &#123;
-        this.parentId = parentId;
-    &#125;
-
-    public List&lt;TreeNode&gt; getChildren() &#123;
-        return children;
-    &#125;
-
-    public void setChildren(List&lt;TreeNode&gt; children) &#123;
-        this.children = children;
-    &#125;
-&#125;
-
-/\*\*
- \* 循环遍历出子节点
- \* @param parentId
- \* @param treeNodeList
- \* @return
- \*/
-public List&lt;TreeNode&gt; forEachChildrenTreeNode(int parentId, List&lt;TreeNode&gt; treeNodeList) &#123;
-    List&lt;TreeNode&gt; children = new ArrayList&lt;&gt;(0);
-    for(TreeNode treeNode : treeNodeList) &#123;
-        if(treeNode.getParentId() != null &amp;&amp; treeNode.getParentId().equals(parentId)) &#123;
-            children.add(treeNode);
-        &#125;
-    &#125;
-
-    for(TreeNode child : children) &#123;
-        List&lt;TreeNode&gt; childChildren = forEachChildrenTreeNode(child.getId(), treeNodeList);
-        if(childChildren == null) &#123;
-            childChildren = new ArrayList&lt;&gt;(0);
-        &#125;
-        child.setChildren(childChildren);
-    &#125;
-
-    if(children.size() == 0) &#123;
-        return null;
-    &#125;
-    return children;
-&#125;
-
-/\*\*
- \* 测试代码
- \*/
-public void testApp() &#123;
-
-    List&lt;Department&gt; departmentList = new ArrayList&lt;&gt;(6);
-    departmentList.add(new Department(1,&quot;测试集团公司1&quot;, null));
-    departmentList.add(new Department(2,&quot;测试分公司1&quot;, 1));
-    departmentList.add(new Department(3,&quot;测试分公司2&quot;, 1));
-    departmentList.add(new Department(4,&quot;测试子部门1&quot;, 3));
-    departmentList.add(new Department(5,&quot;测试项目室1&quot;, 4));
-    departmentList.add(new Department(6,&quot;测试项目组1&quot;, 5));
-    departmentList.add(new Department(7,&quot;测试项目室2&quot;, 4));
-    departmentList.add(new Department(8,&quot;测试子部门2&quot;, 3));
-    departmentList.add(new Department(9,&quot;测试分公司3&quot;, 1));
-    departmentList.add(new Department(10,&quot;测试集团公司2&quot;, null));
-
-    /\*\*
-     \* 将部门数据转成树形节点
-     \*/
-    List&lt;TreeNode&gt; treeNodeList = new ArrayList&lt;&gt;(10);
-    for(Department department : departmentList) &#123;
-        treeNodeList.add(new TreeNode(department.getId(), department.getName(), department.getParentId(), new ArrayList&lt;&gt;()));
-    &#125;
-
-    /\*\*
-     \* 最终输出的树形结构类结果数据
-     \*/
-    List&lt;TreeNode&gt; treeNodeResultList = new ArrayList&lt;&gt;(0);
-
-    /\*\*
-     \* 将 parentId 为空的顶层节点首先写入结果数据
-     \*/
-    for(TreeNode treeNode : treeNodeList) &#123;
-        if(treeNode.getParentId() == null) &#123;
-            treeNodeResultList.add(treeNode);
-        &#125;
-    &#125;
-
-    /\*\*
-     \* 循环所有在结果数据中的顶层节点，并将子级节点装载进顶层节点的 children 属性
-     \*/
-    for(TreeNode treeNode : treeNodeResultList) &#123;
-        treeNode.setChildren(forEachChildrenTreeNode(treeNode.getId(), treeNodeList));
-    &#125;
-
-    /\*\*
-     \* 将结果数据以 JSON 格式输出
-     \*/
-    ObjectMapper objectMapper = new ObjectMapper();
-    try &#123;
-        System.out.println(objectMapper.writeValueAsString(treeNodeResultList));
-    &#125; catch (JsonProcessingException e) &#123;
-        e.printStackTrace();
-    &#125;
-&#125;</code></pre>
-<p>输出结果如下图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2019/05/java_foreach_department_1.jpg"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">  * 部门实体类</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public class Department &#123;</span><br><span class="line"></span><br><span class="line">     public Department(Integer id, String name, Integer parentId) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     private Integer id;</span><br><span class="line">     private String name;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 上级部门 id</span><br><span class="line">      *&#x2F;</span><br><span class="line">     private Integer parentId;</span><br><span class="line"></span><br><span class="line">     public Integer getId() &#123;</span><br><span class="line">         return id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setId(Integer id) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public String getName() &#123;</span><br><span class="line">         return name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setName(String name) &#123;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public Integer getParentId() &#123;</span><br><span class="line">         return parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setParentId(Integer parentId) &#123;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#x2F;**</span><br><span class="line">  * 树形节点实体类</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public class TreeNode &#123;</span><br><span class="line"></span><br><span class="line">     public TreeNode(Integer id, String name, Integer parentId, List&lt;TreeNode&gt; children) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">         this.children &#x3D; children;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     private Integer id;</span><br><span class="line">     private String name;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 父级节点 id</span><br><span class="line">      *&#x2F;</span><br><span class="line">     private Integer parentId;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 子级节点</span><br><span class="line">      *&#x2F;</span><br><span class="line">     private List&lt;TreeNode&gt; children;</span><br><span class="line"></span><br><span class="line">     public Integer getId() &#123;</span><br><span class="line">         return id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setId(Integer id) &#123;</span><br><span class="line">         this.id &#x3D; id;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public String getName() &#123;</span><br><span class="line">         return name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setName(String name) &#123;</span><br><span class="line">         this.name &#x3D; name;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public Integer getParentId() &#123;</span><br><span class="line">         return parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setParentId(Integer parentId) &#123;</span><br><span class="line">         this.parentId &#x3D; parentId;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public List&lt;TreeNode&gt; getChildren() &#123;</span><br><span class="line">         return children;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     public void setChildren(List&lt;TreeNode&gt; children) &#123;</span><br><span class="line">         this.children &#x3D; children;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#x2F;**</span><br><span class="line">  * 循环遍历出子节点</span><br><span class="line">  * @param parentId</span><br><span class="line">  * @param treeNodeList</span><br><span class="line">  * @return</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public List&lt;TreeNode&gt; forEachChildrenTreeNode(int parentId, List&lt;TreeNode&gt; treeNodeList) &#123;</span><br><span class="line">     List&lt;TreeNode&gt; children &#x3D; new ArrayList&lt;&gt;(0);</span><br><span class="line">     for(TreeNode treeNode : treeNodeList) &#123;</span><br><span class="line">         if(treeNode.getParentId() !&#x3D; null &amp;&amp; treeNode.getParentId().equals(parentId)) &#123;</span><br><span class="line">             children.add(treeNode);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     for(TreeNode child : children) &#123;</span><br><span class="line">         List&lt;TreeNode&gt; childChildren &#x3D; forEachChildrenTreeNode(child.getId(), treeNodeList);</span><br><span class="line">         if(childChildren &#x3D;&#x3D; null) &#123;</span><br><span class="line">             childChildren &#x3D; new ArrayList&lt;&gt;(0);</span><br><span class="line">         &#125;</span><br><span class="line">         child.setChildren(childChildren);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     if(children.size() &#x3D;&#x3D; 0) &#123;</span><br><span class="line">         return null;</span><br><span class="line">     &#125;</span><br><span class="line">     return children;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#x2F;**</span><br><span class="line">  * 测试代码</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public void testApp() &#123;</span><br><span class="line"></span><br><span class="line">     List&lt;Department&gt; departmentList &#x3D; new ArrayList&lt;&gt;(6);</span><br><span class="line">     departmentList.add(new Department(1,&quot;测试集团公司1&quot;, null));</span><br><span class="line">     departmentList.add(new Department(2,&quot;测试分公司1&quot;, 1));</span><br><span class="line">     departmentList.add(new Department(3,&quot;测试分公司2&quot;, 1));</span><br><span class="line">     departmentList.add(new Department(4,&quot;测试子部门1&quot;, 3));</span><br><span class="line">     departmentList.add(new Department(5,&quot;测试项目室1&quot;, 4));</span><br><span class="line">     departmentList.add(new Department(6,&quot;测试项目组1&quot;, 5));</span><br><span class="line">     departmentList.add(new Department(7,&quot;测试项目室2&quot;, 4));</span><br><span class="line">     departmentList.add(new Department(8,&quot;测试子部门2&quot;, 3));</span><br><span class="line">     departmentList.add(new Department(9,&quot;测试分公司3&quot;, 1));</span><br><span class="line">     departmentList.add(new Department(10,&quot;测试集团公司2&quot;, null));</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 将部门数据转成树形节点</span><br><span class="line">      *&#x2F;</span><br><span class="line">     List&lt;TreeNode&gt; treeNodeList &#x3D; new ArrayList&lt;&gt;(10);</span><br><span class="line">     for(Department department : departmentList) &#123;</span><br><span class="line">         treeNodeList.add(new TreeNode(department.getId(), department.getName(), department.getParentId(), new ArrayList&lt;&gt;()));</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 最终输出的树形结构类结果数据</span><br><span class="line">      *&#x2F;</span><br><span class="line">     List&lt;TreeNode&gt; treeNodeResultList &#x3D; new ArrayList&lt;&gt;(0);</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 将 parentId 为空的顶层节点首先写入结果数据</span><br><span class="line">      *&#x2F;</span><br><span class="line">     for(TreeNode treeNode : treeNodeList) &#123;</span><br><span class="line">         if(treeNode.getParentId() &#x3D;&#x3D; null) &#123;</span><br><span class="line">             treeNodeResultList.add(treeNode);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 循环所有在结果数据中的顶层节点，并将子级节点装载进顶层节点的 children 属性</span><br><span class="line">      *&#x2F;</span><br><span class="line">     for(TreeNode treeNode : treeNodeResultList) &#123;</span><br><span class="line">         treeNode.setChildren(forEachChildrenTreeNode(treeNode.getId(), treeNodeList));</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     &#x2F;**</span><br><span class="line">      * 将结果数据以 JSON 格式输出</span><br><span class="line">      *&#x2F;</span><br><span class="line">     ObjectMapper objectMapper &#x3D; new ObjectMapper();</span><br><span class="line">     try &#123;</span><br><span class="line">         System.out.println(objectMapper.writeValueAsString(treeNodeResultList));</span><br><span class="line">     &#125; catch (JsonProcessingException e) &#123;</span><br><span class="line">         e.printStackTrace();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下图： <a href="/images/java_foreach_department_1.jpg"><img src="/images/java_foreach_department_1.jpg"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/" data-id="ckfopr4sk001sgu2phtkz1muv" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/" data-id="ckfor4kss001ttn2pajwzf499" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>

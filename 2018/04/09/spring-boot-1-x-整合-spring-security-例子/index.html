@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="天堂芝士的个人博客">
 <meta property="og:description" content="说明 Spring Boot 1.x 整合 Spring Security 实现角色&#x2F;权限控制实例  官方实现：http:&#x2F;&#x2F;spring.io&#x2F;guides&#x2F;gs&#x2F;securing-web&#x2F; 环境 版本 Java 1.8 MySQL 5.7 Maven 3.5 Tomcat 8.5 依赖 版本 Spring Boot 1.5.11.RELEASE Spring Security 4.2.5.RE">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_1.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_2.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_3.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_4.png">
+<meta property="og:image" content="http://godcheese.com/images/springboot1springsecurity_1.png">
+<meta property="og:image" content="http://godcheese.com/images/springboot1springsecurity_2.png">
+<meta property="og:image" content="http://godcheese.com/images/springboot1springsecurity_3.png">
+<meta property="og:image" content="http://godcheese.com/images/springboot1springsecurity_4.png">
 <meta property="article:published_time" content="2018-04-09T02:13:32.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:38.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring Boot">
 <meta property="article:tag" content="Spring Security">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_1.png">
+<meta name="twitter:image" content="http://godcheese.com/images/springboot1springsecurity_1.png">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -144,110 +144,15 @@
 <p>123456</p>
 <p>ROLE_USER</p>
 <p>表单登录、注销、后台管理、删除用户等。 主要配置文件：WebSecurityConfiguration.java</p>
-<p>package com.gioov.springboot1springsecurity.config;</p>
-<p>import org.springframework.beans.factory.annotation.Autowired;<br>import org.springframework.context.annotation.Bean;<br>import org.springframework.context.annotation.Configuration;<br>import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;<br>import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;<br>import org.springframework.security.config.annotation.web.builders.HttpSecurity;<br>import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;<br>import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;<br>import org.springframework.security.config.http.SessionCreationPolicy;<br>import org.springframework.security.core.session.SessionRegistry;<br>import org.springframework.security.core.session.SessionRegistryImpl;<br>import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</p>
-<p>/**<br> * @author godcheese [<a href="mailto:&#103;&#111;&#x64;&#99;&#x68;&#x65;&#101;&#x73;&#x65;&#64;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#x6b;&#46;&#x63;&#111;&#x6d;">&#103;&#111;&#x64;&#99;&#x68;&#x65;&#101;&#x73;&#x65;&#64;&#111;&#x75;&#116;&#x6c;&#111;&#x6f;&#x6b;&#46;&#x63;&#111;&#x6d;</a>]<br> * @date 2018/4/7 19:00<br> */<br>@Configuration<br>@EnableWebSecurity<br>@EnableGlobalMethodSecurity(prePostEnabled = true)<br>public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {</p>
-<pre><code>@Autowired
-private SessionRegistry sessionRegistry;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.springboot1springsecurity.config;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line">import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;</span><br><span class="line">import org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line">import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line">import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line">import org.springframework.security.config.http.SessionCreationPolicy;</span><br><span class="line">import org.springframework.security.core.session.SessionRegistry;</span><br><span class="line">import org.springframework.security.core.session.SessionRegistryImpl;</span><br><span class="line">import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese [godcheese@outlook.com]</span><br><span class="line"> * @date 2018&#x2F;4&#x2F;7 19:00</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Configuration</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">@EnableGlobalMethodSecurity(prePostEnabled &#x3D; true)</span><br><span class="line">public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private SessionRegistry sessionRegistry;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public SessionRegistry sessionRegistry()&#123;</span><br><span class="line">        return new SessionRegistryImpl();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public SimpleUserDetailsService simpleUserDetailsService()&#123;</span><br><span class="line">        return new SimpleUserDetailsService();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</span><br><span class="line">        auth.userDetailsService(simpleUserDetailsService()).passwordEncoder(new BCryptPasswordEncoder());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        http</span><br><span class="line">                  &#x2F;&#x2F; 禁用 csrf</span><br><span class="line">&#x2F;&#x2F;                .csrf().disable()</span><br><span class="line"></span><br><span class="line">                .authorizeRequests()</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 匹配url，无需登录认证权限</span><br><span class="line">                .antMatchers(&quot;&#x2F;css&#x2F;**&quot;,&quot;&#x2F;js&#x2F;**&quot;,&quot;img&#x2F;**&quot;,&quot;&#x2F;vendor&#x2F;**&quot;).permitAll()</span><br><span class="line"></span><br><span class="line">                .antMatchers(&quot;&#x2F;&quot;,&quot;&#x2F;index&quot;).permitAll()</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 其它请求均需要认证</span><br><span class="line">                .anyRequest().authenticated()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;                .antMatchers(&quot;&#x2F;**&quot;).authenticated()</span><br><span class="line"></span><br><span class="line">                .and()</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 开启表单登录，设置登录 url</span><br><span class="line">                .formLogin().loginPage(&quot;&#x2F;login&quot;)</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 自定义登录表单提交 url</span><br><span class="line">                .loginProcessingUrl(&quot;&#x2F;login&#x2F;form&quot;)</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 设置登录成功跳转到的 url</span><br><span class="line">                .defaultSuccessUrl(&quot;&#x2F;userCenter&quot;,true)</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 设置登录失败跳转到的 url</span><br><span class="line">                .failureUrl(&quot;&#x2F;login?error&quot;).permitAll()</span><br><span class="line"></span><br><span class="line">                .and()</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 开启记住我功能， cookie 保存登录数据</span><br><span class="line">                .rememberMe().rememberMeParameter(&quot;rememberMe&quot;)</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 设置 cookie 有效期，7天内有效</span><br><span class="line">                .tokenValiditySeconds(60 * 60 * 60 * 24 * 7)</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 设置cookie的私钥</span><br><span class="line">                .key(&quot;user&quot;)</span><br><span class="line"></span><br><span class="line">                .and()</span><br><span class="line"></span><br><span class="line">                .logout()</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 设置注销 url</span><br><span class="line">                .logoutUrl(&quot;&#x2F;logout&quot;)</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;设置注销成功后跳转页面，默认是跳转到登录页面</span><br><span class="line">                .logoutSuccessUrl(&quot;&#x2F;login?logout&quot;).permitAll()</span><br><span class="line"></span><br><span class="line">                .and()</span><br><span class="line"></span><br><span class="line">                .sessionManagement()</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 限制单个用户最大session，只允许一个用户登录</span><br><span class="line">                .maximumSessions(1)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; session 过期后跳转到登录 url</span><br><span class="line">                .expiredUrl(&quot;&#x2F;login&quot;)</span><br><span class="line"></span><br><span class="line">                .sessionRegistry(sessionRegistry)</span><br><span class="line"></span><br><span class="line">                .and()</span><br><span class="line"></span><br><span class="line">                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)</span><br><span class="line"></span><br><span class="line">                .and()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; 无权限，访问指定 url</span><br><span class="line">                .exceptionHandling().accessDeniedPage(&quot;&#x2F;403&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@Bean
-public SessionRegistry sessionRegistry()&#123;
-    return new SessionRegistryImpl();
-&#125;
-
-@Bean
-public SimpleUserDetailsService simpleUserDetailsService()&#123;
-    return new SimpleUserDetailsService();
-&#125;
-
-@Override
-protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;
-    auth.userDetailsService(simpleUserDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
-&#125;
-
-@Override
-protected void configure(HttpSecurity http) throws Exception &#123;
-
-    http
-              // 禁用 csrf</code></pre>
-<p>//                .csrf().disable()</p>
-<pre><code>            .authorizeRequests()
-
-            // 匹配url，无需登录认证权限
-            .antMatchers(&quot;/css/\*\*&quot;,&quot;/js/\*\*&quot;,&quot;img/\*\*&quot;,&quot;/vendor/\*\*&quot;).permitAll()
-
-            .antMatchers(&quot;/&quot;,&quot;/index&quot;).permitAll()
-
-            // 其它请求均需要认证
-            .anyRequest().authenticated()</code></pre>
-<p>//                .antMatchers(“/**“).authenticated()</p>
-<pre><code>            .and()
-
-            // 开启表单登录，设置登录 url
-            .formLogin().loginPage(&quot;/login&quot;)
-
-            // 自定义登录表单提交 url
-            .loginProcessingUrl(&quot;/login/form&quot;)
-
-            // 设置登录成功跳转到的 url
-            .defaultSuccessUrl(&quot;/userCenter&quot;,true)
-
-            // 设置登录失败跳转到的 url
-            .failureUrl(&quot;/login?error&quot;).permitAll()
-
-            .and()
-
-            // 开启记住我功能， cookie 保存登录数据
-            .rememberMe().rememberMeParameter(&quot;rememberMe&quot;)
-
-            // 设置 cookie 有效期，7天内有效
-            .tokenValiditySeconds(60 \* 60 \* 60 \* 24 \* 7)
-
-            // 设置cookie的私钥
-            .key(&quot;user&quot;)
-
-            .and()
-
-            .logout()
-
-            // 设置注销 url
-            .logoutUrl(&quot;/logout&quot;)
-
-            //设置注销成功后跳转页面，默认是跳转到登录页面
-            .logoutSuccessUrl(&quot;/login?logout&quot;).permitAll()
-
-            .and()
-
-            .sessionManagement()
-
-            // 限制单个用户最大session，只允许一个用户登录
-            .maximumSessions(1)
-
-
-            // session 过期后跳转到登录 url
-            .expiredUrl(&quot;/login&quot;)
-
-            .sessionRegistry(sessionRegistry)
-
-            .and()
-
-            .sessionCreationPolicy(SessionCreationPolicy.IF\_REQUIRED)
-
-            .and()
-
-
-            // 无权限，访问指定 url
-            .exceptionHandling().accessDeniedPage(&quot;/403&quot;);
-&#125;</code></pre>
-<p>}</p>
-<p> </p>
-<h2 id="Screenshots"><a href="#Screenshots" class="headerlink" title="Screenshots"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity#screenshots"></a>Screenshots</h2><p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_1.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_2.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_3.png"></a> <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_4.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/springboot1springsecurity_4.png"></a></p>
+<h2 id="Screenshots"><a href="#Screenshots" class="headerlink" title="Screenshots"></a><a target="_blank" rel="noopener" href="https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity#screenshots"></a>Screenshots</h2><p><a href="/images/springboot1springsecurity_1.png"><img src="/images/springboot1springsecurity_1.png"></a> <a href="/images/springboot1springsecurity_2.png"><img src="/images/springboot1springsecurity_2.png"></a> <a href="/images/springboot1springsecurity_3.png"><img src="/images/springboot1springsecurity_3.png"></a> <a href="/images/springboot1springsecurity_4.png"><img src="/images/springboot1springsecurity_4.png"></a></p>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><a target="_blank" rel="noopener" href="https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity">https://github.com/godcheese/springboot-example/tree/master/springboot1springsecurity</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfopr4te0031gu2pbqmtgbde" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfor4kts0030tn2p5m9w9l4e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li></ul>

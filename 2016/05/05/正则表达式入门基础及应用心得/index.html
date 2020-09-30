@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="天堂芝士的个人博客">
 <meta property="og:description" content="今天和大家分享一下正则表达式入门基础及应用心得~ 有助于各位新手学习，以下内容还有待指点改善，请各位大神级别的程序员多多建议，谢谢~——by 天堂芝士  好了，进入正题。说到正则表达式，其实应用范围极其宽泛，比如Windows的搜索、很多开发框架内、数据抓取软件等，都可能或多或少加上几句正则表达式以助软件能够更加高效和准确展示用户所需要的数据。接下来我将给大家展示我个人理解的正则表达式语法及应用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png">
+<meta property="og:image" content="http://godcheese.com/images/github_RegexTool.png">
 <meta property="article:published_time" content="2016-05-05T06:03:10.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:39.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="正则表达式">
 <meta property="article:tag" content="程序员必学">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png">
+<meta name="twitter:image" content="http://godcheese.com/images/github_RegexTool.png">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -148,23 +148,23 @@
 <p>@code:e<br>@description:配合函数preg_replace()使用,可以把匹配来的字符串当作正则表达式执行</p>
 <p>以下是更多较专业网站提供的参考资料或工具： Regex Tester:<a target="_blank" rel="noopener" href="http://www.regexpal.com/">http://www.regexpal.com/</a>（英文工具站点） RegexPal:<a target="_blank" rel="noopener" href="http://regexpal.isbadguy.com/">http://regexpal.isbadguy.com/</a>（汉化版RegexPal，推荐） 在线正则表达式测试：<a target="_blank" rel="noopener" href="http://tool.oschina.net/regex/">http://tool.oschina.net/regex/</a>（开源中国） 正则表达式：<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/zh-cn/library/d9eze55x(v=vs.80).aspx">https://msdn.microsoft.com/zh-cn/library/d9eze55x(v=vs.80).aspx</a>（微软MSDN） 正则表达式：<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/94238.htm">http://baike.baidu.com/view/94238.htm</a>（百度百科） 元字符：<a target="_blank" rel="noopener" href="http://baike.baidu.com/view/1061241.htm">http://baike.baidu.com/view/1061241.htm</a>（百度百科）   最后共享一个自己写的php 正则应用工具类 RegexTool.php，已经在github上开放代码~ 里面有几个常用的正则表达式共享大家：</p>
 <pre><code>    &#39;require&#39;=&gt;&#39;/.+/&#39;,  //判断是否已输入
-    &#39;mobile&#39;=&gt;&#39;/^1(34578)\\d&#123;9&#125;$/&#39;, //手机号判断
-    &#39;url&#39;=&gt;&#39;/^(https?://)?(\\w+\\.)+\[a-zA-Z\]+$/&#39;, //url判断全部可能 加 http:// https://  或 未加http:// https://
-    &#39;url\_&#39;=&gt;&#39;/^(\\w+\\.)+\[a-zA-Z\]+$/&#39;,    //只判断未加 http:// https://
-    &#39;url\_http&#39;=&gt;&#39;/^(https?://)+(\\w+\\.)+\[a-zA-Z\]+$/&#39;,    //只判断加http:// https://
-    &#39;qq&#39;=&gt;&#39;/^\[1-9\]&#123;5,11&#125;$/&#39;,    //qq号码判断
-    &#39;email&#39;=&gt;&#39;/^\\w+(\\.\\w+)?@\\w+.+\[a-zA-Z\]$/&#39;,   //email判断
-    &#39;number&#39;=&gt;&#39;/^\\d+$/&#39;,    //是否为数字判断
+    &#39;mobile&#39;=&gt;&#39;/^1(34578)\d&#123;9&#125;$/&#39;, //手机号判断
+    &#39;url&#39;=&gt;&#39;/^(https?://)?(\w+\.)+[a-zA-Z]+$/&#39;, //url判断全部可能 加 http:// https://  或 未加http:// https://
+    &#39;url_&#39;=&gt;&#39;/^(\w+\.)+[a-zA-Z]+$/&#39;,    //只判断未加 http:// https://
+    &#39;url_http&#39;=&gt;&#39;/^(https?://)+(\w+\.)+[a-zA-Z]+$/&#39;,    //只判断加http:// https://
+    &#39;qq&#39;=&gt;&#39;/^[1-9]&#123;5,11&#125;$/&#39;,    //qq号码判断
+    &#39;email&#39;=&gt;&#39;/^\w+(\.\w+)?@\w+.+[a-zA-Z]$/&#39;,   //email判断
+    &#39;number&#39;=&gt;&#39;/^\d+$/&#39;,    //是否为数字判断
 
     // 语言判断
-    &#39;chinese&#39;=&gt;&#39;/^\[\\u2E80-\\u9FFF\]+$/&#39;,  //汉字判断，其中\\u2E80-\\u9FFF为汉字unicode内码编码区间
-    &#39;english&#39;=&gt;&#39;/^\[a-zA-Z\]$/&#39;,  //英文字母判断</code></pre>
-<p>地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/MyPHPCodeLibrary/blob/master/RegexTool.php">RegexTool.php</a>   <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png"><img src="https://www.godcheese.com/wp-content/uploads/2016/05/github_RegexTool.png" alt="github_RegexTool"></a></p>
+    &#39;chinese&#39;=&gt;&#39;/^[\u2E80-\u9FFF]+$/&#39;,  //汉字判断，其中\u2E80-\u9FFF为汉字unicode内码编码区间
+    &#39;english&#39;=&gt;&#39;/^[a-zA-Z]$/&#39;,  //英文字母判断</code></pre>
+<p>地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/MyPHPCodeLibrary/blob/master/RegexTool.php">RegexTool.php</a>   <a href="/images/github_RegexTool.png"><img src="/images/github_RegexTool.png" alt="github_RegexTool"></a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2016/05/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%BA%94%E7%94%A8%E5%BF%83%E5%BE%97/" data-id="ckfopr4vv006tgu2p0y833idh" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2016/05/05/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80%E5%8F%8A%E5%BA%94%E7%94%A8%E5%BF%83%E5%BE%97/" data-id="ckfor4kwh006ttn2p9d331uo5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag">正则表达式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" rel="tag">程序员必学</a></li></ul>

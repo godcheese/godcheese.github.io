@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="天堂芝士的个人博客">
 <meta property="og:description" content="昨天我更新一加5手机到最新系统时，在重新安装 Xposed 时报错：cp : write error: No space left no device Error 1 occurred. 玩 Linux&#x2F;Unix 的可能就一眼看出应该是空间不足了，那为什么我128G的手机竟然爆出空间不足的问题？原因是因为 Xposed 默认安装在 system 分区，而 Android 内部是默认将 system">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed.jpg">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_2.jpg">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_3.jpg">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_4.jpg">
+<meta property="og:image" content="http://godcheese.com/images/oneplus5_xposed.jpg">
+<meta property="og:image" content="http://godcheese.com/images/oneplus5_xposed_2.jpg">
+<meta property="og:image" content="http://godcheese.com/images/oneplus5_xposed_3.jpg">
+<meta property="og:image" content="http://godcheese.com/images/oneplus5_xposed_4.jpg">
 <meta property="article:published_time" content="2018-04-11T01:00:47.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:00:25.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="Android">
-<meta property="article:tag" content="Xposed">
 <meta property="article:tag" content="一加">
+<meta property="article:tag" content="Xposed">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed.jpg">
+<meta name="twitter:image" content="http://godcheese.com/images/oneplus5_xposed.jpg">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -106,24 +106,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>昨天我更新一加5手机到最新系统时，在重新安装 Xposed 时报错：cp : write error: No space left no device Error 1 occurred. 玩 Linux/Unix 的可能就一眼看出应该是空间不足了，那为什么我128G的手机竟然爆出空间不足的问题？原因是因为 Xposed 默认安装在 system 分区，而 Android 内部是默认将 system 设为单独分区的。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed.jpg"></a></p>
+        <p>昨天我更新一加5手机到最新系统时，在重新安装 Xposed 时报错：cp : write error: No space left no device Error 1 occurred. 玩 Linux/Unix 的可能就一眼看出应该是空间不足了，那为什么我128G的手机竟然爆出空间不足的问题？原因是因为 Xposed 默认安装在 system 分区，而 Android 内部是默认将 system 设为单独分区的。 <a href="/images/oneplus5_xposed.jpg"><img src="/images/oneplus5_xposed.jpg"></a></p>
 <h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>这是可能是手机的 system 分区快满了，打开 Termux 输入sh命令：</p>
 <p>df -k</p>
 <p>或</p>
 <p>df -h</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_2.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_2.jpg"></a> 可以看到 system 分区已经用了99%的存储空间。</p>
+<p><a href="/images/oneplus5_xposed_2.jpg"><img src="/images/oneplus5_xposed_2.jpg"></a> 可以看到 system 分区已经用了99%的存储空间。</p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>解决方法就是打开 Root Explorer 文件管理器，进入根目录，然后进入</p>
 <p>/system/app</p>
 <p>或</p>
 <p>/system/priv-app</p>
 <p>或</p>
 <p>/system/reserve（预装应用）</p>
-<p>等目录，删除没用的 文件或 app。 我这里是选择进入 /system/reserve 目录，删除几乎所有没用的 app，因为这个目录所有的都是预装应用，用于出厂恢复时恢复用的，所以我也建议删除此目录下的app。 <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_3.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_3.jpg"></a> 此处我选择了6个没用的预装 app， <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_4.jpg"><img src="https://www.godcheese.com/wp-content/uploads/2018/04/oneplus5_xposed_4.jpg"></a> 删除成功后300M空间可用。</p>
+<p>等目录，删除没用的 文件或 app。 我这里是选择进入 /system/reserve 目录，删除几乎所有没用的 app，因为这个目录所有的都是预装应用，用于出厂恢复时恢复用的，所以我也建议删除此目录下的app。 <a href="/images/oneplus5_xposed_3.jpg"><img src="/images/oneplus5_xposed_3.jpg"></a> 此处我选择了6个没用的预装 app， <a href="/images/oneplus5_xposed_4.jpg"><img src="/images/oneplus5_xposed_4.jpg"></a> 删除成功后300M空间可用。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/11/%E4%B8%80%E5%8A%A0-5-%E6%89%8B%E6%9C%BA%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%AE%89%E8%A3%85-xposed-%E5%87%BA%E7%8E%B0-cp-write-error-no-space-left-no-device-error-1-occurred-%E8%A7%A3/" data-id="ckfopr4v3005fgu2p6cbsei8j" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/11/%E4%B8%80%E5%8A%A0-5-%E6%89%8B%E6%9C%BA%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%AE%89%E8%A3%85-xposed-%E5%87%BA%E7%8E%B0-cp-write-error-no-space-left-no-device-error-1-occurred-%E8%A7%A3/" data-id="ckfor4kvq005ltn2p3ut91cs1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li></ul>

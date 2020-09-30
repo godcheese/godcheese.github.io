@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="天堂芝士的个人博客">
 <meta property="og:description" content="安装宝塔 Linux 面板（bt.cn）yum install -y wget &amp;&amp; wget -O install.sh http:&#x2F;&#x2F;download.bt.cn&#x2F;install&#x2F;install.sh &amp;&amp; sh install.sh 添加站点，用于安装 Flarum  安装 Composerwget https:&#x2F;&#x2F;getcomposer.org&#x2F;compos">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png">
-<meta property="og:image" content="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png">
+<meta property="og:image" content="http://godcheese.com/images/bt_cn_add_website.png">
+<meta property="og:image" content="http://godcheese.com/images/install_flarum_1.png">
+<meta property="og:image" content="http://godcheese.com/images/install_flarum_2.png">
+<meta property="og:image" content="http://godcheese.com/images/install_flarum_3.png">
 <meta property="article:published_time" content="2018-06-21T01:01:50.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:08:38.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="CentOS">
 <meta property="article:tag" content="Composer">
@@ -27,7 +27,7 @@
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="宝塔面板">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png">
+<meta name="twitter:image" content="http://godcheese.com/images/bt_cn_add_website.png">
   
     <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
   
@@ -109,15 +109,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="安装宝塔-Linux-面板（bt-cn）"><a href="#安装宝塔-Linux-面板（bt-cn）" class="headerlink" title="安装宝塔 Linux 面板（bt.cn）"></a>安装宝塔 Linux 面板（bt.cn）</h2><p>yum install -y wget &amp;&amp; wget -O install.sh <a target="_blank" rel="noopener" href="http://download.bt.cn/install/install.sh">http://download.bt.cn/install/install.sh</a> &amp;&amp; sh install.sh</p>
-<p>添加站点，用于安装 Flarum <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/bt_cn_add_website.png"></a></p>
+<p>添加站点，用于安装 Flarum <a href="/images/bt_cn_add_website.png"><img src="/images/bt_cn_add_website.png"></a></p>
 <h2 id="安装-Composer"><a href="#安装-Composer" class="headerlink" title="安装 Composer"></a>安装 Composer</h2><p>wget <a target="_blank" rel="noopener" href="https://getcomposer.org/composer.phar">https://getcomposer.org/composer.phar</a> -O /usr/local/bin/composer<br>chmod a+x /usr/local/bin/composer</p>
 <h1 id="添加-composer-bin-到-PATH"><a href="#添加-composer-bin-到-PATH" class="headerlink" title="添加 composer bin 到 PATH"></a>添加 composer bin 到 PATH</h1><p>export PATH=$PATH:/root/.config/composer/vendor/bin<br>source /etc/profile</p>
 <h1 id="composer-http-改成-https，连接速度会更佳"><a href="#composer-http-改成-https，连接速度会更佳" class="headerlink" title="composer http 改成 https，连接速度会更佳"></a>composer http 改成 https，连接速度会更佳</h1><p>composer config -g repo.packagist composer <a target="_blank" rel="noopener" href="https://packagist.phpcomposer.com/">https://packagist.phpcomposer.com</a></p>
-<h2 id="安装-Flarum"><a href="#安装-Flarum" class="headerlink" title="安装 Flarum"></a>安装 Flarum</h2><p># 安装 flarum<br>mkdir /tmp/flarum &amp;&amp; cd /tmp/flarum &amp;&amp; composer create-project flarum/flarum . –stability=beta</p>
+<h2 id="安装-Flarum"><a href="#安装-Flarum" class="headerlink" title="安装 Flarum"></a>安装 Flarum</h2><p>安装 flarum<br>mkdir /tmp/flarum &amp;&amp; cd /tmp/flarum &amp;&amp; composer create-project flarum/flarum . –stability=beta</p>
 <h1 id="解决因PHP版本过高，安装依赖报错的问题"><a href="#解决因PHP版本过高，安装依赖报错的问题" class="headerlink" title="解决因PHP版本过高，安装依赖报错的问题"></a>解决因PHP版本过高，安装依赖报错的问题</h1><p>composer install –ignore-platform-reqs</p>
 <h1 id="拷贝-flarum-文件到-testweb-文件夹"><a href="#拷贝-flarum-文件到-testweb-文件夹" class="headerlink" title="拷贝 flarum 文件到 testweb 文件夹"></a>拷贝 flarum 文件到 testweb 文件夹</h1><p>rm -rf /www/wwwroot/testweb/* &amp;&amp; cp -R /tmp/flarum/* /www/wwwroot/testweb</p>
-<p>然后访问刚新建的站点，发现已经能访问 Flarum 了，只不过有几个问题： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_1.png"></a></p>
-<h3 id="问题1：The-PHP-extension-‘fileinfo’-is-required"><a href="#问题1：The-PHP-extension-‘fileinfo’-is-required" class="headerlink" title="问题1：The PHP extension ‘fileinfo’ is required."></a>问题1：The PHP extension ‘fileinfo’ is required.</h3><p>解决方法：访问宝塔 Linux 面板，在 PHP 设置中安装 fileinfo 扩展，结果如下图： <a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_2.png"></a></p>
+<p>然后访问刚新建的站点，发现已经能访问 Flarum 了，只不过有几个问题： <a href="/images/install_flarum_1.png"><img src="/images/install_flarum_1.png"></a></p>
+<h3 id="问题1：The-PHP-extension-‘fileinfo’-is-required"><a href="#问题1：The-PHP-extension-‘fileinfo’-is-required" class="headerlink" title="问题1：The PHP extension ‘fileinfo’ is required."></a>问题1：The PHP extension ‘fileinfo’ is required.</h3><p>解决方法：访问宝塔 Linux 面板，在 PHP 设置中安装 fileinfo 扩展，结果如下图： <a href="/images/install_flarum_2.png"><img src="/images/install_flarum_2.png"></a></p>
 <h3 id="问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable"><a href="#问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable" class="headerlink" title="问题2：The /www/wwwroot/testweb/assets directory is not writable."></a>问题2：The /www/wwwroot/testweb/assets directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
 <p>解决方法：</p>
 <p>chmod -R 0777 /www/wwwroot/testweb/assets</p>
@@ -125,24 +125,24 @@
 <p>解决方法：</p>
 <p>chmod -R 0777 /www/wwwroot/testweb/storage</p>
 <p>解决问题后，访问到正常安装页面，填写数据库等相关信息即可安装。</p>
-<p><a target="_blank" rel="noopener" href="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png"><img src="https://www.godcheese.com/wp-content/uploads/2018/06/install_flarum_3.png"></a>   提示：根据<a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">官方文档</a>想要访问正常，必需 URL Rewriting。</p>
+<p><a href="/images/install_flarum_3.png"><img src="/images/install_flarum_3.png"></a>   提示：根据<a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">官方文档</a>想要访问正常，必需 URL Rewriting。</p>
 <h2 id="URL-Rewriting"><a href="#URL-Rewriting" class="headerlink" title="URL Rewriting"></a>URL Rewriting</h2><h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>Flarum includes a <code>.htaccess</code> file – make sure it’s been uploaded correctly. If you’re using shared hosting, confirm with your hosting provider that <code>mod_rewrite</code> is enabled. You may need to add the following to your Apache configuration:</p>
 <p>&lt;Directory “/path/to/your/forum”&gt;<br>    AllowOverride All<br></Directory></p>
 <h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>Add the following lines to your server’s configuration block:</p>
 <p>location / { try_files $uri $uri/ /index.php?$query_string; }<br>location /api { try_files $uri $uri/ /api.php?$query_string; }<br>location /admin { try_files $uri $uri/ /admin.php?$query_string; }</p>
-<p>location ~* ^/(composer\.(jsonlock)config\.phpflarumstoragevendor) {<br>    deny all;<br>    return 404;<br>}</p>
-<p>location ~* \.php$ {<br>    fastcgi_split_path_info ^(.+.php)(/.+)$;<br>    fastcgi_pass unix:/var/run/php5-fpm.sock;<br>    include fastcgi_params;<br>    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br>    fastcgi_param HTTP_PROXY “”; # Fix for <a target="_blank" rel="noopener" href="https://httpoxy.org/">https://httpoxy.org/</a> vulnerability<br>    fastcgi_index index.php;<br>}</p>
-<p>location ~* \.html$ {<br>    expires -1;<br>}</p>
-<p>location ~* \.(cssjsgifjpe?gpng)$ {<br>    expires 1M;<br>    add_header Pragma public;<br>    add_header Cache-Control “public, must-revalidate, proxy-revalidate”;<br>}</p>
-<p>gzip on;<br>gzip_http_version 1.1;<br>gzip_vary on;<br>gzip_comp_level 6;<br>gzip_proxied any;<br>gzip_types application/atom+xml<br>           application/javascript<br>           application/json<br>           application/vnd.ms-fontobject<br>           application/x-font-ttf<br>           application/x-web-app-manifest+json<br>           application/xhtml+xml<br>           application/xml<br>           font/opentype<br>           image/svg+xml<br>           image/x-icon<br>           text/css<br>           #text/html – text/html is gzipped by default by nginx<br>           text/plain<br>           text/xml;<br>gzip_buffers 16 8k;<br>gzip_disable “MSIE [1-6]\.(?!.*SV1)”;</p>
+<p>location ~* ^/(composer.(jsonlock)config.phpflarumstoragevendor) {<br>    deny all;<br>    return 404;<br>}</p>
+<p>location ~* .php$ {<br>    fastcgi_split_path_info ^(.+.php)(/.+)$;<br>    fastcgi_pass unix:/var/run/php5-fpm.sock;<br>    include fastcgi_params;<br>    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br>    fastcgi_param HTTP_PROXY “”; # Fix for <a target="_blank" rel="noopener" href="https://httpoxy.org/">https://httpoxy.org/</a> vulnerability<br>    fastcgi_index index.php;<br>}</p>
+<p>location ~* .html$ {<br>    expires -1;<br>}</p>
+<p>location ~* .(cssjsgifjpe?gpng)$ {<br>    expires 1M;<br>    add_header Pragma public;<br>    add_header Cache-Control “public, must-revalidate, proxy-revalidate”;<br>}</p>
+<p>gzip on;<br>gzip_http_version 1.1;<br>gzip_vary on;<br>gzip_comp_level 6;<br>gzip_proxied any;<br>gzip_types application/atom+xml<br>           application/javascript<br>           application/json<br>           application/vnd.ms-fontobject<br>           application/x-font-ttf<br>           application/x-web-app-manifest+json<br>           application/xhtml+xml<br>           application/xml<br>           font/opentype<br>           image/svg+xml<br>           image/x-icon<br>           text/css<br>           #text/html – text/html is gzipped by default by nginx<br>           text/plain<br>           text/xml;<br>gzip_buffers 16 8k;<br>gzip_disable “MSIE [1-6].(?!.*SV1)”;</p>
 <h3 id="Lighttpd"><a href="#Lighttpd" class="headerlink" title="Lighttpd"></a>Lighttpd</h3><p>Add the following lines to your server’s configuration block:</p>
-<p>url.rewrite-if-not-file = (<br>    “/admin.*“ =&gt; “/admin.php”,<br>    “/api.*“   =&gt; “/api.php”,<br>    “/.*“      =&gt; “/index.php”<br>)</p>
+<p>url.rewrite-if-not-file = (<br>    “/admin.<em>“ =&gt; “/admin.php”,<br>    “/api.</em>“   =&gt; “/api.php”,<br>    “/.*”      =&gt; “/index.php”<br>)</p>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://www.bt.cn/bbs/thread-1186-1-1.html">https://www.bt.cn/bbs/thread-1186-1-1.html</a> <a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">https://flarum.org/docs/installation/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" data-id="ckfopr4rx000xgu2pdti3ct0q" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" data-id="ckfor4ks5000vtn2p8ysb3jcu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li></ul>

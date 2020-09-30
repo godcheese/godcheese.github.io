@@ -7,15 +7,15 @@
   
   <title>Java 数据字典设计之加载字典到内存（二） | 天堂芝士的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。 &#x2F;** * @author godcheese *&#x2F;@Servicepublic class DictionaryServiceI">
+  <meta name="description" content="本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。 12345678910111213141516171819202122232425262728293031323334353637">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 数据字典设计之加载字典到内存（二）">
 <meta property="og:url" content="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
 <meta property="og:site_name" content="天堂芝士的个人博客">
-<meta property="og:description" content="本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。 &#x2F;** * @author godcheese *&#x2F;@Servicepublic class DictionaryServiceI">
+<meta property="og:description" content="本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。 12345678910111213141516171819202122232425262728293031323334353637">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-09-04T00:19:29.000Z">
-<meta property="article:modified_time" content="2020-09-29T09:23:59.000Z">
+<meta property="article:modified_time" content="2020-09-30T02:00:25.000Z">
 <meta property="article:author" content="godcheese">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Spring Boot">
@@ -103,68 +103,13 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文以 Spring Boot 应用、MySQL 数据库为例。 新建 DictionaryService.java、DictionaryServiceImpl.java，新增借口方法：addDictionaryToServletContext，用于调用加载字典到内存。</p>
-<p>/**<br> * @author godcheese<br> */<br>@Service<br>public class DictionaryServiceImpl implements DictionaryService {</p>
-<pre><code>@Autowired
-private DictionaryMapper dictionaryMapper;
-
-@Autowired
-private WebApplicationContext webApplicationContext;
-
-private static final Logger LOGGER = LoggerFactory.getLogger(DictionaryServiceImpl.class);
-
-@Override
-public void addDictionaryToServletContext() &#123;
-    ServletContext servletContext = webApplicationContext.getServletContext();
-    if (servletContext != null) &#123;
-
-        List&lt;DictionaryEntity&gt; dictionaryEntityList = dictionaryMapper.listAll();
-        for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;
-            servletContext.setAttribute(dictionaryEntity.getKey().toUpperCase() + &quot;.&quot; + dictionaryEntity.getValueSlug().toUpperCase(), dictionaryEntity.getValue());
-        &#125;
-
-        Map&lt;String, List&lt;DictionaryEntity&gt;&gt; dictionaryEntityMap = new HashMap&lt;&gt;(6);
-        for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;
-            String key = dictionaryEntity.getKey().toUpperCase();
-            if (dictionaryEntityMap.containsKey(key)) &#123;
-                List&lt;DictionaryEntity&gt; dictionaryEntityList1 = dictionaryEntityMap.get(key);
-                if (!dictionaryEntityList1.contains(dictionaryEntity)) &#123;
-                    dictionaryEntityList1.add(dictionaryEntity);
-                    dictionaryEntityMap.put(key, dictionaryEntityList1);
-                &#125;
-            &#125; else &#123;
-                List&lt;DictionaryEntity&gt; dictionaryEntityList2 = new ArrayList&lt;&gt;(1);
-                dictionaryEntityList2.add(dictionaryEntity);
-                dictionaryEntityMap.put(key, dictionaryEntityList2);
-            &#125;
-        &#125;
-
-        for (Map.Entry entry : dictionaryEntityMap.entrySet()) &#123;
-            servletContext.setAttribute((String) entry.getKey(), entry.getValue());
-        &#125;
-
-    &#125;
-&#125;</code></pre>
-<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Service</span><br><span class="line">public class DictionaryServiceImpl implements DictionaryService &#123;</span><br><span class="line">   </span><br><span class="line">    @Autowired</span><br><span class="line">    private DictionaryMapper dictionaryMapper;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private WebApplicationContext webApplicationContext;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(DictionaryServiceImpl.class);</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addDictionaryToServletContext() &#123;</span><br><span class="line">        ServletContext servletContext &#x3D; webApplicationContext.getServletContext();</span><br><span class="line">        if (servletContext !&#x3D; null) &#123;</span><br><span class="line"></span><br><span class="line">            List&lt;DictionaryEntity&gt; dictionaryEntityList &#x3D; dictionaryMapper.listAll();</span><br><span class="line">            for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;</span><br><span class="line">                servletContext.setAttribute(dictionaryEntity.getKey().toUpperCase() + &quot;.&quot; + dictionaryEntity.getValueSlug().toUpperCase(), dictionaryEntity.getValue());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Map&lt;String, List&lt;DictionaryEntity&gt;&gt; dictionaryEntityMap &#x3D; new HashMap&lt;&gt;(6);</span><br><span class="line">            for (DictionaryEntity dictionaryEntity : dictionaryEntityList) &#123;</span><br><span class="line">                String key &#x3D; dictionaryEntity.getKey().toUpperCase();</span><br><span class="line">                if (dictionaryEntityMap.containsKey(key)) &#123;</span><br><span class="line">                    List&lt;DictionaryEntity&gt; dictionaryEntityList1 &#x3D; dictionaryEntityMap.get(key);</span><br><span class="line">                    if (!dictionaryEntityList1.contains(dictionaryEntity)) &#123;</span><br><span class="line">                        dictionaryEntityList1.add(dictionaryEntity);</span><br><span class="line">                        dictionaryEntityMap.put(key, dictionaryEntityList1);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    List&lt;DictionaryEntity&gt; dictionaryEntityList2 &#x3D; new ArrayList&lt;&gt;(1);</span><br><span class="line">                    dictionaryEntityList2.add(dictionaryEntity);</span><br><span class="line">                    dictionaryEntityMap.put(key, dictionaryEntityList2);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for (Map.Entry entry : dictionaryEntityMap.entrySet()) &#123;</span><br><span class="line">                servletContext.setAttribute((String) entry.getKey(), entry.getValue());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>新建 ApplicationStartupRunner.java，用于程序启动时进行的操作，此处调用 DictionaryService 的 addDictionaryToServletContext 方法，执行将字典加载到内存。</p>
-<p>/**<br> * @author godcheese<br> * @date 2018/2/22 16:19<br> */<br>@Component<br>@Order<br>public class ApplicationStartupRunner implements CommandLineRunner {</p>
-<pre><code>private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationStartupRunner.class);
-
-@Autowired
-private DictionaryService dictionaryService;
-
-@Override
-public void run(String... strings) throws Exception &#123;
-
-    // 首次启动加载数据字典到 ServletContext 内存
-    dictionaryService.addDictionaryToServletContext();
-
-&#125;</code></pre>
-<p>}</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese</span><br><span class="line"> * @date 2018&#x2F;2&#x2F;22 16:19</span><br><span class="line"> *&#x2F;</span><br><span class="line">@Component</span><br><span class="line">@Order</span><br><span class="line">public class ApplicationStartupRunner implements CommandLineRunner &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(ApplicationStartupRunner.class);</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private DictionaryService dictionaryService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(String... strings) throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 首次启动加载数据字典到 ServletContext 内存</span><br><span class="line">        dictionaryService.addDictionaryToServletContext();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckfopr4sm001vgu2p7kfp989h" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/09/04/java-%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8%E8%AE%BE%E8%AE%A1%E4%B9%8B%E5%8A%A0%E8%BD%BD%E5%AD%97%E5%85%B8%E5%88%B0%E5%86%85%E5%AD%98%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckfor4ksu001wtn2p1wks2ja6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" rel="tag">数据字典</a></li></ul>
