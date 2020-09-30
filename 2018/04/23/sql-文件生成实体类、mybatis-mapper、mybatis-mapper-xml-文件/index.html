@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-  
-  <title>SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件 | 天堂芝士的个人博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"godcheese.com","root":"/","scheme":"Muse","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
   <meta name="description" content="开源地址：https:&#x2F;&#x2F;github.com&#x2F;godcheese&#x2F;com.godcheese.common   项目目录D:\demo D:\demo\tables目录下的api_table.sql文件 目前仅支持 MySQL 数据库，Oracle 之后再适配  SQL 文件：api_table.sql1234567891011121314151617181920212223DROP TABL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件">
@@ -22,86 +37,237 @@
 <meta property="article:tag" content="SQL">
 <meta property="article:tag" content="MyBatis">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="天堂芝士的个人博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 5.2.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">天堂芝士的个人博客</a>
-      </h1>
-      
+<link rel="canonical" href="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件 | 天堂芝士的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">天堂芝士的个人博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">当你的才华还撑不起你的野心时，那你就应该静下心来学习。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
         
-          <a class="main-nav-link" href="/">首页</a>
-        
-          <a class="main-nav-link" href="/archives">归档</a>
-        
-          <a class="main-nav-link" href="/links">友链</a>
-        
-          <a class="main-nav-link" href="/about">关于</a>
-        
-          <a class="main-nav-link" href="/messages">留言</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://godcheese.com"></form>
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-%E6%96%87%E4%BB%B6%EF%BC%9Aapi-table-sql"><span class="nav-number">1.</span> <span class="nav-text">SQL 文件：api_table.sql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81MyBatis-Mapper%E3%80%81MyBatis-Mapper-XML-%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">批量生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81MyBatis-Mapper%E3%80%81MyBatis-Mapper-XML-%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9A%84%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%96%87%E4%BB%B6%EF%BC%9AApiEntity-java"><span class="nav-number">4.</span> <span class="nav-text">生成的实体类文件：ApiEntity.java</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%9A%84-MyBatis-Mapper-XML-%E6%96%87%E4%BB%B6%EF%BC%9AApiMapper-xml"><span class="nav-number">5.</span> <span class="nav-text">生成的 MyBatis Mapper XML 文件：ApiMapper.xml</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">godcheese</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-sql-文件生成实体类、mybatis-mapper、mybatis-mapper-xml-文件" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" class="article-date">
-  <time datetime="2018-04-23T08:14:11.000Z" itemprop="datePublished">2018-04-23</time>
-</a>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a>
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
   </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件
-    </h1>
-  
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+
+    <div class="main-inner post posts-expand">
       
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="godcheese">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天堂芝士的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL 文件生成实体类、Mybatis Mapper、MyBatis Mapper XML 文件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-23 16:14:11" itemprop="dateCreated datePublished" datetime="2018-04-23T16:14:11+08:00">2018-04-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-30 10:08:38" itemprop="dateModified" datetime="2020-09-30T10:08:38+08:00">2020-09-30</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" itemprop="url" rel="index"><span itemprop="name">技术分享</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
         <blockquote>
 <p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/godcheese/com.godcheese.common">https://github.com/godcheese/com.godcheese.common</a></p>
 </blockquote>
@@ -115,169 +281,126 @@
 <h4 id="单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件"><a href="#单个生成实体类、MyBatis-Mapper、MyBatis-Mapper-XML-文件" class="headerlink" title="单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件"></a>单个生成实体类、MyBatis Mapper、MyBatis Mapper XML 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 指定单个 SQL 文件生成对应的实体类、MyBatis Mapper、MyBatis Mapper XML 文件</span><br><span class="line">       SqlGenerateProperties properties &#x3D; new SqlGenerateProperties();</span><br><span class="line">       properties.setMyBatisMapperPackage(&quot;com.gioov.demo.mapper&quot;);</span><br><span class="line">       properties.setEntityPackage(&quot;com.gioov.demo.entity&quot;);</span><br><span class="line"></span><br><span class="line">       DatabaseUtil.generateEntity(&quot;D:\\demo\\tables\\api_table.sql&quot;,&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\entity&quot;, properties);</span><br><span class="line">       DatabaseUtil.generateMyBatisMapper(&quot;D:\\demo\\tables\\api_table.sql&quot;,&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper&quot;, properties);</span><br><span class="line">       DatabaseUtil.generateMyBatisMapperXml(&quot;D:\\demo\\tables\\api_table.sql&quot;,&quot;D:\\demo\\src\\main\\java\\com\\gioov\\demo\\mapper&quot;, properties);</span><br></pre></td></tr></table></figure>
 <h4 id="生成的实体类文件：ApiEntity-java"><a href="#生成的实体类文件：ApiEntity-java" class="headerlink" title="生成的实体类文件：ApiEntity.java"></a>生成的实体类文件：ApiEntity.java</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">package com.gioov.demo.entity;</span><br><span class="line"></span><br><span class="line">import java.io.Serializable;</span><br><span class="line">import java.lang.Long;</span><br><span class="line">import java.lang.String;</span><br><span class="line">import java.util.Date;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author godcheese [godcheese@outlook.com]</span><br><span class="line"> * @date 2018&#x2F;4&#x2F;23 15:58</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class ApiEntity implements Serializable &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * api 名称</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 请求地址</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String uri;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * api 目录 id</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long apiCategoryId;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 排序</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Long sort;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 备注</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String remark;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 权限（API:UUID）</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private String authority;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 创建时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtCreate;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 更新时间</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private Date gmtModified;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getUri() &#123;</span><br><span class="line">        return uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUri(String uri) &#123;</span><br><span class="line">        this.uri &#x3D; uri;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getApiCategoryId() &#123;</span><br><span class="line">        return apiCategoryId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setApiCategoryId(Long apiCategoryId) &#123;</span><br><span class="line">        this.apiCategoryId &#x3D; apiCategoryId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Long getSort() &#123;</span><br><span class="line">        return sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSort(Long sort) &#123;</span><br><span class="line">        this.sort &#x3D; sort;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getRemark() &#123;</span><br><span class="line">        return remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRemark(String remark) &#123;</span><br><span class="line">        this.remark &#x3D; remark;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getAuthority() &#123;</span><br><span class="line">        return authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAuthority(String authority) &#123;</span><br><span class="line">        this.authority &#x3D; authority;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtCreate() &#123;</span><br><span class="line">        return gmtCreate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtCreate(Date gmtCreate) &#123;</span><br><span class="line">        this.gmtCreate &#x3D; gmtCreate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Date getGmtModified() &#123;</span><br><span class="line">        return gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setGmtModified(Date gmtModified) &#123;</span><br><span class="line">        this.gmtModified &#x3D; gmtModified;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml"><a href="#生成的-MyBatis-Mapper-XML-文件：ApiMapper-xml" class="headerlink" title="生成的 MyBatis Mapper XML 文件：ApiMapper.xml"></a>生成的 MyBatis Mapper XML 文件：ApiMapper.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-&#x2F;&#x2F;mybatis.org&#x2F;&#x2F;DTD Config 3.0&#x2F;&#x2F;EN&quot; &quot;http:&#x2F;&#x2F;mybatis.org&#x2F;dtd&#x2F;mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace&#x3D;&quot;com.gioov.demo.mapper.ApiMapper&quot;&gt;</span><br><span class="line">    &lt;resultMap id&#x3D;&quot;BaseResultMap&quot; type&#x3D;&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;</span><br><span class="line">        &lt;id column&#x3D;&quot;id&quot; property&#x3D;&quot;id&quot; jdbcType&#x3D;&quot;BIGINT&quot;&#x2F;&gt; &lt;!-- id --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;name&quot; property&#x3D;&quot;name&quot; jdbcType&#x3D;&quot;VARCHAR&quot;&#x2F;&gt; &lt;!-- api 名称 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;uri&quot; property&#x3D;&quot;uri&quot; jdbcType&#x3D;&quot;null&quot;&#x2F;&gt; &lt;!-- 请求地址 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;api_category_id&quot; property&#x3D;&quot;apiCategoryId&quot; jdbcType&#x3D;&quot;BIGINT&quot;&#x2F;&gt; &lt;!-- api 目录 id --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;sort&quot; property&#x3D;&quot;sort&quot; jdbcType&#x3D;&quot;BIGINT&quot;&#x2F;&gt; &lt;!-- 排序 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;remark&quot; property&#x3D;&quot;remark&quot; jdbcType&#x3D;&quot;VARCHAR&quot;&#x2F;&gt; &lt;!-- 备注 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;authority&quot; property&#x3D;&quot;authority&quot; jdbcType&#x3D;&quot;VARCHAR&quot;&#x2F;&gt; &lt;!-- 权限（API:UUID） --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;gmt_create&quot; property&#x3D;&quot;gmtCreate&quot; jdbcType&#x3D;&quot;DATE&quot;&#x2F;&gt; &lt;!-- 创建时间 --&gt;</span><br><span class="line">        &lt;result column&#x3D;&quot;gmt_modified&quot; property&#x3D;&quot;gmtModified&quot; jdbcType&#x3D;&quot;DATE&quot;&#x2F;&gt; &lt;!-- 更新时间 --&gt;</span><br><span class="line">    &lt;&#x2F;resultMap&gt;</span><br><span class="line"></span><br><span class="line">    &lt;sql id&#x3D;&quot;TableName&quot;&gt;</span><br><span class="line">        &#96;api&#96;</span><br><span class="line">    &lt;&#x2F;sql&gt;</span><br><span class="line"></span><br><span class="line">    &lt;sql id&#x3D;&quot;BaseColumnList&quot;&gt;</span><br><span class="line">        &#96;id&#96;, &#96;name&#96;, &#96;uri&#96;, &#96;api_category_id&#96;, &#96;sort&#96;, &#96;remark&#96;, &#96;authority&#96;, &#96;gmt_create&#96;, &#96;gmt_modified&#96;</span><br><span class="line">    &lt;&#x2F;sql&gt;</span><br><span class="line"></span><br><span class="line">    &lt;insert id&#x3D;&quot;insertOne&quot; useGeneratedKeys&#x3D;&quot;true&quot; keyProperty&#x3D;&quot;id&quot; parameterType&#x3D;&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;</span><br><span class="line">        INSERT INTO</span><br><span class="line">        &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">        (&#96;id&#96;, &#96;name&#96;, &#96;uri&#96;, &#96;api_category_id&#96;, &#96;sort&#96;, &#96;remark&#96;, &#96;authority&#96;, &#96;gmt_create&#96;, &#96;gmt_modified&#96;)</span><br><span class="line">        VALUES (#&#123;id&#125;, #&#123;name&#125;, #&#123;uri&#125;, #&#123;apiCategoryId&#125;, #&#123;sort&#125;, #&#123;remark&#125;, #&#123;authority&#125;, #&#123;gmtCreate&#125;, #&#123;gmtModified&#125;)    &lt;&#x2F;insert&gt;</span><br><span class="line"></span><br><span class="line">    &lt;update id&#x3D;&quot;updateOne&quot; keyProperty&#x3D;&quot;id&quot; parameterType&#x3D;&quot;com.gioov.demo.entity.ApiEntity&quot;&gt;</span><br><span class="line">        UPDATE</span><br><span class="line">        &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">        SET &#96;name&#96; &#x3D; #&#123;name&#125;, &#96;uri&#96; &#x3D; #&#123;uri&#125;, &#96;api_category_id&#96; &#x3D; #&#123;apiCategoryId&#125;, &#96;sort&#96; &#x3D; #&#123;sort&#125;, &#96;remark&#96; &#x3D; #&#123;remark&#125;, &#96;authority&#96; &#x3D; #&#123;authority&#125;, &#96;gmt_create&#96; &#x3D; #&#123;gmtCreate&#125;, &#96;gmt_modified&#96; &#x3D; #&#123;gmtModified&#125;</span><br><span class="line">        WHERE &#96;id&#96;&#x3D; #&#123;id&#125;</span><br><span class="line">    &lt;&#x2F;update&gt;</span><br><span class="line"></span><br><span class="line">    &lt;delete id&#x3D;&quot;deleteOne&quot; parameterType&#x3D;&quot;long&quot;&gt;</span><br><span class="line">        DELETE FROM</span><br><span class="line">        &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">        WHERE id &#x3D; #&#123;id&#125;</span><br><span class="line">    &lt;&#x2F;delete&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id&#x3D;&quot;getOne&quot; resultMap&#x3D;&quot;BaseResultMap&quot;&gt;</span><br><span class="line">        SELECT</span><br><span class="line">        &lt;include refid&#x3D;&quot;BaseColumnList&quot;&#x2F;&gt;</span><br><span class="line">        FROM &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt; WHERE id &#x3D; #&#123;id&#125;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id&#x3D;&quot;listAll&quot; resultMap&#x3D;&quot;BaseResultMap&quot;&gt;</span><br><span class="line">        SELECT</span><br><span class="line">        &lt;include refid&#x3D;&quot;BaseColumnList&quot;&#x2F;&gt;</span><br><span class="line">        FROM &lt;include refid&#x3D;&quot;TableName&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;mapper&gt;</span><br></pre></td></tr></table></figure>
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" data-id="ckfowp2b3003gfi2pdv3o6u8l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
 
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+              <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/" rel="prev" title="Server Manager 基于 JavaFX 开发的 一款桌面服务器管理软件">
+                  <i class="fa fa-chevron-left"></i> Server Manager 基于 JavaFX 开发的 一款桌面服务器管理软件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" rel="next" title="一加 5 解锁 Bootloader 、刷写第三方 Recovery、ROOT">
+                  一加 5 解锁 Bootloader 、刷写第三方 Recovery、ROOT <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          一加 5 解锁 Bootloader 、刷写第三方 Recovery、ROOT
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Server Manager 基于 JavaFX 开发的 一款桌面服务器管理软件</div>
-    </a>
-  
-</nav>
+  </article>
+</div>
 
-  
-</article>
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/06/10/%E5%8D%8E%E4%B8%BA%E4%BA%91%E5%92%8C-sonatype-%E8%81%94%E5%90%88%E5%8F%91%E5%B8%83%E4%B8%AD%E5%9B%BD%E5%AE%98%E6%96%B9-maven-%E4%B8%AD%E5%A4%AE%E4%BB%93%E5%BA%93%E9%95%9C%E5%83%8F/">华为云和 Sonatype 联合发布中国官方 Maven 中央仓库镜像</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/14/java-mysql-maven-tomcat-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Java/MySQL/Maven/Tomcat 安装配置方式</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/08/%E5%85%8D%E8%B4%B9%E7%9A%84-jetbrains-%E6%B3%A8%E5%86%8C%E7%A0%81%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95%E5%8F%8A%E8%BD%AF%E4%BB%B6%E7%A0%B4%E8%A7%A3%E6%BF%80%E6%B4%BB%E6%96%B9%E5%BC%8F/">免费的 JetBrains 注册码获取方法及软件破解激活方式</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/12/%E6%B3%A8%E5%85%A5-filter-%E8%A7%A3%E5%86%B3-spring-boot-2-x-%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E5%BC%80%E5%8F%91-cors-%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">注入 Filter 解决 Spring Boot 2.x 前后端分离开发 CORS 跨域问题</a>
-          </li>
-        
-          <li>
-            <a href="/2019/05/03/java-%E5%AE%9E%E7%8E%B0%E6%97%A0%E9%99%90%E5%B1%82%E7%BA%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E9%81%8D%E5%8E%86%E9%83%A8%E9%97%A8/">Java 实现无限层级树形结构遍历部门</a>
-          </li>
-        
-      </ul>
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
     </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">godcheese</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT%E4%B8%9A%E7%95%8C/">IT业界</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1/">互联通信</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/">常用软件</a><span class="category-list-count">22</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7/">开发者工具</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%8B%E6%9C%BA%E6%95%B0%E7%A0%81/">手机数码</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/">技术分享</a><span class="category-list-count">49</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A8%8B%E5%BA%8F%E5%91%98%E6%9D%82%E8%B0%88/">程序员杂谈</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B2%BE%E5%93%81%E8%B5%84%E6%BA%90/">精品资源</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E5%B8%88%E5%BF%85%E5%A4%87/">设计师必备</a><span class="category-list-count">2</span></li></ul>
     </div>
-  </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/APP/" style="font-size: 10px;">APP</a> <a href="/tags/Adobe/" style="font-size: 12.86px;">Adobe</a> <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Android/" style="font-size: 12.86px;">Android</a> <a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a> <a href="/tags/Apache/" style="font-size: 10px;">Apache</a> <a href="/tags/Apache-POI/" style="font-size: 10px;">Apache POI</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/CURL/" style="font-size: 10px;">CURL</a> <a href="/tags/CentOS/" style="font-size: 11.43px;">CentOS</a> <a href="/tags/Composer/" style="font-size: 10px;">Composer</a> <a href="/tags/EasyUI/" style="font-size: 10px;">EasyUI</a> <a href="/tags/Excel/" style="font-size: 10px;">Excel</a> <a href="/tags/Flarum/" style="font-size: 10px;">Flarum</a> <a href="/tags/GiWebFrame/" style="font-size: 11.43px;">GiWebFrame</a> <a href="/tags/GitHub/" style="font-size: 10px;">GitHub</a> <a href="/tags/Google-Chrome/" style="font-size: 10px;">Google Chrome</a> <a href="/tags/Intellij-Idea/" style="font-size: 10px;">Intellij Idea</a> <a href="/tags/Java/" style="font-size: 20px;">Java</a> <a href="/tags/JavaFX/" style="font-size: 10px;">JavaFX</a> <a href="/tags/JavaScript/" style="font-size: 11.43px;">JavaScript</a> <a href="/tags/JetBrains/" style="font-size: 11.43px;">JetBrains</a> <a href="/tags/Laravel/" style="font-size: 12.86px;">Laravel</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Maven/" style="font-size: 14.29px;">Maven</a> <a href="/tags/Microsoft/" style="font-size: 11.43px;">Microsoft</a> <a href="/tags/Microsoft-Office/" style="font-size: 12.86px;">Microsoft Office</a> <a href="/tags/Mozilla-Firefox/" style="font-size: 10px;">Mozilla Firefox</a> <a href="/tags/MyBatis/" style="font-size: 10px;">MyBatis</a> <a href="/tags/MySQL/" style="font-size: 15.71px;">MySQL</a> <a href="/tags/Node-js/" style="font-size: 10px;">Node.js</a> <a href="/tags/Opera/" style="font-size: 10px;">Opera</a> <a href="/tags/Oracle/" style="font-size: 11.43px;">Oracle</a> <a href="/tags/P2P/" style="font-size: 10px;">P2P</a> <a href="/tags/PHP/" style="font-size: 18.57px;">PHP</a> <a href="/tags/PhpStorm/" style="font-size: 10px;">PhpStorm</a> <a href="/tags/PyCharm/" style="font-size: 10px;">PyCharm</a> <a href="/tags/SQL/" style="font-size: 11.43px;">SQL</a> <a href="/tags/Safari/" style="font-size: 10px;">Safari</a> <a href="/tags/Spring-Boot/" style="font-size: 17.14px;">Spring Boot</a> <a href="/tags/Spring-Security/" style="font-size: 10px;">Spring Security</a> <a href="/tags/ThinkPHP/" style="font-size: 10px;">ThinkPHP</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/VMware/" style="font-size: 11.43px;">VMware</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/WIFI/" style="font-size: 10px;">WIFI</a> <a href="/tags/WebStorm/" style="font-size: 10px;">WebStorm</a> <a href="/tags/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">Web服务器</a> <a href="/tags/Windows/" style="font-size: 11.43px;">Windows</a> <a href="/tags/Windows-10/" style="font-size: 10px;">Windows 10</a> <a href="/tags/Windows-7/" style="font-size: 12.86px;">Windows 7</a> <a href="/tags/Windows-8-1/" style="font-size: 10px;">Windows 8.1</a> <a href="/tags/Windows-XP/" style="font-size: 10px;">Windows XP</a> <a href="/tags/Xposed/" style="font-size: 10px;">Xposed</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/cmd/" style="font-size: 10px;">cmd</a> <a href="/tags/git/" style="font-size: 12.86px;">git</a> <a href="/tags/jQuery/" style="font-size: 11.43px;">jQuery</a> <a href="/tags/x-force/" style="font-size: 10px;">x-force</a> <a href="/tags/%E4%B8%80%E5%8A%A0/" style="font-size: 11.43px;">一加</a> <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 10px;">内网穿透</a> <a href="/tags/%E5%8A%9E%E5%85%AC%E8%BD%AF%E4%BB%B6/" style="font-size: 11.43px;">办公软件</a> <a href="/tags/%E5%8E%8B%E7%BC%A9%E8%A7%A3%E5%8E%8B/" style="font-size: 10px;">压缩解压</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 10px;">图片处理</a> <a href="/tags/%E5%AD%A6%E6%A0%A1/" style="font-size: 10px;">学校</a> <a href="/tags/%E5%AD%A6%E7%94%9F/" style="font-size: 10px;">学生</a> <a href="/tags/%E5%AE%89%E5%8D%93%E6%A8%A1%E6%8B%9F%E5%99%A8/" style="font-size: 10px;">安卓模拟器</a> <a href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" style="font-size: 10px;">宝塔面板</a> <a href="/tags/%E5%BE%AE%E4%BF%A1%E8%90%A5%E9%94%80/" style="font-size: 10px;">微信营销</a> <a href="/tags/%E5%BE%AE%E8%AF%BE/" style="font-size: 10px;">微课</a> <a href="/tags/%E6%89%8B%E6%9C%BA/" style="font-size: 10px;">手机</a> <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">操作系统</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AD%97%E5%85%B8/" style="font-size: 11.43px;">数据字典</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" style="font-size: 10px;">数据安全</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 11.43px;">数据库</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" style="font-size: 10px;">数据恢复</a> <a href="/tags/%E6%97%A0%E7%BA%BF%E8%90%A5%E9%94%80/" style="font-size: 10px;">无线营销</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">服务器</a> <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10px;">正则表达式</a> <a href="/tags/%E6%B5%99%E5%B8%88%E5%A4%A7/" style="font-size: 10px;">浙师大</a> <a href="/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" style="font-size: 11.43px;">版本控制</a> <a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 10px;">病毒</a> <a href="/tags/%E7%99%BE%E5%BA%A6/" style="font-size: 14.29px;">百度</a> <a href="/tags/%E7%9F%A5%E7%BD%91CNKI/" style="font-size: 10px;">知网CNKI</a> <a href="/tags/%E7%9F%AD%E4%BF%A1/" style="font-size: 10px;">短信</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E8%AE%BE%E5%A4%87%E5%AE%89%E5%85%A8/" style="font-size: 10px;">移动设备安全</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/" style="font-size: 11.43px;">程序员</a> <a href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%AD%A6/" style="font-size: 10px;">程序员必学</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BE%8E%E5%8C%96/" style="font-size: 11.43px;">系统美化</a> <a href="/tags/%E7%BD%91%E7%9B%98/" style="font-size: 11.43px;">网盘</a> <a href="/tags/%E7%BD%91%E7%AB%99%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">网站开发</a> <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" style="font-size: 10px;">网站搭建</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" style="font-size: 10px;">网络安全</a> <a href="/tags/%E7%BD%91%E9%A1%B5%E8%AE%BE%E8%AE%A1/" style="font-size: 12.86px;">网页设计</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 11.43px;">虚拟机</a> <a href="/tags/%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91/" style="font-size: 10px;">视频剪辑</a> <a href="/tags/%E8%A7%86%E9%A2%91%E7%BC%96%E8%BE%91/" style="font-size: 11.43px;">视频编辑</a> <a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 10px;">论文</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E5%B8%88/" style="font-size: 10px;">设计师</a> <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" style="font-size: 11.43px;">软件开发</a> <a href="/tags/%E8%BF%9C%E7%A8%8B%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">远程工具</a> <a href="/tags/%E9%98%BF%E9%87%8C%E5%A4%A7%E9%B1%BC/" style="font-size: 10px;">阿里大鱼</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" style="font-size: 11.43px;">项目管理</a> <a href="/tags/%E9%AB%98%E6%95%88/" style="font-size: 10px;">高效</a>
-    </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">友情链接</h3>
-      <div class="widget">
-        <ul style="list-style: none">
-          
-            <li class='link'><a target='_blank' href='http://regex.godcheese.com/'>正则校验工具</a></li>
-          
-            <li class='link'><a target='_blank' href='http://www.twistedwg.com/'>TwistedW&#39;s Home</a></li>
-          
-            <li class='link'><a target='_blank' href='https://www.fedte.cc/'>Falost的小窝</a></li>
-          
-            <li class='link'><a target='_blank' href='https://www.52share.online/'>HuiProgramer</a></li>
-          
-            <li class='link'><a target='_blank' href='https://mrbird.cc/'>MrBird&#39;s blog</a></li>
-          
-            <li class='link'><a target='_blank' href='http://www.zjnu.edu.cn/'>浙师大官网</a></li>
-          
-            <li class='link'><a target='_blank' href='http://oa.zjnu.edu.cn/'>浙师大内网</a></li>
-          
-            <li class='link'><a target='_blank' href='http://soft.zjnu.edu.cn/'>浙师大软件站</a></li>
-          
-            <li class='link'><a target='_blank' href='http://10.1.68.13:8001/'>浙师大选课中心</a></li>
-          
-            <li class='link'><a target='_blank' href='http://course.zjnu.cn/wjj/'>计算机省二级AOA软件课程</a></li>
-          
-        </ul>
-  </div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 godcheese<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">首页</a>
-  
-    <a href="/archives" class="mobile-nav-link">归档</a>
-  
-    <a href="/links" class="mobile-nav-link">友链</a>
-  
-    <a href="/about" class="mobile-nav-link">关于</a>
-  
-    <a href="/messages" class="mobile-nav-link">留言</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
 
 
   
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
   
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
 </body>
 </html>
