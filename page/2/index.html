@@ -96,41 +96,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装宝塔-Linux-面板（bt-cn）"><a href="#安装宝塔-Linux-面板（bt-cn）" class="headerlink" title="安装宝塔 Linux 面板（bt.cn）"></a>安装宝塔 Linux 面板（bt.cn）</h2><p>yum install -y wget &amp;&amp; wget -O install.sh <a target="_blank" rel="noopener" href="http://download.bt.cn/install/install.sh">http://download.bt.cn/install/install.sh</a> &amp;&amp; sh install.sh</p>
+        <h2 id="安装宝塔-Linux-面板（bt-cn）"><a href="#安装宝塔-Linux-面板（bt-cn）" class="headerlink" title="安装宝塔 Linux 面板（bt.cn）"></a>安装宝塔 Linux 面板（bt.cn）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http:&#x2F;&#x2F;download.bt.cn&#x2F;install&#x2F;install.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
 <p>添加站点，用于安装 Flarum <a href="/images/bt_cn_add_website.png"><img src="/images/bt_cn_add_website.png"></a></p>
-<h2 id="安装-Composer"><a href="#安装-Composer" class="headerlink" title="安装 Composer"></a>安装 Composer</h2><p>wget <a target="_blank" rel="noopener" href="https://getcomposer.org/composer.phar">https://getcomposer.org/composer.phar</a> -O /usr/local/bin/composer<br>chmod a+x /usr/local/bin/composer</p>
-<h1 id="添加-composer-bin-到-PATH"><a href="#添加-composer-bin-到-PATH" class="headerlink" title="添加 composer bin 到 PATH"></a>添加 composer bin 到 PATH</h1><p>export PATH=$PATH:/root/.config/composer/vendor/bin<br>source /etc/profile</p>
-<h1 id="composer-http-改成-https，连接速度会更佳"><a href="#composer-http-改成-https，连接速度会更佳" class="headerlink" title="composer http 改成 https，连接速度会更佳"></a>composer http 改成 https，连接速度会更佳</h1><p>composer config -g repo.packagist composer <a target="_blank" rel="noopener" href="https://packagist.phpcomposer.com/">https://packagist.phpcomposer.com</a></p>
-<h2 id="安装-Flarum"><a href="#安装-Flarum" class="headerlink" title="安装 Flarum"></a>安装 Flarum</h2><p>安装 flarum<br>mkdir /tmp/flarum &amp;&amp; cd /tmp/flarum &amp;&amp; composer create-project flarum/flarum . –stability=beta</p>
-<h1 id="解决因PHP版本过高，安装依赖报错的问题"><a href="#解决因PHP版本过高，安装依赖报错的问题" class="headerlink" title="解决因PHP版本过高，安装依赖报错的问题"></a>解决因PHP版本过高，安装依赖报错的问题</h1><p>composer install –ignore-platform-reqs</p>
-<h1 id="拷贝-flarum-文件到-testweb-文件夹"><a href="#拷贝-flarum-文件到-testweb-文件夹" class="headerlink" title="拷贝 flarum 文件到 testweb 文件夹"></a>拷贝 flarum 文件到 testweb 文件夹</h1><p>rm -rf /www/wwwroot/testweb/* &amp;&amp; cp -R /tmp/flarum/* /www/wwwroot/testweb</p>
+<h2 id="安装-Composer"><a href="#安装-Composer" class="headerlink" title="安装 Composer"></a>安装 Composer</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;getcomposer.org&#x2F;composer.phar -O &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</span><br><span class="line">chmod a+x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;composer</span><br></pre></td></tr></table></figure>
+<h1 id="添加-composer-bin-到-PATH"><a href="#添加-composer-bin-到-PATH" class="headerlink" title="添加 composer bin 到 PATH"></a>添加 composer bin 到 PATH</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH&#x3D;$PATH:&#x2F;root&#x2F;.config&#x2F;composer&#x2F;vendor&#x2F;bin</span><br><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+<h1 id="composer-http-改成-https，连接速度会更佳"><a href="#composer-http-改成-https，连接速度会更佳" class="headerlink" title="composer http 改成 https，连接速度会更佳"></a>composer http 改成 https，连接速度会更佳</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer config -g repo.packagist composer https:&#x2F;&#x2F;packagist.phpcomposer.com</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Flarum"><a href="#安装-Flarum" class="headerlink" title="安装 Flarum"></a>安装 Flarum</h2><p>安装 flarum</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir &#x2F;tmp&#x2F;flarum &amp;&amp; cd &#x2F;tmp&#x2F;flarum &amp;&amp; composer create-project flarum&#x2F;flarum . --stability&#x3D;beta</span><br></pre></td></tr></table></figure>
+<h1 id="解决因PHP版本过高，安装依赖报错的问题"><a href="#解决因PHP版本过高，安装依赖报错的问题" class="headerlink" title="解决因PHP版本过高，安装依赖报错的问题"></a>解决因PHP版本过高，安装依赖报错的问题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer install --ignore-platform-reqs</span><br></pre></td></tr></table></figure>
+<h1 id="拷贝-flarum-文件到-testweb-文件夹"><a href="#拷贝-flarum-文件到-testweb-文件夹" class="headerlink" title="拷贝 flarum 文件到 testweb 文件夹"></a>拷贝 flarum 文件到 testweb 文件夹</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf &#x2F;www&#x2F;wwwroot&#x2F;testweb&#x2F;* &amp;&amp; cp -R &#x2F;tmp&#x2F;flarum&#x2F;* &#x2F;www&#x2F;wwwroot&#x2F;testweb</span><br></pre></td></tr></table></figure>
 <p>然后访问刚新建的站点，发现已经能访问 Flarum 了，只不过有几个问题： <a href="/images/install_flarum_1.png"><img src="/images/install_flarum_1.png"></a></p>
 <h3 id="问题1：The-PHP-extension-‘fileinfo’-is-required"><a href="#问题1：The-PHP-extension-‘fileinfo’-is-required" class="headerlink" title="问题1：The PHP extension ‘fileinfo’ is required."></a>问题1：The PHP extension ‘fileinfo’ is required.</h3><p>解决方法：访问宝塔 Linux 面板，在 PHP 设置中安装 fileinfo 扩展，结果如下图： <a href="/images/install_flarum_2.png"><img src="/images/install_flarum_2.png"></a></p>
 <h3 id="问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable"><a href="#问题2：The-www-wwwroot-testweb-assets-directory-is-not-writable" class="headerlink" title="问题2：The /www/wwwroot/testweb/assets directory is not writable."></a>问题2：The /www/wwwroot/testweb/assets directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
 <p>解决方法：</p>
-<p>chmod -R 0777 /www/wwwroot/testweb/assets</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 0777 &#x2F;www&#x2F;wwwroot&#x2F;testweb&#x2F;assets</span><br></pre></td></tr></table></figure>
 <h3 id="问题3：The-www-wwwroot-testweb-storage-directory-is-not-writable"><a href="#问题3：The-www-wwwroot-testweb-storage-directory-is-not-writable" class="headerlink" title="问题3：The /www/wwwroot/testweb/storage directory is not writable."></a>问题3：The /www/wwwroot/testweb/storage directory is not writable.</h3><p>Please chmod this directory and its contents to 0775.</p>
 <p>解决方法：</p>
-<p>chmod -R 0777 /www/wwwroot/testweb/storage</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 0777 &#x2F;www&#x2F;wwwroot&#x2F;testweb&#x2F;storage</span><br></pre></td></tr></table></figure>
 <p>解决问题后，访问到正常安装页面，填写数据库等相关信息即可安装。</p>
 <p><a href="/images/install_flarum_3.png"><img src="/images/install_flarum_3.png"></a>   提示：根据<a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">官方文档</a>想要访问正常，必需 URL Rewriting。</p>
-<h2 id="URL-Rewriting"><a href="#URL-Rewriting" class="headerlink" title="URL Rewriting"></a>URL Rewriting</h2><h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>Flarum includes a <code>.htaccess</code> file – make sure it’s been uploaded correctly. If you’re using shared hosting, confirm with your hosting provider that <code>mod_rewrite</code> is enabled. You may need to add the following to your Apache configuration:</p>
-<p>&lt;Directory “/path/to/your/forum”&gt;<br>    AllowOverride All<br></Directory></p>
+<h2 id="URL-Rewriting"><a href="#URL-Rewriting" class="headerlink" title="URL Rewriting"></a>URL Rewriting</h2><h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><p>Flarum includes a <code>.htaccess</code> file – make sure it’s been uploaded correctly. If you’re using shared hosting, confirm with your hosting provider that <code>mod_rewrite</code> is enabled. You may need to add the following to your Apache configuration:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;&#x2F;path&#x2F;to&#x2F;your&#x2F;forum&quot;&gt;</span><br><span class="line">    AllowOverride All</span><br><span class="line">&lt;&#x2F;Directory&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><p>Add the following lines to your server’s configuration block:</p>
-<p>location / { try_files $uri $uri/ /index.php?$query_string; }<br>location /api { try_files $uri $uri/ /api.php?$query_string; }<br>location /admin { try_files $uri $uri/ /admin.php?$query_string; }</p>
-<p>location ~* ^/(composer.(jsonlock)config.phpflarumstoragevendor) {<br>    deny all;<br>    return 404;<br>}</p>
-<p>location ~* .php$ {<br>    fastcgi_split_path_info ^(.+.php)(/.+)$;<br>    fastcgi_pass unix:/var/run/php5-fpm.sock;<br>    include fastcgi_params;<br>    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;<br>    fastcgi_param HTTP_PROXY “”; # Fix for <a target="_blank" rel="noopener" href="https://httpoxy.org/">https://httpoxy.org/</a> vulnerability<br>    fastcgi_index index.php;<br>}</p>
-<p>location ~* .html$ {<br>    expires -1;<br>}</p>
-<p>location ~* .(cssjsgifjpe?gpng)$ {<br>    expires 1M;<br>    add_header Pragma public;<br>    add_header Cache-Control “public, must-revalidate, proxy-revalidate”;<br>}</p>
-<p>gzip on;<br>gzip_http_version 1.1;<br>gzip_vary on;<br>gzip_comp_level 6;<br>gzip_proxied any;<br>gzip_types application/atom+xml<br>           application/javascript<br>           application/json<br>           application/vnd.ms-fontobject<br>           application/x-font-ttf<br>           application/x-web-app-manifest+json<br>           application/xhtml+xml<br>           application/xml<br>           font/opentype<br>           image/svg+xml<br>           image/x-icon<br>           text/css<br>           #text/html – text/html is gzipped by default by nginx<br>           text/plain<br>           text/xml;<br>gzip_buffers 16 8k;<br>gzip_disable “MSIE [1-6].(?!.*SV1)”;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F; &#123; try_files $uri $uri&#x2F; &#x2F;index.php?$query_string; &#125;</span><br><span class="line">location &#x2F;api &#123; try_files $uri $uri&#x2F; &#x2F;api.php?$query_string; &#125;</span><br><span class="line">location &#x2F;admin &#123; try_files $uri $uri&#x2F; &#x2F;admin.php?$query_string; &#125;</span><br><span class="line"></span><br><span class="line">location ~* ^&#x2F;(composer\.(jsonlock)config\.phpflarumstoragevendor) &#123;</span><br><span class="line">    deny all;</span><br><span class="line">    return 404;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~* \.php$ &#123;</span><br><span class="line">    fastcgi_split_path_info ^(.+.php)(&#x2F;.+)$;</span><br><span class="line">    fastcgi_pass unix:&#x2F;var&#x2F;run&#x2F;php5-fpm.sock;</span><br><span class="line">    include fastcgi_params;</span><br><span class="line">    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">    fastcgi_param HTTP_PROXY &quot;&quot;; # Fix for https:&#x2F;&#x2F;httpoxy.org&#x2F; vulnerability</span><br><span class="line">    fastcgi_index index.php;</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">location ~* \.html$ &#123;</span><br><span class="line">    expires -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">location ~* \.(cssjsgifjpe?gpng)$ &#123;</span><br><span class="line">    expires 1M;</span><br><span class="line">    add_header Pragma public;</span><br><span class="line">    add_header Cache-Control &quot;public, must-revalidate, proxy-revalidate&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">gzip on;</span><br><span class="line">gzip_http_version 1.1;</span><br><span class="line">gzip_vary on;</span><br><span class="line">gzip_comp_level 6;</span><br><span class="line">gzip_proxied any;</span><br><span class="line">gzip_types application&#x2F;atom+xml</span><br><span class="line">           application&#x2F;javascript</span><br><span class="line">           application&#x2F;json</span><br><span class="line">           application&#x2F;vnd.ms-fontobject</span><br><span class="line">           application&#x2F;x-font-ttf</span><br><span class="line">           application&#x2F;x-web-app-manifest+json</span><br><span class="line">           application&#x2F;xhtml+xml</span><br><span class="line">           application&#x2F;xml</span><br><span class="line">           font&#x2F;opentype</span><br><span class="line">           image&#x2F;svg+xml</span><br><span class="line">           image&#x2F;x-icon</span><br><span class="line">           text&#x2F;css</span><br><span class="line">           #text&#x2F;html -- text&#x2F;html is gzipped by default by nginx</span><br><span class="line">           text&#x2F;plain</span><br><span class="line">           text&#x2F;xml;</span><br><span class="line">gzip_buffers 16 8k;</span><br><span class="line">gzip_disable &quot;MSIE [1-6]\.(?!.*SV1)&quot;;</span><br></pre></td></tr></table></figure>
 <h3 id="Lighttpd"><a href="#Lighttpd" class="headerlink" title="Lighttpd"></a>Lighttpd</h3><p>Add the following lines to your server’s configuration block:</p>
-<p>url.rewrite-if-not-file = (<br>    “/admin.<em>“ =&gt; “/admin.php”,<br>    “/api.</em>“   =&gt; “/api.php”,<br>    “/.*”      =&gt; “/index.php”<br>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">url.rewrite-if-not-file &#x3D; (</span><br><span class="line">    &quot;&#x2F;admin.*&quot; &#x3D;&gt; &quot;&#x2F;admin.php&quot;,</span><br><span class="line">    &quot;&#x2F;api.*&quot;   &#x3D;&gt; &quot;&#x2F;api.php&quot;,</span><br><span class="line">    &quot;&#x2F;.*&quot;      &#x3D;&gt; &quot;&#x2F;index.php&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a target="_blank" rel="noopener" href="https://www.bt.cn/bbs/thread-1186-1-1.html">https://www.bt.cn/bbs/thread-1186-1-1.html</a> <a target="_blank" rel="noopener" href="https://flarum.org/docs/installation/">https://flarum.org/docs/installation/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" data-id="ckfot28hp000bst2p3la1c92e" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/06/21/centos-7-%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94-linux-%E9%9D%A2%E6%9D%BF%EF%BC%88bt-cn%EF%BC%89%E3%80%81flarum/" data-id="ckfot7eeu000y0i2p5wjvb8su" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Composer/" rel="tag">Composer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flarum/" rel="tag">Flarum</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/" rel="tag">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF/" rel="tag">宝塔面板</a></li></ul>
@@ -184,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" data-id="ckfot28lq004sst2pa6z4fg1s" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/05/07/%E4%B8%80%E5%8A%A0-5-%E8%A7%A3%E9%94%81-bootloader-%E5%92%8C%E5%88%B7%E5%86%99%E7%AC%AC%E4%B8%89%E6%96%B9-recovery/" data-id="ckfot7ehz005j0i2p1xbtdz7p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li></ul>
@@ -238,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" data-id="ckfot28k9002nst2pfub5bk1w" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/23/sql-%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E5%AE%9E%E4%BD%93%E7%B1%BB%E3%80%81mybatis-mapper%E3%80%81mybatis-mapper-xml-%E6%96%87%E4%BB%B6/" data-id="ckfot7ege003b0i2p148v3iff" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/" rel="tag">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li></ul>
@@ -330,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/" data-id="ckfot28jt0028st2p72lxbwtd" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/20/server-manager-%E5%9F%BA%E4%BA%8E-javafx-%E5%BC%80%E5%8F%91%E7%9A%84-%E4%B8%80%E6%AC%BE%E6%A1%8C%E9%9D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E3%80%82/" data-id="ckfot7eg5002w0i2packk1pvn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaFX/" rel="tag">JavaFX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8/" rel="tag">数据安全</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a></li></ul>
@@ -385,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/11/%E4%B8%80%E5%8A%A0-5-%E6%89%8B%E6%9C%BA%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%AE%89%E8%A3%85-xposed-%E5%87%BA%E7%8E%B0-cp-write-error-no-space-left-no-device-error-1-occurred-%E8%A7%A3/" data-id="ckfot28lo004qst2p2gvi7jwe" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/11/%E4%B8%80%E5%8A%A0-5-%E6%89%8B%E6%9C%BA%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F%E5%90%8E%E5%AE%89%E8%A3%85-xposed-%E5%87%BA%E7%8E%B0-cp-write-error-no-space-left-no-device-error-1-occurred-%E8%A7%A3/" data-id="ckfot7ehx005g0i2p6z9vf882" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Xposed/" rel="tag">Xposed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E5%8A%A0/" rel="tag">一加</a></li></ul>
@@ -469,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfot28jy002dst2pbwfl1jk7" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/04/09/spring-boot-1-x-%E6%95%B4%E5%90%88-spring-security-%E4%BE%8B%E5%AD%90/" data-id="ckfot7eg800310i2pccit359y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Security/" rel="tag">Spring Security</a></li></ul>
@@ -519,7 +515,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/01/24/java-apache-poi-%E8%AF%BB%E5%8F%96-excel-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E6%97%B6%E9%81%BF%E5%85%8D%E5%8F%91%E7%94%9F%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E9%97%AE%E9%A2%98%E7%9A%84/" data-id="ckfot28ig000wst2p4gm306hu" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/01/24/java-apache-poi-%E8%AF%BB%E5%8F%96-excel-%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E6%97%B6%E9%81%BF%E5%85%8D%E5%8F%91%E7%94%9F%E7%A7%91%E5%AD%A6%E8%AE%A1%E6%95%B0%E6%B3%95%E9%97%AE%E9%A2%98%E7%9A%84/" data-id="ckfot7ef8001n0i2p5s7l216r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache/" rel="tag">Apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Apache-POI/" rel="tag">Apache POI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Excel/" rel="tag">Excel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
@@ -564,7 +560,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/" data-id="ckfot28k7002kst2p815mcexa" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2018/01/23/spring-boot-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86%EF%BC%8C%E8%BF%94%E5%9B%9E-json-html/" data-id="ckfot7egc00370i2p7u7081sm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a></li></ul>
@@ -616,7 +612,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/10/09/x-y-z-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" data-id="ckfot28kx003nst2p0k3ecutt" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/10/09/x-y-z-%E8%BD%AF%E4%BB%B6%E7%89%88%E6%9C%AC%E5%8F%91%E5%B8%83%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" data-id="ckfot7eh5004e0i2pbwet77td" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" rel="tag">软件开发</a></li></ul>
@@ -663,7 +659,7 @@ if (cellValue.indexOf(&quot;,&quot;) &gt;= 0) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://godcheese.com/2017/09/26/oracle-%E5%B8%B8%E7%94%A8%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/" data-id="ckfot28jo0022st2pdq3ccgut" class="article-share-link">Share</a>
+      <a data-url="http://godcheese.com/2017/09/26/oracle-%E5%B8%B8%E7%94%A8%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/" data-id="ckfot7eg1002s0i2pceec35gg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/" rel="tag">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
